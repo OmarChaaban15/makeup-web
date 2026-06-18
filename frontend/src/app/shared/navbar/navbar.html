@@ -1,0 +1,59 @@
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <div class="navbar-container">
+
+    <!-- Links izquierda -->
+    <ul class="nav-links nav-links--left">
+      <li>
+        <a routerLink="/inicio" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" id="nav-inicio">
+          Inicio
+        </a>
+      </li>
+      <li>
+        <a routerLink="/sobre-mi" routerLinkActive="active" id="nav-sobre-mi">
+          Sobre mí
+        </a>
+      </li>
+      <li>
+        <a routerLink="/servicios" routerLinkActive="active" id="nav-servicios">
+          Servicios
+        </a>
+      </li>
+    </ul>
+
+    <!-- Logo centro -->
+    <a class="navbar-logo" routerLink="/inicio" id="nav-logo">
+      <span class="logo-title">MAKEUP BY YONA</span>
+      <span class="logo-tagline">Realiza tu belleza · Enhance your beauty</span>
+    </a>
+
+    <!-- Links derecha -->
+    <ul class="nav-links nav-links--right">
+      <li>
+        <a routerLink="/cursos" routerLinkActive="active" id="nav-cursos">
+          Cursos
+        </a>
+      </li>
+      <li>
+        <a routerLink="/reservar-cita" routerLinkActive="active" id="nav-reservar" class="btn-reservar">
+          Reservar cita
+        </a>
+      </li>
+    </ul>
+
+    <!-- Menú hamburguesa (móvil) -->
+    <button class="hamburger" (click)="toggleMenu()" [class.open]="menuOpen" id="nav-hamburger" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Menú móvil desplegable -->
+  <div class="mobile-menu" [class.open]="menuOpen" (click)="closeMenu()">
+    <a routerLink="/inicio" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Inicio</a>
+    <a routerLink="/sobre-mi" routerLinkActive="active">Sobre mí</a>
+    <a routerLink="/servicios" routerLinkActive="active">Servicios</a>
+    <a routerLink="/cursos" routerLinkActive="active">Cursos</a>
+    <a routerLink="/reservar-cita" routerLinkActive="active" class="btn-reservar-mobile">Reservar cita</a>
+  </div>
+</nav>

@@ -1,0 +1,321 @@
+/* =========================================
+   SERVICIOS PAGE – MAKEUP BY YONA
+   ========================================= */
+
+.servicios-page {
+  padding-top: var(--navbar-height, 80px);
+  min-height: 100vh;
+  background: var(--color-bg, #fdfcfb);
+}
+
+/* ── HERO ── */
+.servicios-hero {
+  background: linear-gradient(160deg, #fdfcfb 0%, #f5ede3 60%, #ede0d0 100%);
+  padding: 6rem 2rem 5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.servicios-hero::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,149,106,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.servicios-hero__inner {
+  max-width: 680px;
+  margin: 0 auto;
+  animation: fadeUp 0.75s ease both;
+}
+
+.section-label {
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-primary, #c4956a);
+  margin-bottom: 1.1rem;
+}
+
+.servicios-hero__title {
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--color-dark, #1a1a1a);
+  margin-bottom: 1.4rem;
+}
+
+.servicios-hero__title em {
+  font-style: italic;
+  color: var(--color-primary, #c4956a);
+}
+
+.servicios-hero__desc {
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--color-mid, #555);
+  line-height: 1.75;
+}
+
+/* ── GRID DE SERVICIOS ── */
+.servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(0, 0, 0, 0.07);
+  margin: 0;
+}
+
+/* ── TARJETA DE SERVICIO ── */
+.servicio-card {
+  background: #fff;
+  padding: 3.5rem 3rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  transition: background 0.3s ease;
+}
+
+.servicio-card:hover {
+  background: #fdfaf7;
+}
+
+.servicio-card--featured {
+  background: var(--color-dark, #1a1a1a);
+  color: #fff;
+}
+
+.servicio-card--featured:hover {
+  background: #222;
+}
+
+/* Número decorativo */
+.servicio-card__badge {
+  position: absolute;
+  top: 2.5rem;
+  right: 3rem;
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.04);
+  line-height: 1;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.servicio-card--featured .servicio-card__badge {
+  color: rgba(255, 255, 255, 0.06);
+}
+
+.servicio-card:hover .servicio-card__badge {
+  color: rgba(196, 149, 106, 0.10);
+}
+
+/* Ícono */
+.servicio-card__icon {
+  width: 48px;
+  height: 48px;
+  color: var(--color-primary, #c4956a);
+  margin-bottom: 0.4rem;
+}
+
+.servicio-card__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Etiqueta "Más solicitado" */
+.servicio-card__highlight-label {
+  display: inline-block;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--color-primary, #c4956a);
+  background: rgba(196, 149, 106, 0.12);
+  border: 1px solid rgba(196, 149, 106, 0.3);
+  padding: 0.3rem 0.8rem;
+  border-radius: 2rem;
+  width: fit-content;
+}
+
+/* Título */
+.servicio-card__title {
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(1.7rem, 2.5vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-dark, #1a1a1a);
+}
+
+.servicio-card--featured .servicio-card__title {
+  color: #ffffff;
+}
+
+/* Descripción */
+.servicio-card__desc {
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--color-mid, #555);
+  line-height: 1.75;
+  max-width: 440px;
+}
+
+.servicio-card--featured .servicio-card__desc {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Lista de features */
+.servicio-card__list {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.servicio-card__list li {
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--color-mid, #555);
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.servicio-card__list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary, #c4956a);
+  font-size: 0.75rem;
+}
+
+.servicio-card--featured .servicio-card__list li {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.servicio-card--featured .servicio-card__list li::before {
+  color: var(--color-primary, #c4956a);
+}
+
+/* CTA botón */
+.servicio-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary, #c4956a);
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  width: fit-content;
+  margin-top: auto;
+  padding-top: 0.8rem;
+  transition: border-color 0.25s ease, gap 0.25s ease;
+}
+
+.servicio-card__cta:hover {
+  border-color: var(--color-primary, #c4956a);
+  gap: 0.8rem;
+}
+
+.servicio-card--featured .servicio-card__cta {
+  color: var(--color-primary, #c4956a);
+}
+
+/* ── CTA FINAL ── */
+.servicios-cta {
+  background: linear-gradient(135deg, #f5ede3 0%, #ede0d0 100%);
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.servicios-cta__inner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.servicios-cta__title {
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--color-dark, #1a1a1a);
+}
+
+.servicios-cta__title em {
+  font-style: italic;
+  color: var(--color-primary, #c4956a);
+}
+
+.btn-primary-lg {
+  text-decoration: none;
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--color-dark, #1a1a1a);
+  color: #fff;
+  padding: 1rem 2.8rem;
+  border: 1.5px solid var(--color-dark, #1a1a1a);
+  transition: background 0.28s ease, color 0.28s ease;
+}
+
+.btn-primary-lg:hover {
+  background: transparent;
+  color: var(--color-dark, #1a1a1a);
+}
+
+/* ── ANIMACIÓN ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .servicios-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .servicio-card {
+    padding: 3rem 2rem;
+  }
+
+  .servicio-card__badge {
+    right: 2rem;
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .servicios-hero {
+    padding: 4rem 1.5rem 3rem;
+  }
+
+  .servicio-card {
+    padding: 2.5rem 1.5rem;
+  }
+}

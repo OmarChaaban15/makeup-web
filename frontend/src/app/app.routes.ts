@@ -1,3 +1,16 @@
 import { Routes } from '@angular/router';
+import { Inicio } from './pages/inicio/inicio';
+import { SobreMi } from './pages/sobre-mi/sobre-mi';
+import { Servicios } from './pages/servicios/servicios';
+import { Cursos } from './pages/cursos/cursos';
+import { ReservarCita } from './pages/reservar-cita/reservar-cita';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+  { path: 'inicio', component: Inicio },
+  { path: 'sobre-mi', component: SobreMi },
+  { path: 'servicios', component: Servicios },
+  { path: 'cursos', component: Cursos },
+  { path: 'reservar-cita', component: ReservarCita },
+  { path: '**', redirectTo: 'inicio' }
+];
