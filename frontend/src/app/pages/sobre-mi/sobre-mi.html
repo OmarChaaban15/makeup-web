@@ -1,7 +1,103 @@
-<div class="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#fdfcfb] to-[#f5ede3] pt-20">
-  <div class="sobre-mi-fade-up mx-auto max-w-[600px] px-8 py-16 text-center">
-    <p class="mb-5 font-serif text-[0.75rem] uppercase tracking-[0.3em] text-[#c4956a]">Sobre mí</p>
-    <h1 class="mb-6 font-serif text-[clamp(2.5rem,5vw,4.2rem)] font-light leading-[1.2] text-[#1a1a1a]">Mi historia<br><em class="italic text-[#c4956a]">&amp; pasión</em></h1>
-    <p class="font-sans text-base font-light leading-[1.75] text-[#555]">Próximamente encontrarás mi historia, trayectoria y todo lo que me inspira a hacer del maquillaje un arte.</p>
-  </div>
+<div class="min-h-screen bg-[#fdfcfb] pt-20 font-sans antialiased">
+
+  <!-- ══════════════════════════════════════════
+       HERO — SOBRE MÍ
+       ══════════════════════════════════════════ -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-[#fdfcfb] via-[#f5ede3] to-[#ede0d0] px-8 pb-20 pt-24
+                  before:pointer-events-none before:absolute before:-bottom-20 before:-left-20 before:h-[400px] before:w-[400px] before:rounded-full before:bg-[radial-gradient(circle,rgba(196,149,106,0.1)_0%,transparent_70%)]">
+    <div class="sobre-mi-fade-up mx-auto max-w-[700px] text-center">
+      <p class="mb-5 font-serif text-[0.75rem] uppercase tracking-[0.3em] text-[#c4956a]">Sobre mí</p>
+      <h1 class="mb-7 font-serif text-[clamp(2.8rem,5.5vw,4.5rem)] font-light leading-[1.15] text-[#1a1a1a]">
+        Mi historia<br><em class="italic text-[#c4956a]">&amp; pasión</em>
+      </h1>
+      <div class="mx-auto h-[1.5px] w-16 bg-[#c4956a]"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       BLOQUE PRINCIPAL — TEXTO + CITA
+       ══════════════════════════════════════════ -->
+  <section class="px-6 py-24 sm:px-10 md:py-32">
+    <div class="mx-auto max-w-[1100px]">
+      <div class="grid items-start gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-28">
+
+        <!-- Texto principal -->
+        <div class="sobre-mi-fade-up">
+          <p class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.3em] text-[#c4956a]">Mi nombre es Yonaida</p>
+          <h2 class="mb-8 font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] font-light leading-[1.2] text-[#1a1a1a]">
+            Más de cinco años<br><em class="italic text-[#c4956a]">dedicándome al maquillaje</em>
+          </h2>
+
+          <div class="space-y-6 font-sans text-[0.95rem] font-light leading-[1.9] text-[#555]">
+            <p>
+              Durante este tiempo he trabajado con <strong class="font-medium text-[#1a1a1a]">novias, clientes particulares, fotógrafos, marcas y producciones audiovisuales</strong>, desarrollando una visión personalizada de la belleza basada en la naturalidad, la elegancia y la confianza.
+            </p>
+            <p>
+              Cada rostro es único y cada maquillaje cuenta una historia. Mi misión es ayudarte a destacar tu mejor versión y hacer que te sientas <strong class="font-medium text-[#1a1a1a]">cómoda, segura y hermosa</strong> en cualquier ocasión.
+            </p>
+          </div>
+
+          <!-- Separador decorativo -->
+          <div class="my-10 flex items-center gap-4">
+            <div class="h-px flex-1 bg-[#e8ddd5]"></div>
+            <span class="font-serif text-[0.7rem] uppercase tracking-[0.25em] text-[#c4956a]">Mi filosofía</span>
+            <div class="h-px flex-1 bg-[#e8ddd5]"></div>
+          </div>
+
+          <!-- Cita destacada -->
+          <blockquote class="border-l-2 border-[#c4956a] pl-7">
+            <p class="font-serif text-[1.3rem] font-light italic leading-[1.6] text-[#1a1a1a]">
+              "Cada rostro es único y cada maquillaje cuenta una historia."
+            </p>
+            <footer class="mt-4 font-sans text-[0.72rem] font-medium uppercase tracking-[0.2em] text-[#c4956a]">
+              — Yonaida
+            </footer>
+          </blockquote>
+        </div>
+
+        <!-- Columna derecha: foto de Yonaida -->
+        <div class="flex flex-col gap-6">
+
+          <!-- Foto principal -->
+          <div class="group relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(26,26,26,0.15)]">
+            <img
+              src="images/yonaida.jpg"
+              alt="Yonaida, maquilladora profesional"
+              class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+              style="aspect-ratio: 3/4;"
+            />
+            <!-- Overlay badge inferior -->
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-7 py-6">
+              <p class="font-serif text-[0.65rem] uppercase tracking-[0.25em] text-[#c4956a]">Maquilladora profesional</p>
+              <p class="mt-1 font-serif text-[1.2rem] font-light text-white">Yonaida</p>
+            </div>
+          </div>
+
+          <!-- Stats debajo de la foto -->
+          <div class="grid grid-cols-2 gap-3">
+            <div class="flex flex-col gap-1 rounded-2xl border border-[#e8ddd5] bg-white p-5 shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
+              <span class="font-serif text-[2.4rem] font-light leading-none text-[#c4956a]">+5</span>
+              <span class="font-sans text-[0.68rem] font-medium uppercase tracking-wider text-[#888]">años de experiencia</span>
+            </div>
+            <div class="flex flex-col gap-1 rounded-2xl border border-[#e8ddd5] bg-white p-5 shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
+              <span class="font-serif text-[2.4rem] font-light leading-none text-[#c4956a]">100%</span>
+              <span class="font-sans text-[0.68rem] font-medium uppercase tracking-wider text-[#888]">personalizado</span>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <a routerLink="/reservar-cita"
+             class="flex items-center justify-center gap-3 rounded-2xl border-[1.5px] border-[#c4956a] px-8 py-5 font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white"
+             id="sobre-mi-cta-reservar">
+            Reservar una cita
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 </div>
