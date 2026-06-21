@@ -1,7 +1,85 @@
-<div class="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#fdfcfb] to-[#f5ede3] pt-20">
-  <div class="cursos-fade-up mx-auto max-w-[600px] px-8 py-16 text-center">
-    <p class="mb-5 font-serif text-[0.75rem] uppercase tracking-[0.3em] text-[#c4956a]">Cursos</p>
-    <h1 class="mb-6 font-serif text-[clamp(2.5rem,5vw,4.2rem)] font-light leading-[1.2] text-[#1a1a1a]">Aprende el<br><em class="italic text-[#c4956a]">arte del maquillaje</em></h1>
-    <p class="font-sans text-base font-light leading-[1.75] text-[#555]">Cursos presenciales y online para todos los niveles. Formación personalizada con una profesional.</p>
+<div class="min-h-screen bg-[#f2eae4] pt-32 pb-20 font-sans text-[#1a1a1a]">
+
+  <!-- Cabecera -->
+  <div class="mx-auto max-w-[900px] px-6 text-center cursos-fade-up">
+    <h1 class="font-serif text-[clamp(2.5rem,5vw,3.5rem)] font-light leading-tight text-[#1a1a1a]">
+      Academia Yonaida
+    </h1>
+    <p class="mt-2 font-serif text-[1rem] font-light italic tracking-wide text-[#c4956a]">
+      formación presencial exclusiva y personalizada.
+    </p>
   </div>
+
+  <!-- Contenedor de Tarjetas -->
+  <div class="mx-auto mt-16 max-w-[1000px] px-6 cursos-fade-up" style="animation-delay: 0.15s;">
+    <div class="grid gap-8 md:grid-cols-2">
+
+      <!-- Tarjeta 1: Automaquillaje -->
+      <article class="flex flex-col overflow-hidden rounded-[24px] bg-white p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
+        <!-- Imagen (Placeholder) -->
+        <div class="relative h-[240px] w-full rounded-[16px] bg-[#e6dcd4]">
+          <span class="absolute left-4 top-4 rounded-full bg-[#1a1a1a] px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-widest text-white">
+            Plazas Limitadas
+          </span>
+        </div>
+        
+        <!-- Contenido -->
+        <div class="flex flex-1 flex-col pt-8 pb-2 px-2">
+          <h2 class="mb-3 font-serif text-[1.4rem] font-medium text-[#1a1a1a]">Clases de Automaquillaje</h2>
+          <p class="text-[0.85rem] font-light leading-relaxed text-[#555555]">
+            Aprende a conocer tu rostro, identificar tu tipo de piel y ejecutar un look de día y su transición a look de noche.
+          </p>
+          
+          <div class="my-6 h-px w-full bg-[#f2eae4]"></div>
+          
+          <p class="mb-8 text-[0.7rem] font-bold uppercase tracking-wider text-[#c4956a]">
+            Duración: 4 horas | Material incluido
+          </p>
+          
+          <div class="mt-auto flex items-center justify-between">
+            <span class="font-serif text-[1.8rem] font-light text-[#1a1a1a]">120 €</span>
+            <button class="rounded-full bg-[#c4956a] px-6 py-3 text-[0.65rem] font-bold uppercase tracking-widest text-white transition-all hover:bg-[#b08055] hover:shadow-lg">
+              Comprar Curso
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tarjeta 2: Formación Profesional -->
+      <article class="flex flex-col overflow-hidden rounded-[24px] bg-white p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
+        <!-- Imagen (Placeholder) -->
+        <div class="h-[240px] w-full rounded-[16px] bg-[#e6dcd4]"></div>
+        
+        <!-- Contenido -->
+        <div class="flex flex-1 flex-col pt-8 pb-2 px-2">
+          <h2 class="mb-3 font-serif text-[1.4rem] font-medium text-[#1a1a1a]">Iniciación Profesional Pro</h2>
+          <p class="text-[0.85rem] font-light leading-relaxed text-[#555555]">
+            Diseñado para quienes quieren hacer del maquillaje su profesión. Técnicas de piel blindada, colorimetría y novias.
+          </p>
+          
+          <div class="my-6 h-px w-full bg-[#f2eae4]"></div>
+          
+          <p class="mb-8 text-[0.7rem] font-bold uppercase tracking-wider text-[#c4956a]">
+            Duración: 40 horas | Prácticas reales
+          </p>
+          
+          <div class="mt-auto flex items-center justify-between">
+            <span class="font-serif text-[1.8rem] font-light text-[#1a1a1a]">350 €</span>
+            <button class="rounded-full bg-[#1a1a1a] px-6 py-3 text-[0.65rem] font-bold uppercase tracking-widest text-white transition-all hover:bg-[#c4956a] hover:shadow-lg">
+              Solicitar Dossier
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Badge inferior -->
+    <div class="mx-auto mt-16 flex max-w-fit items-center justify-center gap-3 rounded-[12px] bg-white px-8 py-5 shadow-sm cursos-fade-up" style="animation-delay: 0.3s;">
+      <span class="h-3 w-3 rounded-full bg-[#c4956a]"></span>
+      <span class="text-[0.75rem] font-bold text-[#1a1a1a]">Garantía de aprendizaje: Grupos ultra reducidos (Máx. 4 pax).</span>
+    </div>
+
+  </div>
+
 </div>
