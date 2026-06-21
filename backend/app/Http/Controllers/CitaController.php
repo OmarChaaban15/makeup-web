@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cita;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CitaReservada;
 
 class CitaController extends Controller
 {
@@ -39,6 +41,13 @@ class CitaController extends Controller
             'notas'            => $request->notas,
             'estado'           => 'pendiente',
         ]);
+
+        // Enviar email de notificación
+        try {
+            Mail::to('info@makeupbyyona.com')->send(new CitaReservada($cita));
+        } catch (\Exception $e) {
+            \Log::error('Error enviando email de cita: ' . $e->getMessage());
+        }
 
         return response()->json($cita, 201);
     }
