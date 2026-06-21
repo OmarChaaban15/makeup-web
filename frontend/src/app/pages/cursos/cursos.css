@@ -1,0 +1,8 @@
+.cursos-fade-up {
+  animation: cursosFadeUp 0.7s ease both;
+}
+
+@keyframes cursosFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

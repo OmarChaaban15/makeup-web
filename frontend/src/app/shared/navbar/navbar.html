@@ -1,65 +1,81 @@
-<nav class="navbar" [class.scrolled]="isScrolled">
-  <div class="navbar-container">
+<nav class="fixed top-0 left-0 right-0 z-[1000] border-b border-black/[0.06] bg-white transition-all duration-300"
+     [class.navbar-scrolled]="isScrolled">
+  <div class="mx-auto flex h-20 max-w-[1300px] items-center justify-between px-8 max-[480px]:px-5">
 
     <!-- Links izquierda -->
-    <ul class="nav-links nav-links--left">
+    <ul class="hidden flex-1 list-none items-center gap-10 min-[901px]:flex">
       <li>
-        <a routerLink="/inicio" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" id="nav-inicio">
+        <a routerLink="/inicio" routerLinkActive="!text-[#c4956a] after:!w-full" [routerLinkActiveOptions]="{exact:true}" id="nav-inicio"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[#1a1a1a] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full">
           Inicio
         </a>
       </li>
       <li>
-        <a routerLink="/sobre-mi" routerLinkActive="active" id="nav-sobre-mi">
+        <a routerLink="/sobre-mi" routerLinkActive="!text-[#c4956a] after:!w-full" id="nav-sobre-mi"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[#1a1a1a] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full">
           Sobre mí
         </a>
       </li>
       <li>
-        <a routerLink="/servicios" routerLinkActive="active" id="nav-servicios">
+        <a routerLink="/servicios" routerLinkActive="!text-[#c4956a] after:!w-full" id="nav-servicios"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[#1a1a1a] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full">
           Servicios
         </a>
       </li>
     </ul>
 
     <!-- Logo centro -->
-    <a class="navbar-logo" routerLink="/inicio" id="nav-logo">
-      <span class="logo-title">MAKEUP BY YONA</span>
-      <span class="logo-tagline">Realiza tu belleza · Enhance your beauty</span>
+    <a class="group flex flex-none flex-col items-center gap-[2px] px-8 text-center no-underline max-[900px]:px-0" routerLink="/inicio" id="nav-logo">
+      <span class="font-serif text-[1.35rem] font-bold uppercase leading-none tracking-[0.18em] text-[#1a1a1a] transition-colors duration-300 group-hover:text-[#c4956a] max-[900px]:text-[1.1rem] max-[900px]:tracking-[0.12em]">MAKEUP BY YONA</span>
+      <span class="font-serif text-[0.62rem] font-normal italic tracking-[0.06em] text-[#888]">Realiza tu belleza &middot; Enhance your beauty</span>
     </a>
 
     <!-- Links derecha -->
-    <ul class="nav-links nav-links--right">
+    <ul class="hidden flex-1 list-none items-center justify-end gap-10 min-[901px]:flex">
       <li>
-        <a routerLink="/cursos" routerLinkActive="active" id="nav-cursos">
+        <a routerLink="/cursos" routerLinkActive="!text-[#c4956a] after:!w-full" id="nav-cursos"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[#1a1a1a] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full">
           Cursos
         </a>
       </li>
       <li>
-        <a routerLink="/contacto" routerLinkActive="active" id="nav-contacto">
+        <a routerLink="/contacto" routerLinkActive="!text-[#c4956a] after:!w-full" id="nav-contacto"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[#1a1a1a] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full">
           Contacto
         </a>
       </li>
       <li>
-        <a routerLink="/reservar-cita" routerLinkActive="active" id="nav-reservar" class="btn-reservar">
+        <a routerLink="/reservar-cita" routerLinkActive="active" id="nav-reservar"
+           class="border-[1.5px] border-[#c4956a] px-[1.4rem] py-[0.55rem] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white">
           Reservar cita
         </a>
       </li>
     </ul>
 
     <!-- Menú hamburguesa (móvil) -->
-    <button class="hamburger" (click)="toggleMenu()" [class.open]="menuOpen" id="nav-hamburger" aria-label="Abrir menú">
-      <span></span>
-      <span></span>
-      <span></span>
+    <button class="hamburger-btn z-[1100] hidden cursor-pointer flex-col gap-[5px] border-none bg-transparent p-[6px] max-[900px]:flex"
+            (click)="toggleMenu()" [class.hamburger-open]="menuOpen" id="nav-hamburger" aria-label="Abrir menú">
+      <span class="block h-[1.5px] w-6 bg-[#1a1a1a] transition-all duration-300"></span>
+      <span class="block h-[1.5px] w-6 bg-[#1a1a1a] transition-all duration-300"></span>
+      <span class="block h-[1.5px] w-6 bg-[#1a1a1a] transition-all duration-300"></span>
     </button>
   </div>
 
   <!-- Menú móvil desplegable -->
-  <div class="mobile-menu" [class.open]="menuOpen" (click)="closeMenu()">
-    <a routerLink="/inicio" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Inicio</a>
-    <a routerLink="/sobre-mi" routerLinkActive="active">Sobre mí</a>
-    <a routerLink="/servicios" routerLinkActive="active">Servicios</a>
-    <a routerLink="/cursos" routerLinkActive="active">Cursos</a>
-    <a routerLink="/contacto" routerLinkActive="active">Contacto</a>
-    <a routerLink="/reservar-cita" routerLinkActive="active" class="btn-reservar-mobile">Reservar cita</a>
+  <div class="mobile-panel pointer-events-none absolute top-20 left-0 right-0 hidden flex-col gap-6 border-t border-black/[0.06] bg-white px-8 pb-8 pt-6 opacity-0 shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 max-[900px]:flex"
+       [class.mobile-open]="menuOpen"
+       (click)="closeMenu()">
+    <a routerLink="/inicio" routerLinkActive="!text-[#c4956a]" [routerLinkActiveOptions]="{exact:true}"
+       class="font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors duration-200 hover:text-[#c4956a]">Inicio</a>
+    <a routerLink="/sobre-mi" routerLinkActive="!text-[#c4956a]"
+       class="font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors duration-200 hover:text-[#c4956a]">Sobre mí</a>
+    <a routerLink="/servicios" routerLinkActive="!text-[#c4956a]"
+       class="font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors duration-200 hover:text-[#c4956a]">Servicios</a>
+    <a routerLink="/cursos" routerLinkActive="!text-[#c4956a]"
+       class="font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors duration-200 hover:text-[#c4956a]">Cursos</a>
+    <a routerLink="/contacto" routerLinkActive="!text-[#c4956a]"
+       class="font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors duration-200 hover:text-[#c4956a]">Contacto</a>
+    <a routerLink="/reservar-cita" routerLinkActive="active"
+       class="border-[1.5px] border-[#c4956a] px-[1.4rem] py-[0.65rem] text-center font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white">Reservar cita</a>
   </div>
 </nav>
