@@ -1,71 +1,163 @@
-<div class="min-h-screen bg-[#f2eae4] pt-32 pb-20 font-sans text-[#1a1a1a]">
+<div class="min-h-screen bg-[#f2eae4] pt-32 pb-24 font-sans text-[#1a1a1a]">
 
-  <!-- Cabecera -->
+  <!-- ══════════════════════════════════════════
+       CABECERA
+       ══════════════════════════════════════════ -->
   <div class="mx-auto max-w-[900px] px-6 text-center cursos-fade-up">
+    <p class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.32em] text-[#c4956a]">Formación &amp; Masterclass</p>
     <h1 class="font-serif text-[clamp(2.5rem,5vw,3.5rem)] font-light leading-tight text-[#1a1a1a]">
       Academia Yonaida
     </h1>
-    <p class="mt-2 font-serif text-[1rem] font-light italic tracking-wide text-[#c4956a]">
-      formación presencial exclusiva y personalizada.
+    <p class="mt-3 font-serif text-[1rem] font-light italic tracking-wide text-[#c4956a]">
+      Realza tu belleza · Aprende desde donde estés.
+    </p>
+    <p class="mx-auto mt-6 max-w-[560px] font-sans text-[0.9rem] font-light leading-[1.8] text-[#666]">
+      Comparto mis conocimientos y experiencia con personas que desean iniciarse o perfeccionar sus técnicas en el mundo del maquillaje profesional, adaptadas a tu ritmo y estilo de vida.
     </p>
   </div>
 
-  <!-- Contenedor de Tarjetas -->
-  <div class="mx-auto mt-16 max-w-[1000px] px-6 cursos-fade-up" style="animation-delay: 0.15s;">
-    <div class="grid gap-8 md:grid-cols-2">
+  <!-- ══════════════════════════════════════════
+       TARJETAS DE CURSOS
+       ══════════════════════════════════════════ -->
+  <div class="mx-auto mt-16 max-w-[1040px] px-6 cursos-fade-up" style="animation-delay: 0.15s;">
+    <div class="grid gap-8 lg:grid-cols-2">
 
-      <!-- Tarjeta 1: Automaquillaje -->
-      <article class="flex flex-col overflow-hidden rounded-[24px] bg-white p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
-        <!-- Imagen (Placeholder) -->
-        <div class="relative h-[240px] w-full rounded-[16px] bg-[#e6dcd4]">
-          <span class="absolute left-4 top-4 rounded-full bg-[#1a1a1a] px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-widest text-white">
-            Plazas Limitadas
+      <!-- ─── TARJETA 1: MASTERCLASS AUTOMAQUILLAJE ─── -->
+      <article class="flex flex-col overflow-hidden rounded-[24px] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.15)]" id="curso-automaquillaje">
+
+        <!-- Cabecera con color de acento -->
+        <div class="relative flex flex-col justify-end bg-gradient-to-br from-[#c4956a] to-[#a87a52] p-8 pb-7">
+          <span class="absolute right-6 top-6 rounded-full border border-white/30 bg-white/15 px-3 py-1 font-sans text-[0.6rem] font-semibold uppercase tracking-widest text-white backdrop-blur-sm">
+            Online · Plazas Limitadas
           </span>
+          <p class="font-sans text-[0.62rem] font-semibold uppercase tracking-[0.25em] text-white/70">Masterclass</p>
+          <h2 class="mt-2 font-serif text-[1.55rem] font-light leading-[1.2] text-white">
+            Masterclass de<br><strong class="font-semibold">Automaquillaje Online</strong>
+          </h2>
+          <p class="mt-3 font-serif text-[1rem] font-light italic text-white/80">Realza tu belleza</p>
         </div>
-        
-        <!-- Contenido -->
-        <div class="flex flex-1 flex-col pt-8 pb-2 px-2">
-          <h2 class="mb-3 font-serif text-[1.4rem] font-medium text-[#1a1a1a]">Clases de Automaquillaje</h2>
-          <p class="text-[0.85rem] font-light leading-relaxed text-[#555555]">
-            Aprende a conocer tu rostro, identificar tu tipo de piel y ejecutar un look de día y su transición a look de noche.
+
+        <!-- Cuerpo -->
+        <div class="flex flex-1 flex-col p-8">
+
+          <!-- Descripción -->
+          <p class="font-sans text-[0.88rem] font-light leading-[1.85] text-[#555]">
+            Aprende a conocer tu piel, tus facciones y los colores que mejor te favorecen para sacar el máximo partido a tu imagen de forma <strong class="font-medium text-[#1a1a1a]">natural y personalizada</strong>.
           </p>
-          
+
+          <!-- Separador -->
           <div class="my-6 h-px w-full bg-[#f2eae4]"></div>
-          
-          <p class="mb-8 text-[0.7rem] font-bold uppercase tracking-wider text-[#c4956a]">
-            Duración: 4 horas | Material incluido
+
+          <!-- Lo que aprenderás -->
+          <p class="mb-4 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#888]">¿Qué aprenderás?</p>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <span class="mt-[2px] shrink-0 text-[#c4956a]">✨</span>
+              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Identificar tu fototipo de piel y descubrir los colores que más te favorecen.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[2px] shrink-0 text-[#c4956a]">✨</span>
+              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Hidratar y preparar tu piel correctamente según sea seca, mixta o grasa.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[2px] shrink-0 text-[#c4956a]">✨</span>
+              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Contornear tu rostro según su forma para potenciar tus rasgos de manera armoniosa.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[2px] shrink-0 text-[#c4956a]">✨</span>
+              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Realizar un maquillaje favorecedor adaptable a cualquier tipo de rostro.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[2px] shrink-0 text-[#c4956a]">✨</span>
+              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Crear un maquillaje de día y transformarlo en un look de noche.</span>
+            </li>
+          </ul>
+
+          <!-- Separador -->
+          <div class="my-6 h-px w-full bg-[#f2eae4]"></div>
+
+          <!-- Cita inspiracional -->
+          <p class="text-center font-serif text-[0.88rem] font-light italic leading-relaxed text-[#888]">
+            "Porque la belleza no consiste en cambiar quién eres,<br>sino en aprender a resaltar lo mejor de ti."
           </p>
-          
-          <div class="mt-auto flex items-center justify-between">
-            <span class="font-serif text-[1.8rem] font-light text-[#1a1a1a]">120 €</span>
-            <button class="rounded-full bg-[#c4956a] px-6 py-3 text-[0.65rem] font-bold uppercase tracking-widest text-white transition-all hover:bg-[#b08055] hover:shadow-lg">
+
+          <!-- Duración -->
+          <p class="mt-6 text-center font-sans text-[0.68rem] font-bold uppercase tracking-wider text-[#c4956a]">
+            4 horas · Online · Material incluido
+          </p>
+
+          <!-- Precio + CTA -->
+          <div class="mt-auto pt-8 flex items-center justify-between">
+            <span class="font-serif text-[1.9rem] font-light text-[#1a1a1a]">120 €</span>
+            <button class="rounded-full bg-[#c4956a] px-6 py-3 text-[0.65rem] font-bold uppercase tracking-widest text-white transition-all hover:bg-[#a87a52] hover:shadow-lg" id="btn-comprar-masterclass">
               Comprar Curso
             </button>
           </div>
         </div>
       </article>
 
-      <!-- Tarjeta 2: Formación Profesional -->
-      <article class="flex flex-col overflow-hidden rounded-[24px] bg-white p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
-        <!-- Imagen (Placeholder) -->
-        <div class="h-[240px] w-full rounded-[16px] bg-[#e6dcd4]"></div>
-        
-        <!-- Contenido -->
-        <div class="flex flex-1 flex-col pt-8 pb-2 px-2">
-          <h2 class="mb-3 font-serif text-[1.4rem] font-medium text-[#1a1a1a]">Iniciación Profesional Pro</h2>
-          <p class="text-[0.85rem] font-light leading-relaxed text-[#555555]">
-            Diseñado para quienes quieren hacer del maquillaje su profesión. Técnicas de piel blindada, colorimetría y novias.
+      <!-- ─── TARJETA 2: FORMACIÓN PROFESIONAL ONLINE ─── -->
+      <article class="flex flex-col overflow-hidden rounded-[24px] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(26,26,26,0.12)]" id="curso-formacion-online">
+
+        <!-- Cabecera oscura -->
+        <div class="relative flex flex-col justify-end bg-[#1a1a1a] p-8 pb-7">
+          <span class="absolute right-6 top-6 rounded-full border border-[#c4956a]/40 bg-[#c4956a]/20 px-3 py-1 font-sans text-[0.6rem] font-semibold uppercase tracking-widest text-[#c4956a]">
+            100% Online · Sin previos
+          </span>
+          <p class="font-sans text-[0.62rem] font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Formación profesional</p>
+          <h2 class="mt-2 font-serif text-[1.55rem] font-light leading-[1.2] text-white">
+            Formación Online de<br><strong class="font-semibold">Maquillaje Profesional</strong>
+          </h2>
+          <p class="mt-3 font-serif text-[1rem] font-light italic text-white/60">Realza tu belleza</p>
+        </div>
+
+        <!-- Cuerpo -->
+        <div class="flex flex-1 flex-col p-8">
+
+          <!-- Descripción principal -->
+          <p class="font-sans text-[0.88rem] font-light leading-[1.85] text-[#555]">
+            He creado esta formación pensando en personas que desean aprender maquillaje de forma profesional, pero que por falta de tiempo, distancia o trabajo <strong class="font-medium text-[#1a1a1a]">no pueden asistir a clases presenciales</strong>.
           </p>
-          
-          <div class="my-6 h-px w-full bg-[#f2eae4]"></div>
-          
-          <p class="mb-8 text-[0.7rem] font-bold uppercase tracking-wider text-[#c4956a]">
-            Duración: 40 horas | Prácticas reales
+
+          <!-- Separador -->
+          <div class="my-5 h-px w-full bg-[#f2eae4]"></div>
+
+          <!-- Puntos clave en cards pequeñas -->
+          <p class="mb-4 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#888]">Aprenderás a</p>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="rounded-xl bg-[#faf8f6] p-3">
+              <p class="font-sans text-[0.78rem] font-light leading-snug text-[#555]">Conocer tu piel y elegir los productos adecuados</p>
+            </div>
+            <div class="rounded-xl bg-[#faf8f6] p-3">
+              <p class="font-sans text-[0.78rem] font-light leading-snug text-[#555]">Preparar el rostro correctamente</p>
+            </div>
+            <div class="rounded-xl bg-[#faf8f6] p-3">
+              <p class="font-sans text-[0.78rem] font-light leading-snug text-[#555]">Realzar tus facciones con técnica profesional</p>
+            </div>
+            <div class="rounded-xl bg-[#faf8f6] p-3">
+              <p class="font-sans text-[0.78rem] font-light leading-snug text-[#555]">Crear looks para diferentes ocasiones</p>
+            </div>
+          </div>
+
+          <!-- Separador -->
+          <div class="my-5 h-px w-full bg-[#f2eae4]"></div>
+
+          <!-- Beneficio formación online -->
+          <div class="rounded-xl border border-[#c4956a]/20 bg-[#fdf9f6] p-4">
+            <p class="font-sans text-[0.82rem] font-light italic leading-relaxed text-[#666]">
+              "Porque aprender maquillaje no debería depender de dónde vivas ni del tiempo que tengas disponible. Una formación accesible, práctica y de calidad desde cualquier lugar."
+            </p>
+          </div>
+
+          <!-- Duración -->
+          <p class="mt-6 text-center font-sans text-[0.68rem] font-bold uppercase tracking-wider text-[#c4956a]">
+            40 horas · Online · A tu ritmo · Sin conocimientos previos
           </p>
-          
-          <div class="mt-auto flex items-center justify-between">
-            <span class="font-serif text-[1.8rem] font-light text-[#1a1a1a]">350 €</span>
-            <button class="rounded-full bg-[#1a1a1a] px-6 py-3 text-[0.65rem] font-bold uppercase tracking-widest text-white transition-all hover:bg-[#c4956a] hover:shadow-lg">
+
+          <!-- Precio + CTA -->
+          <div class="mt-auto pt-8 flex items-center justify-between">
+            <span class="font-serif text-[1.9rem] font-light text-[#1a1a1a]">350 €</span>
+            <button class="rounded-full bg-[#1a1a1a] px-6 py-3 text-[0.65rem] font-bold uppercase tracking-widest text-white transition-all hover:bg-[#c4956a] hover:shadow-lg" id="btn-solicitar-formacion">
               Solicitar Dossier
             </button>
           </div>
@@ -74,10 +166,10 @@
 
     </div>
 
-    <!-- Badge inferior -->
+    <!-- ══ Badge inferior ══ -->
     <div class="mx-auto mt-16 flex max-w-fit items-center justify-center gap-3 rounded-[12px] bg-white px-8 py-5 shadow-sm cursos-fade-up" style="animation-delay: 0.3s;">
       <span class="h-3 w-3 rounded-full bg-[#c4956a]"></span>
-      <span class="text-[0.75rem] font-bold text-[#1a1a1a]">Garantía de aprendizaje: Grupos ultra reducidos (Máx. 4 pax).</span>
+      <span class="font-sans text-[0.75rem] font-bold text-[#1a1a1a]">Garantía de aprendizaje: Grupos ultra reducidos · Formación personalizada y de calidad.</span>
     </div>
 
   </div>
