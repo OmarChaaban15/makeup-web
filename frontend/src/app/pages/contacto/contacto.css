@@ -1,0 +1,57 @@
+/* =========================================
+   CONTACTO – Animaciones y estilos
+   ========================================= */
+
+/* Fade-up entrance animation */
+.contacto-fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: contactoFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.contacto-delay-1 { animation-delay: 0.15s; }
+.contacto-delay-2 { animation-delay: 0.3s; }
+.contacto-delay-3 { animation-delay: 0.45s; }
+
+@keyframes contactoFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form field stagger animation */
+.contacto-field {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: contactoFieldIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.contacto-field:nth-child(1) { animation-delay: 0.25s; }
+.contacto-field:nth-child(2) { animation-delay: 0.35s; }
+.contacto-field:nth-child(3) { animation-delay: 0.45s; }
+.contacto-field:nth-child(4) { animation-delay: 0.55s; }
+.contacto-field:nth-child(5) { animation-delay: 0.65s; }
+
+@keyframes contactoFieldIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tip card icon pulse on hover */
+.contacto-tip-card:hover span:first-child {
+  animation: contactoIconPulse 0.4s ease;
+}
+
+@keyframes contactoIconPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+/* Submit button press effect */
+.contacto-btn:active {
+  transform: scale(0.97);
+}

@@ -1,0 +1,246 @@
+<main class="min-h-screen bg-[#fdfcfb] pt-20 font-sans text-[#1a1a1a] antialiased">
+
+  <!-- ═══════════════════════════════════════════
+       HERO – CONTACTO
+       ═══════════════════════════════════════════ -->
+  <section class="px-5 pb-14 pt-10 sm:px-8 md:pb-20 md:pt-14 lg:px-10 lg:pb-24">
+    <div class="mx-auto max-w-[1180px]">
+      <div class="grid items-end gap-8 border-b border-[#eaded5] pb-10 lg:grid-cols-[1.1fr_0.9fr] lg:pb-14">
+
+        <!-- Left: Title block -->
+        <div class="contacto-fade-up">
+          <p class="text-xs font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Contacto</p>
+          <h1 class="mt-5 font-serif text-[clamp(2.8rem,5.5vw,5rem)] font-light leading-[1.08] text-[#1a1a1a]">
+            Hablemos de<br>
+            <span class="italic text-[#c4956a]">tu momento.</span>
+          </h1>
+          <div class="mt-8 h-[2px] w-16 bg-[#c4956a]"></div>
+        </div>
+
+        <!-- Right: Subtitle -->
+        <p class="contacto-fade-up contacto-delay-1 max-w-[520px] text-base font-light leading-8 text-[#555555] lg:pb-2">
+          Ya sea maquillaje nupcial, editorial, social o formación privada, cuéntame tu idea. Te responderé con disponibilidad y una propuesta cuidada en 24-48 horas.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FORMULARIO + INFO CARDS
+       ═══════════════════════════════════════════ -->
+  <section class="px-5 pb-20 sm:px-8 md:pb-28 lg:px-10">
+    <div class="mx-auto max-w-[1180px]">
+      <div class="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
+
+        <!-- Formulario -->
+        <form action="mailto:info@makeupbyyona.com" method="post" enctype="text/plain"
+              class="contacto-fade-up contacto-delay-1 rounded-2xl border border-[#e0d4c8] bg-white p-6 shadow-[0_20px_50px_rgba(26,26,26,0.08)] sm:p-8 lg:p-10">
+
+          <p class="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-[#c4956a]">Envíame un mensaje</p>
+
+          <div class="grid gap-6 sm:grid-cols-2">
+            <!-- Nombre -->
+            <label class="contacto-field block">
+              <span class="mb-2 block text-[11px] font-semibold uppercase tracking-wider text-[#8a817b]">Nombre</span>
+              <input class="h-12 w-full rounded-lg border border-[#e0d4c8] bg-[#faf8f6] px-4 text-sm text-[#1a1a1a] outline-none transition-all duration-300 placeholder:text-[#b5aea8] focus:border-[#c4956a] focus:shadow-[0_0_0_3px_rgba(196,149,106,0.15)]"
+                     type="text" name="nombre" autocomplete="name" placeholder="Tu nombre">
+            </label>
+
+            <!-- Email -->
+            <label class="contacto-field block">
+              <span class="mb-2 block text-[11px] font-semibold uppercase tracking-wider text-[#8a817b]">Email</span>
+              <input class="h-12 w-full rounded-lg border border-[#e0d4c8] bg-[#faf8f6] px-4 text-sm text-[#1a1a1a] outline-none transition-all duration-300 placeholder:text-[#b5aea8] focus:border-[#c4956a] focus:shadow-[0_0_0_3px_rgba(196,149,106,0.15)]"
+                     type="email" name="email" autocomplete="email" placeholder="tu@email.com">
+            </label>
+
+            <!-- Teléfono -->
+            <label class="contacto-field block">
+              <span class="mb-2 block text-[11px] font-semibold uppercase tracking-wider text-[#8a817b]">Teléfono</span>
+              <input class="h-12 w-full rounded-lg border border-[#e0d4c8] bg-[#faf8f6] px-4 text-sm text-[#1a1a1a] outline-none transition-all duration-300 placeholder:text-[#b5aea8] focus:border-[#c4956a] focus:shadow-[0_0_0_3px_rgba(196,149,106,0.15)]"
+                     type="tel" name="telefono" autocomplete="tel" placeholder="+34 600 000 000">
+            </label>
+
+            <!-- Servicio -->
+            <label class="contacto-field block">
+              <span class="mb-2 block text-[11px] font-semibold uppercase tracking-wider text-[#8a817b]">Servicio</span>
+              <select class="h-12 w-full appearance-none rounded-lg border border-[#e0d4c8] bg-[#faf8f6] px-4 text-sm text-[#1a1a1a] outline-none transition-all duration-300 focus:border-[#c4956a] focus:shadow-[0_0_0_3px_rgba(196,149,106,0.15)]"
+                      name="servicio">
+                <option>Maquillaje social</option>
+                <option>Novias</option>
+                <option>Editorial / producción</option>
+                <option>Formación privada</option>
+              </select>
+            </label>
+
+            <!-- Mensaje -->
+            <label class="contacto-field block sm:col-span-2">
+              <span class="mb-2 block text-[11px] font-semibold uppercase tracking-wider text-[#8a817b]">Mensaje</span>
+              <textarea class="min-h-[160px] w-full resize-y rounded-lg border border-[#e0d4c8] bg-[#faf8f6] px-4 py-3 text-sm leading-7 text-[#1a1a1a] outline-none transition-all duration-300 placeholder:text-[#b5aea8] focus:border-[#c4956a] focus:shadow-[0_0_0_3px_rgba(196,149,106,0.15)]"
+                        name="mensaje" placeholder="Cuéntame fecha, lugar, tipo de evento y cualquier referencia que tengas."></textarea>
+            </label>
+          </div>
+
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <button type="submit"
+                    class="contacto-btn group inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-[#1a1a1a] px-10 text-xs font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#c4956a] hover:shadow-lg">
+              Enviar consulta
+              <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </button>
+            <p class="text-sm font-light text-[#9f9790]">Respuesta habitual en 24-48h.</p>
+          </div>
+        </form>
+
+        <!-- Sidebar info -->
+        <div class="flex flex-col gap-6">
+
+          <!-- Card oscura: datos de contacto -->
+          <div class="contacto-fade-up contacto-delay-2 rounded-2xl bg-[#1a1a1a] p-7 text-white sm:p-9">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#c4956a]">Makeup By Yona</p>
+            <h2 class="mt-5 font-serif text-[clamp(1.8rem,3.5vw,2.6rem)] font-light leading-tight">
+              Atención personalizada en Ibiza.
+            </h2>
+
+            <div class="mt-8 divide-y divide-white/10">
+              <a href="tel:+34658728433" class="group flex items-center gap-4 py-5 transition-colors">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/8 transition-colors duration-300 group-hover:bg-[#c4956a]/25">
+                  <svg class="h-4 w-4 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
+                  </svg>
+                </span>
+                <div>
+                  <span class="block text-[10px] uppercase tracking-wider text-white/40">Teléfono</span>
+                  <span class="text-base font-light transition-colors duration-300 group-hover:text-[#c4956a]">+34 658 728 433</span>
+                </div>
+              </a>
+
+              <a href="mailto:info@makeupbyyona.com" class="group flex items-center gap-4 py-5 transition-colors">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/8 transition-colors duration-300 group-hover:bg-[#c4956a]/25">
+                  <svg class="h-4 w-4 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+                  </svg>
+                </span>
+                <div>
+                  <span class="block text-[10px] uppercase tracking-wider text-white/40">Email</span>
+                  <span class="break-words text-base font-light transition-colors duration-300 group-hover:text-[#c4956a]">info&#64;makeupbyyona.com</span>
+                </div>
+              </a>
+
+              <div class="flex items-center gap-4 py-5">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/8">
+                  <svg class="h-4 w-4 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </span>
+                <div>
+                  <span class="block text-[10px] uppercase tracking-wider text-white/40">Horario</span>
+                  <span class="text-base font-light">Lun - Sab &middot; Con cita previa</span>
+                </div>
+              </div>
+            </div>
+
+            <a routerLink="/reservar-cita"
+               class="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-white px-8 text-xs font-semibold uppercase tracking-wider text-[#1a1a1a] transition-all duration-300 hover:bg-[#c4956a] hover:text-white hover:shadow-lg sm:w-auto">
+              Reservar cita
+            </a>
+          </div>
+
+          <!-- Mapa -->
+          <div class="contacto-fade-up contacto-delay-3 overflow-hidden rounded-2xl border border-[#e0d4c8]">
+            <div #mapContainer class="h-[280px] w-full sm:h-[320px]"></div>
+            <div class="flex items-center justify-between bg-[#faf8f6] px-6 py-4">
+              <span class="text-sm font-light text-[#555555]">Ibiza, Espana</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Ibiza%2C%20Espa%C3%B1a" target="_blank" rel="noreferrer"
+                 class="group inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#c4956a] transition-colors hover:text-[#1a1a1a]">
+                Abrir mapa
+                <svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECCIÓN – ANTES DE ESCRIBIR (tips)
+       ═══════════════════════════════════════════ -->
+  <section class="bg-[#f4ebe5] px-5 py-16 sm:px-8 md:py-24 lg:px-10">
+    <div class="mx-auto max-w-[1180px]">
+      <div class="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+        <div class="contacto-fade-up">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#c4956a]">Antes de escribir</p>
+          <h2 class="mt-4 max-w-[430px] font-serif text-[clamp(2rem,4vw,3rem)] font-light leading-tight text-[#1a1a1a]">
+            Lo que ayuda a preparar tu propuesta.
+          </h2>
+          <div class="mt-6 h-[2px] w-14 bg-[#c4956a]"></div>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-3">
+          <!-- Card 1: Fecha -->
+          <article class="contacto-fade-up contacto-delay-1 contacto-tip-card group rounded-2xl border border-[#ddcbbd] bg-[#fdfcfb] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(196,149,106,0.15)]">
+            <span class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#c4956a]/10 text-[#c4956a] transition-all duration-300 group-hover:bg-[#c4956a] group-hover:text-white">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/>
+              </svg>
+            </span>
+            <p class="text-xs font-semibold uppercase tracking-wider text-[#c4956a]">Fecha</p>
+            <p class="mt-3 text-sm font-light leading-7 text-[#555555]">Día, hora aproximada y ciudad o localización del servicio.</p>
+          </article>
+
+          <!-- Card 2: Servicio -->
+          <article class="contacto-fade-up contacto-delay-2 contacto-tip-card group rounded-2xl border border-[#ddcbbd] bg-[#fdfcfb] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(196,149,106,0.15)]">
+            <span class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#c4956a]/10 text-[#c4956a] transition-all duration-300 group-hover:bg-[#c4956a] group-hover:text-white">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/>
+              </svg>
+            </span>
+            <p class="text-xs font-semibold uppercase tracking-wider text-[#c4956a]">Servicio</p>
+            <p class="mt-3 text-sm font-light leading-7 text-[#555555]">Maquillaje social, novia, editorial, producción o formación privada.</p>
+          </article>
+
+          <!-- Card 3: Estilo -->
+          <article class="contacto-fade-up contacto-delay-3 contacto-tip-card group rounded-2xl border border-[#ddcbbd] bg-[#fdfcfb] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(196,149,106,0.15)]">
+            <span class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#c4956a]/10 text-[#c4956a] transition-all duration-300 group-hover:bg-[#c4956a] group-hover:text-white">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </span>
+            <p class="text-xs font-semibold uppercase tracking-wider text-[#c4956a]">Estilo</p>
+            <p class="mt-3 text-sm font-light leading-7 text-[#555555]">Referencias, acabado deseado y cualquier detalle importante.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECCIÓN – CTA FINAL
+       ═══════════════════════════════════════════ -->
+  <section class="bg-[#1a1a1a] px-5 py-20 text-center text-white sm:px-8 md:py-28 lg:px-10">
+    <div class="mx-auto max-w-[620px] contacto-fade-up">
+      <div class="mx-auto mb-6 h-[2px] w-12 bg-[#c4956a]"></div>
+      <h2 class="font-serif text-[clamp(2rem,4.5vw,3.5rem)] font-light leading-tight">
+        Tu belleza merece un trato
+        <span class="italic text-[#c4956a]">excepcional.</span>
+      </h2>
+      <p class="mx-auto mt-6 max-w-[460px] text-base font-light leading-8 text-white/60">
+        Cada servicio comienza con una conversación. Reserva tu cita y descubre un maquillaje pensado para ti.
+      </p>
+      <a routerLink="/reservar-cita"
+         class="group mt-10 inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-[#c4956a] px-10 text-xs font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-white hover:text-[#1a1a1a] hover:shadow-xl">
+        Reservar cita
+        <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+</main>

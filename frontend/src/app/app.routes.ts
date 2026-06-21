@@ -3,6 +3,7 @@ import { Inicio } from './pages/inicio/inicio';
 import { SobreMi } from './pages/sobre-mi/sobre-mi';
 import { Servicios } from './pages/servicios/servicios';
 import { Cursos } from './pages/cursos/cursos';
+import { Contacto } from './pages/contacto/contacto';
 import { ReservarCita } from './pages/reservar-cita/reservar-cita';
 
 export const routes: Routes = [
@@ -11,6 +12,7 @@ export const routes: Routes = [
   { path: 'sobre-mi', component: SobreMi },
   { path: 'servicios', component: Servicios },
   { path: 'cursos', component: Cursos },
+  { path: 'contacto', component: Contacto },
   { path: 'reservar-cita', component: ReservarCita },
   { path: '**', redirectTo: 'inicio' }
 ];
