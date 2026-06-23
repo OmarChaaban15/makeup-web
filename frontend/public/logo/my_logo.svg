@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img">
+  <title>Makeup by Yona</title>
+  <rect width="100" height="100" fill="#f5ede3" rx="16"/>
+  <text
+    x="50" y="75"
+    text-anchor="middle"
+    font-family="'Brush Script MT', 'Segoe Script', cursive"
+    font-size="68"
+    font-style="italic"
+    fill="#c4956a"
+  >My</text>
+</svg>
