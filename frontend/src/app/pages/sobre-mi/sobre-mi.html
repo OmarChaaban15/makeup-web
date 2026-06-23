@@ -100,4 +100,56 @@
     </div>
   </section>
 
+  <!-- ══════════════════════════════════════════
+       GALERÍA — SEGUNDA FOTO
+       ══════════════════════════════════════════ -->
+  <section class="bg-gradient-to-br from-[#f5ede3] to-[#ede0d0] px-6 py-24 sm:px-10">
+    <div class="mx-auto max-w-[1100px]">
+      <div class="grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24">
+
+        <!-- Columna izquierda: segunda foto -->
+        <div class="sobre-mi-fade-up group relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(26,26,26,0.14)]">
+          <img
+            src="images/yonaida2.PNG"
+            alt="Yonaida en acción — maquillaje profesional"
+            class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+            style="aspect-ratio: 4/5; min-height: 380px;"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+        </div>
+
+        <!-- Columna derecha: texto -->
+        <div class="sobre-mi-fade-up">
+          <p class="mb-5 font-serif text-[0.72rem] uppercase tracking-[0.3em] text-[#c4956a]">En mi día a día</p>
+          <h2 class="mb-8 font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] font-light leading-[1.2] text-[#1a1a1a]">
+            Pasión por cada<br><em class="italic text-[#c4956a]">detalle</em>
+          </h2>
+
+          <div class="space-y-6 font-sans text-[0.95rem] font-light leading-[1.9] text-[#555]">
+            <p>
+              Me encanta el proceso creativo que hay detrás de cada maquillaje. Desde la <strong class="font-medium text-[#1a1a1a]">consulta inicial</strong> hasta el toque final, cada paso está pensado para que el resultado sea exactamente lo que imaginas.
+            </p>
+            <p>
+              Trabajo con <strong class="font-medium text-[#1a1a1a]">productos de alta calidad</strong>, siguiendo las tendencias actuales y adaptando cada técnica al tipo de piel, tono y estilo personal de cada clienta.
+            </p>
+          </div>
+
+          <div class="mt-10 flex gap-4 flex-wrap">
+            <a routerLink="/reservar-cita"
+               class="border-[1.5px] border-[#c4956a] bg-[#c4956a] px-[2.4rem] py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:border-[#a87a52] hover:bg-[#a87a52]"
+               id="sobre-mi-segunda-cta-reservar">
+              Reservar cita
+            </a>
+            <a routerLink="/contacto"
+               class="border-[1.5px] border-[#1a1a1a] px-[2.4rem] py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-all duration-300 hover:bg-[#1a1a1a] hover:text-white"
+               id="sobre-mi-segunda-cta-contacto">
+              Contactar
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 </div>
