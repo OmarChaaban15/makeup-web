@@ -8,3 +8,8 @@
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
+
+/* Asegurar el cursor de "manita" por defecto en todos los elementos clicables */
+a, button, [role="button"], input[type="submit"], input[type="button"], .cursor-pointer {
+  cursor: pointer;
+}
