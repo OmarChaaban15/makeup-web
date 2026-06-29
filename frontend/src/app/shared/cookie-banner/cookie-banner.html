@@ -1,0 +1,116 @@
+<!-- Banner de cookies -->
+<div *ngIf="isVisible"
+     class="fixed bottom-0 left-0 right-0 z-[1500] border-t border-black/[0.07] bg-white shadow-[0_-4px_32px_rgba(0,0,0,0.10)] transition-all duration-500"
+     [class.translate-y-full]="isHiding"
+     [class.opacity-0]="isHiding">
+
+  <div class="mx-auto flex max-w-[1300px] flex-col gap-4 px-8 py-5 min-[700px]:flex-row min-[700px]:items-center min-[700px]:gap-8">
+
+    <!-- Icono + texto -->
+    <div class="flex flex-1 items-start gap-4">
+      <!-- Icono cookie -->
+      <div class="mt-[2px] flex-none text-[#c4956a]">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
+          <path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/>
+        </svg>
+      </div>
+      <p class="font-serif text-[0.80rem] leading-relaxed text-[#444]">
+        Utilizamos cookies propias y de terceros para mejorar tu experiencia y analizar el uso de nuestra web.
+        Puedes aceptarlas todas o configurar tus preferencias.
+        <a routerLink="/politica-privacidad"
+           (click)="accept()"
+           class="ml-1 font-semibold text-[#c4956a] underline underline-offset-2 transition-colors hover:text-[#a07850]">
+          Más información
+        </a>
+      </p>
+    </div>
+
+    <!-- Botones -->
+    <div class="flex flex-shrink-0 flex-wrap gap-3">
+      <button (click)="configure()"
+              class="cursor-pointer border border-black/[0.15] bg-transparent px-5 py-[0.5rem] font-serif text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[#555] transition-all duration-200 hover:border-[#c4956a] hover:text-[#c4956a]">
+        Configurar
+      </button>
+      <button (click)="rejectAll()"
+              class="cursor-pointer border border-black/[0.15] bg-transparent px-5 py-[0.5rem] font-serif text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[#555] transition-all duration-200 hover:border-[#c4956a] hover:text-[#c4956a]">
+        Rechazar
+      </button>
+      <button (click)="accept()"
+              class="cursor-pointer border-[1.5px] border-[#c4956a] bg-[#c4956a] px-6 py-[0.5rem] font-serif text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-white transition-all duration-200 hover:bg-transparent hover:text-[#c4956a]">
+        Aceptar todas
+      </button>
+    </div>
+  </div>
+
+  <!-- Panel de configuración (expandible) -->
+  <div *ngIf="showConfig"
+       class="border-t border-black/[0.07] bg-[#fafafa]">
+    <div class="mx-auto max-w-[1300px] px-8 py-6">
+      <p class="mb-4 font-serif text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a]">Configurar cookies</p>
+
+      <div class="flex flex-col gap-4">
+
+        <!-- Necesarias (siempre activas) -->
+        <div class="flex items-start justify-between gap-6">
+          <div>
+            <p class="font-serif text-[0.82rem] font-semibold text-[#1a1a1a]">Cookies necesarias</p>
+            <p class="mt-1 font-serif text-[0.75rem] leading-relaxed text-[#777]">Imprescindibles para el funcionamiento básico de la web. No pueden desactivarse.</p>
+          </div>
+          <div class="mt-1 flex-none">
+            <span class="font-serif text-[0.68rem] uppercase tracking-[0.1em] text-[#c4956a]">Siempre activas</span>
+          </div>
+        </div>
+
+        <!-- Análisis -->
+        <div class="flex items-start justify-between gap-6 border-t border-black/[0.06] pt-4">
+          <div>
+            <p class="font-serif text-[0.82rem] font-semibold text-[#1a1a1a]">Cookies analíticas</p>
+            <p class="mt-1 font-serif text-[0.75rem] leading-relaxed text-[#777]">Nos ayudan a entender cómo interactúas con la web para mejorar nuestros servicios.</p>
+          </div>
+          <div class="mt-1 flex-none">
+            <button (click)="analyticsEnabled = !analyticsEnabled"
+                    [class.bg-[#c4956a]]="analyticsEnabled"
+                    [class.bg-[#ddd]]="!analyticsEnabled"
+                    class="relative h-6 w-11 cursor-pointer rounded-full border-none transition-colors duration-300">
+              <span [class.translate-x-5]="analyticsEnabled"
+                    [class.translate-x-0]="!analyticsEnabled"
+                    class="absolute top-[2px] left-[2px] h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-300 block"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Marketing -->
+        <div class="flex items-start justify-between gap-6 border-t border-black/[0.06] pt-4">
+          <div>
+            <p class="font-serif text-[0.82rem] font-semibold text-[#1a1a1a]">Cookies de marketing</p>
+            <p class="mt-1 font-serif text-[0.75rem] leading-relaxed text-[#777]">Permiten mostrarte contenido y anuncios personalizados según tus intereses.</p>
+          </div>
+          <div class="mt-1 flex-none">
+            <button (click)="marketingEnabled = !marketingEnabled"
+                    [class.bg-[#c4956a]]="marketingEnabled"
+                    [class.bg-[#ddd]]="!marketingEnabled"
+                    class="relative h-6 w-11 cursor-pointer rounded-full border-none transition-colors duration-300">
+              <span [class.translate-x-5]="marketingEnabled"
+                    [class.translate-x-0]="!marketingEnabled"
+                    class="absolute top-[2px] left-[2px] h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-300 block"></span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-6 flex justify-end gap-3">
+        <button (click)="showConfig = false"
+                class="cursor-pointer border border-black/[0.15] bg-transparent px-5 py-[0.45rem] font-serif text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[#555] transition-all hover:border-[#c4956a] hover:text-[#c4956a]">
+          Cancelar
+        </button>
+        <button (click)="saveConfig()"
+                class="cursor-pointer border-[1.5px] border-[#c4956a] bg-[#c4956a] px-6 py-[0.45rem] font-serif text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-white transition-all hover:bg-transparent hover:text-[#c4956a]">
+          Guardar preferencias
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

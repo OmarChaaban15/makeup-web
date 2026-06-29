@@ -8,4 +8,9 @@ import { RouterLink } from '@angular/router';
 })
 export class Footer {
   currentYear = new Date().getFullYear();
+
+  resetCookies() {
+    localStorage.removeItem('cookie-consent');
+    window.location.reload();
+  }
 }

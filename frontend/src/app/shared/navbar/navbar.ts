@@ -1,5 +1,5 @@
-import { Component, HostListener, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, HostListener } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +11,8 @@ export class Navbar {
   isScrolled = false;
   menuOpen = false;
 
+  constructor(private router: Router) {}
+
   @HostListener('window:scroll')
   onScroll() {
     this.isScrolled = window.scrollY > 20;
@@ -21,6 +23,11 @@ export class Navbar {
   }
 
   closeMenu() {
+    this.menuOpen = false;
+  }
+
+  openLogin() {
+    this.router.navigate(['/login']);
     this.menuOpen = false;
   }
 }
