@@ -8,6 +8,11 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\ResenaController;
 use App\Http\Controllers\AccesoTutorialController;
+use App\Http\Controllers\AuthController;
+
+// ── RUTAS DE AUTENTICACIÓN (sin login) ─────────────────
+Route::post('/auth/register', [AuthController::class, 'register']);
+Route::post('/auth/login', [AuthController::class, 'login']);
 
 // ── RUTAS PÚBLICAS (sin login) ──────────────────────
 Route::get('/categorias', [CategoriaController::class, 'index']);
@@ -26,6 +31,11 @@ Route::post('/citas', [CitaController::class, 'store']);
 
 // ── RUTAS PRIVADAS (requieren login) ────────────────
 Route::middleware('auth:sanctum')->group(function () {
+    // Rutas de autenticación
+    Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::get('/auth/me', [AuthController::class, 'me']);
+
+    // Rutas existentes
     Route::get('/pedidos', [PedidoController::class, 'index']);
     Route::post('/pedidos', [PedidoController::class, 'store']);
 

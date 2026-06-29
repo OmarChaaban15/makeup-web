@@ -91,8 +91,19 @@
 
   <!-- Barra inferior -->
   <div class="px-6 py-5 sm:px-10">
-    <div class="mx-auto flex max-w-[1180px] flex-col items-center justify-center gap-1 text-[0.72rem] font-light text-white/25">
+    <div class="mx-auto flex max-w-[1180px] flex-col items-center justify-center gap-2 text-[0.72rem] font-light text-white/25">
       <span>&copy; {{ currentYear }} Makeup By Yona. Todos los derechos reservados.</span>
+      <div class="flex items-center gap-4">
+        <a routerLink="/politica-privacidad"
+           class="no-underline transition-colors duration-300 hover:text-[#c4956a]">
+          Política de privacidad
+        </a>
+        <span class="text-white/10">|</span>
+        <button (click)="resetCookies()"
+                class="cursor-pointer border-none bg-transparent p-0 text-[0.72rem] font-light text-white/25 transition-colors duration-300 hover:text-[#c4956a]">
+          Gestionar cookies
+        </button>
+      </div>
     </div>
   </div>
 

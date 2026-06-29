@@ -50,15 +50,38 @@
           Reservar cita
         </a>
       </li>
+      <!-- ✦ Icono usuario (escritorio) -->
+      <li>
+        <button (click)="openLogin()"
+                class="cursor-pointer border-none bg-transparent p-[6px] text-[#1a1a1a] transition-colors duration-300 hover:text-[#c4956a]"
+                aria-label="Iniciar sesión" id="nav-usuario">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </button>
+      </li>
     </ul>
 
-    <!-- Menú hamburguesa (móvil) -->
-    <button class="hamburger-btn z-[1100] hidden cursor-pointer flex-col gap-[5px] border-none bg-transparent p-[6px] max-[900px]:flex"
-            (click)="toggleMenu()" [class.hamburger-open]="menuOpen" id="nav-hamburger" aria-label="Abrir menú">
-      <span class="block h-[1.5px] w-6 bg-[#1a1a1a] transition-all duration-300"></span>
-      <span class="block h-[1.5px] w-6 bg-[#1a1a1a] transition-all duration-300"></span>
-      <span class="block h-[1.5px] w-6 bg-[#1a1a1a] transition-all duration-300"></span>
-    </button>
+    <!-- Menú hamburguesa (móvil) + icono usuario móvil -->
+    <div class="z-[1100] hidden items-center gap-2 max-[900px]:flex">
+      <!-- ✦ Icono usuario (móvil) -->
+      <button (click)="openLogin()"
+              class="cursor-pointer border-none bg-transparent p-[6px] text-[#1a1a1a] transition-colors duration-300 hover:text-[#c4956a]"
+              aria-label="Iniciar sesión">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </button>
+
+      <button class="hamburger-btn cursor-pointer flex-col gap-[5px] border-none bg-transparent p-[6px]"
+              (click)="toggleMenu()" [class.hamburger-open]="menuOpen" id="nav-hamburger" aria-label="Abrir menú">
+        <span class="block h-[1.5px] w-6 bg-[#1a1a1a] transition-all duration-300"></span>
+        <span class="block h-[1.5px] w-6 bg-[#1a1a1a] transition-all duration-300"></span>
+        <span class="block h-[1.5px] w-6 bg-[#1a1a1a] transition-all duration-300"></span>
+      </button>
+    </div>
   </div>
 
   <!-- Menú móvil desplegable -->
@@ -77,5 +100,17 @@
        class="font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors duration-200 hover:text-[#c4956a]">Contacto</a>
     <a routerLink="/reservar-cita" routerLinkActive="active"
        class="border-[1.5px] border-[#c4956a] px-[1.4rem] py-[0.65rem] text-center font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white">Reservar cita</a>
+    <!-- ✦ Iniciar sesión en menú móvil -->
+    <button (click)="openLogin()"
+            class="flex cursor-pointer items-center gap-2 border-none bg-transparent p-0 font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] transition-colors duration-200 hover:text-[#c4956a]">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      Iniciar sesión
+    </button>
   </div>
 </nav>
+
+<!-- Login Modal -->
+<app-login-modal [(isOpen)]="loginOpen" />

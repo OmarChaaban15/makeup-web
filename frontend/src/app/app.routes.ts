@@ -5,6 +5,7 @@ import { Servicios } from './pages/servicios/servicios';
 import { Cursos } from './pages/cursos/cursos';
 import { Contacto } from './pages/contacto/contacto';
 import { ReservarCita } from './pages/reservar-cita/reservar-cita';
+import { PoliticaPrivacidad } from './pages/politica-privacidad/politica-privacidad'; // ← añadir
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'cursos', component: Cursos },
   { path: 'contacto', component: Contacto },
   { path: 'reservar-cita', component: ReservarCita },
+  { path: 'politica-privacidad', component: PoliticaPrivacidad }, // ← añadir
   { path: '**', redirectTo: 'inicio' }
 ];
