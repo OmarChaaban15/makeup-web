@@ -5,7 +5,9 @@ import { Servicios } from './pages/servicios/servicios';
 import { Cursos } from './pages/cursos/cursos';
 import { Contacto } from './pages/contacto/contacto';
 import { ReservarCita } from './pages/reservar-cita/reservar-cita';
-import { PoliticaPrivacidad } from './pages/politica-privacidad/politica-privacidad'; // ← añadir
+import { PoliticaPrivacidad } from './pages/politica-privacidad/politica-privacidad';
+import { Login } from './pages/login/login';
+import { Registro } from './pages/registro/registro';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -15,6 +17,8 @@ export const routes: Routes = [
   { path: 'cursos', component: Cursos },
   { path: 'contacto', component: Contacto },
   { path: 'reservar-cita', component: ReservarCita },
-  { path: 'politica-privacidad', component: PoliticaPrivacidad }, // ← añadir
+  { path: 'politica-privacidad', component: PoliticaPrivacidad },
+  { path: 'login', component: Login },
+  { path: 'registro', component: Registro },
   { path: '**', redirectTo: 'inicio' }
 ];

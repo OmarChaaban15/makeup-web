@@ -9,21 +9,20 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    /**
-     * Registrar un nuevo usuario
-     */
     public function register(Request $request)
     {
         try {
             $validated = $request->validate([
-                'name' => 'required|string|max:255',
+                'nombre' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
+                'telefono' => 'nullable|string|max:20',
                 'password' => 'required|string|min:8|confirmed',
             ]);
 
             $user = User::create([
-                'name' => $validated['name'],
+                'name' => $validated['nombre'],
                 'email' => $validated['email'],
+                'phone' => $validated['telefono'] ?? null,
                 'password' => Hash::make($validated['password']),
             ]);
 
@@ -31,25 +30,20 @@ class AuthController extends Controller
 
             return response()->json([
                 'message' => 'Usuario registrado exitosamente',
-                'user' => $user,
+                'user' => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                ],
                 'token' => $token,
             ], 201);
-        } catch (ValidationException $e) {
-            return response()->json([
-                'message' => 'Error de validación',
-                'errors' => $e->errors(),
-            ], 422);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Error al registrar el usuario',
-                'error' => $e->getMessage(),
-            ], 500);
+                'message' => $e->getMessage(),
+            ], 422);
         }
     }
 
-    /**
-     * Iniciar sesión
-     */
     public function login(Request $request)
     {
         try {
@@ -66,55 +60,27 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            // Revocar tokens anteriores si lo deseas
-            // $user->tokens()->delete();
-
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
                 'message' => 'Sesión iniciada correctamente',
-                'user' => $user,
+                'user' => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                ],
                 'token' => $token,
             ], 200);
-        } catch (ValidationException $e) {
-            return response()->json([
-                'message' => 'Error de validación',
-                'errors' => $e->errors(),
-            ], 422);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Error al iniciar sesión',
-                'error' => $e->getMessage(),
-            ], 500);
+                'message' => $e->getMessage(),
+            ], 422);
         }
     }
 
-    /**
-     * Cerrar sesión
-     */
     public function logout(Request $request)
     {
-        try {
-            $request->user()->currentAccessToken()->delete();
-
-            return response()->json([
-                'message' => 'Sesión cerrada correctamente',
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Error al cerrar sesión',
-                'error' => $e->getMessage(),
-            ], 500);
-        }
-    }
-
-    /**
-     * Obtener usuario actual
-     */
-    public function me(Request $request)
-    {
-        return response()->json([
-            'user' => $request->user(),
-        ], 200);
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['message' => 'Sesión cerrada'], 200);
     }
 }

@@ -1,17 +1,17 @@
 import { Component, HostListener } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { LoginModal } from '../login-modal/login-modal';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive, LoginModal],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })
 export class Navbar {
   isScrolled = false;
   menuOpen = false;
-  loginOpen = false;
+
+  constructor(private router: Router) {}
 
   @HostListener('window:scroll')
   onScroll() {
@@ -27,7 +27,7 @@ export class Navbar {
   }
 
   openLogin() {
-    this.loginOpen = true;
+    this.router.navigate(['/login']);
     this.menuOpen = false;
   }
 }
