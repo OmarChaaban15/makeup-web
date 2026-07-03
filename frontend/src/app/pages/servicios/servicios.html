@@ -26,118 +26,184 @@
   </section>
 
   <!-- ══════════════════════════════════════════
-       GRID DE SERVICIOS
+       GALERÍA DE FOTOS — YONAIDA 3 & 4
        ══════════════════════════════════════════ -->
-  <section class="grid grid-cols-1 gap-px bg-black/[0.07] min-[901px]:grid-cols-2">
+  <section class="overflow-hidden bg-[#fdfcfb] px-6 py-16 sm:px-10">
+    <div class="mx-auto grid max-w-[1100px] grid-cols-1 gap-5 sm:grid-cols-2">
 
-    <!-- 1. Eventos -->
-    <article class="relative flex flex-col gap-4 bg-white p-10 transition-colors duration-300 hover:bg-[#fdfaf7] max-[900px]:p-8 max-[480px]:px-6 max-[480px]:py-10" id="servicio-eventos">
-      <div class="h-12 w-12 text-[#c4956a]">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="h-full w-full">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
-          <path d="M8 12l2 2 4-4"/>
-          <path d="M12 6v2M12 16v2M6 12h2M16 12h2"/>
-        </svg>
+      <!-- Foto yonaida3 -->
+      <div class="group relative overflow-hidden rounded-2xl shadow-[0_16px_50px_rgba(26,26,26,0.12)]">
+        <img
+          src="images/yonaida3.JPG"
+          alt="Yonaida — maquillaje profesional"
+          class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
+          style="aspect-ratio: 4/5; min-height: 360px;"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 px-7 py-6">
+          <p class="font-serif text-[0.65rem] uppercase tracking-[0.25em] text-[#c4956a]">Maquillaje</p>
+          <p class="mt-1 font-serif text-[1.1rem] font-light text-white">Arte en cada detalle</p>
+        </div>
       </div>
-      <span class="pointer-events-none absolute top-10 right-12 font-serif text-[4rem] font-bold leading-none text-black/[0.04] max-[900px]:right-8 max-[900px]:text-[3rem]">01</span>
-      <h2 class="font-serif text-[clamp(1.7rem,2.5vw,2.2rem)] font-normal leading-[1.2] text-[#1a1a1a]">Maquillaje<br>para eventos</h2>
-      <p class="max-w-[440px] font-sans text-[0.9rem] font-light leading-[1.75] text-[#555]">
-        Luce radiante en cualquier ocasión especial. Realizo maquillajes personalizados para fiestas, galas, graduaciones, comuniones, bautizos, cumpleaños y todo tipo de eventos donde quieras destacar con una imagen impecable.
-      </p>
-      <ul class="my-1 flex list-none flex-col gap-[0.55rem] p-0">
-        <li class="relative pl-5 font-sans text-[0.82rem] text-[#555] before:absolute before:left-0 before:text-[0.75rem] before:text-[#c4956a] before:content-['—']">Maquillaje de larga duración</li>
-        <li class="relative pl-5 font-sans text-[0.82rem] text-[#555] before:absolute before:left-0 before:text-[0.75rem] before:text-[#c4956a] before:content-['—']">Adaptado a tu estilo y facciones</li>
-        <li class="relative pl-5 font-sans text-[0.82rem] text-[#555] before:absolute before:left-0 before:text-[0.75rem] before:text-[#c4956a] before:content-['—']">Acabado profesional y elegante</li>
-      </ul>
-      <a routerLink="/reservar-cita" class="group mt-auto inline-flex w-fit items-center gap-2 border-b border-transparent pb-[2px] pt-3 font-serif text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:gap-3 hover:border-[#c4956a]" id="cta-eventos">
-        Reservar cita
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </a>
-    </article>
 
-    <!-- 2. Novia (featured) -->
-    <article class="relative flex flex-col gap-4 bg-[#1a1a1a] p-10 text-white transition-colors duration-300 hover:bg-[#222] max-[900px]:p-8 max-[480px]:px-6 max-[480px]:py-10" id="servicio-novia">
-      <div class="h-12 w-12 text-[#c4956a]">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="h-full w-full">
-          <path d="M12 22s8-6 8-12a8 8 0 0 0-16 0c0 6 8 12 8 12z"/>
-          <circle cx="12" cy="10" r="3"/>
-        </svg>
+      <!-- Foto yonaida4 -->
+      <div class="group relative overflow-hidden rounded-2xl shadow-[0_16px_50px_rgba(26,26,26,0.12)]">
+        <img
+          src="images/yonaida4.PNG"
+          alt="Yonaida — trabajo artístico de maquillaje"
+          class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
+          style="aspect-ratio: 4/5; min-height: 360px;"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 px-7 py-6">
+          <p class="font-serif text-[0.65rem] uppercase tracking-[0.25em] text-[#c4956a]">Elegancia</p>
+          <p class="mt-1 font-serif text-[1.1rem] font-light text-white">Tu mejor versión</p>
+        </div>
       </div>
-      <span class="pointer-events-none absolute top-10 right-12 font-serif text-[4rem] font-bold leading-none text-white/[0.06] max-[900px]:right-8 max-[900px]:text-[3rem]">02</span>
-      <span class="w-fit rounded-full border border-[#c4956a]/30 bg-[#c4956a]/[0.12] px-3 py-1 font-sans text-[0.7rem] font-medium tracking-[0.1em] text-[#c4956a]">&#11088; Más solicitado</span>
-      <h2 class="font-serif text-[clamp(1.7rem,2.5vw,2.2rem)] font-normal leading-[1.2] text-white">Maquillaje<br>de novia</h2>
-      <p class="max-w-[440px] font-sans text-[0.9rem] font-light leading-[1.75] text-white/65">
-        Tu boda es uno de los días más importantes de tu vida y mereces sentirte única. Te acompaño durante todo el proceso para crear un maquillaje que refleje tu personalidad, resista toda la jornada y luzca perfecto tanto en persona como en fotografía.
-      </p>
-      <ul class="my-1 flex list-none flex-col gap-[0.55rem] p-0">
-        <li class="relative pl-5 font-sans text-[0.82rem] text-white/60 before:absolute before:left-0 before:text-[0.75rem] before:text-[#c4956a] before:content-['—']">Prueba de maquillaje previa</li>
-        <li class="relative pl-5 font-sans text-[0.82rem] text-white/60 before:absolute before:left-0 before:text-[0.75rem] before:text-[#c4956a] before:content-['—']">Asesoramiento personalizado</li>
-        <li class="relative pl-5 font-sans text-[0.82rem] text-white/60 before:absolute before:left-0 before:text-[0.75rem] before:text-[#c4956a] before:content-['—']">Servicio para novia e invitadas</li>
-        <li class="relative pl-5 font-sans text-[0.82rem] text-white/60 before:absolute before:left-0 before:text-[0.75rem] before:text-[#c4956a] before:content-['—']">Resistente a lágrimas y calor</li>
-      </ul>
-      <a routerLink="/reservar-cita" class="group mt-auto inline-flex w-fit items-center gap-2 border-b border-transparent pb-[2px] pt-3 font-serif text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:gap-3 hover:border-[#c4956a]" id="cta-novia">
-        Reservar cita
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </a>
-    </article>
 
-    <!-- 3. Editorial / Fotografía -->
-    <article class="relative flex flex-col gap-4 bg-white p-10 transition-colors duration-300 hover:bg-[#fdfaf7] max-[900px]:p-8 max-[480px]:px-6 max-[480px]:py-10" id="servicio-editorial">
-      <div class="h-12 w-12 text-[#c4956a]">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="h-full w-full">
-          <rect x="3" y="5" width="18" height="14" rx="2"/>
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M8 5V3M16 5V3"/>
-        </svg>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       GRID DE SERVICIOS — PREMIUM
+       ══════════════════════════════════════════ -->
+  <section class="bg-[#fdfcfb] px-6 py-20 sm:px-10">
+    <div class="mx-auto max-w-[1100px]">
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+
+        <!-- ── 01 · Eventos ── -->
+        <article class="group relative flex flex-col overflow-hidden rounded-[20px] border border-[#ede0d0] bg-white p-10 shadow-[0_4px_24px_rgba(196,149,106,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.18)]" id="servicio-eventos">
+
+
+          <div class="mb-6 flex items-center gap-4">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5ede3] text-[#c4956a]">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <p class="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Eventos &amp; Ocasiones</p>
+          </div>
+
+          <h2 class="mb-4 font-serif text-[clamp(1.6rem,2.5vw,2.1rem)] font-light leading-[1.2] text-[#1a1a1a]">Maquillaje<br><em class="italic text-[#c4956a]">para eventos</em></h2>
+          <div class="mb-5 h-[1.5px] w-10 bg-[#c4956a]"></div>
+
+          <p class="mb-6 font-sans text-[0.88rem] font-light leading-[1.8] text-[#666]">
+            Luce radiante en cualquier ocasión especial. Maquillajes personalizados para fiestas, galas, graduaciones, comuniones y todo tipo de eventos.
+          </p>
+
+          <ul class="mb-8 flex flex-col gap-2.5">
+            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Maquillaje de larga duración</li>
+            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Adaptado a tu estilo y facciones</li>
+            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Acabado profesional y elegante</li>
+          </ul>
+
+          <a routerLink="/reservar-cita" class="mt-auto inline-flex w-fit items-center gap-2 rounded-full border border-[#c4956a] px-6 py-2.5 font-serif text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white" id="cta-eventos">
+            Reservar cita
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </article>
+
+        <!-- ── 02 · Novia ── -->
+        <article class="group relative flex flex-col overflow-hidden rounded-[20px] bg-[#1a1a1a] p-10 shadow-[0_4px_24px_rgba(26,26,26,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(26,26,26,0.35)]" id="servicio-novia">
+
+
+          <div class="mb-6 flex items-center gap-4">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#c4956a]/15 text-[#c4956a]">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                <path d="M12 22s8-6 8-12a8 8 0 0 0-16 0c0 6 8 12 8 12z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div class="flex flex-col gap-1">
+              <p class="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Novia &amp; Bodas</p>
+              <span class="w-fit rounded-full bg-[#c4956a]/20 px-2.5 py-0.5 font-sans text-[0.58rem] font-semibold uppercase tracking-wider text-[#c4956a]">⭐ Más solicitado</span>
+            </div>
+          </div>
+
+          <h2 class="mb-4 font-serif text-[clamp(1.6rem,2.5vw,2.1rem)] font-light leading-[1.2] text-white">Maquillaje<br><em class="italic text-[#c4956a]">de novia</em></h2>
+          <div class="mb-5 h-[1.5px] w-10 bg-[#c4956a]"></div>
+
+          <p class="mb-6 font-sans text-[0.88rem] font-light leading-[1.8] text-white/65">
+            Tu boda merece lo mejor. Te acompaño en todo el proceso para crear un look que refleje tu personalidad y resista toda la jornada perfectamente.
+          </p>
+
+          <ul class="mb-8 flex flex-col gap-2.5">
+            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-white/60"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Prueba de maquillaje previa</li>
+            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-white/60"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Asesoramiento personalizado</li>
+            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-white/60"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Resistente a lágrimas y calor</li>
+          </ul>
+
+          <a routerLink="/reservar-cita" class="mt-auto inline-flex w-fit items-center gap-2 rounded-full border border-[#c4956a] bg-[#c4956a] px-6 py-2.5 font-serif text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:bg-[#a87a52] hover:border-[#a87a52]" id="cta-novia">
+            Reservar cita
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </article>
+
+        <!-- ── 03 · Editorial ── -->
+        <article class="group relative flex flex-col overflow-hidden rounded-[20px] border border-[#ede0d0] bg-white p-10 shadow-[0_4px_24px_rgba(196,149,106,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.18)]" id="servicio-editorial">
+
+
+          <div class="mb-6 flex items-center gap-4">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5ede3] text-[#c4956a]">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                <rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 5V3M16 5V3"/>
+              </svg>
+            </div>
+            <p class="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Editorial &amp; Fotografía</p>
+          </div>
+
+          <h2 class="mb-4 font-serif text-[clamp(1.6rem,2.5vw,2.1rem)] font-light leading-[1.2] text-[#1a1a1a]">Maquillaje editorial<br><em class="italic text-[#c4956a]">&amp; fotografía</em></h2>
+          <div class="mb-5 h-[1.5px] w-10 bg-[#c4956a]"></div>
+
+          <p class="mb-6 font-sans text-[0.88rem] font-light leading-[1.8] text-[#666]">
+            Especializada en sesiones fotográficas, campañas publicitarias y creación de contenido. Cada look se diseña según la iluminación y el concepto creativo.
+          </p>
+
+          <ul class="mb-8 flex flex-col gap-2.5">
+            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Editorial de moda y belleza</li>
+            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Fotografía profesional</li>
+            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Contenido para marcas y redes sociales</li>
+          </ul>
+
+          <a routerLink="/reservar-cita" class="mt-auto inline-flex w-fit items-center gap-2 rounded-full border border-[#c4956a] px-6 py-2.5 font-serif text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white" id="cta-editorial">
+            Reservar cita
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </article>
+
+        <!-- ── 04 · Audiovisual ── -->
+        <article class="group relative flex flex-col overflow-hidden rounded-[20px] border border-[#ede0d0] bg-white p-10 shadow-[0_4px_24px_rgba(196,149,106,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.18)]" id="servicio-audiovisual">
+
+
+          <div class="mb-6 flex items-center gap-4">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5ede3] text-[#c4956a]">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>
+              </svg>
+            </div>
+            <p class="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Cine &amp; Producción</p>
+          </div>
+
+          <h2 class="mb-4 font-serif text-[clamp(1.6rem,2.5vw,2.1rem)] font-light leading-[1.2] text-[#1a1a1a]">Maquillaje<br><em class="italic text-[#c4956a]">audiovisual</em></h2>
+          <div class="mb-5 h-[1.5px] w-10 bg-[#c4956a]"></div>
+
+          <p class="mb-6 font-sans text-[0.88rem] font-light leading-[1.8] text-[#666]">
+            Para producciones audiovisuales, televisión, cine, videoclips y publicidad. Resultados perfectos en cámara bajo cualquier tipo de iluminación.
+          </p>
+
+          <ul class="mb-8 flex flex-col gap-2.5">
+            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Grabaciones y rodajes</li>
+            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Producciones publicitarias</li>
+            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Continuidad y adaptación a cámara</li>
+          </ul>
+
+          <a routerLink="/reservar-cita" class="mt-auto inline-flex w-fit items-center gap-2 rounded-full border border-[#c4956a] px-6 py-2.5 font-serif text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white" id="cta-audiovisual">
+            Reservar cita
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </article>
+
       </div>
-      <span class="pointer-events-none absolute top-10 right-12 font-serif text-[4rem] font-bold leading-none text-black/[0.04] max-[900px]:right-8 max-[900px]:text-[3rem]">03</span>
-      <h2 class="font-serif text-[clamp(1.7rem,2.5vw,2.2rem)] font-normal leading-[1.2] text-[#1a1a1a]">Maquillaje editorial<br>&amp; fotografía</h2>
-      <p class="max-w-[440px] font-sans text-[0.9rem] font-light leading-[1.75] text-[#555]">
-        Especializada en maquillajes para sesiones fotográficas, campañas publicitarias, moda, belleza y creación de contenido. Cada look se diseña teniendo en cuenta la iluminación, el concepto creativo y los objetivos de la sesión.
-      </p>
-      <ul class="my-1 flex list-none flex-col gap-[0.55rem] p-0">
-        <li class="relative pl-5 font-sans text-[0.82rem] text-[#555] before:absolute before:left-0 before:text-[0.75rem] before:text-[#c4956a] before:content-['—']">Editorial de moda y belleza</li>
-        <li class="relative pl-5 font-sans text-[0.82rem] text-[#555] before:absolute before:left-0 before:text-[0.75rem] before:text-[#c4956a] before:content-['—']">Fotografía profesional</li>
-        <li class="relative pl-5 font-sans text-[0.82rem] text-[#555] before:absolute before:left-0 before:text-[0.75rem] before:text-[#c4956a] before:content-['—']">Creación de contenido para marcas y redes sociales</li>
-      </ul>
-      <a routerLink="/reservar-cita" class="group mt-auto inline-flex w-fit items-center gap-2 border-b border-transparent pb-[2px] pt-3 font-serif text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:gap-3 hover:border-[#c4956a]" id="cta-editorial">
-        Reservar cita
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </a>
-    </article>
-
-    <!-- 4. Audiovisual -->
-    <article class="relative flex flex-col gap-4 bg-white p-10 transition-colors duration-300 hover:bg-[#fdfaf7] max-[900px]:p-8 max-[480px]:px-6 max-[480px]:py-10" id="servicio-audiovisual">
-      <div class="h-12 w-12 text-[#c4956a]">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="h-full w-full">
-          <polygon points="23 7 16 12 23 17 23 7"/>
-          <rect x="1" y="5" width="15" height="14" rx="2"/>
-        </svg>
-      </div>
-      <span class="pointer-events-none absolute top-10 right-12 font-serif text-[4rem] font-bold leading-none text-black/[0.04] max-[900px]:right-8 max-[900px]:text-[3rem]">04</span>
-      <h2 class="font-serif text-[clamp(1.7rem,2.5vw,2.2rem)] font-normal leading-[1.2] text-[#1a1a1a]">Maquillaje<br>audiovisual</h2>
-      <p class="max-w-[440px] font-sans text-[0.9rem] font-light leading-[1.75] text-[#555]">
-        Servicios de maquillaje para producciones audiovisuales, televisión, cine, videoclips, publicidad y proyectos digitales. Conocimiento profundo de la luz artificial y la cámara para garantizar resultados perfectos en pantalla.
-      </p>
-      <ul class="my-1 flex list-none flex-col gap-[0.55rem] p-0">
-        <li class="relative pl-5 font-sans text-[0.82rem] text-[#555] before:absolute before:left-0 before:text-[0.75rem] before:text-[#c4956a] before:content-['—']">Grabaciones y rodajes</li>
-        <li class="relative pl-5 font-sans text-[0.82rem] text-[#555] before:absolute before:left-0 before:text-[0.75rem] before:text-[#c4956a] before:content-['—']">Producciones publicitarias</li>
-        <li class="relative pl-5 font-sans text-[0.82rem] text-[#555] before:absolute before:left-0 before:text-[0.75rem] before:text-[#c4956a] before:content-['—']">Continuidad y adaptación a cámara</li>
-      </ul>
-      <a routerLink="/reservar-cita" class="group mt-auto inline-flex w-fit items-center gap-2 border-b border-transparent pb-[2px] pt-3 font-serif text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:gap-3 hover:border-[#c4956a]" id="cta-audiovisual">
-        Reservar cita
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </a>
-    </article>
-
+    </div>
   </section>
 
   <!-- ══════════════════════════════════════════
@@ -159,23 +225,18 @@
     <div class="relative z-10 flex h-full flex-col justify-center px-8 py-24 sm:px-16 md:px-24" style="min-height: 560px;">
       <div class="max-w-[560px]">
 
-        <!-- Eyebrow -->
         <p class="mb-5 font-serif text-[0.72rem] uppercase tracking-[0.35em] text-[#c4956a]">¿Lista para tu cambio?</p>
 
-        <!-- Título -->
         <h2 class="mb-6 font-serif text-[clamp(2.2rem,4.5vw,3.5rem)] font-light leading-[1.2] text-white drop-shadow-md">
           Tu momento<br><em class="italic text-[#c4956a]">empieza aquí</em>
         </h2>
 
-        <!-- Separador -->
         <div class="mb-8 h-[1.5px] w-14 bg-[#c4956a]"></div>
 
-        <!-- Texto -->
         <p class="mb-10 max-w-[440px] font-sans text-[0.95rem] font-light leading-[1.85] text-white/75">
           Cuéntame tu idea y juntas diseñamos el maquillaje perfecto para ti. Primera consulta gratuita y sin compromiso.
         </p>
 
-        <!-- Cita -->
         <blockquote class="mb-10 border-l-2 border-[#c4956a] pl-5">
           <p class="font-serif text-[1rem] font-light italic leading-[1.7] text-white/60">
             "Cada clienta merece sentirse única y absolutamente especial."
@@ -183,7 +244,6 @@
           <footer class="mt-2 font-sans text-[0.68rem] uppercase tracking-[0.2em] text-[#c4956a]">— Yonaida</footer>
         </blockquote>
 
-        <!-- Botones -->
         <div class="flex flex-wrap gap-4">
           <a routerLink="/reservar-cita"
              class="inline-flex items-center gap-3 bg-[#c4956a] px-8 py-4 font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:bg-[#a87a52]"
