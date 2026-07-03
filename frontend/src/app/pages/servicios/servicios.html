@@ -1,14 +1,24 @@
 <div class="min-h-screen bg-[#fdfcfb] pt-20 font-sans antialiased">
 
   <!-- ══════════════════════════════════════════
-       HERO DE SECCIÓN
+       HERO DE SECCIÓN (fondo: yonaida5)
        ══════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-[#fdfcfb] via-[#f5ede3] to-[#ede0d0] px-8 pb-20 pt-24 text-center
-                  before:pointer-events-none before:absolute before:-top-20 before:-right-20 before:h-[400px] before:w-[400px] before:rounded-full before:bg-[radial-gradient(circle,rgba(196,149,106,0.12)_0%,transparent_70%)]">
-    <div class="servicios-fade-up mx-auto max-w-[680px]">
+  <section class="relative overflow-hidden" style="min-height: 620px;">
+    <!-- Imagen de fondo -->
+    <img
+      src="images/yonaida5.PNG"
+      alt="Yonaida, maquilladora profesional — servicios"
+      class="absolute inset-0 h-full w-full object-cover"
+      style="object-position: center -300px;"
+    />
+    <!-- Overlay degradado -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/60"></div>
+
+    <!-- Contenido centrado -->
+    <div class="servicios-fade-up relative z-10 flex flex-col items-center justify-center px-8 pb-20 pt-32 text-center" style="min-height: 620px;">
       <p class="mb-4 font-serif text-[0.72rem] uppercase tracking-[0.32em] text-[#c4956a]">Mis Servicios</p>
-      <h1 class="mb-5 font-serif text-[clamp(2.8rem,5.5vw,4.5rem)] font-light leading-[1.15] text-[#1a1a1a]">El maquillaje<br><em class="italic text-[#c4956a]">que mereces</em></h1>
-      <p class="font-sans text-base font-light leading-[1.75] text-[#555]">
+      <h1 class="mb-5 font-serif text-[clamp(2.8rem,5.5vw,4.5rem)] font-light leading-[1.15] text-white drop-shadow-lg">El maquillaje<br><em class="italic text-[#c4956a]">que mereces</em></h1>
+      <p class="font-sans text-base font-light leading-[1.75] text-white/80">
         Cada servicio está diseñado para realzar tu belleza única,<br>
         adaptándome a cada ocasión con detalle y profesionalidad.
       </p>
@@ -131,20 +141,66 @@
   </section>
 
   <!-- ══════════════════════════════════════════
-       CTA FINAL
+       CTA FINAL — FONDO YONAIDA 6
        ══════════════════════════════════════════ -->
-  <section class="bg-gradient-to-br from-[#f5ede3] to-[#ede0d0] px-8 py-24 text-center">
-    <div class="mx-auto flex max-w-[600px] flex-col items-center gap-6">
-      <p class="font-serif text-[0.72rem] uppercase tracking-[0.32em] text-[#c4956a]">¿No sabes cuál elegir?</p>
-      <h2 class="font-serif text-[clamp(2rem,4vw,3rem)] font-light leading-[1.25] text-[#1a1a1a]">Hablemos y<br><em class="italic text-[#c4956a]">encontramos el look perfecto</em></h2>
-      <p class="font-sans text-[0.9rem] font-light leading-[1.8] text-[#666]">
-        Cuéntame tu idea y diseñaremos juntas la opción perfecta para ti.
-      </p>
-      <a routerLink="/reservar-cita"
-         class="border-[1.5px] border-[#1a1a1a] bg-[#1a1a1a] px-[2.8rem] py-4 font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:bg-transparent hover:text-[#1a1a1a]"
-         id="servicios-cta-final">
-        Reservar consulta gratuita
-      </a>
+  <section class="relative overflow-hidden" style="min-height: 560px;">
+
+    <!-- Imagen de fondo -->
+    <img
+      src="images/yonaida6.PNG"
+      alt="Yonaida — maquillaje de alta calidad"
+      class="absolute inset-0 h-full w-full object-cover"
+      style="object-position: center 30%;"
+    />
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/30"></div>
+
+    <!-- Contenido -->
+    <div class="relative z-10 flex h-full flex-col justify-center px-8 py-24 sm:px-16 md:px-24" style="min-height: 560px;">
+      <div class="max-w-[560px]">
+
+        <!-- Eyebrow -->
+        <p class="mb-5 font-serif text-[0.72rem] uppercase tracking-[0.35em] text-[#c4956a]">¿Lista para tu cambio?</p>
+
+        <!-- Título -->
+        <h2 class="mb-6 font-serif text-[clamp(2.2rem,4.5vw,3.5rem)] font-light leading-[1.2] text-white drop-shadow-md">
+          Tu momento<br><em class="italic text-[#c4956a]">empieza aquí</em>
+        </h2>
+
+        <!-- Separador -->
+        <div class="mb-8 h-[1.5px] w-14 bg-[#c4956a]"></div>
+
+        <!-- Texto -->
+        <p class="mb-10 max-w-[440px] font-sans text-[0.95rem] font-light leading-[1.85] text-white/75">
+          Cuéntame tu idea y juntas diseñamos el maquillaje perfecto para ti. Primera consulta gratuita y sin compromiso.
+        </p>
+
+        <!-- Cita -->
+        <blockquote class="mb-10 border-l-2 border-[#c4956a] pl-5">
+          <p class="font-serif text-[1rem] font-light italic leading-[1.7] text-white/60">
+            "Cada clienta merece sentirse única y absolutamente especial."
+          </p>
+          <footer class="mt-2 font-sans text-[0.68rem] uppercase tracking-[0.2em] text-[#c4956a]">— Yonaida</footer>
+        </blockquote>
+
+        <!-- Botones -->
+        <div class="flex flex-wrap gap-4">
+          <a routerLink="/reservar-cita"
+             class="inline-flex items-center gap-3 bg-[#c4956a] px-8 py-4 font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:bg-[#a87a52]"
+             id="servicios-cta-reservar">
+            Reservar cita
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a routerLink="/contacto"
+             class="inline-flex items-center gap-3 border-[1.5px] border-white/40 px-8 py-4 font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:border-white hover:bg-white/10"
+             id="servicios-cta-contactar">
+            Contactar
+          </a>
+        </div>
+
+      </div>
     </div>
   </section>
 
