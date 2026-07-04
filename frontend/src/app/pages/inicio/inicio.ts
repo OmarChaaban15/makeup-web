@@ -13,6 +13,7 @@ export class Inicio implements OnInit, OnDestroy {
     { src: 'images/IMG_2.PNG', alt: 'Trabajo de maquillaje 2', pos: 'center 35%' },
     { src: 'images/IMG_3.PNG', alt: 'Trabajo de maquillaje 3', pos: 'center 35%' },
     { src: 'images/IMG_4.PNG', alt: 'Trabajo de maquillaje 4', pos: 'center 40%' },
+    { src: 'images/IMG_5.JPEG', alt: 'Trabajo de maquillaje 5', pos: 'center center' },
   ];
 
   currentIndex = signal(0);
