@@ -47,7 +47,7 @@ export class Login implements OnInit {
   onSubmit(): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
-      this.errorMsg = 'Por favor, completa los campos correctamente.';
+      this.errorMsg = 'Revisa el correo y la contraseña antes de continuar.';
       return;
     }
 
@@ -69,10 +69,13 @@ export class Login implements OnInit {
       },
       error: (error) => {
         this.isLoading = false;
-        const errorMessage = error.error?.message || error.statusText || 'Error de conexión';
-        this.errorMsg = errorMessage === 'Credenciales inválidas' 
-          ? 'Email o contraseña incorrectos' 
-          : errorMessage;
+        if (error.status === 0) {
+          this.errorMsg = 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.';
+        } else if (error.status === 401) {
+          this.errorMsg = 'El correo o la contraseña son incorrectos.';
+        } else {
+          this.errorMsg = error.error?.message || 'No se pudo iniciar sesión. Inténtalo de nuevo.';
+        }
       }
     });
   }

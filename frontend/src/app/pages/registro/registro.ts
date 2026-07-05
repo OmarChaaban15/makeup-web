@@ -61,7 +61,13 @@ export class Registro implements OnInit {
   onSubmit(): void {
     if (this.registroForm.invalid) {
       this.registroForm.markAllAsTouched();
-      this.errorMsg = 'Por favor, revisa los campos del formulario.';
+      if (this.registroForm.errors?.['mismatch']) {
+        this.errorMsg = 'Las contraseñas no coinciden.';
+      } else if (this.registroForm.get('aceptaTerminos')?.invalid) {
+        this.errorMsg = 'Debes aceptar los términos y la política de privacidad.';
+      } else {
+        this.errorMsg = 'Revisa los campos del formulario antes de continuar.';
+      }
       return;
     }
 
@@ -89,10 +95,12 @@ export class Registro implements OnInit {
       },
       error: (error) => {
         this.isLoading = false;
-        if (error.error?.errors?.email) {
-          this.errorMsg = 'Este email ya está registrado.';
+        if (error.status === 0) {
+          this.errorMsg = 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.';
+        } else if (error.error?.errors?.email) {
+          this.errorMsg = 'Ya existe una cuenta con este correo electrónico.';
         } else {
-          this.errorMsg = error.error?.message || 'Error al crear la cuenta.';
+          this.errorMsg = error.error?.message || 'No se pudo crear la cuenta. Inténtalo de nuevo.';
         }
       }
     });
