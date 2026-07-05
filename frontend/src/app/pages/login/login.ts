@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { finalize } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -44,6 +46,22 @@ export class Login implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
+  private getErrorMessage(error: any, fallback: string): string {
+    if (!error || !error.error) {
+      return fallback;
+    }
+
+    if (error.status === 0) {
+      return 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.';
+    }
+
+    if (error.error?.message) {
+      return error.error.message;
+    }
+
+    return fallback;
+  }
+
   onSubmit(): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
@@ -57,26 +75,21 @@ export class Login implements OnInit {
 
     const credentials = this.loginForm.value;
 
-    this.http.post<any>('http://localhost:8000/api/auth/login', credentials).subscribe({
-      next: (response) => {
-        this.successMsg = 'Iniciando sesión...';
-        localStorage.setItem('auth_token', response.token);
-        localStorage.setItem('user', JSON.stringify(response.user));
-        
-        setTimeout(() => {
-          this.router.navigate(['/inicio']);
-        }, 1000);
-      },
-      error: (error) => {
-        this.isLoading = false;
-        if (error.status === 0) {
-          this.errorMsg = 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.';
-        } else if (error.status === 401) {
-          this.errorMsg = 'El correo o la contraseña son incorrectos.';
-        } else {
-          this.errorMsg = error.error?.message || 'No se pudo iniciar sesión. Inténtalo de nuevo.';
+    this.http.post<any>(`${environment.apiUrl}/auth/login`, credentials)
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe({
+        next: (response) => {
+          this.successMsg = 'Iniciando sesión...';
+          localStorage.setItem('auth_token', response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
+          
+          setTimeout(() => {
+            this.router.navigate(['/inicio']);
+          }, 1000);
+        },
+        error: (error) => {
+          this.errorMsg = this.getErrorMessage(error, 'No se pudo iniciar sesión. Inténtalo de nuevo.');
         }
-      }
-    });
+      });
   }
 }

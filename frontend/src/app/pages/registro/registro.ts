@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { finalize } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-registro',
@@ -31,6 +33,30 @@ export class Registro implements OnInit {
     if (localStorage.getItem('auth_token')) {
       this.router.navigate(['/inicio']);
     }
+  }
+
+  private getErrorMessage(error: any, fallback: string): string {
+    if (!error || !error.error) {
+      return fallback;
+    }
+
+    if (error.status === 0) {
+      return 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.';
+    }
+
+    if (error.error?.errors) {
+      const firstKey = Object.keys(error.error.errors)[0];
+      const firstError = error.error.errors[firstKey];
+      if (Array.isArray(firstError) && firstError.length) {
+        return firstError[0];
+      }
+    }
+
+    if (error.error?.message) {
+      return error.error.message;
+    }
+
+    return fallback;
   }
 
   private initForm(): void {
@@ -83,26 +109,21 @@ export class Registro implements OnInit {
       password_confirmation: this.registroForm.value.confirmPassword
     };
 
-    this.http.post<any>('http://localhost:8000/api/auth/register', formData).subscribe({
-      next: (response) => {
-        this.successMsg = '¡Cuenta creada! Redirigiendo...';
-        localStorage.setItem('auth_token', response.token);
-        localStorage.setItem('user', JSON.stringify(response.user));
-        
-        setTimeout(() => {
-          this.router.navigate(['/inicio']);
-        }, 1000);
-      },
-      error: (error) => {
-        this.isLoading = false;
-        if (error.status === 0) {
-          this.errorMsg = 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.';
-        } else if (error.error?.errors?.email) {
-          this.errorMsg = 'Ya existe una cuenta con este correo electrónico.';
-        } else {
-          this.errorMsg = error.error?.message || 'No se pudo crear la cuenta. Inténtalo de nuevo.';
+    this.http.post<any>(`${environment.apiUrl}/auth/register`, formData)
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe({
+        next: (response) => {
+          this.successMsg = '¡Cuenta creada! Redirigiendo...';
+          localStorage.setItem('auth_token', response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
+          
+          setTimeout(() => {
+            this.router.navigate(['/inicio']);
+          }, 1000);
+        },
+        error: (error) => {
+          this.errorMsg = this.getErrorMessage(error, 'No se pudo crear la cuenta. Inténtalo de nuevo.');
         }
-      }
-    });
+      });
   }
 }
