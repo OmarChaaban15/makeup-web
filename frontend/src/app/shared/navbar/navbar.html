@@ -1,9 +1,9 @@
 <nav class="fixed top-0 left-0 right-0 z-[1000] border-b border-black/[0.06] bg-white transition-all duration-300"
      [class.navbar-scrolled]="isScrolled">
-  <div class="mx-auto flex h-20 max-w-[1300px] items-center justify-between px-8 max-[480px]:px-5">
+  <div class="mx-auto grid h-20 max-w-[1300px] grid-cols-[1fr_auto_1fr] items-center px-8 max-[480px]:px-5">
 
     <!-- Links izquierda -->
-    <ul class="hidden flex-1 list-none items-center gap-10 min-[901px]:flex">
+    <ul class="hidden list-none items-center justify-end gap-10 min-[901px]:flex">
       <li>
         <a routerLink="/inicio" routerLinkActive="!text-[#c4956a] after:!w-full" [routerLinkActiveOptions]="{exact:true}" id="nav-inicio"
            class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[#1a1a1a] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full">
@@ -25,13 +25,13 @@
     </ul>
 
     <!-- Logo centro -->
-    <a class="group flex flex-none flex-col items-center gap-[2px] px-8 text-center no-underline max-[900px]:px-0" routerLink="/inicio" id="nav-logo">
+    <a class="group mx-4 flex flex-none flex-col items-center justify-self-center gap-[2px] px-4 text-center no-underline max-[900px]:px-0" routerLink="/inicio" id="nav-logo">
       <span class="font-serif text-[1.35rem] font-bold uppercase leading-none tracking-[0.18em] text-[#1a1a1a] transition-colors duration-300 group-hover:text-[#c4956a] max-[900px]:text-[1.1rem] max-[900px]:tracking-[0.12em]">MAKEUP BY YONA</span>
       <span class="font-serif text-[0.62rem] font-normal italic tracking-[0.06em] text-[#888]">Realiza tu belleza &middot; Enhance your beauty</span>
     </a>
 
     <!-- Links derecha -->
-    <ul class="hidden flex-1 list-none items-center justify-end gap-10 min-[901px]:flex">
+    <ul class="hidden list-none items-center justify-end gap-4 lg:gap-6 xl:gap-8 2xl:gap-10 min-[901px]:flex">
       <li>
         <a routerLink="/cursos" routerLinkActive="!text-[#c4956a] after:!w-full" id="nav-cursos"
            class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[#1a1a1a] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full">
@@ -46,7 +46,7 @@
       </li>
       <li>
         <a routerLink="/reservar-cita" routerLinkActive="active" id="nav-reservar"
-           class="border-[1.5px] border-[#c4956a] px-[1.4rem] py-[0.55rem] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white">
+           class="inline-flex min-w-[9rem] shrink-0 items-center justify-center whitespace-nowrap border-[1.5px] border-[#c4956a] px-[1rem] py-[0.5rem] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white lg:px-[1.2rem] lg:py-[0.55rem]">
           Reservar cita
         </a>
       </li>
@@ -60,7 +60,7 @@
         </li>
       }
       <!-- ✦ Usuario (escritorio) -->
-      <li class="relative">
+      <li class="relative ml-2">
         @if (isLoggedIn) {
           <button (click)="toggleUserMenu($event)"
                   class="flex cursor-pointer items-center gap-2 border-none bg-transparent p-[6px] text-[#1a1a1a] transition-colors duration-300 hover:text-[#c4956a]"
@@ -83,12 +83,8 @@
                 <p class="font-sans text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-[#888]">Sesión iniciada</p>
                 <p class="mt-1 truncate font-serif text-[0.95rem] font-light text-[#1a1a1a]">{{ userName }}</p>
               </div>
-              <a routerLink="/mis-cursos" (click)="closeUserMenu()"
-                 class="block px-4 py-3 font-sans text-[0.8rem] font-medium text-[#1a1a1a] transition-colors hover:bg-[#f2eae4] hover:text-[#c4956a]">
-                Mis Cursos
-              </a>
               <button (click)="logout()"
-                      class="flex w-full cursor-pointer items-center gap-2 border-none bg-transparent px-4 py-3 text-left font-sans text-[0.8rem] font-medium text-[#1a1a1a] transition-colors hover:bg-[#f2eae4] hover:text-[#c4956a]">
+                      class="flex w-full cursor-pointer items-center gap-2 border-none bg-transparent px-4 py-3 text-left font-sans text-[0.8rem] font-medium text-[#1a1a1a] transition-colors hover:bg-[#f2eae4] hover:text-red-700">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/>
                 </svg>
