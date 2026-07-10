@@ -8,6 +8,8 @@ import { ReservarCita } from './pages/reservar-cita/reservar-cita';
 import { PoliticaPrivacidad } from './pages/politica-privacidad/politica-privacidad';
 import { Login } from './pages/login/login';
 import { Registro } from './pages/registro/registro';
+import { MisCursos } from './pages/mis-cursos/mis-cursos';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -18,6 +20,7 @@ export const routes: Routes = [
   { path: 'contacto', component: Contacto },
   { path: 'reservar-cita', component: ReservarCita },
   { path: 'politica-privacidad', component: PoliticaPrivacidad },
+  { path: 'mis-cursos', component: MisCursos, canActivate: [authGuard] },
   { path: 'login', component: Login },
   { path: 'registro', component: Registro },
   { path: '**', redirectTo: 'inicio' }

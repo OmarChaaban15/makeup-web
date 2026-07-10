@@ -50,25 +50,71 @@
           Reservar cita
         </a>
       </li>
-      <!-- ✦ Icono usuario (escritorio) -->
-      <li>
-        <button (click)="openLogin()"
-                class="cursor-pointer border-none bg-transparent p-[6px] text-[#1a1a1a] transition-colors duration-300 hover:text-[#c4956a]"
-                aria-label="Iniciar sesión" id="nav-usuario">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-        </button>
+      <!-- ✦ Mis Cursos (solo con sesión iniciada) -->
+      @if (isLoggedIn) {
+        <li>
+          <a routerLink="/mis-cursos" routerLinkActive="!text-[#c4956a] after:!w-full" id="nav-mis-cursos"
+             class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[#1a1a1a] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full">
+            Mis Cursos
+          </a>
+        </li>
+      }
+      <!-- ✦ Usuario (escritorio) -->
+      <li class="relative">
+        @if (isLoggedIn) {
+          <button (click)="toggleUserMenu($event)"
+                  class="flex cursor-pointer items-center gap-2 border-none bg-transparent p-[6px] text-[#1a1a1a] transition-colors duration-300 hover:text-[#c4956a]"
+                  aria-label="Menú de usuario" id="nav-usuario">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span class="max-w-[120px] truncate font-serif text-[0.78rem] font-semibold uppercase tracking-[0.1em]">{{ userName }}</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="transition-transform duration-300" [class.rotate-180]="userMenuOpen">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </button>
+
+          @if (userMenuOpen) {
+            <div class="absolute right-0 top-full mt-3 w-60 overflow-hidden rounded-[14px] border border-black/[0.06] bg-white py-2 shadow-[0_12px_40px_rgba(0,0,0,0.12)]"
+                 (click)="$event.stopPropagation()">
+              <div class="border-b border-black/[0.06] px-4 py-3">
+                <p class="font-sans text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-[#888]">Sesión iniciada</p>
+                <p class="mt-1 truncate font-serif text-[0.95rem] font-light text-[#1a1a1a]">{{ userName }}</p>
+              </div>
+              <a routerLink="/mis-cursos" (click)="closeUserMenu()"
+                 class="block px-4 py-3 font-sans text-[0.8rem] font-medium text-[#1a1a1a] transition-colors hover:bg-[#f2eae4] hover:text-[#c4956a]">
+                Mis Cursos
+              </a>
+              <button (click)="logout()"
+                      class="flex w-full cursor-pointer items-center gap-2 border-none bg-transparent px-4 py-3 text-left font-sans text-[0.8rem] font-medium text-[#1a1a1a] transition-colors hover:bg-[#f2eae4] hover:text-[#c4956a]">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/>
+                </svg>
+                Cerrar sesión
+              </button>
+            </div>
+          }
+        } @else {
+          <button (click)="openLogin()"
+                  class="cursor-pointer border-none bg-transparent p-[6px] text-[#1a1a1a] transition-colors duration-300 hover:text-[#c4956a]"
+                  aria-label="Iniciar sesión" id="nav-usuario">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </button>
+        }
       </li>
     </ul>
 
     <!-- Menú hamburguesa (móvil) + icono usuario móvil -->
     <div class="z-[1100] hidden items-center gap-2 max-[900px]:flex">
-      <!-- ✦ Icono usuario (móvil) -->
-      <button (click)="openLogin()"
+      <!-- ✦ Icono usuario (móvil): con sesión abre el menú, si no va al login -->
+      <button (click)="isLoggedIn ? toggleMenu() : openLogin()"
               class="cursor-pointer border-none bg-transparent p-[6px] text-[#1a1a1a] transition-colors duration-300 hover:text-[#c4956a]"
-              aria-label="Iniciar sesión">
+              [attr.aria-label]="isLoggedIn ? 'Menú de usuario' : 'Iniciar sesión'">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
           <circle cx="12" cy="7" r="4"/>
@@ -100,15 +146,36 @@
        class="font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors duration-200 hover:text-[#c4956a]">Contacto</a>
     <a routerLink="/reservar-cita" routerLinkActive="active"
        class="border-[1.5px] border-[#c4956a] px-[1.4rem] py-[0.65rem] text-center font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white">Reservar cita</a>
-    <!-- ✦ Iniciar sesión en menú móvil -->
-    <button (click)="openLogin()"
-            class="flex cursor-pointer items-center gap-2 border-none bg-transparent p-0 font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] transition-colors duration-200 hover:text-[#c4956a]">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
-      </svg>
-      Iniciar sesión
-    </button>
+    <!-- ✦ Mis Cursos en menú móvil (solo con sesión iniciada) -->
+    @if (isLoggedIn) {
+      <a routerLink="/mis-cursos" routerLinkActive="!text-[#c4956a]"
+         class="font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors duration-200 hover:text-[#c4956a]">Mis Cursos</a>
+    }
+    <!-- ✦ Usuario en menú móvil -->
+    @if (isLoggedIn) {
+      <div class="flex flex-col gap-3 border-t border-black/[0.06] pt-5">
+        <div>
+          <p class="font-sans text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-[#888]">Sesión iniciada</p>
+          <p class="mt-1 font-serif text-[0.95rem] font-light text-[#1a1a1a]">{{ userName }}</p>
+        </div>
+        <button (click)="logout()"
+                class="flex cursor-pointer items-center gap-2 border-none bg-transparent p-0 font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] transition-colors duration-200 hover:text-[#c4956a]">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/>
+          </svg>
+          Cerrar sesión
+        </button>
+      </div>
+    } @else {
+      <button (click)="openLogin()"
+              class="flex cursor-pointer items-center gap-2 border-none bg-transparent p-0 font-serif text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] transition-colors duration-200 hover:text-[#c4956a]">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        Iniciar sesión
+      </button>
+    }
   </div>
 </nav>
 

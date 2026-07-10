@@ -31,4 +31,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/pedidos', [PedidoController::class, 'index']);
     Route::post('/pedidos', [PedidoController::class, 'store']);
     Route::get('/citas', [CitaController::class, 'index']);
+    Route::get('/mis-cursos', [AccesoTutorialController::class, 'index']);
 });
