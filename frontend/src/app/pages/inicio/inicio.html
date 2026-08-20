@@ -2,16 +2,30 @@
      HERO
      ══════════════════════════════════════════ -->
 <div
-  class="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-[#f8f3ee] via-[#ede3d8] to-[#e0d0bc] pt-20 text-center
-            before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_at_60%_40%,rgba(196,149,106,0.12)_0%,transparent_60%)]">
-  <div class="hero-overlay absolute inset-0"
-    style="background:url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4956a' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&quot;)">
-  </div>
+  class="relative flex min-h-screen items-center justify-center overflow-hidden pt-20 text-center"
+  id="hero-section">
+
+  <!-- ── Fondo de video ── -->
+  <video
+    #heroVideo
+    id="hero-video"
+    class="absolute inset-0 h-full w-full object-cover"
+    autoplay
+    muted
+    playsinline
+    preload="auto"
+    (ended)="onHeroVideoEnded()">
+  </video>
+
+  <!-- Overlay semitransparente para mantener legibilidad del texto -->
+  <div class="hero-video-overlay absolute inset-0"></div>
+
+  <!-- Contenido del hero -->
   <div class="inicio-fade-up relative z-10 max-w-[700px] px-8">
-    <p class="mb-5 font-serif text-[0.8rem] uppercase tracking-[0.3em] text-[#c4956a]">Bienvenida</p>
-    <h1 class="mb-6 font-serif text-[clamp(2.8rem,6vw,5rem)] font-light leading-[1.15] text-[#1a1a1a]">El arte del
-      maquillaje<br><em class="italic text-[#c4956a]">hecho para ti</em></h1>
-    <p class="mx-auto mb-11 max-w-[500px] font-sans text-[1.05rem] font-light leading-[1.7] text-[#555]">Maquilladora
+    <p class="mb-5 font-serif text-[0.8rem] uppercase tracking-[0.3em] text-[#e8c99a]">Bienvenida</p>
+    <h1 class="mb-6 font-serif text-[clamp(2.8rem,6vw,5rem)] font-light leading-[1.15] text-white">El arte del
+      maquillaje<br><em class="italic text-[#e8c99a]">hecho para ti</em></h1>
+    <p class="mx-auto mb-11 max-w-[500px] font-sans text-[1.05rem] font-light leading-[1.7] text-[rgba(255,255,255,0.88)]">Maquilladora
       profesional con más de 5 años de experiencia creando looks personalizados que realzan la belleza natural de cada
       mujer.</p>
     <div class="flex flex-wrap justify-center gap-4">
@@ -19,7 +33,7 @@
         class="border-[1.5px] border-[#c4956a] bg-[#c4956a] px-[2.4rem] py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:border-[#a87a52] hover:bg-[#a87a52]"
         id="inicio-cta-reservar">Reservar cita</a>
       <a routerLink="/servicios"
-        class="border-[1.5px] border-[#1a1a1a] px-[2.4rem] py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-all duration-300 hover:bg-[#1a1a1a] hover:text-white"
+        class="border-[1.5px] border-white px-[2.4rem] py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:bg-white hover:text-[#1a1a1a]"
         id="inicio-cta-servicios">Ver servicios</a>
     </div>
   </div>
