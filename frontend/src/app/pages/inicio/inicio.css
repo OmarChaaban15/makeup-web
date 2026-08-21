@@ -6,9 +6,9 @@
 .hero-video-overlay {
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.50) 0%,
-    rgba(0, 0, 0, 0.25) 40%,
-    rgba(0, 0, 0, 0.55) 100%
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.45) 40%,
+    rgba(0, 0, 0, 0.70) 100%
   );
   z-index: 1;
 }
