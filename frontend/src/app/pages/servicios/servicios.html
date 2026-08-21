@@ -15,10 +15,10 @@
     <div class="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/60"></div>
 
     <!-- Contenido centrado -->
-    <div class="servicios-fade-up relative z-10 flex flex-col items-center justify-center px-8 pb-20 pt-32 text-center" style="min-height: 620px;">
-      <p class="mb-4 font-serif text-[0.72rem] uppercase tracking-[0.32em] text-[#c4956a]">Mis Servicios</p>
-      <h1 class="mb-5 font-serif text-[clamp(2.8rem,5.5vw,4.5rem)] font-light leading-[1.15] text-white drop-shadow-lg">El maquillaje<br><em class="italic text-[#c4956a]">que mereces</em></h1>
-      <p class="font-sans text-base font-light leading-[1.75] text-white/80">
+    <div class="relative z-10 flex flex-col items-center justify-center px-8 pb-20 pt-32 text-center" style="min-height: 620px;">
+      <p scrollReveal="up" class="mb-4 font-serif text-[0.72rem] uppercase tracking-[0.32em] text-[#c4956a]">Mis Servicios</p>
+      <h1 scrollReveal="up" scrollDelay="1" class="mb-5 font-serif text-[clamp(2.8rem,5.5vw,4.5rem)] font-light leading-[1.15] text-white drop-shadow-lg">El maquillaje<br><em class="italic text-[#c4956a]">que mereces</em></h1>
+      <p scrollReveal="up" scrollDelay="2" class="font-sans text-base font-light leading-[1.75] text-white/80">
         Cada servicio está diseñado para realzar tu belleza única,<br>
         adaptándome a cada ocasión con detalle y profesionalidad.
       </p>
@@ -32,7 +32,7 @@
     <div class="mx-auto grid max-w-[1100px] grid-cols-1 gap-5 sm:grid-cols-2">
 
       <!-- Foto yonaida3 -->
-      <div class="group relative overflow-hidden rounded-2xl shadow-[0_16px_50px_rgba(26,26,26,0.12)]">
+      <div scrollReveal="left" class="group relative overflow-hidden rounded-2xl shadow-[0_16px_50px_rgba(26,26,26,0.12)]">
         <img
           src="images/yonaida3.JPG"
           alt="Yonaida — maquillaje profesional"
@@ -40,14 +40,14 @@
           style="aspect-ratio: 4/5; min-height: 360px;"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-        <div class="absolute bottom-0 left-0 px-7 py-6">
+        <div class="absolute bottom-0 left-0 px-7 py-6 translate-y-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
           <p class="font-serif text-[0.65rem] uppercase tracking-[0.25em] text-[#c4956a]">Maquillaje</p>
           <p class="mt-1 font-serif text-[1.1rem] font-light text-white">Arte en cada detalle</p>
         </div>
       </div>
 
       <!-- Foto yonaida4 -->
-      <div class="group relative overflow-hidden rounded-2xl shadow-[0_16px_50px_rgba(26,26,26,0.12)]">
+      <div scrollReveal="right" class="group relative overflow-hidden rounded-2xl shadow-[0_16px_50px_rgba(26,26,26,0.12)]">
         <img
           src="images/yonaida4.PNG"
           alt="Yonaida — trabajo artístico de maquillaje"
@@ -55,7 +55,7 @@
           style="aspect-ratio: 4/5; min-height: 360px;"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-        <div class="absolute bottom-0 left-0 px-7 py-6">
+        <div class="absolute bottom-0 left-0 px-7 py-6 translate-y-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
           <p class="font-serif text-[0.65rem] uppercase tracking-[0.25em] text-[#c4956a]">Elegancia</p>
           <p class="mt-1 font-serif text-[1.1rem] font-light text-white">Tu mejor versión</p>
         </div>
@@ -72,11 +72,13 @@
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
 
         <!-- ── 01 · Eventos ── -->
-        <article class="group relative flex flex-col overflow-hidden rounded-[20px] border border-[#ede0d0] bg-white p-10 shadow-[0_4px_24px_rgba(196,149,106,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.18)]" id="servicio-eventos">
+        <article scrollReveal="up" scrollDelay="1"
+                 class="service-card group relative flex flex-col overflow-hidden rounded-[20px] border border-[#ede0d0] bg-white p-10 shadow-[0_4px_24px_rgba(196,149,106,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.18)]" id="servicio-eventos">
 
+          <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
 
           <div class="mb-6 flex items-center gap-4">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5ede3] text-[#c4956a]">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5ede3] text-[#c4956a] transition-all duration-300 group-hover:bg-[#c4956a] group-hover:text-white">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
               </svg>
@@ -104,18 +106,20 @@
         </article>
 
         <!-- ── 02 · Novia ── -->
-        <article class="group relative flex flex-col overflow-hidden rounded-[20px] bg-[#1a1a1a] p-10 shadow-[0_4px_24px_rgba(26,26,26,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(26,26,26,0.35)]" id="servicio-novia">
+        <article scrollReveal="up" scrollDelay="2"
+                 class="service-card group relative flex flex-col overflow-hidden rounded-[20px] bg-[#1a1a1a] p-10 shadow-[0_4px_24px_rgba(26,26,26,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(26,26,26,0.35)]" id="servicio-novia">
 
+          <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
 
           <div class="mb-6 flex items-center gap-4">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#c4956a]/15 text-[#c4956a]">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#c4956a]/15 text-[#c4956a] transition-all duration-300 group-hover:bg-[#c4956a] group-hover:text-white">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
                 <path d="M12 22s8-6 8-12a8 8 0 0 0-16 0c0 6 8 12 8 12z"/><circle cx="12" cy="10" r="3"/>
               </svg>
             </div>
             <div class="flex flex-col gap-1">
               <p class="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Novia &amp; Bodas</p>
-              <span class="w-fit rounded-full bg-[#c4956a]/20 px-2.5 py-0.5 font-sans text-[0.58rem] font-semibold uppercase tracking-wider text-[#c4956a]">⭐ Más solicitado</span>
+              <span class="badge-pulse w-fit rounded-full bg-[#c4956a]/20 px-2.5 py-0.5 font-sans text-[0.58rem] font-semibold uppercase tracking-wider text-[#c4956a]">⭐ Más solicitado</span>
             </div>
           </div>
 
@@ -139,11 +143,13 @@
         </article>
 
         <!-- ── 03 · Editorial ── -->
-        <article class="group relative flex flex-col overflow-hidden rounded-[20px] border border-[#ede0d0] bg-white p-10 shadow-[0_4px_24px_rgba(196,149,106,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.18)]" id="servicio-editorial">
+        <article scrollReveal="up" scrollDelay="3"
+                 class="service-card group relative flex flex-col overflow-hidden rounded-[20px] border border-[#ede0d0] bg-white p-10 shadow-[0_4px_24px_rgba(196,149,106,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.18)]" id="servicio-editorial">
 
+          <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
 
           <div class="mb-6 flex items-center gap-4">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5ede3] text-[#c4956a]">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5ede3] text-[#c4956a] transition-all duration-300 group-hover:bg-[#c4956a] group-hover:text-white">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
                 <rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 5V3M16 5V3"/>
               </svg>
@@ -171,11 +177,13 @@
         </article>
 
         <!-- ── 04 · Audiovisual ── -->
-        <article class="group relative flex flex-col overflow-hidden rounded-[20px] border border-[#ede0d0] bg-white p-10 shadow-[0_4px_24px_rgba(196,149,106,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.18)]" id="servicio-audiovisual">
+        <article scrollReveal="up" scrollDelay="4"
+                 class="service-card group relative flex flex-col overflow-hidden rounded-[20px] border border-[#ede0d0] bg-white p-10 shadow-[0_4px_24px_rgba(196,149,106,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.18)]" id="servicio-audiovisual">
 
+          <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
 
           <div class="mb-6 flex items-center gap-4">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5ede3] text-[#c4956a]">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5ede3] text-[#c4956a] transition-all duration-300 group-hover:bg-[#c4956a] group-hover:text-white">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
                 <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>
               </svg>
@@ -225,28 +233,28 @@
     <div class="relative z-10 flex h-full flex-col justify-center px-8 py-24 sm:px-16 md:px-24" style="min-height: 560px;">
       <div class="max-w-[560px]">
 
-        <p class="mb-5 font-serif text-[0.72rem] uppercase tracking-[0.35em] text-[#c4956a]">¿Lista para tu cambio?</p>
+        <p scrollReveal="up" class="mb-5 font-serif text-[0.72rem] uppercase tracking-[0.35em] text-[#c4956a]">¿Lista para tu cambio?</p>
 
-        <h2 class="mb-6 font-serif text-[clamp(2.2rem,4.5vw,3.5rem)] font-light leading-[1.2] text-white drop-shadow-md">
+        <h2 scrollReveal="up" scrollDelay="1" class="mb-6 font-serif text-[clamp(2.2rem,4.5vw,3.5rem)] font-light leading-[1.2] text-white drop-shadow-md">
           Tu momento<br><em class="italic text-[#c4956a]">empieza aquí</em>
         </h2>
 
         <div class="mb-8 h-[1.5px] w-14 bg-[#c4956a]"></div>
 
-        <p class="mb-10 max-w-[440px] font-sans text-[0.95rem] font-light leading-[1.85] text-white/75">
+        <p scrollReveal="up" scrollDelay="2" class="mb-10 max-w-[440px] font-sans text-[0.95rem] font-light leading-[1.85] text-white/75">
           Cuéntame tu idea y juntas diseñamos el maquillaje perfecto para ti. Primera consulta gratuita y sin compromiso.
         </p>
 
-        <blockquote class="mb-10 border-l-2 border-[#c4956a] pl-5">
+        <blockquote scrollReveal="left" scrollDelay="3" class="mb-10 border-l-2 border-[#c4956a] pl-5">
           <p class="font-serif text-[1rem] font-light italic leading-[1.7] text-white/60">
             "Cada clienta merece sentirse única y absolutamente especial."
           </p>
           <footer class="mt-2 font-sans text-[0.68rem] uppercase tracking-[0.2em] text-[#c4956a]">— Yonaida</footer>
         </blockquote>
 
-        <div class="flex flex-wrap gap-4">
+        <div scrollReveal="up" scrollDelay="4" class="flex flex-wrap gap-4">
           <a routerLink="/reservar-cita"
-             class="inline-flex items-center gap-3 bg-[#c4956a] px-8 py-4 font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:bg-[#a87a52]"
+             class="inline-flex items-center gap-3 bg-[#c4956a] px-8 py-4 font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:bg-[#a87a52] hover:shadow-[0_8px_30px_rgba(196,149,106,0.4)]"
              id="servicios-cta-reservar">
             Reservar cita
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">

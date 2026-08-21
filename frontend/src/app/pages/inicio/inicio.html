@@ -2,26 +2,55 @@
      HERO
      ══════════════════════════════════════════ -->
 <div
-  class="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-[#f8f3ee] via-[#ede3d8] to-[#e0d0bc] pt-20 text-center
-            before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_at_60%_40%,rgba(196,149,106,0.12)_0%,transparent_60%)]">
-  <div class="hero-overlay absolute inset-0"
-    style="background:url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4956a' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&quot;)">
-  </div>
-  <div class="inicio-fade-up relative z-10 max-w-[700px] px-8">
-    <p class="mb-5 font-serif text-[0.8rem] uppercase tracking-[0.3em] text-[#c4956a]">Bienvenida</p>
-    <h1 class="mb-6 font-serif text-[clamp(2.8rem,6vw,5rem)] font-light leading-[1.15] text-[#1a1a1a]">El arte del
-      maquillaje<br><em class="italic text-[#c4956a]">hecho para ti</em></h1>
-    <p class="mx-auto mb-11 max-w-[500px] font-sans text-[1.05rem] font-light leading-[1.7] text-[#555]">Maquilladora
+  class="relative flex min-h-screen items-center justify-center overflow-hidden pt-20 text-center"
+  id="hero-section">
+
+  <!-- ── Fondo de video ── -->
+  <video
+    #heroVideo
+    id="hero-video"
+    class="absolute inset-0 h-full w-full object-cover"
+    autoplay
+    muted
+    playsinline
+    preload="auto"
+    (ended)="onHeroVideoEnded()">
+  </video>
+
+  <!-- Overlay semitransparente para mantener legibilidad del texto -->
+  <div class="hero-video-overlay absolute inset-0"></div>
+
+  <!-- Canvas de partículas doradas -->
+  <canvas #particleCanvas class="particle-canvas absolute inset-0 h-full w-full"></canvas>
+
+  <!-- Contenido del hero -->
+  <div class="relative z-10 max-w-[700px] px-8"
+       [style.transform]="'translate(' + mouseX() * 0.3 + 'px, ' + mouseY() * 0.3 + 'px)'">
+    <p class="hero-text-enter mb-5 font-serif text-[0.8rem] uppercase tracking-[0.3em] text-[#e8c99a] hero-text-delay-1"
+       [class.visible]="heroTextVisible()">Bienvenida</p>
+    <h1 class="hero-text-enter mb-6 font-serif text-[clamp(2.8rem,6vw,5rem)] font-light leading-[1.15] text-white hero-text-delay-2"
+        [class.visible]="heroTextVisible()">El arte del
+      maquillaje<br><em class="italic text-[#e8c99a]">hecho para ti</em></h1>
+    <p class="hero-text-enter mx-auto mb-11 max-w-[500px] font-sans text-[1.05rem] font-light leading-[1.7] text-[rgba(255,255,255,0.88)] hero-text-delay-3"
+       [class.visible]="heroTextVisible()">Maquilladora
       profesional con más de 5 años de experiencia creando looks personalizados que realzan la belleza natural de cada
       mujer.</p>
-    <div class="flex flex-wrap justify-center gap-4">
+    <div class="hero-text-enter flex flex-wrap justify-center gap-4 hero-text-delay-4"
+         [class.visible]="heroTextVisible()">
       <a routerLink="/reservar-cita"
-        class="border-[1.5px] border-[#c4956a] bg-[#c4956a] px-[2.4rem] py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:border-[#a87a52] hover:bg-[#a87a52]"
+        class="border-[1.5px] border-[#c4956a] bg-[#c4956a] px-[2.4rem] py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:border-[#a87a52] hover:bg-[#a87a52] hover:shadow-[0_8px_30px_rgba(196,149,106,0.4)]"
         id="inicio-cta-reservar">Reservar cita</a>
       <a routerLink="/servicios"
-        class="border-[1.5px] border-[#1a1a1a] px-[2.4rem] py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-all duration-300 hover:bg-[#1a1a1a] hover:text-white"
+        class="border-[1.5px] border-white px-[2.4rem] py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:bg-white hover:text-[#1a1a1a]"
         id="inicio-cta-servicios">Ver servicios</a>
     </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(232,201,154,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M19 12l-7 7-7-7"/>
+    </svg>
   </div>
 </div>
 
@@ -33,13 +62,13 @@
     <div class="grid items-center gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
 
       <!-- Columna izquierda: texto -->
-      <div class="inicio-fade-up">
-        <p class="mb-5 font-serif text-[0.75rem] uppercase tracking-[0.3em] text-[#c4956a]">Sobre mí</p>
-        <h2 class="mb-8 font-serif text-[clamp(2.2rem,4.5vw,3.6rem)] font-light leading-[1.15] text-[#1a1a1a]">
+      <div>
+        <p scrollReveal="up" class="mb-5 font-serif text-[0.75rem] uppercase tracking-[0.3em] text-[#c4956a]">Sobre mí</p>
+        <h2 scrollReveal="up" scrollDelay="1" class="mb-8 font-serif text-[clamp(2.2rem,4.5vw,3.6rem)] font-light leading-[1.15] text-[#1a1a1a]">
           Hola, soy <em class="italic text-[#c4956a]">Yonaida</em>
         </h2>
 
-        <div class="space-y-5 font-sans text-[0.95rem] font-light leading-[1.85] text-[#555]">
+        <div scrollReveal="up" scrollDelay="2" class="space-y-5 font-sans text-[0.95rem] font-light leading-[1.85] text-[#555]">
           <p>
             Maquilladora profesional en España con más de <strong class="font-medium text-[#1a1a1a]">5 años de
               experiencia</strong> ayudando a mujeres a resaltar su belleza y sentirse seguras en sus momentos más
@@ -56,7 +85,26 @@
           </p>
         </div>
 
-        <div class="mt-10 flex flex-wrap gap-4">
+        <!-- Animated counters -->
+        <div scrollReveal="up" scrollDelay="3"
+             class="mt-10 grid grid-cols-3 gap-4"
+             (mouseenter)="animateCounters()"
+             #counterSection>
+          <div class="flex flex-col items-center gap-1 rounded-xl border border-[#e8ddd5] bg-white p-4 shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
+            <span class="counter-number font-serif text-[2rem] font-light leading-none text-[#c4956a]">+{{ counterYears() }}</span>
+            <span class="font-sans text-[0.62rem] font-medium uppercase tracking-wider text-[#888]">años</span>
+          </div>
+          <div class="flex flex-col items-center gap-1 rounded-xl border border-[#e8ddd5] bg-white p-4 shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
+            <span class="counter-number font-serif text-[2rem] font-light leading-none text-[#c4956a]">+{{ counterClients() }}</span>
+            <span class="font-sans text-[0.62rem] font-medium uppercase tracking-wider text-[#888]">clientas</span>
+          </div>
+          <div class="flex flex-col items-center gap-1 rounded-xl border border-[#e8ddd5] bg-white p-4 shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
+            <span class="counter-number font-serif text-[2rem] font-light leading-none text-[#c4956a]">{{ counterPersonal() }}%</span>
+            <span class="font-sans text-[0.62rem] font-medium uppercase tracking-wider text-[#888]">personalizado</span>
+          </div>
+        </div>
+
+        <div scrollReveal="up" scrollDelay="4" class="mt-10 flex flex-wrap gap-4">
           <a routerLink="/sobre-mi"
             class="border-b-[1.5px] border-[#c4956a] pb-[2px] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:tracking-[0.2em]"
             id="inicio-link-sobre-mi">
@@ -66,7 +114,7 @@
       </div>
 
       <!-- Columna derecha: foto de Yonaida -->
-      <div class="group relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(26,26,26,0.15)]">
+      <div scrollReveal="right" scrollDelay="2" class="group relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(26,26,26,0.15)]">
         <img src="images/yonaida.jpg" alt="Yonaida, maquilladora profesional"
           class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
           style="aspect-ratio: 4/5; min-height: 420px;" />
@@ -98,19 +146,23 @@
   <div class="relative mx-auto max-w-[1100px]">
 
     <!-- Encabezado -->
-    <div class="mb-16 text-center inicio-fade-up">
-      <p class="mb-4 font-serif text-[0.75rem] uppercase tracking-[0.3em] text-[#c4956a]">Lo que hago</p>
-      <h2 class="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-[1.2] text-white">
+    <div class="mb-16 text-center">
+      <p scrollReveal="up" class="mb-4 font-serif text-[0.75rem] uppercase tracking-[0.3em] text-[#c4956a]">Lo que hago</p>
+      <h2 scrollReveal="up" scrollDelay="1" class="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-[1.2] text-white">
         Descubre mis <em class="italic text-[#c4956a]">servicios</em>
       </h2>
-      <div class="mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-[#c4956a] to-transparent"></div>
+      <div class="gradient-line-animated mx-auto mt-6 h-px w-16"></div>
     </div>
 
-    <!-- Grid de tarjetas -->
+    <!-- Grid de tarjetas con 3D tilt -->
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
 
       <!-- Maquillaje para eventos -->
-      <a routerLink="/servicios" class="group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-8 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-[#c4956a]/40 hover:bg-white/12 hover:shadow-[0_12px_40px_rgba(196,149,106,0.2)]">
+      <a routerLink="/servicios"
+         class="tilt-card group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-8 backdrop-blur-md transition-all duration-500 hover:border-[#c4956a]/40 hover:bg-white/12 hover:shadow-[0_12px_40px_rgba(196,149,106,0.2)]"
+         scrollReveal="up" scrollDelay="1"
+         (mousemove)="onCardMouseMove($event, eventCard)" (mouseleave)="onCardMouseLeave(eventCard)" #eventCard>
+        <div class="card-shine"></div>
         <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
         <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#c4956a]/15 transition-colors duration-300 group-hover:bg-[#c4956a]/30">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
@@ -130,7 +182,11 @@
       </a>
 
       <!-- Maquillaje de novia -->
-      <a routerLink="/servicios" class="group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-8 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-[#c4956a]/40 hover:bg-white/12 hover:shadow-[0_12px_40px_rgba(196,149,106,0.2)]">
+      <a routerLink="/servicios"
+         class="tilt-card group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-8 backdrop-blur-md transition-all duration-500 hover:border-[#c4956a]/40 hover:bg-white/12 hover:shadow-[0_12px_40px_rgba(196,149,106,0.2)]"
+         scrollReveal="up" scrollDelay="2"
+         (mousemove)="onCardMouseMove($event, noviCard)" (mouseleave)="onCardMouseLeave(noviCard)" #noviCard>
+        <div class="card-shine"></div>
         <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
         <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#c4956a]/15 transition-colors duration-300 group-hover:bg-[#c4956a]/30">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
@@ -147,7 +203,11 @@
       </a>
 
       <!-- Editorial & fotografía -->
-      <a routerLink="/servicios" class="group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-8 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-[#c4956a]/40 hover:bg-white/12 hover:shadow-[0_12px_40px_rgba(196,149,106,0.2)]">
+      <a routerLink="/servicios"
+         class="tilt-card group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-8 backdrop-blur-md transition-all duration-500 hover:border-[#c4956a]/40 hover:bg-white/12 hover:shadow-[0_12px_40px_rgba(196,149,106,0.2)]"
+         scrollReveal="up" scrollDelay="3"
+         (mousemove)="onCardMouseMove($event, editCard)" (mouseleave)="onCardMouseLeave(editCard)" #editCard>
+        <div class="card-shine"></div>
         <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
         <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#c4956a]/15 transition-colors duration-300 group-hover:bg-[#c4956a]/30">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
@@ -165,7 +225,11 @@
       </a>
 
       <!-- Maquillaje audiovisual -->
-      <a routerLink="/servicios" class="group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-8 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-[#c4956a]/40 hover:bg-white/12 hover:shadow-[0_12px_40px_rgba(196,149,106,0.2)]">
+      <a routerLink="/servicios"
+         class="tilt-card group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-8 backdrop-blur-md transition-all duration-500 hover:border-[#c4956a]/40 hover:bg-white/12 hover:shadow-[0_12px_40px_rgba(196,149,106,0.2)]"
+         scrollReveal="up" scrollDelay="4"
+         (mousemove)="onCardMouseMove($event, audioCard)" (mouseleave)="onCardMouseLeave(audioCard)" #audioCard>
+        <div class="card-shine"></div>
         <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
         <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#c4956a]/15 transition-colors duration-300 group-hover:bg-[#c4956a]/30">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
@@ -185,7 +249,7 @@
     </div>
 
     <!-- CTA -->
-    <div class="mt-14 text-center">
+    <div scrollReveal="up" class="mt-14 text-center">
       <a routerLink="/servicios"
         class="group inline-flex items-center gap-3 border-[1.5px] border-[#c4956a] bg-[#c4956a] px-[2.8rem] py-4 font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:gap-5 hover:bg-transparent hover:text-[#c4956a]"
         id="inicio-link-servicios">
@@ -204,15 +268,15 @@
   <div class="mx-auto max-w-[1100px]">
 
     <!-- Encabezado -->
-    <div class="mb-14 text-center inicio-fade-up">
-      <p class="mb-4 font-serif text-[0.75rem] uppercase tracking-[0.3em] text-[#c4956a]">Mi trabajo</p>
-      <h2 class="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-[1.2] text-[#1a1a1a]">
+    <div class="mb-14 text-center">
+      <p scrollReveal="up" class="mb-4 font-serif text-[0.75rem] uppercase tracking-[0.3em] text-[#c4956a]">Mi trabajo</p>
+      <h2 scrollReveal="up" scrollDelay="1" class="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-[1.2] text-[#1a1a1a]">
         Algunos de mis <em class="italic text-[#c4956a]">trabajos</em>
       </h2>
     </div>
 
     <!-- Carrusel -->
-    <div class="relative" id="inicio-carousel">
+    <div scrollReveal="scale" class="relative" id="inicio-carousel">
 
       <!-- Pista: grid para apilar todos los slides en la misma celda -->
       <div class="grid overflow-hidden rounded-2xl shadow-[0_24px_70px_rgba(26,26,26,0.18)]">
@@ -220,17 +284,26 @@
         <div class="[grid-area:1/1] overflow-hidden transition-opacity duration-700" [class.opacity-0]="currentIndex() !== i"
           [class.opacity-100]="currentIndex() === i" [class.pointer-events-none]="currentIndex() !== i"
           [class.z-10]="currentIndex() === i" [class.z-0]="currentIndex() !== i">
-          <!-- Imagen -->
-          <img [src]="slide.src" [alt]="slide.alt" class="block w-full rounded-2xl object-cover" [style.object-position]="slide.pos"
-            style="aspect-ratio: 4/3; max-height: 72vh;" loading="lazy" />
-
+          <!-- Imagen con Ken Burns -->
+          <img [src]="slide.src" [alt]="slide.alt"
+               class="block w-full rounded-2xl object-cover cursor-zoom-in"
+               [class]="currentIndex() === i ? getKenBurnsClass(i) : ''"
+               [style.object-position]="slide.pos"
+               style="aspect-ratio: 4/3; max-height: 72vh;"
+               loading="lazy"
+               (click)="openLightbox(slide)" />
         </div>
         }
       </div>
 
+      <!-- Progress bar -->
+      <div class="mt-3 h-[3px] w-full overflow-hidden rounded-full bg-black/5">
+        <div class="carousel-progress" [style.width.%]="progressWidth()"></div>
+      </div>
+
       <!-- Flecha anterior -->
       <button
-        class="absolute left-4 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-md transition-all duration-250 hover:scale-105 hover:border-[#c4956a] hover:bg-[#c4956a]/80"
+        class="absolute left-4 top-[calc(50%-20px)] z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-md transition-all duration-250 hover:scale-105 hover:border-[#c4956a] hover:bg-[#c4956a]/80"
         (click)="prev()" aria-label="Anterior" id="carousel-prev">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
           stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
@@ -240,7 +313,7 @@
 
       <!-- Flecha siguiente -->
       <button
-        class="absolute right-4 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-md transition-all duration-250 hover:scale-105 hover:border-[#c4956a] hover:bg-[#c4956a]/80"
+        class="absolute right-4 top-[calc(50%-20px)] z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-md transition-all duration-250 hover:scale-105 hover:border-[#c4956a] hover:bg-[#c4956a]/80"
         (click)="next()" aria-label="Siguiente" id="carousel-next">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
           stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
@@ -249,11 +322,11 @@
       </button>
 
       <!-- Puntos de paginación -->
-      <div class="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2" role="tablist"
+      <div class="mt-5 flex items-center justify-center gap-2" role="tablist"
         aria-label="Diapositivas">
         @for (slide of slides; track slide.src; let i = $index) {
         <button class="h-2 rounded-full border-none p-0 transition-all duration-300" [class.w-2]="currentIndex() !== i"
-          [class.bg-white/50]="currentIndex() !== i" [class.w-7]="currentIndex() === i"
+          [class.bg-[#1a1a1a]/20]="currentIndex() !== i" [class.w-7]="currentIndex() === i"
           [class.bg-[#c4956a]]="currentIndex() === i" [class.scale-110]="currentIndex() === i" (click)="goTo(i)"
           [attr.aria-label]="'Ir a diapositiva ' + (i + 1)" [attr.aria-selected]="currentIndex() === i" role="tab"
           [id]="'carousel-dot-' + i"></button>
@@ -262,7 +335,7 @@
     </div>
 
     <!-- Enlace secundario -->
-    <div class="mt-12 text-center">
+    <div scrollReveal="up" class="mt-12 text-center">
       <a routerLink="/servicios"
         class="inline-block border-b-[1.5px] border-[#c4956a] pb-[2px] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:tracking-[0.2em]"
         id="inicio-carousel-ver-servicios">
@@ -271,3 +344,18 @@
     </div>
   </div>
 </section>
+
+<!-- ══════════════════════════════════════════
+     LIGHTBOX
+     ══════════════════════════════════════════ -->
+@if (lightboxOpen()) {
+<div class="lightbox-overlay" (click)="closeLightbox()">
+  <button class="absolute right-6 top-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20"
+          (click)="closeLightbox()" aria-label="Cerrar">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <img [src]="lightboxSrc()" [alt]="lightboxAlt()" (click)="$event.stopPropagation()" class="cursor-default" />
+</div>
+}

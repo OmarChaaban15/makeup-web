@@ -1,0 +1,55 @@
+/* ═══════════════════════════════════════════
+   FOOTER — Premium Styles
+   ═══════════════════════════════════════════ */
+
+/* ── Gradient background ── */
+:host .footer-premium {
+  background: linear-gradient(165deg, #1a1a1a 0%, #111 50%, #0d0d0d 100%);
+}
+
+/* ── Magnetic button smooth transition ── */
+:host .magnetic-btn {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 0.3s ease,
+              background-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* ── Animated separator ── */
+:host .footer-separator {
+  background: linear-gradient(90deg, transparent, rgba(196, 149, 106, 0.4), transparent);
+  background-size: 200% 100%;
+  animation: footerSepShift 4s ease-in-out infinite;
+}
+
+@keyframes footerSepShift {
+  0% { background-position: 100% 50%; }
+  50% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* ── CSS Floating particles ── */
+:host .fp {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(196, 149, 106, 0.15);
+  animation: fpFloat linear infinite;
+  pointer-events: none;
+}
+
+:host .fp-1 { width: 3px; height: 3px; left: 10%; top: 20%; animation-duration: 18s; animation-delay: 0s; }
+:host .fp-2 { width: 2px; height: 2px; left: 25%; top: 60%; animation-duration: 22s; animation-delay: 2s; }
+:host .fp-3 { width: 4px; height: 4px; left: 40%; top: 30%; animation-duration: 20s; animation-delay: 4s; }
+:host .fp-4 { width: 2px; height: 2px; left: 55%; top: 70%; animation-duration: 16s; animation-delay: 1s; }
+:host .fp-5 { width: 3px; height: 3px; left: 70%; top: 15%; animation-duration: 24s; animation-delay: 3s; }
+:host .fp-6 { width: 2px; height: 2px; left: 85%; top: 50%; animation-duration: 19s; animation-delay: 5s; }
+:host .fp-7 { width: 3px; height: 3px; left: 15%; top: 80%; animation-duration: 21s; animation-delay: 6s; }
+:host .fp-8 { width: 2px; height: 2px; left: 60%; top: 40%; animation-duration: 17s; animation-delay: 2.5s; }
+
+@keyframes fpFloat {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  50% { transform: translateY(-40px) translateX(15px); opacity: 0.3; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(-80px) translateX(-10px); opacity: 0; }
+}

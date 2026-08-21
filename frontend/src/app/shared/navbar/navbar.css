@@ -1,14 +1,36 @@
-/* Navbar – state-driven classes only (everything else is Tailwind) */
+/* Navbar – Premium state-driven classes */
 
-/* Scroll state */
-:host .navbar-scrolled {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.08);
+/* ── Transparent state (hero pages, top of scroll) ── */
+:host .navbar-transparent {
+  background: transparent;
+  border-color: transparent;
 }
 
-/* Hamburger open animation */
+/* ── Solid state (non-hero pages or scrolled) ── */
+:host .navbar-solid {
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* ── Scroll state — glassmorphism ── */
+:host .navbar-scrolled {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.04);
+}
+
+/* ── Active nav link ── */
+:host .nav-active {
+  color: #c4956a !important;
+}
+
+:host .nav-active::after {
+  width: 100% !important;
+}
+
+/* ── Hamburger open animation ── */
 :host .hamburger-open span:nth-child(1) {
   transform: translateY(6.5px) rotate(45deg);
 }
@@ -19,7 +41,7 @@
   transform: translateY(-6.5px) rotate(-45deg);
 }
 
-/* Mobile menu open */
+/* ── Mobile menu open ── */
 :host .mobile-open {
   opacity: 1;
   transform: translateY(0);

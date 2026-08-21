@@ -1,60 +1,81 @@
-<nav class="fixed top-0 left-0 right-0 z-[1000] border-b border-black/[0.06] bg-white transition-all duration-300"
-     [class.navbar-scrolled]="isScrolled">
+<nav class="fixed top-0 left-0 right-0 z-[1000] transition-all duration-500"
+     [class.navbar-scrolled]="isScrolled"
+     [class.navbar-transparent]="isTransparent"
+     [class.navbar-solid]="!isTransparent">
   <div class="mx-auto grid h-20 max-w-[1300px] grid-cols-[1fr_auto_1fr] items-center px-8 max-[480px]:px-5">
 
     <!-- Links izquierda -->
     <ul class="hidden list-none items-center justify-end gap-10 min-[901px]:flex">
       <li>
-        <a routerLink="/inicio" routerLinkActive="!text-[#c4956a] after:!w-full" [routerLinkActiveOptions]="{exact:true}" id="nav-inicio"
-           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[#1a1a1a] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full">
+        <a routerLink="/inicio" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}" id="nav-inicio"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
+           [class.text-white]="isTransparent"
+           [class.text-[#1a1a1a]]="!isTransparent">
           Inicio
         </a>
       </li>
       <li>
-        <a routerLink="/sobre-mi" routerLinkActive="!text-[#c4956a] after:!w-full" id="nav-sobre-mi"
-           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[#1a1a1a] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full">
+        <a routerLink="/sobre-mi" routerLinkActive="nav-active" id="nav-sobre-mi"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
+           [class.text-white]="isTransparent"
+           [class.text-[#1a1a1a]]="!isTransparent">
           Sobre mí
         </a>
       </li>
       <li>
-        <a routerLink="/servicios" routerLinkActive="!text-[#c4956a] after:!w-full" id="nav-servicios"
-           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[#1a1a1a] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full">
+        <a routerLink="/servicios" routerLinkActive="nav-active" id="nav-servicios"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
+           [class.text-white]="isTransparent"
+           [class.text-[#1a1a1a]]="!isTransparent">
           Servicios
         </a>
       </li>
     </ul>
 
     <!-- Logo centro -->
-    <a class="group mx-4 flex flex-none flex-col items-center justify-self-center gap-[2px] px-4 text-center no-underline max-[900px]:px-0" routerLink="/inicio" id="nav-logo">
-      <span class="font-serif text-[1.35rem] font-bold uppercase leading-none tracking-[0.18em] text-[#1a1a1a] transition-colors duration-300 group-hover:text-[#c4956a] max-[900px]:text-[1.1rem] max-[900px]:tracking-[0.12em]">MAKEUP BY YONA</span>
-      <span class="font-serif text-[0.62rem] font-normal italic tracking-[0.06em] text-[#888]">Realiza tu belleza &middot; Enhance your beauty</span>
+    <a class="group shimmer-gold mx-4 flex flex-none flex-col items-center justify-self-center gap-[2px] px-4 text-center no-underline max-[900px]:px-0" routerLink="/inicio" id="nav-logo">
+      <span class="font-serif text-[1.35rem] font-bold uppercase leading-none tracking-[0.18em] transition-colors duration-300 group-hover:text-[#c4956a] max-[900px]:text-[1.1rem] max-[900px]:tracking-[0.12em]"
+            [class.text-white]="isTransparent"
+            [class.text-[#1a1a1a]]="!isTransparent">MAKEUP BY YONA</span>
+      <span class="font-serif text-[0.62rem] font-normal italic tracking-[0.06em]"
+            [class.text-white/60]="isTransparent"
+            [class.text-[#888]]="!isTransparent">Realiza tu belleza &middot; Enhance your beauty</span>
     </a>
 
     <!-- Links derecha -->
     <ul class="hidden list-none items-center justify-end gap-4 lg:gap-6 xl:gap-8 2xl:gap-10 min-[901px]:flex">
       <li>
-        <a routerLink="/cursos" routerLinkActive="!text-[#c4956a] after:!w-full" id="nav-cursos"
-           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[#1a1a1a] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full">
+        <a routerLink="/cursos" routerLinkActive="nav-active" id="nav-cursos"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
+           [class.text-white]="isTransparent"
+           [class.text-[#1a1a1a]]="!isTransparent">
           Cursos
         </a>
       </li>
       <li>
-        <a routerLink="/contacto" routerLinkActive="!text-[#c4956a] after:!w-full" id="nav-contacto"
-           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[#1a1a1a] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full">
+        <a routerLink="/contacto" routerLinkActive="nav-active" id="nav-contacto"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
+           [class.text-white]="isTransparent"
+           [class.text-[#1a1a1a]]="!isTransparent">
           Contacto
         </a>
       </li>
       <li>
         <a routerLink="/reservar-cita" routerLinkActive="active" id="nav-reservar"
-           class="inline-flex min-w-[9rem] shrink-0 items-center justify-center whitespace-nowrap border-[1.5px] border-[#c4956a] px-[1rem] py-[0.5rem] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white lg:px-[1.2rem] lg:py-[0.55rem]">
+           class="inline-flex min-w-[9rem] shrink-0 items-center justify-center whitespace-nowrap border-[1.5px] border-[#c4956a] px-[1rem] py-[0.5rem] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white lg:px-[1.2rem] lg:py-[0.55rem]"
+           [class.border-white]="isTransparent"
+           [class.text-white]="isTransparent"
+           [class.hover:border-[#c4956a]]="isTransparent">
           Reservar cita
         </a>
       </li>
       <!-- ✦ Mis Cursos (solo con sesión iniciada) -->
       @if (isLoggedIn) {
         <li>
-          <a routerLink="/mis-cursos" routerLinkActive="!text-[#c4956a] after:!w-full" id="nav-mis-cursos"
-             class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[#1a1a1a] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full">
+          <a routerLink="/mis-cursos" routerLinkActive="nav-active" id="nav-mis-cursos"
+             class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
+             [class.text-white]="isTransparent"
+             [class.text-[#1a1a1a]]="!isTransparent">
             Mis Cursos
           </a>
         </li>
@@ -63,7 +84,9 @@
       <li class="relative ml-2">
         @if (isLoggedIn) {
           <button (click)="toggleUserMenu($event)"
-                  class="flex cursor-pointer items-center gap-2 border-none bg-transparent p-[6px] text-[#1a1a1a] transition-colors duration-300 hover:text-[#c4956a]"
+                  class="flex cursor-pointer items-center gap-2 border-none bg-transparent p-[6px] transition-colors duration-300 hover:text-[#c4956a]"
+                  [class.text-white]="isTransparent"
+                  [class.text-[#1a1a1a]]="!isTransparent"
                   aria-label="Menú de usuario" id="nav-usuario">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -94,7 +117,9 @@
           }
         } @else {
           <button (click)="openLogin()"
-                  class="cursor-pointer border-none bg-transparent p-[6px] text-[#1a1a1a] transition-colors duration-300 hover:text-[#c4956a]"
+                  class="cursor-pointer border-none bg-transparent p-[6px] transition-colors duration-300 hover:text-[#c4956a]"
+                  [class.text-white]="isTransparent"
+                  [class.text-[#1a1a1a]]="!isTransparent"
                   aria-label="Iniciar sesión" id="nav-usuario">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -109,7 +134,9 @@
     <div class="z-[1100] hidden items-center gap-2 max-[900px]:flex">
       <!-- ✦ Icono usuario (móvil): con sesión abre el menú, si no va al login -->
       <button (click)="isLoggedIn ? toggleMenu() : openLogin()"
-              class="cursor-pointer border-none bg-transparent p-[6px] text-[#1a1a1a] transition-colors duration-300 hover:text-[#c4956a]"
+              class="cursor-pointer border-none bg-transparent p-[6px] transition-colors duration-300 hover:text-[#c4956a]"
+              [class.text-white]="isTransparent"
+              [class.text-[#1a1a1a]]="!isTransparent"
               [attr.aria-label]="isLoggedIn ? 'Menú de usuario' : 'Iniciar sesión'">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -119,9 +146,15 @@
 
       <button class="hamburger-btn cursor-pointer flex-col gap-[5px] border-none bg-transparent p-[6px]"
               (click)="toggleMenu()" [class.hamburger-open]="menuOpen" id="nav-hamburger" aria-label="Abrir menú">
-        <span class="block h-[1.5px] w-6 bg-[#1a1a1a] transition-all duration-300"></span>
-        <span class="block h-[1.5px] w-6 bg-[#1a1a1a] transition-all duration-300"></span>
-        <span class="block h-[1.5px] w-6 bg-[#1a1a1a] transition-all duration-300"></span>
+        <span class="block h-[1.5px] w-6 transition-all duration-300"
+              [class.bg-white]="isTransparent"
+              [class.bg-[#1a1a1a]]="!isTransparent"></span>
+        <span class="block h-[1.5px] w-6 transition-all duration-300"
+              [class.bg-white]="isTransparent"
+              [class.bg-[#1a1a1a]]="!isTransparent"></span>
+        <span class="block h-[1.5px] w-6 transition-all duration-300"
+              [class.bg-white]="isTransparent"
+              [class.bg-[#1a1a1a]]="!isTransparent"></span>
       </button>
     </div>
   </div>
@@ -174,5 +207,3 @@
     }
   </div>
 </nav>
-
-

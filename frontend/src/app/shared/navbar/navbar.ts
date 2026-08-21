@@ -1,7 +1,8 @@
 import { Component, HostListener } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -13,8 +14,17 @@ export class Navbar {
   isScrolled = false;
   menuOpen = false;
   userMenuOpen = false;
+  isHeroPage = true; // transparent navbar on hero pages
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) {
+    // Detect route changes to toggle transparent navbar
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe(e => {
+        const path = e.urlAfterRedirects || e.url;
+        this.isHeroPage = path === '/' || path === '/inicio';
+      });
+  }
 
   get isLoggedIn(): boolean {
     return !!localStorage.getItem('auth_token');
@@ -27,6 +37,11 @@ export class Navbar {
     } catch {
       return 'Mi cuenta';
     }
+  }
+
+  /** Returns true when navbar should be transparent (hero page, not scrolled) */
+  get isTransparent(): boolean {
+    return this.isHeroPage && !this.isScrolled && !this.menuOpen;
   }
 
   @HostListener('window:scroll')
