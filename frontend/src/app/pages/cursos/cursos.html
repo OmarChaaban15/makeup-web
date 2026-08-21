@@ -98,100 +98,115 @@
           </p>
 
           <!-- Precio + CTA -->
-          <div class="mt-auto pt-8 flex items-center justify-between">
-            <span class="font-serif text-[1.9rem] font-light text-[#1a1a1a]">120 €</span>
-            <button class="rounded-full bg-[#c4956a] px-6 py-3 text-[0.65rem] font-bold uppercase tracking-widest text-white transition-all hover:bg-[#a87a52] hover:shadow-[0_8px_30px_rgba(196,149,106,0.3)]" id="btn-comprar-masterclass">
-              Comprar Curso
+          <div class="mt-auto pt-8">
+            <!-- Bloque de precio con oferta -->
+            <!-- Badge oferta (flujo normal, no absoluto) -->
+            <span class="mb-3 inline-flex items-center gap-1 rounded-full bg-[#c4956a] px-3 py-1 shadow-sm">
+              <svg class="h-2.5 w-2.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <span class="font-sans text-[0.55rem] font-bold uppercase tracking-wider text-white">Oferta especial</span>
+            </span>
+            <!-- Fila precios -->
+            <div class="mb-5 flex items-end gap-4">
+              <span class="font-serif text-[2.4rem] font-semibold leading-none text-[#c4956a]">45 €</span>
+              <div class="flex flex-col gap-0.5 pb-1">
+                <span class="font-sans text-[0.55rem] font-semibold uppercase tracking-widest text-[#999]">Antes</span>
+                <span class="font-serif text-[1.4rem] font-medium leading-none text-[#888] line-through decoration-[#c4956a] decoration-2">55 €</span>
+              </div>
+            </div>
+            <button class="w-full rounded-full bg-gradient-to-r from-[#c4956a] to-[#a87a52] px-6 py-3.5 text-[0.65rem] font-bold uppercase tracking-widest text-white shadow-[0_6px_24px_rgba(196,149,106,0.35)] transition-all hover:scale-[1.02] hover:shadow-[0_10px_36px_rgba(196,149,106,0.45)]" id="btn-comprar-masterclass">
+              Reservar mi Plaza — 45 €
             </button>
           </div>
 
         </div>
       </article>
 
-      <!-- ─── TARJETA 2: FORMACIÓN PROFESIONAL ─── -->
+      <!-- ─── TARJETA 2: FORMACIÓN PROFESIONAL (PRÓXIMAMENTE) ─── -->
       <article scrollReveal="up" scrollDelay="2"
-               class="curso-card group flex flex-col overflow-hidden rounded-[24px] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(26,26,26,0.12)]" id="curso-formacion-online">
+               class="curso-card relative flex flex-col overflow-hidden rounded-[24px] bg-white shadow-sm" id="curso-formacion-online" style="cursor:default">
 
-        <!-- Cabecera -->
-        <div class="relative flex flex-col justify-end bg-[#1a1a1a] p-8 pb-7">
-          <span class="relative z-10 mb-3 w-fit rounded-full border border-[#c4956a]/40 bg-[#c4956a]/20 px-3 py-1 font-sans text-[0.6rem] font-semibold uppercase tracking-widest text-[#c4956a]">
-            100% Online · Sin previos
+        <!-- ░░░ OVERLAY PRÓXIMAMENTE ░░░ -->
+        <div class="absolute inset-0 z-20 flex flex-col items-center justify-center rounded-[24px] backdrop-blur-[3px]" style="background: rgba(26,26,26,0.72)">
+          <!-- Icono reloj animado -->
+          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm">
+            <svg class="h-8 w-8 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <!-- Pill estado -->
+          <span class="mb-3 inline-flex items-center gap-2 rounded-full border border-[#c4956a]/50 bg-[#c4956a]/15 px-4 py-1.5 backdrop-blur-sm">
+            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-[#c4956a]"></span>
+            <span class="font-sans text-[0.6rem] font-bold uppercase tracking-[0.3em] text-[#c4956a]">En desarrollo</span>
           </span>
-          <p class="relative z-10 font-sans text-[0.62rem] font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Formación profesional</p>
-          <h2 class="relative z-10 mt-2 font-serif text-[1.55rem] font-light leading-[1.2] text-white">
-            Formación Online de<br><strong class="font-semibold">Maquillaje Profesional</strong>
-          </h2>
-          <p class="relative z-10 mt-3 font-serif text-[1rem] font-light italic text-white/60">Aprende desde donde estés</p>
+          <h3 class="font-serif text-[2rem] font-light text-white">Próximamente</h3>
+          <p class="mt-2 max-w-[220px] text-center font-sans text-[0.78rem] font-light leading-relaxed text-white/60">
+            Estamos preparando algo increíble.<br>Pronto disponible.
+          </p>
+          <!-- Botón notificación -->
+          <button
+            id="btn-notificar-formacion"
+            class="mt-6 rounded-full border border-white/25 bg-white/10 px-6 py-2.5 font-sans text-[0.62rem] font-semibold uppercase tracking-widest text-white backdrop-blur-sm transition-all duration-200 hover:border-[#c4956a]/60 hover:bg-[#c4956a]/20 hover:text-[#c4956a]"
+          >
+            Avísame cuando esté disponible
+          </button>
         </div>
 
-        <!-- Cuerpo -->
-        <div class="flex flex-1 flex-col p-8">
+        <!-- ── Contenido de fondo (desvanecido) ── -->
+        <div class="pointer-events-none select-none opacity-30">
 
-          <!-- Descripción -->
-          <p class="font-sans text-[0.88rem] font-light leading-[1.85] text-[#555]">
-            He creado esta formación para quienes desean aprender maquillaje profesional pero que por falta de tiempo, distancia o trabajo <strong class="font-medium text-[#1a1a1a]">no pueden asistir a clases presenciales</strong>.
-          </p>
-
-          <!-- Separador -->
-          <div class="my-6 h-px w-full bg-[#f2eae4]"></div>
-
-          <!-- Lista con iconos SVG -->
-          <p class="mb-4 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#888]">¿Qué aprenderás?</p>
-          <ul class="space-y-3">
-            <li class="flex items-start gap-3">
-              <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
-                <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-              </span>
-              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Conocer tu piel y elegir los productos adecuados para cada tipo de maquillaje.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
-                <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-              </span>
-              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Preparar el rostro correctamente con técnicas de base y corrección profesional.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
-                <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-              </span>
-              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Realzar tus facciones con técnicas de contouring, iluminación y color.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
-                <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-              </span>
-              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Crear looks para diferentes ocasiones: día, noche, eventos y editorial.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
-                <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-              </span>
-              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Desarrollar tu propio estilo y técnica para trabajar de forma autónoma.</span>
-            </li>
-          </ul>
-
-          <!-- Separador -->
-          <div class="my-6 h-px w-full bg-[#f2eae4]"></div>
-
-          <!-- Cita -->
-          <p class="text-center font-serif text-[0.88rem] font-light italic leading-relaxed text-[#888]">
-            "Aprender maquillaje no debería depender de dónde vivas,<br>ni del tiempo que tengas disponible."
-          </p>
-
-          <!-- Duración -->
-          <p class="mt-6 text-center font-sans text-[0.68rem] font-bold uppercase tracking-wider text-[#c4956a]">
-            40 horas · Online · A tu ritmo · Sin previos
-          </p>
-
-          <!-- Precio + CTA -->
-          <div class="mt-auto pt-8 flex items-center justify-between">
-            <span class="font-serif text-[1.9rem] font-light text-[#1a1a1a]">350 €</span>
-            <button class="rounded-full bg-[#1a1a1a] px-6 py-3 text-[0.65rem] font-bold uppercase tracking-widest text-white transition-all hover:bg-[#c4956a] hover:shadow-[0_8px_30px_rgba(196,149,106,0.3)]" id="btn-solicitar-formacion">
-              Solicitar Dossier
-            </button>
+          <!-- Cabecera -->
+          <div class="relative flex flex-col justify-end bg-[#1a1a1a] p-8 pb-7">
+            <span class="relative z-10 mb-3 w-fit rounded-full border border-[#c4956a]/40 bg-[#c4956a]/20 px-3 py-1 font-sans text-[#c4956a] text-[0.6rem] font-semibold uppercase tracking-widest">
+              100% Online · Sin previos
+            </span>
+            <p class="relative z-10 font-sans text-[0.62rem] font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Formación profesional</p>
+            <h2 class="relative z-10 mt-2 font-serif text-[1.55rem] font-light leading-[1.2] text-white">
+              Formación Online de<br><strong class="font-semibold">Maquillaje Profesional</strong>
+            </h2>
+            <p class="relative z-10 mt-3 font-serif text-[1rem] font-light italic text-white/60">Aprende desde donde estés</p>
           </div>
 
-        </div>
+          <!-- Cuerpo -->
+          <div class="flex flex-1 flex-col p-8">
+            <p class="font-sans text-[0.88rem] font-light leading-[1.85] text-[#555]">
+              He creado esta formación para quienes desean aprender maquillaje profesional pero que por falta de tiempo, distancia o trabajo <strong class="font-medium text-[#1a1a1a]">no pueden asistir a clases presenciales</strong>.
+            </p>
+            <div class="my-6 h-px w-full bg-[#f2eae4]"></div>
+            <p class="mb-4 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#888]">¿Qué aprenderás?</p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
+                  <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </span>
+                <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Conocer tu piel y elegir los productos adecuados para cada tipo de maquillaje.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
+                  <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </span>
+                <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Preparar el rostro correctamente con técnicas de base y corrección profesional.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
+                  <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </span>
+                <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Realzar tus facciones con técnicas de contouring, iluminación y color.</span>
+              </li>
+            </ul>
+            <div class="my-6 h-px w-full bg-[#f2eae4]"></div>
+            <p class="mt-6 text-center font-sans text-[0.68rem] font-bold uppercase tracking-wider text-[#c4956a]">
+              40 horas · Online · A tu ritmo · Sin previos
+            </p>
+            <div class="mt-auto pt-8 flex items-center justify-between">
+              <span class="font-serif text-[1.9rem] font-light text-[#1a1a1a]">350 €</span>
+              <button class="rounded-full bg-[#1a1a1a] px-6 py-3 text-[0.65rem] font-bold uppercase tracking-widest text-white">
+                Solicitar Dossier
+              </button>
+            </div>
+          </div>
+
+        </div><!-- /pointer-events-none -->
       </article>
 
     </div>
