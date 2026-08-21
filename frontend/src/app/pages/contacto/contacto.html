@@ -8,9 +8,9 @@
       <div class="grid items-end gap-8 border-b border-[#eaded5] pb-10 lg:grid-cols-[1.1fr_0.9fr] lg:pb-14">
 
         <!-- Left: Title block -->
-        <div class="contacto-fade-up">
-          <p class="text-xs font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Contacto</p>
-          <h1 class="mt-5 font-serif text-[clamp(2.8rem,5.5vw,5rem)] font-light leading-[1.08] text-[#1a1a1a]">
+        <div>
+          <p scrollReveal="up" class="text-xs font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Contacto</p>
+          <h1 scrollReveal="up" scrollDelay="1" class="mt-5 font-serif text-[clamp(2.8rem,5.5vw,5rem)] font-light leading-[1.08] text-[#1a1a1a]">
             Hablemos de<br>
             <span class="italic text-[#c4956a]">tu momento.</span>
           </h1>
@@ -18,8 +18,8 @@
         </div>
 
         <!-- Right: Subtitle -->
-        <p
-          class="contacto-fade-up contacto-delay-1 max-w-[520px] text-base font-light leading-8 text-[#555555] lg:pb-2">
+        <p scrollReveal="up" scrollDelay="2"
+          class="max-w-[520px] text-base font-light leading-8 text-[#555555] lg:pb-2">
           Ya sea maquillaje nupcial, editorial, social o formación privada, cuéntame tu idea. Te responderé con
           disponibilidad y una propuesta cuidada en 24-48 horas.
         </p>
@@ -37,7 +37,8 @@
 
         <!-- Formulario -->
         <form action="mailto:info@makeupbyyona.com" method="post" enctype="text/plain"
-          class="contacto-fade-up contacto-delay-1 rounded-2xl border border-[#e0d4c8] bg-white p-6 shadow-[0_20px_50px_rgba(26,26,26,0.08)] sm:p-8 lg:p-10">
+          scrollReveal="up" scrollDelay="1"
+          class="rounded-2xl border border-[#e0d4c8] bg-white p-6 shadow-[0_20px_50px_rgba(26,26,26,0.08)] sm:p-8 lg:p-10">
 
           <p class="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-[#c4956a]">Envíame un mensaje</p>
 
@@ -91,7 +92,7 @@
 
           <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <button type="submit"
-              class="contacto-btn group inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-[#1a1a1a] px-10 text-xs font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#c4956a] hover:shadow-lg">
+              class="contacto-btn group inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-[#1a1a1a] px-10 text-xs font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#c4956a] hover:shadow-[0_8px_30px_rgba(196,149,106,0.3)]">
               Enviar consulta
               <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none"
                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -106,7 +107,7 @@
         <div class="flex flex-col gap-6">
 
           <!-- Card oscura: datos de contacto -->
-          <div class="contacto-fade-up contacto-delay-2 rounded-2xl bg-[#1a1a1a] p-7 text-white sm:p-9">
+          <div scrollReveal="right" scrollDelay="2" class="rounded-2xl bg-[#1a1a1a] p-7 text-white sm:p-9">
             <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#c4956a]">Makeup By Yona</p>
             <h2 class="mt-5 font-serif text-[clamp(1.8rem,3.5vw,2.6rem)] font-light leading-tight">
               Atención personalizada en Ibiza.
@@ -161,16 +162,16 @@
             </div>
 
             <a routerLink="/reservar-cita"
-              class="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-white px-8 text-xs font-semibold uppercase tracking-wider text-[#1a1a1a] transition-all duration-300 hover:bg-[#c4956a] hover:text-white hover:shadow-lg sm:w-auto">
+              class="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-white px-8 text-xs font-semibold uppercase tracking-wider text-[#1a1a1a] transition-all duration-300 hover:bg-[#c4956a] hover:text-white hover:shadow-[0_8px_30px_rgba(196,149,106,0.3)] sm:w-auto">
               Reservar cita
             </a>
           </div>
 
           <!-- Mapa -->
-          <div class="contacto-fade-up contacto-delay-3 overflow-hidden rounded-2xl border border-[#e0d4c8]">
+          <div scrollReveal="up" scrollDelay="3" class="overflow-hidden rounded-2xl border border-[#e0d4c8]">
             <div #mapContainer class="h-[280px] w-full sm:h-[320px]"></div>
             <div class="flex items-center justify-between bg-[#faf8f6] px-6 py-4">
-              <span class="text-sm font-light text-[#555555]">Ibiza, Espana</span>
+              <span class="text-sm font-light text-[#555555]">Ibiza, España</span>
               <a href="https://www.google.com/maps/search/?api=1&query=Ibiza%2C%20Espa%C3%B1a" target="_blank"
                 rel="noreferrer"
                 class="group inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#c4956a] transition-colors hover:text-[#1a1a1a]">
@@ -194,9 +195,9 @@
   <section class="bg-[#f4ebe5] px-5 py-16 sm:px-8 md:py-24 lg:px-10">
     <div class="mx-auto max-w-[1180px]">
       <div class="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
-        <div class="contacto-fade-up">
-          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#c4956a]">Antes de escribir</p>
-          <h2 class="mt-4 max-w-[430px] font-serif text-[clamp(2rem,4vw,3rem)] font-light leading-tight text-[#1a1a1a]">
+        <div>
+          <p scrollReveal="up" class="text-xs font-semibold uppercase tracking-[0.2em] text-[#c4956a]">Antes de escribir</p>
+          <h2 scrollReveal="up" scrollDelay="1" class="mt-4 max-w-[430px] font-serif text-[clamp(2rem,4vw,3rem)] font-light leading-tight text-[#1a1a1a]">
             Lo que ayuda a preparar tu propuesta.
           </h2>
           <div class="mt-6 h-[2px] w-14 bg-[#c4956a]"></div>
@@ -204,8 +205,8 @@
 
         <div class="grid gap-5 sm:grid-cols-3">
           <!-- Card 1: Fecha -->
-          <article
-            class="contacto-fade-up contacto-delay-1 contacto-tip-card group rounded-2xl border border-[#ddcbbd] bg-[#fdfcfb] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(196,149,106,0.15)]">
+          <article scrollReveal="up" scrollDelay="1"
+            class="contacto-tip-card group rounded-2xl border border-[#ddcbbd] bg-[#fdfcfb] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(196,149,106,0.15)]">
             <span
               class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#c4956a]/10 text-[#c4956a] transition-all duration-300 group-hover:bg-[#c4956a] group-hover:text-white">
               <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -219,8 +220,8 @@
           </article>
 
           <!-- Card 2: Servicio -->
-          <article
-            class="contacto-fade-up contacto-delay-2 contacto-tip-card group rounded-2xl border border-[#ddcbbd] bg-[#fdfcfb] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(196,149,106,0.15)]">
+          <article scrollReveal="up" scrollDelay="2"
+            class="contacto-tip-card group rounded-2xl border border-[#ddcbbd] bg-[#fdfcfb] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(196,149,106,0.15)]">
             <span
               class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#c4956a]/10 text-[#c4956a] transition-all duration-300 group-hover:bg-[#c4956a] group-hover:text-white">
               <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -234,8 +235,8 @@
           </article>
 
           <!-- Card 3: Estilo -->
-          <article
-            class="contacto-fade-up contacto-delay-3 contacto-tip-card group rounded-2xl border border-[#ddcbbd] bg-[#fdfcfb] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(196,149,106,0.15)]">
+          <article scrollReveal="up" scrollDelay="3"
+            class="contacto-tip-card group rounded-2xl border border-[#ddcbbd] bg-[#fdfcfb] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(196,149,106,0.15)]">
             <span
               class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#c4956a]/10 text-[#c4956a] transition-all duration-300 group-hover:bg-[#c4956a] group-hover:text-white">
               <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">

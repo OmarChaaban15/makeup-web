@@ -15,9 +15,9 @@
     <div class="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/60"></div>
 
     <!-- Contenido centrado -->
-    <div class="sobre-mi-fade-up relative z-10 flex flex-col items-center justify-center px-8 pb-20 pt-32 text-center" style="min-height: 620px;">
-      <p class="mb-5 font-serif text-[0.75rem] uppercase tracking-[0.3em] text-[#c4956a]">Sobre mí</p>
-      <h1 class="mb-7 font-serif text-[clamp(2.8rem,5.5vw,4.5rem)] font-light leading-[1.15] text-white drop-shadow-lg">
+    <div class="relative z-10 flex flex-col items-center justify-center px-8 pb-20 pt-32 text-center" style="min-height: 620px;">
+      <p scrollReveal="up" class="mb-5 font-serif text-[0.75rem] uppercase tracking-[0.3em] text-[#c4956a]">Sobre mí</p>
+      <h1 scrollReveal="up" scrollDelay="1" class="mb-7 font-serif text-[clamp(2.8rem,5.5vw,4.5rem)] font-light leading-[1.15] text-white drop-shadow-lg">
         Mi historia<br><em class="italic text-[#c4956a]">&amp; pasión</em>
       </h1>
       <div class="mx-auto h-[1.5px] w-16 bg-[#c4956a]"></div>
@@ -32,13 +32,13 @@
       <div class="grid items-start gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-28">
 
         <!-- Texto principal -->
-        <div class="sobre-mi-fade-up">
-          <p class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.3em] text-[#c4956a]">Mi nombre es Yonaida</p>
-          <h2 class="mb-8 font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] font-light leading-[1.2] text-[#1a1a1a]">
+        <div>
+          <p scrollReveal="up" class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.3em] text-[#c4956a]">Mi nombre es Yonaida</p>
+          <h2 scrollReveal="up" scrollDelay="1" class="mb-8 font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] font-light leading-[1.2] text-[#1a1a1a]">
             Más de cinco años<br><em class="italic text-[#c4956a]">dedicándome al maquillaje</em>
           </h2>
 
-          <div class="space-y-6 font-sans text-[0.95rem] font-light leading-[1.9] text-[#555]">
+          <div scrollReveal="up" scrollDelay="2" class="space-y-6 font-sans text-[0.95rem] font-light leading-[1.9] text-[#555]">
             <p>
               Durante este tiempo he trabajado con <strong class="font-medium text-[#1a1a1a]">novias, clientes particulares, fotógrafos, marcas y producciones audiovisuales</strong>, desarrollando una visión personalizada de la belleza basada en la naturalidad, la elegancia y la confianza.
             </p>
@@ -48,14 +48,14 @@
           </div>
 
           <!-- Separador decorativo -->
-          <div class="my-10 flex items-center gap-4">
+          <div scrollReveal="scale" scrollDelay="3" class="my-10 flex items-center gap-4">
             <div class="h-px flex-1 bg-[#e8ddd5]"></div>
             <span class="font-serif text-[0.7rem] uppercase tracking-[0.25em] text-[#c4956a]">Mi filosofía</span>
             <div class="h-px flex-1 bg-[#e8ddd5]"></div>
           </div>
 
           <!-- Cita destacada -->
-          <blockquote class="border-l-2 border-[#c4956a] pl-7">
+          <blockquote scrollReveal="left" scrollDelay="4" class="border-l-2 border-[#c4956a] pl-7">
             <p class="font-serif text-[1.3rem] font-light italic leading-[1.6] text-[#1a1a1a]">
               "Cada rostro es único y cada maquillaje cuenta una historia."
             </p>
@@ -69,7 +69,7 @@
         <div class="flex flex-col gap-6">
 
           <!-- Foto principal -->
-          <div class="group relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(26,26,26,0.15)]">
+          <div scrollReveal="right" scrollDelay="2" class="group relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(26,26,26,0.15)]">
             <img
               src="images/yonaida.jpg"
               alt="Yonaida, maquilladora profesional"
@@ -77,27 +77,29 @@
               style="aspect-ratio: 3/4;"
             />
             <!-- Overlay badge inferior -->
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-7 py-6">
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-7 py-6 translate-y-1 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
               <p class="font-serif text-[0.65rem] uppercase tracking-[0.25em] text-[#c4956a]">Maquilladora profesional</p>
               <p class="mt-1 font-serif text-[1.2rem] font-light text-white">Yonaida</p>
             </div>
           </div>
 
-          <!-- Stats debajo de la foto -->
-          <div class="grid grid-cols-2 gap-3">
-            <div class="flex flex-col gap-1 rounded-2xl border border-[#e8ddd5] bg-white p-5 shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
-              <span class="font-serif text-[2.4rem] font-light leading-none text-[#c4956a]">+5</span>
+          <!-- Stats debajo de la foto con animated counters -->
+          <div scrollReveal="up" scrollDelay="3"
+               class="grid grid-cols-2 gap-3"
+               (mouseenter)="animateCounters()">
+            <div class="flex flex-col gap-1 rounded-2xl border border-[#e8ddd5] bg-white p-5 shadow-[0_4px_20px_rgba(196,149,106,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(196,149,106,0.12)]">
+              <span class="font-serif text-[2.4rem] font-light leading-none text-[#c4956a]" style="font-variant-numeric: tabular-nums;">+{{ counterYears() }}</span>
               <span class="font-sans text-[0.68rem] font-medium uppercase tracking-wider text-[#888]">años de experiencia</span>
             </div>
-            <div class="flex flex-col gap-1 rounded-2xl border border-[#e8ddd5] bg-white p-5 shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
-              <span class="font-serif text-[2.4rem] font-light leading-none text-[#c4956a]">100%</span>
+            <div class="flex flex-col gap-1 rounded-2xl border border-[#e8ddd5] bg-white p-5 shadow-[0_4px_20px_rgba(196,149,106,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(196,149,106,0.12)]">
+              <span class="font-serif text-[2.4rem] font-light leading-none text-[#c4956a]" style="font-variant-numeric: tabular-nums;">{{ counterPersonal() }}%</span>
               <span class="font-sans text-[0.68rem] font-medium uppercase tracking-wider text-[#888]">personalizado</span>
             </div>
           </div>
 
           <!-- CTA -->
-          <a routerLink="/reservar-cita"
-             class="flex items-center justify-center gap-3 rounded-2xl border-[1.5px] border-[#c4956a] px-8 py-5 font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white"
+          <a routerLink="/reservar-cita" scrollReveal="up" scrollDelay="4"
+             class="flex items-center justify-center gap-3 rounded-2xl border-[1.5px] border-[#c4956a] px-8 py-5 font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white hover:shadow-[0_8px_30px_rgba(196,149,106,0.3)]"
              id="sobre-mi-cta-reservar">
             Reservar una cita
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
@@ -118,7 +120,7 @@
       <div class="grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24">
 
         <!-- Columna izquierda: segunda foto -->
-        <div class="sobre-mi-fade-up group relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(26,26,26,0.14)]">
+        <div scrollReveal="left" class="group relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(26,26,26,0.14)]">
           <img
             src="images/yonaida2.PNG"
             alt="Yonaida en acción — maquillaje profesional"
@@ -129,13 +131,13 @@
         </div>
 
         <!-- Columna derecha: texto -->
-        <div class="sobre-mi-fade-up">
-          <p class="mb-5 font-serif text-[0.72rem] uppercase tracking-[0.3em] text-[#c4956a]">En mi día a día</p>
-          <h2 class="mb-8 font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] font-light leading-[1.2] text-[#1a1a1a]">
+        <div>
+          <p scrollReveal="up" class="mb-5 font-serif text-[0.72rem] uppercase tracking-[0.3em] text-[#c4956a]">En mi día a día</p>
+          <h2 scrollReveal="up" scrollDelay="1" class="mb-8 font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] font-light leading-[1.2] text-[#1a1a1a]">
             Pasión por cada<br><em class="italic text-[#c4956a]">detalle</em>
           </h2>
 
-          <div class="space-y-6 font-sans text-[0.95rem] font-light leading-[1.9] text-[#555]">
+          <div scrollReveal="up" scrollDelay="2" class="space-y-6 font-sans text-[0.95rem] font-light leading-[1.9] text-[#555]">
             <p>
               Me encanta el proceso creativo que hay detrás de cada maquillaje. Desde la <strong class="font-medium text-[#1a1a1a]">consulta inicial</strong> hasta el toque final, cada paso está pensado para que el resultado sea exactamente lo que imaginas.
             </p>
@@ -144,9 +146,9 @@
             </p>
           </div>
 
-          <div class="mt-10 flex gap-4 flex-wrap">
+          <div scrollReveal="up" scrollDelay="3" class="mt-10 flex gap-4 flex-wrap">
             <a routerLink="/reservar-cita"
-               class="border-[1.5px] border-[#c4956a] bg-[#c4956a] px-[2.4rem] py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:border-[#a87a52] hover:bg-[#a87a52]"
+               class="border-[1.5px] border-[#c4956a] bg-[#c4956a] px-[2.4rem] py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:border-[#a87a52] hover:bg-[#a87a52] hover:shadow-[0_8px_30px_rgba(196,149,106,0.4)]"
                id="sobre-mi-segunda-cta-reservar">
               Reservar cita
             </a>

@@ -1,10 +1,11 @@
 import { afterNextRender, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
 import * as L from 'leaflet';
 
 @Component({
   selector: 'app-contacto',
-  imports: [RouterLink],
+  imports: [RouterLink, ScrollRevealDirective],
   templateUrl: './contacto.html',
   styleUrl: './contacto.css',
 })
