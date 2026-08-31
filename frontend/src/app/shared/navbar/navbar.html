@@ -43,7 +43,7 @@
     </a>
 
     <!-- Links derecha -->
-    <ul class="hidden list-none items-center justify-end gap-4 lg:gap-6 xl:gap-8 2xl:gap-10 min-[901px]:flex">
+    <ul class="hidden list-none items-center justify-end gap-3 lg:gap-4 xl:gap-6 2xl:gap-8 min-[1150px]:flex">
       <li>
         <a routerLink="/cursos" routerLinkActive="nav-active" id="nav-cursos"
            class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
@@ -62,7 +62,7 @@
       </li>
       <li>
         <a routerLink="/reservar-cita" routerLinkActive="active" id="nav-reservar"
-           class="inline-flex min-w-[9rem] shrink-0 items-center justify-center whitespace-nowrap border-[1.5px] border-[#c4956a] px-[1rem] py-[0.5rem] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white lg:px-[1.2rem] lg:py-[0.55rem]"
+           class="inline-flex min-w-[8rem] xl:min-w-[9rem] shrink-0 items-center justify-center whitespace-nowrap border-[1.5px] border-[#c4956a] px-[1rem] py-[0.5rem] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white lg:px-[1.2rem] lg:py-[0.55rem]"
            [class.border-white]="isTransparent"
            [class.text-white]="isTransparent"
            [class.hover:border-[#c4956a]]="isTransparent">
@@ -73,9 +73,9 @@
       @if (isLoggedIn) {
         <li>
           <a routerLink="/mis-cursos" routerLinkActive="nav-active" id="nav-mis-cursos"
-             class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
-             [class.text-white]="isTransparent"
-             [class.text-[#1a1a1a]]="!isTransparent">
+            class="nav-link relative pb-[3px] whitespace-nowrap font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
+            [class.text-white]="isTransparent"
+            [class.text-[#1a1a1a]]="!isTransparent">
             Mis Cursos
           </a>
         </li>
@@ -131,8 +131,7 @@
     </ul>
 
     <!-- Menú hamburguesa (móvil) + icono usuario móvil -->
-    <div class="z-[1100] hidden items-center gap-2 max-[900px]:flex">
-      <!-- ✦ Icono usuario (móvil): con sesión abre el menú, si no va al login -->
+    <div class="z-[1100] hidden items-center gap-2 max-[1149px]:flex">      <!-- ✦ Icono usuario (móvil): con sesión abre el menú, si no va al login -->
       <button (click)="isLoggedIn ? toggleMenu() : openLogin()"
               class="cursor-pointer border-none bg-transparent p-[6px] transition-colors duration-300 hover:text-[#c4956a]"
               [class.text-white]="isTransparent"
@@ -160,7 +159,7 @@
   </div>
 
   <!-- Menú móvil desplegable -->
-  <div class="mobile-panel pointer-events-none absolute top-20 left-0 right-0 hidden flex-col gap-6 border-t border-black/[0.06] bg-white px-8 pb-8 pt-6 opacity-0 shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 max-[900px]:flex"
+  <div class="mobile-panel pointer-events-none absolute top-20 left-0 right-0 hidden flex-col gap-6 border-t border-black/[0.06] bg-white px-8 pb-8 pt-6 opacity-0 shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 max-[1149px]:flex"
        [class.mobile-open]="menuOpen"
        (click)="closeMenu()">
     <a routerLink="/inicio" routerLinkActive="!text-[#c4956a]" [routerLinkActiveOptions]="{exact:true}"

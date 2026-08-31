@@ -10,7 +10,8 @@ class Tutorial extends Model
     protected $table = 'tutoriales';
     protected $fillable = [
         'categoria_id', 'titulo', 'descripcion_corta', 'descripcion_larga',
-        'precio', 'video_url', 'miniatura_url', 'nivel', 'activo'
+        'precio', 'video_url', 'miniatura_url', 'nivel', 'activo',
+        'stripe_price_id'
     ];
 
     // video_url solo se devuelve si el usuario tiene acceso

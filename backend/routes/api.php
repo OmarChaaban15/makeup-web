@@ -9,6 +9,7 @@ use App\Http\Controllers\CitaController;
 use App\Http\Controllers\ResenaController;
 use App\Http\Controllers\AccesoTutorialController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\StripeWebhookController;
 
 // Auth routes (sin login)
 Route::post('/auth/register', [AuthController::class, 'register']);
@@ -33,3 +34,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/citas', [CitaController::class, 'index']);
     Route::get('/mis-cursos', [AccesoTutorialController::class, 'index']);
 });
+Route::post('/webhooks/stripe', [StripeWebhookController::class, 'handle']);

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -29,12 +29,11 @@ export class MisCursos implements OnInit {
   private http = inject(HttpClient);
   private sanitizer = inject(DomSanitizer);
 
-  cursos: Curso[] = [];
-  isLoading = true;
-  errorMsg = '';
+  cursos = signal<Curso[]>([]);
+  isLoading = signal(true);
+  errorMsg = signal('');
 
-  // Curso que se esta reproduciendo en el modal (null = modal cerrado)
-  cursoActivo: Curso | null = null;
+  cursoActivo = signal<Curso | null>(null);
 
   ngOnInit(): void {
     this.cargarCursos();
@@ -45,10 +44,10 @@ export class MisCursos implements OnInit {
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 
     this.http.get<Curso[]>(`${environment.apiUrl}/mis-cursos`, { headers })
-      .pipe(finalize(() => this.isLoading = false))
+      .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe({
-        next: (cursos) => this.cursos = cursos,
-        error: () => this.errorMsg = 'No se pudieron cargar tus cursos. Inténtalo de nuevo más tarde.'
+        next: (cursos) => this.cursos.set(cursos),
+        error: () => this.errorMsg.set('No se pudieron cargar tus cursos. Inténtalo de nuevo más tarde.')
       });
   }
 
@@ -56,21 +55,19 @@ export class MisCursos implements OnInit {
     if (!curso.video_url) {
       return;
     }
-    this.cursoActivo = curso;
+    this.cursoActivo.set(curso);
     document.body.style.overflow = 'hidden';
   }
 
   cerrarModal(): void {
-    this.cursoActivo = null;
+    this.cursoActivo.set(null);
     document.body.style.overflow = '';
   }
 
-  // Devuelve true si el video es un embed (YouTube / Vimeo) y no un archivo directo
   esEmbed(url: string): boolean {
     return /youtube\.com|youtu\.be|vimeo\.com/i.test(url);
   }
 
-  // Normaliza YouTube/Vimeo a su URL de embed y la marca como segura para el iframe
   embedUrl(url: string): SafeResourceUrl {
     let embed = url;
 

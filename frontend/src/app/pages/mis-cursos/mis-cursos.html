@@ -18,11 +18,11 @@
        ══════════════════════════════════════════ -->
   <div class="mx-auto mt-16 max-w-[1040px] px-6">
 
-    @if (isLoading) {
+    @if (isLoading()) {
       <p class="text-center font-sans text-[0.9rem] font-light text-[#666]">Cargando tus cursos…</p>
-    } @else if (errorMsg) {
-      <p class="text-center font-sans text-[0.9rem] font-light text-[#b45454]">{{ errorMsg }}</p>
-    } @else if (cursos.length === 0) {
+    } @else if (errorMsg()) {
+      <p class="text-center font-sans text-[0.9rem] font-light text-[#b45454]">{{ errorMsg() }}</p>
+    } @else if (cursos().length === 0) {
       <div class="mx-auto max-w-[520px] rounded-[20px] bg-white px-8 py-12 text-center shadow-sm">
         <p class="font-serif text-[1.15rem] font-light text-[#1a1a1a]">Todavía no tienes cursos.</p>
         <p class="mt-3 font-sans text-[0.85rem] font-light leading-relaxed text-[#666]">
@@ -37,7 +37,7 @@
 
       <!-- ─── GRID DE CURSOS ─── -->
       <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        @for (curso of cursos; track curso.id) {
+        @for (curso of cursos(); track curso.id) {
           <article
             (click)="abrirCurso(curso)"
             class="group flex cursor-pointer flex-col overflow-hidden rounded-[20px] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.18)]">
@@ -83,7 +83,7 @@
 <!-- ══════════════════════════════════════════
      MODAL REPRODUCTOR
      ══════════════════════════════════════════ -->
-@if (cursoActivo) {
+@if (cursoActivo()) {
   <div class="fixed inset-0 z-[2000] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
        (click)="cerrarModal()">
     <div class="relative w-full max-w-[900px] overflow-hidden rounded-[16px] bg-[#111] shadow-2xl"
@@ -97,20 +97,20 @@
 
       <!-- Reproductor -->
       <div class="aspect-video w-full bg-black">
-        @if (cursoActivo.video_url && esEmbed(cursoActivo.video_url)) {
-          <iframe [src]="embedUrl(cursoActivo.video_url)" class="h-full w-full" frameborder="0"
+        @if (cursoActivo()!.video_url && esEmbed(cursoActivo()!.video_url!)) {
+          <iframe [src]="embedUrl(cursoActivo()!.video_url!)" class="h-full w-full" frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen></iframe>
-        } @else if (cursoActivo.video_url) {
-          <video [src]="cursoActivo.video_url" class="h-full w-full" controls autoplay></video>
+        } @else if (cursoActivo()!.video_url) {
+          <video [src]="cursoActivo()!.video_url" class="h-full w-full" controls autoplay></video>
         }
       </div>
 
       <!-- Info -->
       <div class="p-6">
-        <h3 class="font-serif text-[1.3rem] font-light text-white">{{ cursoActivo.titulo }}</h3>
-        @if (cursoActivo.descripcion_larga) {
-          <p class="mt-3 font-sans text-[0.85rem] font-light leading-relaxed text-white/70">{{ cursoActivo.descripcion_larga }}</p>
+        <h3 class="font-serif text-[1.3rem] font-light text-white">{{ cursoActivo()!.titulo }}</h3>
+        @if (cursoActivo()!.descripcion_larga) {
+          <p class="mt-3 font-sans text-[0.85rem] font-light leading-relaxed text-white/70">{{ cursoActivo()!.descripcion_larga }}</p>
         }
       </div>
     </div>

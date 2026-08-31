@@ -10,6 +10,8 @@ import { Login } from './pages/login/login';
 import { Registro } from './pages/registro/registro';
 import { MisCursos } from './pages/mis-cursos/mis-cursos';
 import { authGuard } from './guards/auth-guard';
+import { PagoExitoso } from './pages/pago-exitoso/pago-exitoso';
+import { PagoCancelado } from './pages/pago-cancelado/pago-cancelado';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -23,5 +25,8 @@ export const routes: Routes = [
   { path: 'mis-cursos', component: MisCursos, canActivate: [authGuard] },
   { path: 'login', component: Login },
   { path: 'registro', component: Registro },
+  { path: 'pago-exitoso', component: PagoExitoso },
+  { path: 'pago-cancelado', component: PagoCancelado },
   { path: '**', redirectTo: 'inicio' }
+  
 ];
