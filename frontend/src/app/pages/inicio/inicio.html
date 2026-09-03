@@ -24,24 +24,24 @@
   <canvas #particleCanvas class="particle-canvas absolute inset-0 h-full w-full"></canvas>
 
   <!-- Contenido del hero -->
-  <div class="relative z-10 max-w-[700px] px-8"
+  <div class="relative z-10 max-w-[700px] px-5 sm:px-8"
        [style.transform]="'translate(' + mouseX() * 0.3 + 'px, ' + mouseY() * 0.3 + 'px)'">
-    <p class="hero-text-enter mb-5 font-serif text-[0.8rem] uppercase tracking-[0.3em] text-[#e8c99a] hero-text-delay-1"
+    <p class="hero-text-enter mb-3 sm:mb-5 font-serif text-[0.72rem] sm:text-[0.8rem] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#e8c99a] hero-text-delay-1"
        [class.visible]="heroTextVisible()">Bienvenida</p>
-    <h1 class="hero-text-enter mb-6 font-serif text-[clamp(2.8rem,6vw,5rem)] font-light leading-[1.15] text-white hero-text-delay-2"
+    <h1 class="hero-text-enter mb-4 sm:mb-6 font-serif text-[clamp(2.4rem,6.5vw,5rem)] font-light leading-[1.12] text-white hero-text-delay-2"
         [class.visible]="heroTextVisible()">El arte del
       maquillaje<br><em class="italic text-[#e8c99a]">hecho para ti</em></h1>
-    <p class="hero-text-enter mx-auto mb-11 max-w-[500px] font-sans text-[1.05rem] font-light leading-[1.7] text-[rgba(255,255,255,0.88)] hero-text-delay-3"
+    <p class="hero-text-enter mx-auto mb-8 sm:mb-11 max-w-[500px] font-sans text-[0.92rem] sm:text-[1.05rem] font-light leading-[1.65] text-[rgba(255,255,255,0.88)] hero-text-delay-3"
        [class.visible]="heroTextVisible()">Maquilladora
       profesional con más de 5 años de experiencia creando looks personalizados que realzan la belleza natural de cada
       mujer.</p>
-    <div class="hero-text-enter flex flex-wrap justify-center gap-4 hero-text-delay-4"
+    <div class="hero-text-enter flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 hero-text-delay-4 w-full"
          [class.visible]="heroTextVisible()">
       <a routerLink="/reservar-cita"
-        class="border-[1.5px] border-[#c4956a] bg-[#c4956a] px-[2.4rem] py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:border-[#a87a52] hover:bg-[#a87a52] hover:shadow-[0_8px_30px_rgba(196,149,106,0.4)]"
+        class="w-full sm:w-auto inline-flex items-center justify-center border-[1.5px] border-[#c4956a] bg-[#c4956a] px-8 py-3.5 sm:px-[2.4rem] sm:py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:border-[#a87a52] hover:bg-[#a87a52] hover:shadow-[0_8px_30px_rgba(196,149,106,0.4)] active:scale-[0.98]"
         id="inicio-cta-reservar">Reservar cita</a>
       <a routerLink="/servicios"
-        class="border-[1.5px] border-white px-[2.4rem] py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:bg-white hover:text-[#1a1a1a]"
+        class="w-full sm:w-auto inline-flex items-center justify-center border-[1.5px] border-white/80 px-8 py-3.5 sm:px-[2.4rem] sm:py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:bg-white hover:text-[#1a1a1a] active:scale-[0.98]"
         id="inicio-cta-servicios">Ver servicios</a>
     </div>
   </div>
@@ -87,24 +87,24 @@
 
         <!-- Animated counters -->
         <div scrollReveal="up" scrollDelay="3"
-             class="mt-10 grid grid-cols-3 gap-4"
+             class="mt-10 grid grid-cols-3 gap-2 sm:gap-4"
              (mouseenter)="animateCounters()"
              #counterSection>
-          <div class="flex flex-col items-center gap-1 rounded-xl border border-[#e8ddd5] bg-white p-4 shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
-            <span class="counter-number font-serif text-[2rem] font-light leading-none text-[#c4956a]">+{{ counterYears() }}</span>
-            <span class="font-sans text-[0.62rem] font-medium uppercase tracking-wider text-[#888]">años</span>
+          <div class="flex flex-col items-center gap-1 rounded-xl border border-[#e8ddd5] bg-white p-3 sm:p-4 text-center shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
+            <span class="counter-number font-serif text-[1.5rem] sm:text-[2rem] font-light leading-none text-[#c4956a]">+{{ counterYears() }}</span>
+            <span class="font-sans text-[0.55rem] sm:text-[0.62rem] font-medium uppercase tracking-wider text-[#888]">años</span>
           </div>
-          <div class="flex flex-col items-center gap-1 rounded-xl border border-[#e8ddd5] bg-white p-4 shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
-            <span class="counter-number font-serif text-[2rem] font-light leading-none text-[#c4956a]">+{{ counterClients() }}</span>
-            <span class="font-sans text-[0.62rem] font-medium uppercase tracking-wider text-[#888]">clientas</span>
+          <div class="flex flex-col items-center gap-1 rounded-xl border border-[#e8ddd5] bg-white p-3 sm:p-4 text-center shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
+            <span class="counter-number font-serif text-[1.5rem] sm:text-[2rem] font-light leading-none text-[#c4956a]">+{{ counterClients() }}</span>
+            <span class="font-sans text-[0.55rem] sm:text-[0.62rem] font-medium uppercase tracking-wider text-[#888]">clientas</span>
           </div>
-          <div class="flex flex-col items-center gap-1 rounded-xl border border-[#e8ddd5] bg-white p-4 shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
-            <span class="counter-number font-serif text-[2rem] font-light leading-none text-[#c4956a]">{{ counterPersonal() }}%</span>
-            <span class="font-sans text-[0.62rem] font-medium uppercase tracking-wider text-[#888]">personalizado</span>
+          <div class="flex flex-col items-center gap-1 rounded-xl border border-[#e8ddd5] bg-white p-3 sm:p-4 text-center shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
+            <span class="counter-number font-serif text-[1.5rem] sm:text-[2rem] font-light leading-none text-[#c4956a]">{{ counterPersonal() }}%</span>
+            <span class="font-sans text-[0.55rem] sm:text-[0.62rem] font-medium uppercase tracking-wider text-[#888]">personal</span>
           </div>
         </div>
 
-        <div scrollReveal="up" scrollDelay="4" class="mt-10 flex flex-wrap gap-4">
+        <div scrollReveal="up" scrollDelay="4" class="mt-8 sm:mt-10 flex flex-wrap gap-4">
           <a routerLink="/sobre-mi"
             class="border-b-[1.5px] border-[#c4956a] pb-[2px] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:tracking-[0.2em]"
             id="inicio-link-sobre-mi">
@@ -117,12 +117,12 @@
       <div scrollReveal="right" scrollDelay="2" class="group relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(26,26,26,0.15)]">
         <img src="images/yonaida.jpg" alt="Yonaida, maquilladora profesional"
           class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
-          style="aspect-ratio: 4/5; min-height: 420px;" />
+          style="aspect-ratio: 4/5; min-height: 320px;" />
         <!-- Overlay badge inferior -->
-        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/65 to-transparent px-8 py-7">
-          <p class="font-serif text-[0.62rem] uppercase tracking-[0.28em] text-[#c4956a]">Maquilladora profesional ·
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/75 via-black/40 to-transparent px-5 py-5 sm:px-8 sm:py-7">
+          <p class="font-serif text-[0.58rem] sm:text-[0.62rem] uppercase tracking-[0.2em] sm:tracking-[0.28em] text-[#c4956a]">Maquilladora profesional ·
             España</p>
-          <p class="mt-1 font-serif text-[1.4rem] font-light italic text-white">"Realza tu belleza natural."</p>
+          <p class="mt-0.5 sm:mt-1 font-serif text-[1.15rem] sm:text-[1.4rem] font-light italic text-white">"Realza tu belleza natural."</p>
         </div>
       </div>
     </div>
@@ -303,20 +303,20 @@
 
       <!-- Flecha anterior -->
       <button
-        class="absolute left-4 top-[calc(50%-20px)] z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-md transition-all duration-250 hover:scale-105 hover:border-[#c4956a] hover:bg-[#c4956a]/80"
+        class="absolute left-2 sm:left-4 top-[calc(50%-20px)] z-20 flex h-10 w-10 sm:h-12 sm:w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/30 sm:bg-white/10 text-white backdrop-blur-md transition-all duration-250 hover:scale-105 active:scale-95 hover:border-[#c4956a] hover:bg-[#c4956a]/80"
         (click)="prev()" aria-label="Anterior" id="carousel-prev">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 sm:w-5 sm:h-5">
           <path d="M15 18l-6-6 6-6" />
         </svg>
       </button>
 
       <!-- Flecha siguiente -->
       <button
-        class="absolute right-4 top-[calc(50%-20px)] z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-md transition-all duration-250 hover:scale-105 hover:border-[#c4956a] hover:bg-[#c4956a]/80"
+        class="absolute right-2 sm:right-4 top-[calc(50%-20px)] z-20 flex h-10 w-10 sm:h-12 sm:w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/30 sm:bg-white/10 text-white backdrop-blur-md transition-all duration-250 hover:scale-105 active:scale-95 hover:border-[#c4956a] hover:bg-[#c4956a]/80"
         (click)="next()" aria-label="Siguiente" id="carousel-next">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 sm:w-5 sm:h-5">
           <path d="M9 18l6-6-6-6" />
         </svg>
       </button>

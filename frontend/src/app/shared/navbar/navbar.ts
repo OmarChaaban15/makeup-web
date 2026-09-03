@@ -57,10 +57,22 @@ export class Navbar {
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
+    this.updateBodyScroll();
   }
 
   closeMenu() {
     this.menuOpen = false;
+    this.updateBodyScroll();
+  }
+
+  private updateBodyScroll() {
+    if (typeof document !== 'undefined') {
+      if (this.menuOpen) {
+        document.body.classList.add('overflow-hidden');
+      } else {
+        document.body.classList.remove('overflow-hidden');
+      }
+    }
   }
 
   toggleUserMenu(event: Event) {
@@ -88,7 +100,7 @@ export class Navbar {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('user');
     this.userMenuOpen = false;
-    this.menuOpen = false;
+    this.closeMenu();
     this.router.navigate(['/inicio']);
   }
 }

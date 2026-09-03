@@ -11,26 +11,26 @@
     <p class="font-serif text-[0.88rem] font-light italic text-[#c4956a]">✨ Realza tu belleza con maquillaje profesional y personalizado.</p>
   </div>
 
-  <div class="mx-auto mt-16 max-w-[850px] px-6 reservar-fade-up" style="animation-delay: 0.15s;">
+  <div class="mx-auto mt-10 sm:mt-16 max-w-[850px] px-4 sm:px-6 reservar-fade-up" style="animation-delay: 0.15s;">
     <div class="flex flex-col overflow-hidden rounded-[24px] bg-[#f2eae4] shadow-sm md:flex-row">
       
       <!-- Lado Izquierdo: Calendario -->
-      <div class="p-10 md:w-1/2 lg:p-12 relative border-b border-[#e6dcd4] md:border-b-0 md:border-r">
-        <div class="mb-10 flex items-center justify-between">
-          <button type="button" (click)="mesAnterior()" class="flex cursor-pointer h-8 w-8 items-center justify-center rounded-full text-[#c4956a] transition-all hover:bg-[#c4956a]/10">
+      <div class="p-6 sm:p-10 md:w-1/2 lg:p-12 relative border-b border-[#e6dcd4] md:border-b-0 md:border-r">
+        <div class="mb-6 sm:mb-10 flex items-center justify-between">
+          <button type="button" (click)="mesAnterior()" class="flex cursor-pointer h-9 w-9 items-center justify-center rounded-full text-[#c4956a] transition-all hover:bg-[#c4956a]/10 active:scale-95">
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <h2 class="font-serif text-[1.4rem] font-bold text-[#1a1a1a]">{{ mesNombre }} {{ anioActual }}</h2>
-          <button type="button" (click)="mesSiguiente()" class="flex cursor-pointer h-8 w-8 items-center justify-center rounded-full text-[#c4956a] transition-all hover:bg-[#c4956a]/10">
+          <h2 class="font-serif text-[1.2rem] sm:text-[1.4rem] font-bold text-[#1a1a1a]">{{ mesNombre }} {{ anioActual }}</h2>
+          <button type="button" (click)="mesSiguiente()" class="flex cursor-pointer h-9 w-9 items-center justify-center rounded-full text-[#c4956a] transition-all hover:bg-[#c4956a]/10 active:scale-95">
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>
         
-        <div class="grid grid-cols-7 gap-y-6 text-center text-sm">
+        <div class="grid grid-cols-7 gap-y-3 sm:gap-y-6 text-center text-sm">
           <!-- Días de la semana -->
           <div class="font-sans text-[0.6rem] font-bold uppercase tracking-widest text-[#c4956a]">L</div>
           <div class="font-sans text-[0.6rem] font-bold uppercase tracking-widest text-[#c4956a]">M</div>
@@ -50,7 +50,7 @@
             <div class="flex justify-center">
               <button type="button" 
                       (click)="seleccionarFecha(dia)"
-                      class="flex h-8 w-8 items-center justify-center cursor-pointer rounded-full font-sans text-sm font-light transition-all duration-300"
+                      class="flex h-9 w-9 items-center justify-center cursor-pointer rounded-full font-sans text-sm font-light transition-all duration-300 active:scale-90"
                       [class.bg-[#c4956a]]="formData.fecha === dia"
                       [class.text-white]="formData.fecha === dia"
                       [class.font-medium]="formData.fecha === dia"
@@ -64,7 +64,7 @@
       </div>
 
       <!-- Lado Derecho: Formulario -->
-      <div class="p-10 md:w-1/2 lg:p-12">
+      <div class="p-6 sm:p-10 md:w-1/2 lg:p-12">
         <h3 class="mb-10 font-serif text-[1.15rem] font-medium text-[#1a1a1a]">Tus Datos</h3>
 
         <form (ngSubmit)="onSubmit()" class="flex flex-col gap-8">
@@ -117,7 +117,7 @@
 
           <!-- Botón de Enviar -->
           <button type="submit" [disabled]="enviando"
-                  class="mx-auto mt-4 flex h-12 w-full max-w-[240px] cursor-pointer items-center justify-center rounded-full bg-[#1a1a1a] text-[0.65rem] font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-[#c4956a] disabled:opacity-70 disabled:cursor-not-allowed">
+                  class="mt-4 flex h-12 w-full sm:max-w-[260px] sm:mx-auto cursor-pointer items-center justify-center rounded-xl sm:rounded-full bg-[#1a1a1a] text-[0.72rem] font-bold uppercase tracking-[0.16em] text-white shadow-md transition-all duration-300 hover:bg-[#c4956a] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed">
             {{ enviando ? 'Enviando...' : 'Confirmar Fecha' }}
           </button>
         </form>

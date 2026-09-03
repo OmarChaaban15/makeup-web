@@ -26,15 +26,14 @@
   </div>
 
   <!-- ══ COLUMNA DERECHA ══ -->
-  <!-- Aumentado a py-40 (160px de espacio arriba y abajo en escritorio) -->
-  <div class="relative flex w-full flex-col items-center justify-center px-8 py-24 lg:w-1/2 lg:px-16 lg:py-40 xl:px-24">
+  <div class="relative flex w-full flex-col items-center justify-center px-6 py-12 sm:px-12 sm:py-20 lg:w-1/2 lg:px-16 lg:py-40 xl:px-24">
     <div class="w-full max-w-md">
       
-      <div class="mb-12">
-        <h1 class="font-serif text-[2.2rem] font-bold uppercase leading-none tracking-[0.05em] text-[#1a1a1a]">
+      <div class="mb-8 sm:mb-12">
+        <h1 class="font-serif text-[1.9rem] sm:text-[2.2rem] font-bold uppercase leading-none tracking-[0.05em] text-[#1a1a1a]">
           Bienvenida
         </h1>
-        <p class="mt-3 text-sm text-[#666]">Ingresa tus credenciales para acceder a tu cuenta.</p>
+        <p class="mt-2 sm:mt-3 text-xs sm:text-sm text-[#666]">Ingresa tus credenciales para acceder a tu cuenta.</p>
       </div>
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-8">
