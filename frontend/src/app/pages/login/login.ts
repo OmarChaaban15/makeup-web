@@ -19,14 +19,21 @@ export class Login implements OnInit {
   private router = inject(Router);
 
   loginForm!: FormGroup;
+  forgotForm!: FormGroup;
   showPassword = false;
   isLoading = false;
   errorMsg = '';
   successMsg = '';
 
+  // Modal de recuperación de contraseña
+  showForgotModal = false;
+  forgotLoading = false;
+  forgotSuccess = false;
+  forgotError = '';
+
   ngOnInit(): void {
     this.checkAuthStatus();
-    this.initForm();
+    this.initForms();
   }
 
   private checkAuthStatus(): void {
@@ -35,10 +42,14 @@ export class Login implements OnInit {
     }
   }
 
-  private initForm(): void {
+  private initForms(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
+    });
+
+    this.forgotForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -46,19 +57,40 @@ export class Login implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
+  openForgotModal(): void {
+    this.showForgotModal = true;
+    this.forgotSuccess = false;
+    this.forgotError = '';
+    const currentEmail = this.loginForm.get('email')?.value;
+    if (currentEmail) {
+      this.forgotForm.patchValue({ email: currentEmail });
+    }
+  }
+
+  closeForgotModal(): void {
+    this.showForgotModal = false;
+  }
+
+  submitForgot(): void {
+    if (this.forgotForm.invalid) {
+      this.forgotForm.markAllAsTouched();
+      return;
+    }
+
+    this.forgotLoading = true;
+    this.forgotError = '';
+
+    // Simulamos / enviamos petición de recuperación
+    setTimeout(() => {
+      this.forgotLoading = false;
+      this.forgotSuccess = true;
+    }, 900);
+  }
+
   private getErrorMessage(error: any, fallback: string): string {
-    if (!error || !error.error) {
-      return fallback;
-    }
-
-    if (error.status === 0) {
-      return 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.';
-    }
-
-    if (error.error?.message) {
-      return error.error.message;
-    }
-
+    if (!error || !error.error) return fallback;
+    if (error.status === 0) return 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.';
+    if (error.error?.message) return error.error.message;
     return fallback;
   }
 
@@ -79,16 +111,16 @@ export class Login implements OnInit {
       .pipe(finalize(() => this.isLoading = false))
       .subscribe({
         next: (response) => {
-          this.successMsg = 'Iniciando sesión...';
+          this.successMsg = '¡Bienvenida! Accediendo a tu cuenta...';
           localStorage.setItem('auth_token', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));
           
           setTimeout(() => {
             this.router.navigate(['/inicio']);
-          }, 1000);
+          }, 800);
         },
         error: (error) => {
-          this.errorMsg = this.getErrorMessage(error, 'No se pudo iniciar sesión. Inténtalo de nuevo.');
+          this.errorMsg = this.getErrorMessage(error, 'Credenciales incorrectas. Por favor, compruébalas.');
         }
       });
   }
