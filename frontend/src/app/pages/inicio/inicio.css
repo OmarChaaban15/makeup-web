@@ -89,20 +89,20 @@
 }
 
 @keyframes kenBurns1 {
-  from { transform: scale(1) translate(0, 0); }
-  to { transform: scale(1.08) translate(-1%, -1%); }
+  from { transform: scale(1.06) translate(0, 0); }
+  to { transform: scale(1.12) translate(-1%, -1%); }
 }
 @keyframes kenBurns2 {
-  from { transform: scale(1.08) translate(-1%, 0); }
-  to { transform: scale(1) translate(1%, -1%); }
+  from { transform: scale(1.12) translate(-1%, 0); }
+  to { transform: scale(1.06) translate(1%, -1%); }
 }
 @keyframes kenBurns3 {
-  from { transform: scale(1) translate(0, 0); }
-  to { transform: scale(1.06) translate(1%, 1%); }
+  from { transform: scale(1.06) translate(0, 0); }
+  to { transform: scale(1.11) translate(1%, 1%); }
 }
 @keyframes kenBurns4 {
-  from { transform: scale(1.06) translate(1%, 0); }
-  to { transform: scale(1) translate(-1%, 1%); }
+  from { transform: scale(1.11) translate(1%, 0); }
+  to { transform: scale(1.06) translate(-1%, 1%); }
 }
 
 /* ── Carousel progress bar ── */
@@ -165,3 +165,20 @@
   50% { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
 }
+
+/* ── Marquee infinito ── */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 28s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+

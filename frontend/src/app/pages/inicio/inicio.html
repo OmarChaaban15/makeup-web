@@ -1,5 +1,5 @@
 <!-- ══════════════════════════════════════════
-     HERO
+     HERO CINEMATOGRÁFICO CON VÍDEO & PARTÍCULAS
      ══════════════════════════════════════════ -->
 <div
   class="relative flex min-h-screen items-center justify-center overflow-hidden pt-20 text-center"
@@ -24,25 +24,37 @@
   <canvas #particleCanvas class="particle-canvas absolute inset-0 h-full w-full"></canvas>
 
   <!-- Contenido del hero -->
-  <div class="relative z-10 max-w-[700px] px-5 sm:px-8"
+  <div class="relative z-10 max-w-[760px] px-5 sm:px-8"
        [style.transform]="'translate(' + mouseX() * 0.3 + 'px, ' + mouseY() * 0.3 + 'px)'">
-    <p class="hero-text-enter mb-3 sm:mb-5 font-serif text-[0.72rem] sm:text-[0.8rem] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#e8c99a] hero-text-delay-1"
-       [class.visible]="heroTextVisible()">Bienvenida</p>
-    <h1 class="hero-text-enter mb-4 sm:mb-6 font-serif text-[clamp(2.4rem,6.5vw,5rem)] font-light leading-[1.12] text-white hero-text-delay-2"
-        [class.visible]="heroTextVisible()">El arte del
-      maquillaje<br><em class="italic text-[#e8c99a]">hecho para ti</em></h1>
-    <p class="hero-text-enter mx-auto mb-8 sm:mb-11 max-w-[500px] font-sans text-[0.92rem] sm:text-[1.05rem] font-light leading-[1.65] text-[rgba(255,255,255,0.88)] hero-text-delay-3"
-       [class.visible]="heroTextVisible()">Maquilladora
-      profesional con más de 5 años de experiencia creando looks personalizados que realzan la belleza natural de cada
-      mujer.</p>
+    <div class="hero-text-enter mb-4 sm:mb-5 inline-flex items-center gap-2 rounded-full border border-[#c4956a]/40 bg-[#c4956a]/15 px-4 py-1.5 backdrop-blur-md hero-text-delay-1"
+         [class.visible]="heroTextVisible()">
+      <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a] animate-pulse"></span>
+      <span class="font-serif text-[0.7rem] uppercase tracking-[0.28em] text-[#e8c99a]">Atelier de Maquillaje &middot; Ibiza</span>
+    </div>
+
+    <h1 class="hero-text-enter mb-5 sm:mb-7 font-serif text-[clamp(2.5rem,6.5vw,5.5rem)] font-light leading-[1.1] text-white hero-text-delay-2 drop-shadow-2xl"
+        [class.visible]="heroTextVisible()">
+      El arte del maquillaje<br><em class="italic text-[#e8c99a]">hecho para ti</em>
+    </h1>
+
+    <p class="hero-text-enter mx-auto mb-9 sm:mb-11 max-w-[540px] font-sans text-sm sm:text-base font-light leading-[1.8] text-[rgba(255,255,255,0.88)] hero-text-delay-3"
+       [class.visible]="heroTextVisible()">
+      Realzando tu esencia natural con técnica de alta costura, pieles luminosas y fijación impecable frente a cualquier clima y emoción.
+    </p>
+
     <div class="hero-text-enter flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 hero-text-delay-4 w-full"
          [class.visible]="heroTextVisible()">
       <a routerLink="/contacto"
-        class="w-full sm:w-auto inline-flex items-center justify-center border-[1.5px] border-[#c4956a] bg-[#c4956a] px-8 py-3.5 sm:px-[2.4rem] sm:py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:border-[#a87a52] hover:bg-[#a87a52] hover:shadow-[0_8px_30px_rgba(196,149,106,0.4)] active:scale-[0.98]"
-        id="inicio-cta-contacto">Contactar</a>
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#c4956a] px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-xl transition-all duration-300 hover:bg-[#a87a52] hover:shadow-2xl active:scale-95"
+        id="inicio-cta-contacto">
+        <span>Solicitar Cita</span>
+        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </a>
       <a routerLink="/servicios"
-        class="w-full sm:w-auto inline-flex items-center justify-center border-[1.5px] border-white/80 px-8 py-3.5 sm:px-[2.4rem] sm:py-[0.9rem] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:bg-white hover:text-[#1a1a1a] active:scale-[0.98]"
-        id="inicio-cta-servicios">Ver servicios</a>
+        class="w-full sm:w-auto inline-flex items-center justify-center rounded-full border border-white/40 bg-white/10 backdrop-blur-md px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white transition-all duration-300 hover:bg-white hover:text-[#1a1a1a] active:scale-95"
+        id="inicio-cta-servicios">
+        Ver Servicios
+      </a>
     </div>
   </div>
 
@@ -55,206 +67,165 @@
 </div>
 
 <!-- ══════════════════════════════════════════
-     PRESENTACIÓN — Hola, soy Yonaida
+     PRESENTACIÓN EDITORIAL — Hola, soy Yonaida
      ══════════════════════════════════════════ -->
-<section class="bg-[#fdfcfb] px-6 py-24 sm:px-10 md:py-32">
-  <div class="mx-auto max-w-[1100px]">
+<section class="bg-[#fcf9f6] px-6 py-24 sm:px-10 md:py-32">
+  <div class="mx-auto max-w-[1140px]">
     <div class="grid items-center gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
 
-      <!-- Columna izquierda: texto -->
+      <!-- Columna izquierda: texto biográfico -->
       <div>
-        <p scrollReveal="up" class="mb-5 font-serif text-[0.75rem] uppercase tracking-[0.3em] text-[#c4956a]">Sobre mí</p>
-        <h2 scrollReveal="up" scrollDelay="1" class="mb-8 font-serif text-[clamp(2.2rem,4.5vw,3.6rem)] font-light leading-[1.15] text-[#1a1a1a]">
+        <p scrollReveal="up" class="mb-4 font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">Atelier de Belleza</p>
+        <h2 scrollReveal="up" scrollDelay="1" class="mb-6 font-serif text-[clamp(2.2rem,4.5vw,3.6rem)] font-light leading-[1.15] text-[#1a1a1a]">
           Hola, soy <em class="italic text-[#c4956a]">Yonaida</em>
         </h2>
 
-        <div scrollReveal="up" scrollDelay="2" class="space-y-5 font-sans text-[0.95rem] font-light leading-[1.85] text-[#555]">
+        <div scrollReveal="up" scrollDelay="2" class="space-y-5 font-sans text-sm sm:text-base font-light leading-[1.85] text-[#555]">
           <p>
-            Maquilladora profesional en España con más de <strong class="font-medium text-[#1a1a1a]">5 años de
-              experiencia</strong> ayudando a mujeres a resaltar su belleza y sentirse seguras en sus momentos más
-            importantes.
+            Maquilladora profesional afincada en <strong class="font-medium text-[#1a1a1a]">Ibiza</strong> con más de cinco años de experiencia ayudando a novias, clientas particulares y marcas a proyectar su mejor versión.
           </p>
           <p>
-            Mi pasión es crear maquillajes personalizados que reflejen la esencia de cada persona, adaptándome a cada
-            estilo, ocasión y necesidad. Trabajo con técnicas profesionales y productos de alta calidad para ofrecer
-            resultados <strong class="font-medium text-[#1a1a1a]">duraderos, elegantes y favorecedores</strong>.
-          </p>
-          <p>
-            Ya sea para una boda, un evento especial, una sesión fotográfica o una producción audiovisual, mi objetivo
-            es que te veas y te sientas espectacular.
+            Mi técnica no busca transformar tus rasgos, sino realzar la frescura de tu mirada y la luz de tu piel con acabados duraderos y respetuosos con tu fisionomía.
           </p>
         </div>
 
         <!-- Animated counters -->
         <div scrollReveal="up" scrollDelay="3"
-             class="mt-10 grid grid-cols-3 gap-2 sm:gap-4"
+             class="mt-10 grid grid-cols-3 gap-3"
              (mouseenter)="animateCounters()"
              #counterSection>
-          <div class="flex flex-col items-center gap-1 rounded-xl border border-[#e8ddd5] bg-white p-3 sm:p-4 text-center shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
-            <span class="counter-number font-serif text-[1.5rem] sm:text-[2rem] font-light leading-none text-[#c4956a]">+{{ counterYears() }}</span>
-            <span class="font-sans text-[0.55rem] sm:text-[0.62rem] font-medium uppercase tracking-wider text-[#888]">años</span>
+          <div class="flex flex-col items-center gap-1 rounded-2xl border border-[#ede0d0] bg-white p-4 text-center shadow-sm">
+            <span class="counter-number font-serif text-2xl sm:text-3xl font-light leading-none text-[#c4956a]">+{{ counterYears() }}</span>
+            <span class="font-sans text-[0.62rem] font-semibold uppercase tracking-wider text-[#888]">Años</span>
           </div>
-          <div class="flex flex-col items-center gap-1 rounded-xl border border-[#e8ddd5] bg-white p-3 sm:p-4 text-center shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
-            <span class="counter-number font-serif text-[1.5rem] sm:text-[2rem] font-light leading-none text-[#c4956a]">+{{ counterClients() }}</span>
-            <span class="font-sans text-[0.55rem] sm:text-[0.62rem] font-medium uppercase tracking-wider text-[#888]">clientas</span>
+          <div class="flex flex-col items-center gap-1 rounded-2xl border border-[#ede0d0] bg-white p-4 text-center shadow-sm">
+            <span class="counter-number font-serif text-2xl sm:text-3xl font-light leading-none text-[#c4956a]">+{{ counterClients() }}</span>
+            <span class="font-sans text-[0.62rem] font-semibold uppercase tracking-wider text-[#888]">Clientas</span>
           </div>
-          <div class="flex flex-col items-center gap-1 rounded-xl border border-[#e8ddd5] bg-white p-3 sm:p-4 text-center shadow-[0_4px_20px_rgba(196,149,106,0.06)]">
-            <span class="counter-number font-serif text-[1.5rem] sm:text-[2rem] font-light leading-none text-[#c4956a]">{{ counterPersonal() }}%</span>
-            <span class="font-sans text-[0.55rem] sm:text-[0.62rem] font-medium uppercase tracking-wider text-[#888]">personal</span>
+          <div class="flex flex-col items-center gap-1 rounded-2xl border border-[#ede0d0] bg-white p-4 text-center shadow-sm">
+            <span class="counter-number font-serif text-2xl sm:text-3xl font-light leading-none text-[#c4956a]">{{ counterPersonal() }}%</span>
+            <span class="font-sans text-[0.62rem] font-semibold uppercase tracking-wider text-[#888]">A Medida</span>
           </div>
         </div>
 
-        <div scrollReveal="up" scrollDelay="4" class="mt-8 sm:mt-10 flex flex-wrap gap-4">
+        <div scrollReveal="up" scrollDelay="4" class="mt-8 flex flex-wrap gap-4">
           <a routerLink="/sobre-mi"
-            class="border-b-[1.5px] border-[#c4956a] pb-[2px] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:tracking-[0.2em]"
+            class="inline-flex items-center gap-2 font-serif text-xs font-semibold uppercase tracking-[0.18em] text-[#c4956a] no-underline transition-all duration-300 hover:gap-3"
             id="inicio-link-sobre-mi">
-            Conoce mi historia →
+            <span>Conoce mi historia y filosofía</span>
+            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
         </div>
       </div>
 
       <!-- Columna derecha: foto de Yonaida -->
-      <div scrollReveal="right" scrollDelay="2" class="group relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(26,26,26,0.15)]">
+      <div scrollReveal="right" scrollDelay="2" class="group relative overflow-hidden rounded-[28px] shadow-[0_25px_60px_rgba(26,26,26,0.14)]">
         <img src="images/yonaida.jpg" alt="Yonaida, maquilladora profesional"
-          class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
-          style="aspect-ratio: 4/5; min-height: 320px;" />
-        <!-- Overlay badge inferior -->
-        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/75 via-black/40 to-transparent px-5 py-5 sm:px-8 sm:py-7">
-          <p class="font-serif text-[0.58rem] sm:text-[0.62rem] uppercase tracking-[0.2em] sm:tracking-[0.28em] text-[#c4956a]">Maquilladora profesional ·
-            España</p>
-          <p class="mt-0.5 sm:mt-1 font-serif text-[1.15rem] sm:text-[1.4rem] font-light italic text-white">"Realza tu belleza natural."</p>
+          class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+          style="aspect-ratio: 4/5; min-height: 380px;" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"></div>
+        <div class="absolute bottom-6 left-6 right-6 text-white">
+          <p class="font-serif text-[0.65rem] uppercase tracking-[0.25em] text-[#e8c6a0]">Makeup Artist &middot; Ibiza</p>
+          <p class="mt-1 font-serif text-xl sm:text-2xl font-light italic">"Tu belleza, elevada a su máxima expresión."</p>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════
-     SERVICIOS RESUMEN
+     SERVICIOS DESTACADOS CON FOTOS REALES
      ══════════════════════════════════════════ -->
-<section class="relative overflow-hidden px-6 py-28 sm:px-10">
-
-  <!-- Fondo negro y dorado sutil -->
-  <div class="absolute inset-0 bg-[#0a0a0a]">
-    <!-- Degradado oscuro principal -->
-    <div class="absolute inset-0 bg-gradient-to-br from-[#0d0d0d] via-[#151515] to-[#0a0a0a]"></div>
-    <!-- Acentos dorados radiales suaves -->
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(196,149,106,0.12),transparent_60%)]"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(196,149,106,0.08),transparent_50%)]"></div>
-  </div>
-
-  <div class="relative mx-auto max-w-[1100px]">
+<section class="relative overflow-hidden bg-[#161514] px-6 py-28 sm:px-10 text-white">
+  
+  <div class="relative mx-auto max-w-[1140px]">
 
     <!-- Encabezado -->
     <div class="mb-16 text-center">
-      <p scrollReveal="up" class="mb-4 font-serif text-[0.75rem] uppercase tracking-[0.3em] text-[#c4956a]">Lo que hago</p>
-      <h2 scrollReveal="up" scrollDelay="1" class="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-[1.2] text-white">
-        Descubre mis <em class="italic text-[#c4956a]">servicios</em>
+      <p scrollReveal="up" class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.3em] text-[#c4956a]">Servicios Especializados</p>
+      <h2 scrollReveal="up" scrollDelay="1" class="font-serif text-[clamp(2.2rem,4vw,3.4rem)] font-light leading-[1.2] text-white">
+        Elegancia en cada <em class="italic text-[#e8c6a0]">disciplina</em>
       </h2>
-      <div class="gradient-line-animated mx-auto mt-6 h-px w-16"></div>
+      <div class="gradient-line-animated mx-auto mt-6 h-px w-20"></div>
     </div>
 
-    <!-- Grid de tarjetas con 3D tilt -->
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <!-- Grid de tarjetas fotográficas de servicios -->
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 
-      <!-- Maquillaje para eventos -->
+      <!-- Novias -->
       <a routerLink="/servicios"
-         class="tilt-card group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-8 backdrop-blur-md transition-all duration-500 hover:border-[#c4956a]/40 hover:bg-white/12 hover:shadow-[0_12px_40px_rgba(196,149,106,0.2)]"
-         scrollReveal="up" scrollDelay="1"
-         (mousemove)="onCardMouseMove($event, eventCard)" (mouseleave)="onCardMouseLeave(eventCard)" #eventCard>
-        <div class="card-shine"></div>
-        <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#c4956a]/15 transition-colors duration-300 group-hover:bg-[#c4956a]/30">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-            stroke="#c4956a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
-            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-            <line x1="9" y1="9" x2="9.01" y2="9"/>
-            <line x1="15" y1="9" x2="15.01" y2="9"/>
-          </svg>
+         class="group relative flex flex-col overflow-hidden rounded-[26px] bg-white/5 border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:border-[#c4956a]/60 hover:shadow-[0_20px_50px_rgba(196,149,106,0.25)]">
+        <div class="relative aspect-[4/5] w-full overflow-hidden">
+          <img src="images/IMG_1.PNG" alt="Maquillaje de novia" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#161514] via-black/40 to-transparent"></div>
+          <span class="absolute top-3.5 left-3.5 rounded-full bg-[#c4956a] px-3 py-1 text-[0.62rem] font-serif uppercase tracking-widest text-white shadow-md">
+            Novias VIP
+          </span>
         </div>
-        <h3 class="font-serif text-[1.05rem] font-normal leading-snug text-white">Maquillaje para eventos</h3>
-        <p class="font-sans text-[0.82rem] font-light leading-relaxed text-white/55">Looks impactantes y duraderos para bodas de invitada, galas, graduaciones y todo tipo de celebraciones.</p>
-        <div class="mt-auto flex items-center gap-1 font-serif text-[0.72rem] uppercase tracking-[0.15em] text-[#c4956a] opacity-0 transition-all duration-300 group-hover:opacity-100">
-          <span>Saber más</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div class="p-6">
+          <h3 class="font-serif text-lg font-normal text-white group-hover:text-[#e8c6a0] transition-colors">Novias &amp; Bodas</h3>
+          <p class="mt-2 text-xs font-light text-white/60 leading-relaxed">Prueba previa personalizada, kit de retoque y preparación en villas u hoteles de Ibiza.</p>
         </div>
       </a>
 
-      <!-- Maquillaje de novia -->
+      <!-- Eventos -->
       <a routerLink="/servicios"
-         class="tilt-card group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-8 backdrop-blur-md transition-all duration-500 hover:border-[#c4956a]/40 hover:bg-white/12 hover:shadow-[0_12px_40px_rgba(196,149,106,0.2)]"
-         scrollReveal="up" scrollDelay="2"
-         (mousemove)="onCardMouseMove($event, noviCard)" (mouseleave)="onCardMouseLeave(noviCard)" #noviCard>
-        <div class="card-shine"></div>
-        <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#c4956a]/15 transition-colors duration-300 group-hover:bg-[#c4956a]/30">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-            stroke="#c4956a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
+         class="group relative flex flex-col overflow-hidden rounded-[26px] bg-white/5 border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:border-[#c4956a]/60 hover:shadow-[0_20px_50px_rgba(196,149,106,0.25)]">
+        <div class="relative aspect-[4/5] w-full overflow-hidden">
+          <img src="images/IMG_3.PNG" alt="Maquillaje para eventos" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#161514] via-black/40 to-transparent"></div>
+          <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.62rem] font-serif uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
+            Social
+          </span>
         </div>
-        <h3 class="font-serif text-[1.05rem] font-normal leading-snug text-white">Maquillaje de novia</h3>
-        <p class="font-sans text-[0.82rem] font-light leading-relaxed text-white/55">Un look atemporal para el día más especial. Con prueba previa y acompañamiento personalizado.</p>
-        <div class="mt-auto flex items-center gap-1 font-serif text-[0.72rem] uppercase tracking-[0.15em] text-[#c4956a] opacity-0 transition-all duration-300 group-hover:opacity-100">
-          <span>Saber más</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div class="p-6">
+          <h3 class="font-serif text-lg font-normal text-white group-hover:text-[#e8c6a0] transition-colors">Invitadas &amp; Galas</h3>
+          <p class="mt-2 text-xs font-light text-white/60 leading-relaxed">Looks de fiesta sofisticados con pestañas a medida y fijación extrema para bailar toda la noche.</p>
         </div>
       </a>
 
-      <!-- Editorial & fotografía -->
+      <!-- Editorial -->
       <a routerLink="/servicios"
-         class="tilt-card group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-8 backdrop-blur-md transition-all duration-500 hover:border-[#c4956a]/40 hover:bg-white/12 hover:shadow-[0_12px_40px_rgba(196,149,106,0.2)]"
-         scrollReveal="up" scrollDelay="3"
-         (mousemove)="onCardMouseMove($event, editCard)" (mouseleave)="onCardMouseLeave(editCard)" #editCard>
-        <div class="card-shine"></div>
-        <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#c4956a]/15 transition-colors duration-300 group-hover:bg-[#c4956a]/30">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-            stroke="#c4956a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-            <circle cx="12" cy="13" r="4"/>
-          </svg>
+         class="group relative flex flex-col overflow-hidden rounded-[26px] bg-white/5 border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:border-[#c4956a]/60 hover:shadow-[0_20px_50px_rgba(196,149,106,0.25)]">
+        <div class="relative aspect-[4/5] w-full overflow-hidden">
+          <img src="images/IMG_4.PNG" alt="Maquillaje editorial" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#161514] via-black/40 to-transparent"></div>
+          <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.62rem] font-serif uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
+            Moda
+          </span>
         </div>
-        <h3 class="font-serif text-[1.05rem] font-normal leading-snug text-white">Editorial & fotografía</h3>
-        <p class="font-sans text-[0.82rem] font-light leading-relaxed text-white/55">Creaciones artísticas para sesiones de fotos, lookbooks, campañas y proyectos de moda y belleza.</p>
-        <div class="mt-auto flex items-center gap-1 font-serif text-[0.72rem] uppercase tracking-[0.15em] text-[#c4956a] opacity-0 transition-all duration-300 group-hover:opacity-100">
-          <span>Saber más</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div class="p-6">
+          <h3 class="font-serif text-lg font-normal text-white group-hover:text-[#e8c6a0] transition-colors">Editorial &amp; Campañas</h3>
+          <p class="mt-2 text-xs font-light text-white/60 leading-relaxed">Concepto creativo para marcas de moda, lookbooks y shootings con fotógrafos internacionales.</p>
         </div>
       </a>
 
-      <!-- Maquillaje audiovisual -->
+      <!-- Audiovisual -->
       <a routerLink="/servicios"
-         class="tilt-card group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-8 backdrop-blur-md transition-all duration-500 hover:border-[#c4956a]/40 hover:bg-white/12 hover:shadow-[0_12px_40px_rgba(196,149,106,0.2)]"
-         scrollReveal="up" scrollDelay="4"
-         (mousemove)="onCardMouseMove($event, audioCard)" (mouseleave)="onCardMouseLeave(audioCard)" #audioCard>
-        <div class="card-shine"></div>
-        <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#c4956a]/15 transition-colors duration-300 group-hover:bg-[#c4956a]/30">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-            stroke="#c4956a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="23 7 16 12 23 17 23 7"/>
-            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-          </svg>
+         class="group relative flex flex-col overflow-hidden rounded-[26px] bg-white/5 border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:border-[#c4956a]/60 hover:shadow-[0_20px_50px_rgba(196,149,106,0.25)]">
+        <div class="relative aspect-[4/5] w-full overflow-hidden">
+          <img src="images/IMG_5.JPEG" alt="Maquillaje audiovisual" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#161514] via-black/40 to-transparent"></div>
+          <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.62rem] font-serif uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
+            Cine &amp; TV
+          </span>
         </div>
-        <h3 class="font-serif text-[1.05rem] font-normal leading-snug text-white">Maquillaje audiovisual</h3>
-        <p class="font-sans text-[0.82rem] font-light leading-relaxed text-white/55">Para cine, televisión, videoclips y publicidad. Técnica adaptada a la luz y la cámara.</p>
-        <div class="mt-auto flex items-center gap-1 font-serif text-[0.72rem] uppercase tracking-[0.15em] text-[#c4956a] opacity-0 transition-all duration-300 group-hover:opacity-100">
-          <span>Saber más</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div class="p-6">
+          <h3 class="font-serif text-lg font-normal text-white group-hover:text-[#e8c6a0] transition-colors">Rodajes &amp; TV</h3>
+          <p class="mt-2 text-xs font-light text-white/60 leading-relaxed">Control de brillo y textura específico para ópticas 4K/8K en exteriores, spots y videoclips.</p>
         </div>
       </a>
 
     </div>
 
-    <!-- CTA -->
+    <!-- CTA servicios -->
     <div scrollReveal="up" class="mt-14 text-center">
       <a routerLink="/servicios"
-        class="group inline-flex items-center gap-3 border-[1.5px] border-[#c4956a] bg-[#c4956a] px-[2.8rem] py-4 font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:gap-5 hover:bg-transparent hover:text-[#c4956a]"
+        class="inline-flex items-center gap-3 rounded-full bg-[#c4956a] px-10 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white transition-all duration-300 hover:bg-[#a87a52] hover:shadow-[0_10px_35px_rgba(196,149,106,0.4)] active:scale-95"
         id="inicio-link-servicios">
-        Ver todos los servicios
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <span>Explorar todos los servicios</span>
+        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
       </a>
     </div>
 
@@ -262,34 +233,79 @@
 </section>
 
 <!-- ══════════════════════════════════════════
-     CARRUSEL DE TRABAJOS
+     BANNER DESTACADO — MASTERCLASS ONLINE
      ══════════════════════════════════════════ -->
-<section class="bg-[#fdfcfb] px-6 py-24 sm:px-10">
+<section class="bg-[#fcf9f6] px-6 py-20 sm:px-10">
+  <div class="mx-auto max-w-[1140px]">
+    <div scrollReveal="up" class="relative overflow-hidden rounded-[32px] bg-gradient-to-r from-[#211e1b] via-[#2a2622] to-[#1a1918] text-white p-8 sm:p-12 lg:p-14 shadow-2xl border border-white/10">
+      
+      <div class="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full border border-[#c4956a]/50 bg-[#c4956a]/15 px-3.5 py-1 text-[0.65rem] font-serif uppercase tracking-widest text-[#e8c6a0]">
+            <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a] animate-pulse"></span>
+            Aprende Conmigo Desde Casa
+          </span>
+          
+          <h2 class="mt-4 font-serif text-[clamp(1.8rem,3.5vw,3rem)] font-light leading-tight">
+            Masterclass de<br><em class="italic text-[#e8c6a0]">Automaquillaje Online</em>
+          </h2>
+
+          <p class="mt-4 text-sm sm:text-base font-light text-white/75 leading-relaxed max-w-[500px]">
+            Descubre paso a paso cómo preparar tu cutis, corregir imperfecciones y esculpir tus facciones con las técnicas secretas que aplico en mis sesiones de boda.
+          </p>
+
+          <div class="mt-6 flex items-baseline gap-4">
+            <span class="font-serif text-3xl sm:text-4xl font-semibold text-white">45 €</span>
+            <span class="font-serif text-lg text-white/40 line-through">55 €</span>
+            <span class="text-xs uppercase tracking-wider text-[#c4956a] font-semibold">Acceso vitalicio</span>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a routerLink="/cursos"
+               class="inline-flex items-center gap-2 rounded-full bg-[#c4956a] px-8 py-3.5 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-lg transition-all hover:bg-[#a87a52] active:scale-95">
+              <span>Ver Masterclass</span>
+              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="relative overflow-hidden rounded-2xl shadow-xl aspect-video border border-white/10">
+          <img src="images/portada_automaquillaje.png" alt="Portada de la masterclass" class="h-full w-full object-cover" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CARRUSEL DE TRABAJOS & PORTAFOLIO
+     ══════════════════════════════════════════ -->
+<section class="bg-[#fcf9f6] px-6 py-20 sm:px-10 border-t border-[#ede0d0]">
   <div class="mx-auto max-w-[1100px]">
 
     <!-- Encabezado -->
     <div class="mb-14 text-center">
-      <p scrollReveal="up" class="mb-4 font-serif text-[0.75rem] uppercase tracking-[0.3em] text-[#c4956a]">Mi trabajo</p>
-      <h2 scrollReveal="up" scrollDelay="1" class="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-[1.2] text-[#1a1a1a]">
-        Algunos de mis <em class="italic text-[#c4956a]">trabajos</em>
+      <p scrollReveal="up" class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.3em] text-[#c4956a]">Galería de Trabajos</p>
+      <h2 scrollReveal="up" scrollDelay="1" class="font-serif text-[clamp(2.2rem,4vw,3.2rem)] font-light leading-[1.2] text-[#1a1a1a]">
+        Momentos <em class="italic text-[#c4956a]">inolvidables</em>
       </h2>
+      <div class="mx-auto mt-4 h-[1.5px] w-12 bg-[#c4956a]"></div>
     </div>
 
     <!-- Carrusel -->
     <div scrollReveal="scale" class="relative" id="inicio-carousel">
 
       <!-- Pista: grid para apilar todos los slides en la misma celda -->
-      <div class="grid overflow-hidden rounded-2xl shadow-[0_24px_70px_rgba(26,26,26,0.18)]">
+      <div class="relative overflow-hidden rounded-[24px] bg-[#1a1a1a] shadow-[0_24px_70px_rgba(26,26,26,0.18)] aspect-[16/10] sm:aspect-[16/9] w-full">
         @for (slide of slides; track slide.src; let i = $index) {
-        <div class="[grid-area:1/1] overflow-hidden transition-opacity duration-700" [class.opacity-0]="currentIndex() !== i"
+        <div class="absolute inset-0 overflow-hidden transition-opacity duration-700" [class.opacity-0]="currentIndex() !== i"
           [class.opacity-100]="currentIndex() === i" [class.pointer-events-none]="currentIndex() !== i"
           [class.z-10]="currentIndex() === i" [class.z-0]="currentIndex() !== i">
-          <!-- Imagen con Ken Burns -->
           <img [src]="slide.src" [alt]="slide.alt"
-               class="block w-full rounded-2xl object-cover cursor-zoom-in"
+               class="h-full w-full object-cover object-center cursor-zoom-in"
                [class]="currentIndex() === i ? getKenBurnsClass(i) : ''"
                [style.object-position]="slide.pos"
-               style="aspect-ratio: 4/3; max-height: 72vh;"
                loading="lazy"
                (click)="openLightbox(slide)" />
         </div>
@@ -297,13 +313,13 @@
       </div>
 
       <!-- Progress bar -->
-      <div class="mt-3 h-[3px] w-full overflow-hidden rounded-full bg-black/5">
+      <div class="mt-5 h-[3px] w-full overflow-hidden rounded-full bg-[#1a1a1a]/10">
         <div class="carousel-progress" [style.width.%]="progressWidth()"></div>
       </div>
 
-      <!-- Flecha anterior -->
+      <!-- Flechas -->
       <button
-        class="absolute left-2 sm:left-4 top-[calc(50%-20px)] z-20 flex h-10 w-10 sm:h-12 sm:w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/30 sm:bg-white/10 text-white backdrop-blur-md transition-all duration-250 hover:scale-105 active:scale-95 hover:border-[#c4956a] hover:bg-[#c4956a]/80"
+        class="absolute left-3 sm:left-6 top-[calc(50%-22px)] z-20 flex h-11 w-11 sm:h-12 sm:w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/50 text-white backdrop-blur-md transition-all duration-250 hover:scale-105 active:scale-95 hover:bg-[#c4956a]"
         (click)="prev()" aria-label="Anterior" id="carousel-prev">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 sm:w-5 sm:h-5">
@@ -311,9 +327,8 @@
         </svg>
       </button>
 
-      <!-- Flecha siguiente -->
       <button
-        class="absolute right-2 sm:right-4 top-[calc(50%-20px)] z-20 flex h-10 w-10 sm:h-12 sm:w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/30 sm:bg-white/10 text-white backdrop-blur-md transition-all duration-250 hover:scale-105 active:scale-95 hover:border-[#c4956a] hover:bg-[#c4956a]/80"
+        class="absolute right-3 sm:right-6 top-[calc(50%-22px)] z-20 flex h-11 w-11 sm:h-12 sm:w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/50 text-white backdrop-blur-md transition-all duration-250 hover:scale-105 active:scale-95 hover:bg-[#c4956a]"
         (click)="next()" aria-label="Siguiente" id="carousel-next">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 sm:w-5 sm:h-5">
@@ -322,26 +337,58 @@
       </button>
 
       <!-- Puntos de paginación -->
-      <div class="mt-5 flex items-center justify-center gap-2" role="tablist"
-        aria-label="Diapositivas">
+      <div class="mt-6 flex items-center justify-center gap-2.5" role="tablist" aria-label="Diapositivas">
         @for (slide of slides; track slide.src; let i = $index) {
-        <button class="h-2 rounded-full border-none p-0 transition-all duration-300" [class.w-2]="currentIndex() !== i"
+        <button class="h-2 rounded-full border-none p-0 transition-all duration-300 cursor-pointer" [class.w-2]="currentIndex() !== i"
           [class.bg-[#1a1a1a]/20]="currentIndex() !== i" [class.w-7]="currentIndex() === i"
-          [class.bg-[#c4956a]]="currentIndex() === i" [class.scale-110]="currentIndex() === i" (click)="goTo(i)"
-          [attr.aria-label]="'Ir a diapositiva ' + (i + 1)" [attr.aria-selected]="currentIndex() === i" role="tab"
+          [class.bg-[#c4956a]]="currentIndex() === i" (click)="goTo(i)"
+          [attr.aria-label]="'Ir a diapositiva ' + (i + 1)" role="tab"
           [id]="'carousel-dot-' + i"></button>
         }
       </div>
     </div>
 
-    <!-- Enlace secundario -->
-    <div scrollReveal="up" class="mt-12 text-center">
-      <a routerLink="/servicios"
-        class="inline-block border-b-[1.5px] border-[#c4956a] pb-[2px] font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:tracking-[0.2em]"
-        id="inicio-carousel-ver-servicios">
-        Ver todos mis servicios →
-      </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     TESTIMONIOS VIP — EXPERIENCIAS REALES
+     ══════════════════════════════════════════ -->
+<section class="bg-[#f7f2ed] px-6 py-24 sm:px-10 border-t border-[#ede0d0]">
+  <div class="mx-auto max-w-[1140px]">
+    
+    <div class="text-center mb-16">
+      <p scrollReveal="up" class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">Testimonios &amp; Reseñas</p>
+      <h2 scrollReveal="up" scrollDelay="1" class="mt-2 font-serif text-[clamp(2.2rem,4vw,3.2rem)] font-light text-[#1a1a1a]">
+        Lo que dicen mis <em class="italic text-[#c4956a]">clientas</em>
+      </h2>
+      <div class="mx-auto mt-4 h-[1.5px] w-12 bg-[#c4956a]"></div>
     </div>
+
+    <div class="grid gap-8 sm:grid-cols-3">
+      @for (testimonio of testimonios; track testimonio.nombre) {
+        <article scrollReveal="up" class="rounded-3xl bg-white p-8 border border-[#ede0d0] shadow-sm flex flex-col justify-between">
+          <div>
+            <!-- Estrellas doradas -->
+            <div class="flex gap-1 text-[#c4956a] mb-4">
+              @for (star of [1,2,3,4,5]; track star) {
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+              }
+            </div>
+            <p class="font-sans text-xs sm:text-sm font-light text-[#555] leading-relaxed italic">
+              "{{ testimonio.texto }}"
+            </p>
+          </div>
+          <div class="mt-6 pt-5 border-t border-[#f2eae4]">
+            <span class="block font-serif text-sm font-medium text-[#1a1a1a]">{{ testimonio.nombre }}</span>
+            <span class="block text-[0.65rem] text-[#888] font-sans">{{ testimonio.tipo }}</span>
+          </div>
+        </article>
+      }
+    </div>
+
   </div>
 </section>
 
