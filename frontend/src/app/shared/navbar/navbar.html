@@ -2,10 +2,10 @@
      [class.navbar-scrolled]="isScrolled"
      [class.navbar-transparent]="isTransparent"
      [class.navbar-solid]="!isTransparent">
-  <div class="relative mx-auto flex h-20 max-w-[1300px] items-center justify-between px-4 sm:px-6 min-[901px]:grid min-[901px]:grid-cols-[1fr_auto_1fr] md:px-8">
+  <div class="relative mx-auto flex h-20 max-w-[1440px] items-center justify-between px-4 sm:px-6 min-[1150px]:grid min-[1150px]:grid-cols-[1fr_auto_1fr] md:px-8">
 
     <!-- Links izquierda (Escritorio) -->
-    <ul class="hidden list-none items-center justify-end gap-10 min-[901px]:flex">
+    <ul class="hidden list-none items-center justify-end gap-6 lg:gap-8 min-[1150px]:flex pr-8 lg:pr-12">
       <li>
         <a routerLink="/inicio" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}" id="nav-inicio"
            class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
@@ -32,18 +32,18 @@
       </li>
     </ul>
 
-    <!-- Logo centro (Siempre centrado) -->
-    <a class="group shimmer-gold pointer-events-auto flex flex-col items-center justify-center text-center no-underline max-[900px]:absolute max-[900px]:left-1/2 max-[900px]:top-1/2 max-[900px]:-translate-x-1/2 max-[900px]:-translate-y-1/2 max-[900px]:w-max px-2 md:px-4" routerLink="/inicio" id="nav-logo">
-      <span class="font-serif text-[1rem] min-[380px]:text-[1.15rem] sm:text-[1.25rem] md:text-[1.35rem] font-bold uppercase leading-none tracking-[0.12em] sm:tracking-[0.16em] md:tracking-[0.18em] transition-colors duration-300 group-hover:text-[#c4956a]"
+    <!-- Logo centro (Siempre en el medio exacto) -->
+    <a class="group shimmer-gold pointer-events-auto flex flex-col items-center justify-center text-center no-underline max-[1149px]:absolute max-[1149px]:left-1/2 max-[1149px]:top-1/2 max-[1149px]:-translate-x-1/2 max-[1149px]:-translate-y-1/2 max-[1149px]:w-max px-4" routerLink="/inicio" id="nav-logo">
+      <span class="font-serif text-[1rem] min-[380px]:text-[1.15rem] sm:text-[1.25rem] md:text-[1.32rem] font-bold uppercase leading-none tracking-[0.12em] sm:tracking-[0.16em] transition-colors duration-300 group-hover:text-[#c4956a]"
             [class.text-white]="isTransparent"
             [class.text-[#1a1a1a]]="!isTransparent">MAKEUP BY YONA</span>
-      <span class="font-serif text-[0.52rem] sm:text-[0.62rem] font-normal italic tracking-[0.04em] md:tracking-[0.06em]"
+      <span class="font-serif text-[0.52rem] sm:text-[0.6rem] font-normal italic tracking-[0.04em] mt-0.5"
             [class.text-white/75]="isTransparent"
             [class.text-[#888]]="!isTransparent">Realiza tu belleza &middot; Enhance your beauty</span>
     </a>
 
-    <!-- Links derecha -->
-    <ul class="hidden list-none items-center justify-end gap-3 lg:gap-4 xl:gap-6 2xl:gap-8 min-[1150px]:flex">
+    <!-- Links derecha (Escritorio) -->
+    <ul class="hidden list-none items-center justify-start gap-4 lg:gap-5 xl:gap-6 min-[1150px]:flex pl-8 lg:pl-12">
       <li>
         <a routerLink="/cursos" routerLinkActive="nav-active" id="nav-cursos"
            class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
