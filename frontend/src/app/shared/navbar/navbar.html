@@ -2,7 +2,7 @@
      [class.navbar-scrolled]="isScrolled"
      [class.navbar-transparent]="isTransparent"
      [class.navbar-solid]="!isTransparent">
-  <div class="mx-auto flex h-20 max-w-[1300px] items-center justify-between px-4 sm:px-6 md:grid md:grid-cols-[1fr_auto_1fr] md:px-8">
+  <div class="relative mx-auto flex h-20 max-w-[1300px] items-center justify-between px-4 sm:px-6 min-[901px]:grid min-[901px]:grid-cols-[1fr_auto_1fr] md:px-8">
 
     <!-- Links izquierda (Escritorio) -->
     <ul class="hidden list-none items-center justify-end gap-10 min-[901px]:flex">
@@ -32,12 +32,12 @@
       </li>
     </ul>
 
-    <!-- Logo centro -->
-    <a class="group shimmer-gold flex flex-none flex-col items-start md:items-center justify-self-center gap-[1px] md:gap-[2px] text-left md:text-center no-underline px-0 md:px-4" routerLink="/inicio" id="nav-logo">
-      <span class="font-serif text-[1.1rem] sm:text-[1.25rem] md:text-[1.35rem] font-bold uppercase leading-none tracking-[0.14em] md:tracking-[0.18em] transition-colors duration-300 group-hover:text-[#c4956a]"
+    <!-- Logo centro (Siempre centrado) -->
+    <a class="group shimmer-gold pointer-events-auto flex flex-col items-center justify-center text-center no-underline max-[900px]:absolute max-[900px]:left-1/2 max-[900px]:top-1/2 max-[900px]:-translate-x-1/2 max-[900px]:-translate-y-1/2 max-[900px]:w-max px-2 md:px-4" routerLink="/inicio" id="nav-logo">
+      <span class="font-serif text-[1rem] min-[380px]:text-[1.15rem] sm:text-[1.25rem] md:text-[1.35rem] font-bold uppercase leading-none tracking-[0.12em] sm:tracking-[0.16em] md:tracking-[0.18em] transition-colors duration-300 group-hover:text-[#c4956a]"
             [class.text-white]="isTransparent"
             [class.text-[#1a1a1a]]="!isTransparent">MAKEUP BY YONA</span>
-      <span class="font-serif text-[0.55rem] sm:text-[0.62rem] font-normal italic tracking-[0.04em] md:tracking-[0.06em]"
+      <span class="font-serif text-[0.52rem] sm:text-[0.62rem] font-normal italic tracking-[0.04em] md:tracking-[0.06em]"
             [class.text-white/75]="isTransparent"
             [class.text-[#888]]="!isTransparent">Realiza tu belleza &middot; Enhance your beauty</span>
     </a>

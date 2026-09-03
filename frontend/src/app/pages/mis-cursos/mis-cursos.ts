@@ -51,6 +51,13 @@ export class MisCursos implements OnInit {
       });
   }
 
+  getMiniatura(curso: Curso): string {
+    if (curso.miniatura_url && !curso.miniatura_url.includes('img.youtube.com')) {
+      return curso.miniatura_url;
+    }
+    return 'images/portada_automaquillaje.png';
+  }
+
   abrirCurso(curso: Curso): void {
     if (!curso.video_url) {
       return;

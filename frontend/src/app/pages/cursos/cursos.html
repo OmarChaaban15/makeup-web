@@ -26,16 +26,23 @@
       <article scrollReveal="up" scrollDelay="1"
                class="curso-card group flex flex-col overflow-hidden rounded-[24px] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.15)]" id="curso-automaquillaje">
 
-        <!-- Cabecera -->
-        <div class="relative flex flex-col justify-end bg-gradient-to-br from-[#c4956a] to-[#a87a52] p-8 pb-7">
+        <!-- Cabecera con imagen de portada -->
+        <div class="relative flex flex-col justify-end overflow-hidden p-8 pb-7 min-h-[220px]">
+          <!-- Imagen de fondo -->
+          <img src="images/portada_automaquillaje.png"
+               alt="Masterclass de Automaquillaje Online"
+               class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
+          <!-- Overlay con degradado para legibilidad del texto -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/30"></div>
+
           <span class="relative z-10 mb-3 w-fit rounded-full border border-white/30 bg-white/15 px-3 py-1 font-sans text-[0.6rem] font-semibold uppercase tracking-widest text-white backdrop-blur-sm">
             Online · Plazas Limitadas
           </span>
-          <p class="relative z-10 font-sans text-[0.62rem] font-semibold uppercase tracking-[0.25em] text-white/70">Masterclass</p>
-          <h2 class="relative z-10 mt-2 font-serif text-[1.55rem] font-light leading-[1.2] text-white">
+          <p class="relative z-10 font-sans text-[0.62rem] font-semibold uppercase tracking-[0.25em] text-[#e8c99a]">Masterclass</p>
+          <h2 class="relative z-10 mt-1 font-serif text-[1.55rem] font-light leading-[1.2] text-white">
             Masterclass de<br><strong class="font-semibold">Automaquillaje Online</strong>
           </h2>
-          <p class="relative z-10 mt-3 font-serif text-[1rem] font-light italic text-white/80">Realza tu belleza</p>
+          <p class="relative z-10 mt-2 font-serif text-[1rem] font-light italic text-[#e8c99a]">Realza tu belleza</p>
         </div>
 
         <!-- Cuerpo -->
