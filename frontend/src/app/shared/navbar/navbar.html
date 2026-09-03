@@ -53,20 +53,12 @@
         </a>
       </li>
       <li>
-        <a routerLink="/contacto" routerLinkActive="nav-active" id="nav-contacto"
-           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
-           [class.text-white]="isTransparent"
-           [class.text-[#1a1a1a]]="!isTransparent">
-          Contacto
-        </a>
-      </li>
-      <li>
-        <a routerLink="/reservar-cita" routerLinkActive="active" id="nav-reservar"
-           class="inline-flex min-w-[8rem] xl:min-w-[9rem] shrink-0 items-center justify-center whitespace-nowrap border-[1.5px] border-[#c4956a] px-[1rem] py-[0.5rem] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white lg:px-[1.2rem] lg:py-[0.55rem]"
+        <a routerLink="/contacto" routerLinkActive="active" id="nav-contacto"
+           class="inline-flex min-w-[7.5rem] xl:min-w-[8.5rem] shrink-0 items-center justify-center whitespace-nowrap border-[1.5px] border-[#c4956a] px-[1rem] py-[0.5rem] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white lg:px-[1.2rem] lg:py-[0.55rem]"
            [class.border-white]="isTransparent"
            [class.text-white]="isTransparent"
            [class.hover:border-[#c4956a]]="isTransparent">
-          Reservar cita
+          Contacto
         </a>
       </li>
       <!-- ✦ Mis Cursos (solo con sesión iniciada) -->
@@ -197,10 +189,10 @@
       </a>
     }
 
-    <!-- Botón CTA Reserva -->
-    <a routerLink="/reservar-cita" routerLinkActive="active"
+    <!-- Botón CTA Contacto -->
+    <a routerLink="/contacto" routerLinkActive="active"
        class="mt-3 flex h-12 items-center justify-center rounded-xl border-[1.5px] border-[#c4956a] bg-[#c4956a] px-6 text-center font-serif text-[0.85rem] font-semibold uppercase tracking-[0.16em] text-white no-underline shadow-[0_6px_20px_rgba(196,149,106,0.3)] transition-all active:scale-[0.98]">
-      Reservar cita
+      Contactar ahora
     </a>
 
     <!-- ✦ Usuario en menú móvil -->

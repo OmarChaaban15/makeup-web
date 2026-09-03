@@ -25,6 +25,7 @@ Route::get('/tutoriales/{id}', [TutorialController::class, 'show']);
 Route::get('/resenas', [ResenaController::class, 'index']);
 Route::post('/resenas', [ResenaController::class, 'store']);
 Route::post('/citas', [CitaController::class, 'store']);
+Route::post('/contacto', [\App\Http\Controllers\ContactoController::class, 'enviar']);
 
 // Rutas privadas (requieren login)
 Route::middleware('auth:sanctum')->group(function () {

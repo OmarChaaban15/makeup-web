@@ -21,8 +21,8 @@ export class Navbar {
     this.router.events
       .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
       .subscribe(e => {
-        const path = e.urlAfterRedirects || e.url;
-        this.isHeroPage = path === '/' || path === '/inicio';
+        const path = (e.urlAfterRedirects || e.url).split('?')[0];
+        this.isHeroPage = path === '/' || path === '/inicio' || path === '/sobre-mi' || path === '/servicios';
       });
   }
 
