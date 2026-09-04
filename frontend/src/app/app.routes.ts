@@ -4,7 +4,6 @@ import { SobreMi } from './pages/sobre-mi/sobre-mi';
 import { Servicios } from './pages/servicios/servicios';
 import { Cursos } from './pages/cursos/cursos';
 import { Contacto } from './pages/contacto/contacto';
-import { ReservarCita } from './pages/reservar-cita/reservar-cita';
 import { PoliticaPrivacidad } from './pages/politica-privacidad/politica-privacidad';
 import { Login } from './pages/login/login';
 import { Registro } from './pages/registro/registro';
@@ -20,7 +19,7 @@ export const routes: Routes = [
   { path: 'servicios', component: Servicios },
   { path: 'cursos', component: Cursos },
   { path: 'contacto', component: Contacto },
-  { path: 'reservar-cita', component: ReservarCita },
+  { path: 'reservar-cita', redirectTo: 'contacto', pathMatch: 'full' },
   { path: 'politica-privacidad', component: PoliticaPrivacidad },
   { path: 'mis-cursos', component: MisCursos, canActivate: [authGuard] },
   { path: 'login', component: Login },
@@ -28,5 +27,4 @@ export const routes: Routes = [
   { path: 'pago-exitoso', component: PagoExitoso },
   { path: 'pago-cancelado', component: PagoCancelado },
   { path: '**', redirectTo: 'inicio' }
-  
 ];

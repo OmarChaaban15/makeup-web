@@ -1,0 +1,40 @@
+<!-- España -->
+<ng-template #flagES>
+  <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 750 500">
+    <rect width="750" height="500" fill="#c60b1e"/>
+    <rect width="750" height="250" y="125" fill="#ffc400"/>
+  </svg>
+</ng-template>
+
+<!-- Reino Unido (Inglés) -->
+<ng-template #flagEN>
+  <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 60 30">
+    <clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+    <clipPath id="t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>
+    <g clip-path="url(#s)">
+      <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+      <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t)" stroke="#C8102E" stroke-width="4"/>
+      <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
+      <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
+    </g>
+  </svg>
+</ng-template>
+
+<!-- Italia -->
+<ng-template #flagIT>
+  <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 3 2">
+    <rect width="1" height="2" fill="#009246"/>
+    <rect width="1" height="2" x="1" fill="#fff"/>
+    <rect width="1" height="2" x="2" fill="#ce2b37"/>
+  </svg>
+</ng-template>
+
+<!-- Alemania -->
+<ng-template #flagDE>
+  <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 5 3">
+    <rect width="5" height="1" y="0" fill="#000"/>
+    <rect width="5" height="1" y="1" fill="#dd0000"/>
+    <rect width="5" height="1" y="2" fill="#ffce00"/>
+  </svg>
+</ng-template>

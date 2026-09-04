@@ -1,118 +1,371 @@
-<div class="min-h-screen bg-[#f2eae4] pt-32 pb-24 font-sans text-[#1a1a1a]">
+<div class="min-h-screen bg-[#fcf9f6] pt-28 pb-28 font-sans text-[#1a1a1a] antialiased selection:bg-[#c4956a]/20">
 
   <!-- ══════════════════════════════════════════
-       CABECERA
+       HERO / BIENVENIDA ALUMNA
        ══════════════════════════════════════════ -->
-  <div class="mx-auto max-w-[900px] px-6 text-center cursos-fade-up">
-    <p class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.32em] text-[#c4956a]">Área privada</p>
-    <h1 class="font-serif text-[clamp(2.5rem,5vw,3.5rem)] font-light leading-tight text-[#1a1a1a]">
-      Mis Cursos
-    </h1>
-    <p class="mt-3 font-serif text-[1rem] font-light italic tracking-wide text-[#c4956a]">
-      Tu formación, disponible siempre que la necesites.
-    </p>
-  </div>
+  <section class="relative px-5 sm:px-8 lg:px-12">
+    <div class="mx-auto max-w-[1240px]">
+      
+      <!-- Banner tipo Studio Suite -->
+      <div class="cursos-fade-up relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#1d1b19] via-[#24211d] to-[#161514] p-8 sm:p-12 lg:p-14 text-white shadow-[0_25px_60px_rgba(26,26,26,0.18)] border border-white/10">
+        
+        <!-- Elemento decorativo de luz sutil -->
+        <div class="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#c4956a]/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-[#c4956a]/10 blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+          <div class="max-w-[650px]">
+            <div class="inline-flex items-center gap-2 rounded-full border border-[#c4956a]/40 bg-[#c4956a]/15 px-3.5 py-1 text-[0.68rem] font-serif uppercase tracking-[0.25em] text-[#e8c6a0]">
+              <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a] animate-pulse"></span>
+              Aula Virtual Exclusiva
+            </div>
+            <h1 class="mt-4 font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-tight">
+              Bienvenida de nuevo,<br>
+              <span class="italic text-[#e8c6a0]">{{ userName }}</span>
+            </h1>
+            <p class="mt-4 font-sans text-sm sm:text-base font-light text-white/75 leading-relaxed">
+              Accede a tus masterclasses sin límite de tiempo, repasa las técnicas paso a paso y descarga tus guías de productos.
+            </p>
+          </div>
+
+          <!-- Métricas del alumno -->
+          <div class="flex flex-row md:flex-col gap-4 shrink-0">
+            <div class="flex-1 md:flex-initial rounded-2xl bg-white/5 p-4 sm:px-6 sm:py-4 border border-white/10 backdrop-blur-md">
+              <span class="block font-sans text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[#c4956a]">Cursos activos</span>
+              <span class="mt-1 block font-serif text-2xl sm:text-3xl font-normal text-white">{{ cursos().length }}</span>
+            </div>
+            <div class="flex-1 md:flex-initial rounded-2xl bg-white/5 p-4 sm:px-6 sm:py-4 border border-white/10 backdrop-blur-md">
+              <span class="block font-sans text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[#c4956a]">Resolución HD</span>
+              <span class="mt-1 block font-serif text-sm sm:text-base font-normal text-white">1080p · Sin límites</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
 
   <!-- ══════════════════════════════════════════
-       ESTADOS
+       CONTENIDO PRINCIPAL
        ══════════════════════════════════════════ -->
-  <div class="mx-auto mt-16 max-w-[1040px] px-6">
+  <section class="mt-12 px-5 sm:px-8 lg:px-12">
+    <div class="mx-auto max-w-[1240px]">
 
-    @if (isLoading()) {
-      <p class="text-center font-sans text-[0.9rem] font-light text-[#666]">Cargando tus cursos…</p>
-    } @else if (errorMsg()) {
-      <p class="text-center font-sans text-[0.9rem] font-light text-[#b45454]">{{ errorMsg() }}</p>
-    } @else if (cursos().length === 0) {
-      <div class="mx-auto max-w-[520px] rounded-[20px] bg-white px-8 py-12 text-center shadow-sm">
-        <p class="font-serif text-[1.15rem] font-light text-[#1a1a1a]">Todavía no tienes cursos.</p>
-        <p class="mt-3 font-sans text-[0.85rem] font-light leading-relaxed text-[#666]">
-          Cuando adquieras una formación aparecerá aquí para que puedas verla cuando quieras.
-        </p>
-        <a routerLink="/cursos"
-           class="mt-6 inline-block rounded-full bg-[#c4956a] px-6 py-3 text-[0.65rem] font-bold uppercase tracking-widest text-white transition-all hover:bg-[#a87a52] hover:shadow-lg">
-          Ver cursos disponibles
+      <!-- Barra de filtro / estado -->
+      <div class="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-[#eadecd] pb-5">
+        <div>
+          <h2 class="font-serif text-[1.4rem] font-normal text-[#1a1a1a]">Tus Masterclasses adquiridas</h2>
+          <p class="mt-0.5 text-xs text-[#777]">Acceso vitalicio garantizado en alta definición</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <a routerLink="/cursos"
+             class="inline-flex items-center gap-2 rounded-full border border-[#c4956a] px-5 py-2 text-xs font-serif font-semibold uppercase tracking-wider text-[#c4956a] transition-all duration-300 hover:bg-[#c4956a] hover:text-white">
+            <span>Explorar catálogo</span>
+            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- ESTADOS DE CARGA -->
+      @if (isLoading()) {
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          @for (n of [1, 2, 3]; track n) {
+            <div class="overflow-hidden rounded-3xl border border-[#ede0d0] bg-white p-4 shadow-sm">
+              <div class="aspect-video w-full rounded-2xl skeleton-shimmer"></div>
+              <div class="mt-5 space-y-3 px-2">
+                <div class="h-5 w-3/4 rounded-full skeleton-shimmer"></div>
+                <div class="h-3.5 w-full rounded-full skeleton-shimmer"></div>
+                <div class="h-3.5 w-1/2 rounded-full skeleton-shimmer"></div>
+              </div>
+            </div>
+          }
+        </div>
+      } @else if (errorMsg()) {
+        <div class="mx-auto max-w-[500px] rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-sm text-red-600">
+          {{ errorMsg() }}
+        </div>
+      } @else if (cursos().length === 0) {
+        
+        <!-- ESTADO VACÍO ELEGANTE -->
+        <div class="cursos-fade-up mx-auto max-w-[620px] rounded-[32px] border border-[#ede0d0] bg-white p-10 sm:p-14 text-center shadow-[0_12px_40px_rgba(26,26,26,0.04)]">
+          <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#fdf8f4] text-[#c4956a] ring-8 ring-[#faf4ee]">
+            <svg class="h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.3">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>
+          </div>
+          <h3 class="font-serif text-2xl font-light text-[#1a1a1a]">Tu espacio de formación está listo</h3>
+          <p class="mt-3 text-sm sm:text-base font-light text-[#666] leading-relaxed">
+            Aún no has adquirido ninguna formación. Cuando te unas a una masterclass online de maquillaje, tendrás acceso inmediato al contenido en vídeo y material didáctico.
+          </p>
+          <div class="mt-8 flex justify-center">
+            <a routerLink="/cursos"
+               class="inline-flex items-center gap-2 rounded-full bg-[#1a1a1a] px-8 py-3.5 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-lg transition-all duration-300 hover:bg-[#c4956a] hover:shadow-xl active:scale-95">
+              Descubrir Formaciones Disponibles
+            </a>
+          </div>
+        </div>
+
+      } @else {
+
+        <!-- ─── REJILLA DE CURSOS PREMIUM ─── -->
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
+          @for (curso of cursos(); track curso.id) {
+            <article
+              (click)="abrirCurso(curso)"
+              class="cursos-fade-up group relative flex cursor-pointer flex-col overflow-hidden rounded-[26px] border border-[#ede0d0] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(196,149,106,0.18)]">
+
+              <!-- Cabecera / Portada del curso con efecto fotográfico -->
+              <div class="relative aspect-video w-full overflow-hidden bg-[#161514]">
+                <img [src]="getMiniatura(curso)" [alt]="curso.titulo"
+                     class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+                
+                <!-- Degradados para contraste perfecto -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+
+                <!-- Badges superiores -->
+                <div class="absolute left-3.5 top-3.5 right-3.5 flex items-center justify-between z-10">
+                  @if (curso.nivel) {
+                    <span class="rounded-full bg-black/60 px-3 py-1 font-serif text-[0.62rem] font-semibold uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
+                      {{ curso.nivel }}
+                    </span>
+                  } @else {
+                    <span class="rounded-full bg-black/60 px-3 py-1 font-serif text-[0.62rem] font-semibold uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
+                      Masterclass
+                    </span>
+                  }
+
+                  <!-- Botón checkbox de completado -->
+                  <button type="button"
+                          (click)="toggleCompletado(curso.id, $event)"
+                          [title]="isCompletado(curso.id) ? 'Marcar como pendiente' : 'Marcar como completado'"
+                          class="flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.62rem] font-sans font-medium transition-all backdrop-blur-md cursor-pointer border"
+                          [class.bg-emerald-500]="isCompletado(curso.id)"
+                          [class.text-white]="isCompletado(curso.id)"
+                          [class.border-emerald-400]="isCompletado(curso.id)"
+                          [class.bg-black/50]="!isCompletado(curso.id)"
+                          [class.text-white/80]="!isCompletado(curso.id)"
+                          [class.border-white/10]="!isCompletado(curso.id)">
+                    <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>{{ isCompletado(curso.id) ? 'Completado' : 'En curso' }}</span>
+                  </button>
+                </div>
+
+                <!-- Botón flotante Play central -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="flex h-14 w-14 items-center justify-center rounded-full bg-[#c4956a] text-white shadow-xl transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#a87a52]">
+                    <svg class="h-6 w-6 ml-0.5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Duración / Formato en footer de imagen -->
+                <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs text-white/80">
+                  <span class="flex items-center gap-1.5 text-[0.72rem] font-light">
+                    <svg class="h-3.5 w-3.5 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Video On-Demand
+                  </span>
+                  <span class="text-[0.68rem] text-white/60 uppercase tracking-wider font-semibold">HD 1080p</span>
+                </div>
+              </div>
+
+              <!-- Ficha de información del curso -->
+              <div class="flex flex-1 flex-col p-6 sm:p-7">
+                <h3 class="font-serif text-[1.25rem] font-normal leading-snug text-[#1a1a1a] transition-colors group-hover:text-[#c4956a]">
+                  {{ curso.titulo }}
+                </h3>
+
+                @if (curso.descripcion_corta) {
+                  <p class="mt-2.5 line-clamp-2 font-sans text-[0.85rem] font-light leading-relaxed text-[#666]">
+                    {{ curso.descripcion_corta }}
+                  </p>
+                }
+
+                <!-- Barra de estado / Progreso visual -->
+                <div class="mt-6 pt-5 border-t border-[#f0e6dc] flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="h-2 w-2 rounded-full"
+                          [class.bg-emerald-500]="isCompletado(curso.id)"
+                          [class.bg-[#c4956a]]="!isCompletado(curso.id)"></span>
+                    <span class="text-xs font-serif uppercase tracking-wider text-[#777]">
+                      {{ isCompletado(curso.id) ? 'Finalizado' : 'Listo para ver' }}
+                    </span>
+                  </div>
+
+                  <span class="inline-flex items-center gap-1 font-serif text-[0.75rem] font-semibold uppercase tracking-wider text-[#c4956a] group-hover:translate-x-0.5 transition-transform">
+                    Reproducir
+                    <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
+
+              </div>
+
+            </article>
+          }
+        </div>
+
+      }
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       BANNER DE SOPORTE PARA ALUMNAS
+       ══════════════════════════════════════════ -->
+  <section class="mt-20 px-5 sm:px-8 lg:px-12">
+    <div class="mx-auto max-w-[1240px]">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6 rounded-2xl bg-[#faf5f0] p-6 sm:p-8 border border-[#ebded2]">
+        <div class="flex items-center gap-4">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#c4956a]/15 text-[#c4956a]">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="font-serif text-base sm:text-lg font-medium text-[#1a1a1a]">¿Tienes dudas sobre las técnicas del curso?</h4>
+            <p class="text-xs sm:text-sm font-light text-[#666]">Como alumna de Makeup by Yona, puedes consultar cualquier inquietud sobre productos o técnicas.</p>
+          </div>
+        </div>
+        <a href="https://wa.me/34658728433?text=Hola%20Yonaida,%20tengo%20una%20duda%20sobre%20mi%20curso%20de%20maquillaje"
+           target="_blank" rel="noopener noreferrer"
+           class="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#1a1a1a] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:bg-[#c4956a]">
+          <span>Preguntar a Yonaida</span>
+          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </a>
       </div>
-    } @else {
+    </div>
+  </section>
 
-      <!-- ─── GRID DE CURSOS ─── -->
-      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        @for (curso of cursos(); track curso.id) {
-          <article
-            (click)="abrirCurso(curso)"
-            class="group flex cursor-pointer flex-col overflow-hidden rounded-[20px] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.18)]">
-
-            <!-- Miniatura -->
-            <div class="relative aspect-video overflow-hidden bg-[#1a1a1a]">
-              @if (curso.miniatura_url) {
-                <img [src]="curso.miniatura_url" [alt]="curso.titulo"
-                     class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-              } @else {
-                <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#c4956a] to-[#a87a52]"></div>
-              }
-              <!-- Overlay play -->
-              <div class="absolute inset-0 flex items-center justify-center bg-black/25 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <span class="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 text-[#c4956a] shadow-lg">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                </span>
-              </div>
-              @if (curso.nivel) {
-                <span class="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 font-sans text-[0.58rem] font-semibold uppercase tracking-widest text-[#c4956a] backdrop-blur-sm">
-                  {{ curso.nivel }}
-                </span>
-              }
-            </div>
-
-            <!-- Cuerpo -->
-            <div class="flex flex-1 flex-col p-6">
-              <h2 class="font-serif text-[1.2rem] font-light leading-snug text-[#1a1a1a]">{{ curso.titulo }}</h2>
-              @if (curso.descripcion_corta) {
-                <p class="mt-3 font-sans text-[0.83rem] font-light leading-relaxed text-[#666]">{{ curso.descripcion_corta }}</p>
-              }
-              <span class="mt-auto pt-5 font-sans text-[0.68rem] font-bold uppercase tracking-widest text-[#c4956a]">
-                Ver curso →
-              </span>
-            </div>
-          </article>
-        }
-      </div>
-    }
-  </div>
 </div>
 
 <!-- ══════════════════════════════════════════
-     MODAL REPRODUCTOR
+     MODAL REPRODUCTOR TIPO MASTERCLASS SUITE
      ══════════════════════════════════════════ -->
 @if (cursoActivo()) {
-  <div class="fixed inset-0 z-[2000] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+  <div class="fixed inset-0 z-[2000] flex items-center justify-center bg-black/90 p-3 sm:p-6 backdrop-blur-md"
        (click)="cerrarModal()">
-    <div class="relative w-full max-w-[900px] overflow-hidden rounded-[16px] bg-[#111] shadow-2xl"
+    <div class="relative flex flex-col w-full max-w-[1060px] max-h-[92vh] overflow-hidden rounded-[28px] bg-[#141312] border border-white/10 shadow-[0_30px_90px_rgba(0,0,0,0.8)]"
          (click)="$event.stopPropagation()">
 
-      <!-- Cerrar -->
-      <button (click)="cerrarModal()" aria-label="Cerrar"
-              class="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white transition-colors hover:bg-[#c4956a]">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-      </button>
+      <!-- Barra superior del reproductor -->
+      <div class="flex items-center justify-between border-b border-white/10 bg-[#1a1918] px-6 py-4">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="flex h-3 w-3 shrink-0 rounded-full bg-emerald-500"></span>
+          <span class="truncate font-serif text-sm sm:text-base font-normal text-white">
+            {{ cursoActivo()!.titulo }}
+          </span>
+        </div>
 
-      <!-- Reproductor -->
-      <div class="aspect-video w-full bg-black">
-        @if (cursoActivo()!.video_url && esEmbed(cursoActivo()!.video_url!)) {
-          <iframe [src]="embedUrl(cursoActivo()!.video_url!)" class="h-full w-full" frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-        } @else if (cursoActivo()!.video_url) {
-          <video [src]="cursoActivo()!.video_url" class="h-full w-full" controls autoplay></video>
-        }
+        <button (click)="cerrarModal()" aria-label="Cerrar reproductor"
+                class="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-[#c4956a] hover:rotate-90">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
       </div>
 
-      <!-- Info -->
-      <div class="p-6">
-        <h3 class="font-serif text-[1.3rem] font-light text-white">{{ cursoActivo()!.titulo }}</h3>
-        @if (cursoActivo()!.descripcion_larga) {
-          <p class="mt-3 font-sans text-[0.85rem] font-light leading-relaxed text-white/70">{{ cursoActivo()!.descripcion_larga }}</p>
-        }
+      <!-- Contenedor scrollable interno -->
+      <div class="custom-modal-scroll overflow-y-auto flex-1">
+        
+        <!-- Pantalla de vídeo con ratio cinematográfico -->
+        <div class="aspect-video w-full bg-black">
+          @if (cursoActivo()!.video_url && esEmbed(cursoActivo()!.video_url!)) {
+            <iframe [src]="embedUrl(cursoActivo()!.video_url!)" class="h-full w-full" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+          } @else if (cursoActivo()!.video_url) {
+            <video [src]="cursoActivo()!.video_url" class="h-full w-full" controls autoplay></video>
+          }
+        </div>
+
+        <!-- Panel de pestañas interactivas -->
+        <div class="p-6 sm:p-8 bg-[#141312]">
+          <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
+            
+            <!-- Pestañas -->
+            <div class="flex gap-2">
+              <button type="button"
+                      (click)="activeTab.set('temario')"
+                      class="rounded-full px-4 py-1.5 text-xs font-serif uppercase tracking-wider transition-all cursor-pointer"
+                      [class.bg-[#c4956a]]="activeTab() === 'temario'"
+                      [class.text-white]="activeTab() === 'temario'"
+                      [class.bg-white/5]="activeTab() !== 'temario'"
+                      [class.text-white/60]="activeTab() !== 'temario'">
+                Descripción &amp; Claves
+              </button>
+              <button type="button"
+                      (click)="activeTab.set('recursos')"
+                      class="rounded-full px-4 py-1.5 text-xs font-serif uppercase tracking-wider transition-all cursor-pointer"
+                      [class.bg-[#c4956a]]="activeTab() === 'recursos'"
+                      [class.text-white]="activeTab() === 'recursos'"
+                      [class.bg-white/5]="activeTab() !== 'recursos'"
+                      [class.text-white/60]="activeTab() !== 'recursos'">
+                Guía de Materiales
+              </button>
+            </div>
+
+            <!-- Botón marcar completado dentro del modal -->
+            <button type="button"
+                    (click)="toggleCompletado(cursoActivo()!.id)"
+                    class="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-sans transition-all cursor-pointer"
+                    [class.border-emerald-500]="isCompletado(cursoActivo()!.id)"
+                    [class.bg-emerald-500/20]="isCompletado(cursoActivo()!.id)"
+                    [class.text-emerald-300]="isCompletado(cursoActivo()!.id)"
+                    [class.border-white/20]="!isCompletado(cursoActivo()!.id)"
+                    [class.text-white/80]="!isCompletado(cursoActivo()!.id)">
+              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>{{ isCompletado(cursoActivo()!.id) ? 'Lección Completada' : 'Marcar como completada' }}</span>
+            </button>
+
+          </div>
+
+          <!-- Pestaña 1: Descripción -->
+          @if (activeTab() === 'temario') {
+            <div class="mt-6 space-y-4">
+              <h4 class="font-serif text-lg font-light text-white">{{ cursoActivo()!.titulo }}</h4>
+              <p class="font-sans text-sm font-light leading-relaxed text-white/75">
+                {{ cursoActivo()!.descripcion_larga || cursoActivo()!.descripcion_corta || 'Disfruta de esta lección paso a paso. Recuerda pausar el vídeo para practicar cada trazo y técnica con tus productos.' }}
+              </p>
+            </div>
+          }
+
+          <!-- Pestaña 2: Recursos / Recomendaciones de productos -->
+          @if (activeTab() === 'recursos') {
+            <div class="mt-6 rounded-2xl bg-white/5 p-5 border border-white/10 space-y-3">
+              <h4 class="font-serif text-base text-[#e8c6a0]">Kit recomendado para esta práctica:</h4>
+              <ul class="space-y-2 text-xs font-light text-white/80">
+                <li class="flex items-center gap-2">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Hidratación y preparación previa de la piel según tu tipo de cutis.
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Brochas de difuminado fino y esponja humedecida.
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Paleta de sombras neutras y corrector de alta cobertura.
+                </li>
+              </ul>
+            </div>
+          }
+
+        </div>
+
       </div>
+
     </div>
   </div>
 }

@@ -1,231 +1,283 @@
-<div class="min-h-screen bg-[#f2eae4] pt-32 pb-24 font-sans text-[#1a1a1a]">
+<div class="min-h-screen bg-[#fbf7f4] pt-28 pb-28 font-sans text-[#1a1a1a] antialiased selection:bg-[#c4956a]/20">
 
   <!-- ══════════════════════════════════════════
-       CABECERA
+       CABECERA HERO EDITORIAL — ACADEMIA
        ══════════════════════════════════════════ -->
-  <div class="mx-auto max-w-[900px] px-6 text-center">
-    <p scrollReveal="up" class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.32em] text-[#c4956a]">Formación &amp; Masterclass</p>
-    <h1 scrollReveal="up" scrollDelay="1" class="font-serif text-[clamp(2.5rem,5vw,3.5rem)] font-light leading-tight text-[#1a1a1a]">
-      Academia Yonaida
-    </h1>
-    <p scrollReveal="up" scrollDelay="2" class="mt-3 font-serif text-[1rem] font-light italic tracking-wide text-[#c4956a]">
-      Realza tu belleza · Aprende desde donde estés.
-    </p>
-    <p scrollReveal="up" scrollDelay="3" class="mx-auto mt-6 max-w-[560px] font-sans text-[0.9rem] font-light leading-[1.8] text-[#666]">
-      Comparto mis conocimientos y experiencia con personas que desean iniciarse o perfeccionar sus técnicas en el mundo del maquillaje profesional, adaptadas a tu ritmo y estilo de vida.
-    </p>
-  </div>
+  <section class="relative px-6 sm:px-10">
+    <div class="mx-auto max-w-[1100px] text-center">
+      
+      <!-- Badge superior -->
+      <div scrollReveal="up" class="mb-5 inline-flex items-center gap-2 rounded-full border border-[#c4956a]/40 bg-[#c4956a]/15 px-4 py-1.5 backdrop-blur-md">
+        <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a] animate-pulse"></span>
+        <span class="font-serif text-[0.7rem] uppercase tracking-[0.28em] text-[#9c6e45]">Formación Online &middot; Método Yonaida</span>
+      </div>
+
+      <h1 scrollReveal="up" scrollDelay="1" class="font-serif text-[clamp(2.6rem,5.5vw,4.5rem)] font-light leading-[1.1] text-[#1a1a1a]">
+        Academia <em class="italic text-[#c4956a]">Yonaida</em>
+      </h1>
+
+      <p scrollReveal="up" scrollDelay="2" class="mt-3 font-serif text-[1.15rem] sm:text-[1.25rem] font-light italic text-[#c4956a]">
+        Realza tu belleza &middot; Aprende desde donde estés a tu ritmo
+      </p>
+
+      <div class="mx-auto mt-6 h-[1.5px] w-16 bg-[#c4956a]"></div>
+
+      <p scrollReveal="up" scrollDelay="3" class="mx-auto mt-6 max-w-[620px] font-sans text-sm sm:text-base font-light leading-[1.85] text-[#555]">
+        Mis formaciones condensan años de experiencia real con clientas, novias y pasarela en clases prácticas, visuales y sin secretos, para que logres acabados profesionales sin complicaciones.
+      </p>
+
+    </div>
+  </section>
 
   <!-- ══════════════════════════════════════════
-       TARJETAS DE CURSOS
+       CATÁLOGO DE FORMACIONES
        ══════════════════════════════════════════ -->
-  <div class="mx-auto mt-16 max-w-[1040px] px-6">
-    <div class="grid gap-8 lg:grid-cols-2 lg:items-stretch">
+  <section class="mt-16 px-6 sm:px-10">
+    <div class="mx-auto max-w-[1140px]">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-stretch">
 
-      <!-- ─── TARJETA 1: MASTERCLASS ─── -->
-      <article scrollReveal="up" scrollDelay="1"
-               class="curso-card group flex flex-col overflow-hidden rounded-[24px] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.15)]" id="curso-automaquillaje">
+        <!-- ─── TARJETA 1: MASTERCLASS AUTOMAQUILLAJE (DISPONIBLE AHORA) ─── -->
+        <article scrollReveal="up" scrollDelay="1"
+                 class="curso-card group flex flex-col overflow-hidden rounded-[30px] bg-white border border-[#ede0d0] shadow-[0_10px_40px_rgba(26,26,26,0.06)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_25px_60px_rgba(196,149,106,0.2)]" id="curso-automaquillaje">
 
-        <!-- Cabecera -->
-        <div class="relative flex flex-col justify-end bg-gradient-to-br from-[#c4956a] to-[#a87a52] p-8 pb-7">
-          <span class="relative z-10 mb-3 w-fit rounded-full border border-white/30 bg-white/15 px-3 py-1 font-sans text-[0.6rem] font-semibold uppercase tracking-widest text-white backdrop-blur-sm">
-            Online · Plazas Limitadas
-          </span>
-          <p class="relative z-10 font-sans text-[0.62rem] font-semibold uppercase tracking-[0.25em] text-white/70">Masterclass</p>
-          <h2 class="relative z-10 mt-2 font-serif text-[1.55rem] font-light leading-[1.2] text-white">
-            Masterclass de<br><strong class="font-semibold">Automaquillaje Online</strong>
-          </h2>
-          <p class="relative z-10 mt-3 font-serif text-[1rem] font-light italic text-white/80">Realza tu belleza</p>
-        </div>
+          <!-- Cabecera de tarjeta con fotografía cinematográfica -->
+          <div class="relative flex flex-col justify-end overflow-hidden p-8 sm:p-10 min-h-[260px] bg-[#1a1a1a]">
+            <!-- Foto oficial de portada -->
+            <img src="images/portada_automaquillaje.png"
+                 alt="Masterclass de Automaquillaje Online — Yonaida"
+                 class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
+            
+            <!-- Degradado para nitidez del texto -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/30"></div>
 
-        <!-- Cuerpo -->
-        <div class="flex flex-1 flex-col p-8">
-
-          <!-- Descripción -->
-          <p class="font-sans text-[0.88rem] font-light leading-[1.85] text-[#555]">
-            Aprende a conocer tu piel, tus facciones y los colores que mejor te favorecen para sacar el máximo partido a tu imagen de forma <strong class="font-medium text-[#1a1a1a]">natural y personalizada</strong>.
-          </p>
-
-          <!-- Separador -->
-          <div class="my-6 h-px w-full bg-[#f2eae4]"></div>
-
-          <!-- Lista con iconos SVG -->
-          <p class="mb-4 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#888]">¿Qué aprenderás?</p>
-          <ul class="space-y-3">
-            <li class="flex items-start gap-3">
-              <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
-                <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            <div class="relative z-10 flex items-center justify-between gap-3 mb-3">
+              <span class="rounded-full bg-emerald-500 px-3.5 py-1 text-[0.6rem] font-sans font-semibold uppercase tracking-widest text-white shadow-sm flex items-center gap-1.5">
+                <span class="h-1.5 w-1.5 rounded-full bg-white animate-pulse"></span>
+                Acceso Inmediato
               </span>
-              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Identificar tu fototipo de piel y descubrir los colores que más te favorecen.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
-                <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span class="rounded-full bg-black/60 px-3 py-1 font-serif text-[0.62rem] uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
+                4 Horas HD
               </span>
-              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Hidratar y preparar tu piel correctamente según sea seca, mixta o grasa.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
-                <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-              </span>
-              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Contornear tu rostro según su forma para potenciar tus rasgos de manera armoniosa.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
-                <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-              </span>
-              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Realizar un maquillaje favorecedor adaptable a cualquier tipo de rostro.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
-                <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-              </span>
-              <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Crear un maquillaje de día y transformarlo en un look de noche.</span>
-            </li>
-          </ul>
-
-          <!-- Separador -->
-          <div class="my-6 h-px w-full bg-[#f2eae4]"></div>
-
-          <!-- Cita -->
-          <p class="text-center font-serif text-[0.88rem] font-light italic leading-relaxed text-[#888]">
-            "Porque la belleza no consiste en cambiar quién eres,<br>sino en aprender a resaltar lo mejor de ti."
-          </p>
-
-          <!-- Duración -->
-          <p class="mt-6 text-center font-sans text-[0.68rem] font-bold uppercase tracking-wider text-[#c4956a]">
-            4 horas · Online · Material incluido
-          </p>
-
-          <!-- Precio + CTA -->
-          <div class="mt-auto pt-8">
-            <!-- Bloque de precio con oferta -->
-            <!-- Badge oferta (flujo normal, no absoluto) -->
-            <span class="mb-3 inline-flex items-center gap-1 rounded-full bg-[#c4956a] px-3 py-1 shadow-sm">
-              <svg class="h-2.5 w-2.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <span class="font-sans text-[0.55rem] font-bold uppercase tracking-wider text-white">Oferta especial</span>
-            </span>
-            <!-- Fila precios -->
-            <div class="mb-5 flex items-end gap-4">
-              <span class="font-serif text-[2.4rem] font-semibold leading-none text-[#c4956a]">45 €</span>
-              <div class="flex flex-col gap-0.5 pb-1">
-                <span class="font-sans text-[0.55rem] font-semibold uppercase tracking-widest text-[#999]">Antes</span>
-                <span class="font-serif text-[1.4rem] font-medium leading-none text-[#888] line-through decoration-[#c4956a] decoration-2">55 €</span>
-              </div>
             </div>
+
+            <p class="relative z-10 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#e8c6a0]">Curso estrella</p>
+            <h2 class="relative z-10 mt-1 font-serif text-[clamp(1.6rem,2.8vw,2.2rem)] font-light leading-[1.18] text-white">
+              Masterclass de<br><strong class="font-semibold text-white">Automaquillaje Online</strong>
+            </h2>
+            <p class="relative z-10 mt-2 font-serif text-[1rem] font-light italic text-[#e8c6a0]">Realza tu belleza única</p>
+          </div>
+
+          <!-- Cuerpo descriptivo -->
+          <div class="flex flex-1 flex-col p-8 sm:p-10">
+            
+            <p class="font-sans text-sm sm:text-base font-light leading-[1.8] text-[#555]">
+              Aprende a conocer tu piel, tus facciones y los tonos que mejor te favorecen para sacar el máximo partido a tu imagen con un acabado <strong class="font-medium text-[#1a1a1a]">luminoso, duradero y natural</strong>.
+            </p>
+
+            <div class="my-6 h-px w-full bg-[#f2eae4]"></div>
+
+            <p class="mb-4 font-serif text-xs uppercase tracking-[0.2em] text-[#c4956a]">Contenido paso a paso incluido:</p>
+            
+            <ul class="space-y-3.5">
+              <li class="flex items-start gap-3">
+                <span class="mt-[2px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/15 text-[#c4956a]">
+                  <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </span>
+                <span class="text-xs sm:text-sm font-light text-[#555] leading-relaxed">
+                  <strong>Diagnóstico de piel y colorimetría:</strong> Encuentra tu subtono exacto y la paleta que ilumina tu rostro.
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-[2px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/15 text-[#c4956a]">
+                  <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </span>
+                <span class="text-xs sm:text-sm font-light text-[#555] leading-relaxed">
+                  <strong>Preparación &amp; Skincare previo:</strong> El secreto para que la base no se cuartee ni marque líneas.
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-[2px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/15 text-[#c4956a]">
+                  <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </span>
+                <span class="text-xs sm:text-sm font-light text-[#555] leading-relaxed">
+                  <strong>Visagismo y Contorno armónico:</strong> Esculpe pómulos, mandíbula y nariz según tus proporciones reales.
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-[2px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/15 text-[#c4956a]">
+                  <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </span>
+                <span class="text-xs sm:text-sm font-light text-[#555] leading-relaxed">
+                  <strong>De Look de Día a Look de Noche:</strong> Transición en 5 minutos para eventos, cenas o fiestas.
+                </span>
+              </li>
+            </ul>
+
+            <!-- Cita inspiracional -->
+            <div class="mt-8 rounded-2xl bg-[#faf5f0] p-4 text-center border border-[#eee2d5]">
+              <p class="font-serif text-xs italic text-[#777]">
+                "La belleza no consiste en cambiar quién eres, sino en aprender a resaltar lo mejor de ti."
+              </p>
+            </div>
+
+            <!-- Bloque de Precio y Compra Segura -->
+            <div class="mt-auto pt-8">
+              
+              <div class="mb-4 flex items-center justify-between">
+                <div>
+                  <span class="inline-flex items-center gap-1 rounded-full bg-[#c4956a]/15 px-3 py-0.5 text-[0.65rem] font-serif uppercase tracking-wider text-[#c4956a] font-semibold">
+                    Oferta Especial
+                  </span>
+                  <div class="mt-1 flex items-baseline gap-3">
+                    <span class="font-serif text-3xl sm:text-4xl font-semibold text-[#1a1a1a]">45 €</span>
+                    <span class="font-serif text-lg text-[#999] line-through decoration-[#c4956a]">55 €</span>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="block text-[0.65rem] uppercase tracking-wider text-[#888]">Acceso</span>
+                  <span class="block text-xs font-serif font-medium text-[#1a1a1a]">Para siempre</span>
+                </div>
+              </div>
+
+              <!-- Botón de compra conectado a Stripe -->
               <button
                 (click)="comprarMasterclass()"
                 [disabled]="comprando"
-                class="w-full rounded-full bg-gradient-to-r from-[#c4956a] to-[#a87a52] px-6 py-3.5 text-[0.65rem] font-bold uppercase tracking-widest text-white shadow-[0_6px_24px_rgba(196,149,106,0.35)] transition-all hover:scale-[1.02] hover:shadow-[0_10px_36px_rgba(196,149,106,0.45)] disabled:opacity-60 disabled:cursor-not-allowed"
+                class="w-full cursor-pointer rounded-full bg-[#1a1a1a] px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-xl transition-all duration-300 hover:bg-[#c4956a] hover:shadow-2xl disabled:opacity-50 active:scale-95"
                 id="btn-comprar-masterclass">
-                {{ comprando ? 'Redirigiendo...' : 'Reservar mi Plaza — 45 €' }}
+                <span>{{ comprando ? 'Conectando con pasarela segura...' : 'Comprar Masterclass — 45 €' }}</span>
               </button>
+
+              <div class="mt-3 flex items-center justify-center gap-4 text-[0.68rem] text-[#888]">
+                <span class="flex items-center gap-1">
+                  <svg class="h-3.5 w-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                  Pago Seguro Stripe
+                </span>
+                <span>&bull;</span>
+                <span>Visualización en móvil y PC</span>
+              </div>
 
               @if (errorMsg) {
-                <p class="mt-3 text-center font-sans text-[0.75rem] text-red-500">{{ errorMsg }}</p>
+                <p class="mt-3 text-center text-xs text-red-500">{{ errorMsg }}</p>
               }
+
+            </div>
+
           </div>
+        </article>
 
-        </div>
-      </article>
+        <!-- ─── TARJETA 2: FORMACIÓN PROFESIONAL (PRÓXIMAMENTE) ─── -->
+        <article scrollReveal="up" scrollDelay="2"
+                 class="curso-card relative flex flex-col overflow-hidden rounded-[30px] bg-white border border-[#ede0d0] shadow-[0_10px_40px_rgba(26,26,26,0.06)]" id="curso-formacion-online">
 
-      <!-- ─── TARJETA 2: FORMACIÓN PROFESIONAL (PRÓXIMAMENTE) ─── -->
-      <article scrollReveal="up" scrollDelay="2"
-               class="curso-card relative flex flex-col overflow-hidden rounded-[24px] bg-white shadow-sm" id="curso-formacion-online" style="cursor:default">
-
-        <!-- ░░░ OVERLAY PRÓXIMAMENTE ░░░ -->
-        <div class="absolute inset-0 z-20 flex flex-col items-center justify-center rounded-[24px] backdrop-blur-[3px]" style="background: rgba(26,26,26,0.72)">
-          <!-- Icono reloj animado -->
-          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm">
-            <svg class="h-8 w-8 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
-            </svg>
-          </div>
-          <!-- Pill estado -->
-          <span class="mb-3 inline-flex items-center gap-2 rounded-full border border-[#c4956a]/50 bg-[#c4956a]/15 px-4 py-1.5 backdrop-blur-sm">
-            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-[#c4956a]"></span>
-            <span class="font-sans text-[0.6rem] font-bold uppercase tracking-[0.3em] text-[#c4956a]">En desarrollo</span>
-          </span>
-          <h3 class="font-serif text-[2rem] font-light text-white">Próximamente</h3>
-          <p class="mt-2 max-w-[220px] text-center font-sans text-[0.78rem] font-light leading-relaxed text-white/60">
-            Estamos preparando algo increíble.<br>Pronto disponible.
-          </p>
-          <!-- Botón notificación -->
-          <button
-            id="btn-notificar-formacion"
-            class="mt-6 rounded-full border border-white/25 bg-white/10 px-6 py-2.5 font-sans text-[0.62rem] font-semibold uppercase tracking-widest text-white backdrop-blur-sm transition-all duration-200 hover:border-[#c4956a]/60 hover:bg-[#c4956a]/20 hover:text-[#c4956a]"
-          >
-            Avísame cuando esté disponible
-          </button>
-        </div>
-
-        <!-- ── Contenido de fondo (desvanecido) ── -->
-        <div class="pointer-events-none select-none opacity-30">
-
-          <!-- Cabecera -->
-          <div class="relative flex flex-col justify-end bg-[#1a1a1a] p-8 pb-7">
-            <span class="relative z-10 mb-3 w-fit rounded-full border border-[#c4956a]/40 bg-[#c4956a]/20 px-3 py-1 font-sans text-[#c4956a] text-[0.6rem] font-semibold uppercase tracking-widest">
-              100% Online · Sin previos
+          <!-- ░░░ OVERLAY ELEGANTE PRÓXIMAMENTE ░░░ -->
+          <div class="absolute inset-0 z-20 flex flex-col items-center justify-center rounded-[30px] bg-[#141312]/80 backdrop-blur-[5px] p-8 text-center text-white">
+            <div class="mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-[#e8c6a0]">
+              <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <span class="mb-3 inline-flex items-center gap-2 rounded-full border border-[#c4956a]/60 bg-[#c4956a]/20 px-4 py-1 backdrop-blur-md">
+              <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a] animate-pulse"></span>
+              <span class="font-serif text-[0.65rem] font-bold uppercase tracking-[0.25em] text-[#e8c6a0]">Próxima Edición</span>
             </span>
-            <p class="relative z-10 font-sans text-[0.62rem] font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Formación profesional</p>
-            <h2 class="relative z-10 mt-2 font-serif text-[1.55rem] font-light leading-[1.2] text-white">
-              Formación Online de<br><strong class="font-semibold">Maquillaje Profesional</strong>
-            </h2>
-            <p class="relative z-10 mt-3 font-serif text-[1rem] font-light italic text-white/60">Aprende desde donde estés</p>
+            <h3 class="font-serif text-3xl font-light text-white">Certificación Pro</h3>
+            <p class="mt-3 max-w-[280px] text-xs sm:text-sm font-light leading-relaxed text-white/75">
+              Formación avanzada integral para quienes desean dedicarse profesionalmente al mundo del maquillaje en bodas y moda.
+            </p>
+            <button
+              type="button"
+              (click)="abrirAvisoProximamente()"
+              id="btn-notificar-formacion"
+              class="mt-6 cursor-pointer rounded-full border border-white/30 bg-white/15 px-7 py-3 font-serif text-xs font-semibold uppercase tracking-widest text-white backdrop-blur-md transition-all hover:bg-[#c4956a] hover:border-[#c4956a] active:scale-95">
+              Avísame con descuento prioritario
+            </button>
           </div>
 
-          <!-- Cuerpo -->
-          <div class="flex flex-1 flex-col p-8">
-            <p class="font-sans text-[0.88rem] font-light leading-[1.85] text-[#555]">
-              He creado esta formación para quienes desean aprender maquillaje profesional pero que por falta de tiempo, distancia o trabajo <strong class="font-medium text-[#1a1a1a]">no pueden asistir a clases presenciales</strong>.
-            </p>
-            <div class="my-6 h-px w-full bg-[#f2eae4]"></div>
-            <p class="mb-4 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#888]">¿Qué aprenderás?</p>
-            <ul class="space-y-3">
-              <li class="flex items-start gap-3">
-                <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
-                  <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                </span>
-                <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Conocer tu piel y elegir los productos adecuados para cada tipo de maquillaje.</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
-                  <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                </span>
-                <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Preparar el rostro correctamente con técnicas de base y corrección profesional.</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/10">
-                  <svg class="h-3 w-3 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                </span>
-                <span class="font-sans text-[0.83rem] font-light leading-relaxed text-[#555]">Realzar tus facciones con técnicas de contouring, iluminación y color.</span>
-              </li>
-            </ul>
-            <div class="my-6 h-px w-full bg-[#f2eae4]"></div>
-            <p class="mt-6 text-center font-sans text-[0.68rem] font-bold uppercase tracking-wider text-[#c4956a]">
-              40 horas · Online · A tu ritmo · Sin previos
-            </p>
-            <div class="mt-auto pt-8 flex items-center justify-between">
-              <span class="font-serif text-[1.9rem] font-light text-[#1a1a1a]">350 €</span>
-              <button class="rounded-full bg-[#1a1a1a] px-6 py-3 text-[0.65rem] font-bold uppercase tracking-widest text-white">
-                Solicitar Dossier
-              </button>
+          <!-- Contenido de fondo estético -->
+          <div class="pointer-events-none select-none opacity-20 flex flex-col h-full">
+            <div class="relative h-64 w-full bg-[#1a1a1a] p-8 flex flex-col justify-end">
+              <span class="text-[#c4956a] text-xs font-serif uppercase tracking-widest">40 Horas · Certificado</span>
+              <h2 class="text-2xl font-serif text-white mt-1">Formación Online Profesional</h2>
+            </div>
+            <div class="p-8 flex-1 flex flex-col justify-between">
+              <p class="text-sm text-[#555]">Técnicas de pasarela, novias de alta gama y gestión de clientes para dedicarte al maquillaje con éxito.</p>
+              <div class="pt-8 border-t border-[#f0e6dc] flex justify-between items-center">
+                <span class="text-2xl font-serif text-[#1a1a1a]">350 €</span>
+              </div>
             </div>
           </div>
 
-        </div><!-- /pointer-events-none -->
-      </article>
+        </article>
+
+      </div>
+
+      <!-- ══ Garantía de Formación Exclusiva ══ -->
+      <div scrollReveal="up"
+           class="mx-auto mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 rounded-2xl bg-white p-6 sm:px-10 border border-[#eee2d5] shadow-sm text-center sm:text-left">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#c4956a]/15 text-[#c4956a]">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <p class="font-sans text-xs sm:text-sm font-light text-[#555]">
+          <strong class="font-medium text-[#1a1a1a]">Garantía de aprendizaje:</strong> Vídeos con explicaciones claras, planos en primer plano de aplicación y soporte directo para resolver tus dudas.
+        </p>
+      </div>
 
     </div>
+  </section>
 
-    <!-- ══ Badge inferior ══ -->
-    <div scrollReveal="up"
-         class="mx-auto mt-16 flex max-w-fit items-center justify-center gap-3 rounded-[12px] bg-white px-8 py-5 shadow-sm">
-      <span class="badge-dot h-3 w-3 rounded-full bg-[#c4956a]"></span>
-      <span class="font-sans text-[0.75rem] font-bold text-[#1a1a1a]">Garantía de aprendizaje: Grupos ultra reducidos · Formación personalizada y de calidad.</span>
+  <!-- ══════════════════════════════════════════
+       PREGUNTAS FRECUENTES SOBRE LOS CURSOS
+       ══════════════════════════════════════════ -->
+  <section class="mt-24 px-6 sm:px-10">
+    <div class="mx-auto max-w-[900px]">
+      
+      <div class="text-center mb-12">
+        <p scrollReveal="up" class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">Resuelve tus dudas</p>
+        <h3 scrollReveal="up" scrollDelay="1" class="mt-2 font-serif text-2xl sm:text-3xl font-light text-[#1a1a1a]">
+          Preguntas frecuentes sobre las formaciones
+        </h3>
+        <div class="mx-auto mt-4 h-[1.5px] w-12 bg-[#c4956a]"></div>
+      </div>
+
+      <div class="space-y-4">
+        
+        <details class="group rounded-2xl bg-white p-6 border border-[#ede0d0] shadow-sm transition-all open:shadow-md cursor-pointer">
+          <summary class="flex items-center justify-between font-serif text-base sm:text-lg font-normal text-[#1a1a1a] list-none">
+            <span>¿Durante cuánto tiempo tendré acceso a la masterclass?</span>
+            <span class="text-[#c4956a] transition-transform duration-300 group-open:rotate-45 text-xl font-light">+</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm font-light leading-relaxed text-[#666]">
+            El acceso es de por vida. Una vez completada tu compra, el curso se vincula a tu cuenta en el apartado <strong>Mis Cursos</strong> para que puedas repasar las técnicas tantas veces como quieras.
+          </p>
+        </details>
+
+        <details class="group rounded-2xl bg-white p-6 border border-[#ede0d0] shadow-sm transition-all open:shadow-md cursor-pointer">
+          <summary class="flex items-center justify-between font-serif text-base sm:text-lg font-normal text-[#1a1a1a] list-none">
+            <span>¿Necesito tener productos profesionales o caros para hacer el curso?</span>
+            <span class="text-[#c4956a] transition-transform duration-300 group-open:rotate-45 text-xl font-light">+</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm font-light leading-relaxed text-[#666]">
+            No. El curso te enseña a sacar el máximo rendimiento al neceser que ya tienes en casa. Además, aprenderás a reconocer qué productos realmente merecen la pena comprar para tu tipo de piel sin gastar de más.
+          </p>
+        </details>
+
+        <details class="group rounded-2xl bg-white p-6 border border-[#ede0d0] shadow-sm transition-all open:shadow-md cursor-pointer">
+          <summary class="flex items-center justify-between font-serif text-base sm:text-lg font-normal text-[#1a1a1a] list-none">
+            <span>¿Cómo accedo al contenido tras el pago?</span>
+            <span class="text-[#c4956a] transition-transform duration-300 group-open:rotate-45 text-xl font-light">+</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm font-light leading-relaxed text-[#666]">
+            Tras finalizar el pago seguro con tarjeta a través de Stripe, serás redirigida automáticamente a tu panel personal donde podrás reproducir el vídeo en alta definición con un solo clic.
+          </p>
+        </details>
+
+      </div>
+
     </div>
-
-  </div>
+  </section>
 
 </div>

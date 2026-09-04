@@ -46,6 +46,28 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   counterPersonal = signal(0);
   private countersAnimated = false;
 
+  // ── Testimonios VIP ──
+  readonly testimonios = [
+    {
+      nombre: 'Elena M.',
+      tipo: 'Novia · Boda en Santa Eulalia, Ibiza',
+      texto: 'Yonaida fue la mejor decisión para mi gran día. Supo captar exactamente lo que quería desde la primera prueba. El maquillaje aguantó el calor de agosto y la fiesta hasta el amanecer intacto.',
+      estrellas: 5,
+    },
+    {
+      nombre: 'Sofía & Lucas',
+      tipo: 'Editorial de Moda · Campaña Baño',
+      texto: 'Profesionalidad intachable en set. Su técnica de piel luminosa y su rapidez para cambios de look elevaron las fotografías a nivel de revista de lujo. Un diez.',
+      estrellas: 5,
+    },
+    {
+      nombre: 'Carlota R.',
+      tipo: 'Alumna · Masterclass Automaquillaje',
+      texto: 'Nunca conseguía hacerme el eyeliner ni que la base no se viese pesada. Con sus explicaciones paso a paso he aprendido a maquillarme en 15 minutos viéndome radiante.',
+      estrellas: 5,
+    },
+  ];
+
   // ── Slideshow (works section) ─────────────────
   readonly slides = [
     { src: 'images/IMG_1.PNG', alt: 'Trabajo de maquillaje 1', pos: 'center center' },

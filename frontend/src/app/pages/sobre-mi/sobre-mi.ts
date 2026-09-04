@@ -12,19 +12,24 @@ import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
 export class SobreMi {
   // ── Animated Counters ──
   counterYears = signal(0);
+  counterNovias = signal(0);
   counterPersonal = signal(0);
   private countersAnimated = false;
   private isBrowser: boolean;
 
   constructor(@Inject(PLATFORM_ID) private platformId: object) {
     this.isBrowser = isPlatformBrowser(platformId);
+    if (this.isBrowser) {
+      setTimeout(() => this.animateCounters(), 600);
+    }
   }
 
   animateCounters(): void {
     if (this.countersAnimated || !this.isBrowser) return;
     this.countersAnimated = true;
-    this.animateNumber(0, 5, 1500, v => this.counterYears.set(v));
-    this.animateNumber(0, 100, 1800, v => this.counterPersonal.set(v));
+    this.animateNumber(0, 5, 1400, v => this.counterYears.set(v));
+    this.animateNumber(0, 150, 1800, v => this.counterNovias.set(v));
+    this.animateNumber(0, 100, 1600, v => this.counterPersonal.set(v));
   }
 
   private animateNumber(start: number, end: number, duration: number, setter: (v: number) => void): void {

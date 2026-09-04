@@ -1,4 +1,9 @@
 <app-navbar />
-<router-outlet />
+
+<!-- Contenedor principal con micro-transición al cambiar de idioma -->
+<div class="transition-opacity duration-300" [class.opacity-60]="translation.isTranslating()">
+  <router-outlet />
+</div>
+
 <app-footer />
-<app-cookie-banner />
+<app-cookie-banner />

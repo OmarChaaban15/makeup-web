@@ -1,8 +1,9 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { filter } from 'rxjs/operators';
+import { TranslationService } from '../translation.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,16 +15,31 @@ export class Navbar {
   isScrolled = false;
   menuOpen = false;
   userMenuOpen = false;
+  langMenuOpen = false;
   isHeroPage = true; // transparent navbar on hero pages
+
+  public translation = inject(TranslationService);
 
   constructor(private router: Router, private http: HttpClient) {
     // Detect route changes to toggle transparent navbar
     this.router.events
       .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
       .subscribe(e => {
-        const path = e.urlAfterRedirects || e.url;
-        this.isHeroPage = path === '/' || path === '/inicio';
+        const path = (e.urlAfterRedirects || e.url).split('?')[0];
+        this.isHeroPage = path === '/' || path === '/inicio' || path === '/sobre-mi' || path === '/servicios';
       });
+  }
+
+  toggleLangMenu(event?: Event): void {
+    if (event) event.stopPropagation();
+    this.langMenuOpen = !this.langMenuOpen;
+    if (this.langMenuOpen) this.userMenuOpen = false;
+  }
+
+  selectLanguage(lang: 'es' | 'en' | 'it' | 'de', event?: Event): void {
+    if (event) event.stopPropagation();
+    this.translation.setLanguage(lang);
+    this.langMenuOpen = false;
   }
 
   get isLoggedIn(): boolean {
@@ -49,18 +65,31 @@ export class Navbar {
     this.isScrolled = window.scrollY > 20;
   }
 
-  // Cierra el desplegable de usuario al hacer clic fuera de él
+  // Cierra los desplegables al hacer clic fuera
   @HostListener('document:click')
-  closeUserMenu() {
+  closeMenus() {
     this.userMenuOpen = false;
+    this.langMenuOpen = false;
   }
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
+    this.updateBodyScroll();
   }
 
   closeMenu() {
     this.menuOpen = false;
+    this.updateBodyScroll();
+  }
+
+  private updateBodyScroll() {
+    if (typeof document !== 'undefined') {
+      if (this.menuOpen) {
+        document.body.classList.add('overflow-hidden');
+      } else {
+        document.body.classList.remove('overflow-hidden');
+      }
+    }
   }
 
   toggleUserMenu(event: Event) {
@@ -88,7 +117,7 @@ export class Navbar {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('user');
     this.userMenuOpen = false;
-    this.menuOpen = false;
+    this.closeMenu();
     this.router.navigate(['/inicio']);
   }
 }

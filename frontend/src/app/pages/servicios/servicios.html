@@ -1,270 +1,501 @@
-<div class="min-h-screen bg-[#fdfcfb] pt-20 font-sans antialiased">
+<div class="min-h-screen bg-[#fcf9f6] font-sans antialiased selection:bg-[#c4956a]/20">
 
   <!-- ══════════════════════════════════════════
-       HERO DE SECCIÓN (fondo: yonaida5)
+       HERO CINEMATOGRÁFICO A PANTALLA COMPLETA
        ══════════════════════════════════════════ -->
-  <section class="relative overflow-hidden" style="min-height: 620px;">
+  <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
     <!-- Imagen de fondo -->
-    <img
-      src="images/yonaida5.PNG"
-      alt="Yonaida, maquilladora profesional — servicios"
-      class="absolute inset-0 h-full w-full object-cover"
-      style="object-position: center -300px;"
-    />
-    <!-- Overlay degradado -->
-    <div class="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/60"></div>
+    <img src="images/yonaida5.PNG" alt="Yonaida, maquilladora profesional en Ibiza"
+      class="absolute inset-0 h-full w-full object-cover object-center" />
+    <!-- Overlay degradado oscuro de alta fidelidad -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/85"></div>
 
-    <!-- Contenido centrado -->
-    <div class="relative z-10 flex flex-col items-center justify-center px-8 pb-20 pt-32 text-center" style="min-height: 620px;">
-      <p scrollReveal="up" class="mb-4 font-serif text-[0.72rem] uppercase tracking-[0.32em] text-[#c4956a]">Mis Servicios</p>
-      <h1 scrollReveal="up" scrollDelay="1" class="mb-5 font-serif text-[clamp(2.8rem,5.5vw,4.5rem)] font-light leading-[1.15] text-white drop-shadow-lg">El maquillaje<br><em class="italic text-[#c4956a]">que mereces</em></h1>
-      <p scrollReveal="up" scrollDelay="2" class="font-sans text-base font-light leading-[1.75] text-white/80">
-        Cada servicio está diseñado para realzar tu belleza única,<br>
-        adaptándome a cada ocasión con detalle y profesionalidad.
+    <!-- Contenido central -->
+    <div class="relative z-10 mx-auto max-w-[820px] px-6 text-center text-white">
+      <div scrollReveal="up"
+        class="mb-5 inline-flex items-center gap-2 rounded-full border border-[#c4956a]/40 bg-[#c4956a]/15 px-4 py-1.5 backdrop-blur-md">
+        <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a] animate-pulse"></span>
+        <span class="font-serif text-[0.7rem] uppercase tracking-[0.28em] text-[#e8c6a0]">Atelier de Maquillaje &middot;
+          Ibiza</span>
+      </div>
+
+      <h1 scrollReveal="up" scrollDelay="1"
+        class="font-serif text-[clamp(2.6rem,6.5vw,5.5rem)] font-light leading-[1.08] text-white drop-shadow-2xl">
+        El maquillaje<br><em class="italic text-[#e8c6a0]">que mereces</em>
+      </h1>
+
+      <p scrollReveal="up" scrollDelay="2"
+        class="mx-auto mt-6 max-w-[540px] font-sans text-sm sm:text-base font-light leading-[1.8] text-white/85">
+        Desde la exclusividad nupcial hasta producciones de moda y eventos de gala. Cada técnica está concebida para
+        resaltar tus rasgos con luminosidad, elegancia y máxima fijación.
       </p>
+
+      <!-- Selector rápido de categorías -->
+      <div scrollReveal="up" scrollDelay="3" class="mt-8 flex flex-wrap justify-center gap-2.5 sm:gap-3">
+        <button type="button" (click)="scrollTo('servicio-novia')"
+          class="rounded-full bg-white/10 px-5 py-2.5 font-serif text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white backdrop-blur-md border border-white/20 transition-all hover:bg-[#c4956a] hover:border-[#c4956a] cursor-pointer">
+          Novias &amp; Bodas
+        </button>
+        <button type="button" (click)="scrollTo('servicio-eventos')"
+          class="rounded-full bg-white/10 px-5 py-2.5 font-serif text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white backdrop-blur-md border border-white/20 transition-all hover:bg-[#c4956a] hover:border-[#c4956a] cursor-pointer">
+          Eventos &amp; Social
+        </button>
+        <button type="button" (click)="scrollTo('servicio-editorial')"
+          class="rounded-full bg-white/10 px-5 py-2.5 font-serif text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white backdrop-blur-md border border-white/20 transition-all hover:bg-[#c4956a] hover:border-[#c4956a] cursor-pointer">
+          Moda &amp; Editorial
+        </button>
+        <button type="button" (click)="scrollTo('servicio-audiovisual')"
+          class="rounded-full bg-white/10 px-5 py-2.5 font-serif text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white backdrop-blur-md border border-white/20 transition-all hover:bg-[#c4956a] hover:border-[#c4956a] cursor-pointer">
+          Cine &amp; Rodajes
+        </button>
+      </div>
+    </div>
+
+    <!-- Indicador de scroll -->
+    <button type="button" (click)="scrollTo('intro-servicios')"
+      class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/60 hover:text-[#c4956a] transition-colors cursor-pointer animate-bounce">
+      <span class="font-serif text-[0.62rem] uppercase tracking-[0.25em]">Descubrir servicios</span>
+      <svg class="h-4 w-4 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       INTRO & FILOSOFÍA DE ATELIER
+       ══════════════════════════════════════════ -->
+  <section id="intro-servicios" class="px-6 py-20 sm:px-10 md:py-28">
+    <div class="mx-auto max-w-[1140px]">
+      <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+
+        <div>
+          <p scrollReveal="up"
+            class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">Filosofía de
+            Belleza</p>
+          <h2 scrollReveal="up" scrollDelay="1"
+            class="mt-4 font-serif text-[clamp(2rem,3.8vw,3rem)] font-light leading-[1.2] text-[#1a1a1a]">
+            Naturalidad pulida,<br>
+            <em class="italic text-[#c4956a]">fijación impecable.</em>
+          </h2>
+          <div class="mt-6 h-[1.5px] w-14 bg-[#c4956a]"></div>
+          <p scrollReveal="up" scrollDelay="2"
+            class="mt-6 font-sans text-[0.95rem] font-light leading-[1.85] text-[#555]">
+            Mi enfoque huye de los maquillajes pesados o artificiales. Trabajo la piel creando una base luminosa, sedosa
+            y resistente al clima mediterráneo, realzando la mirada y los labios para que sigas reconociéndote en tu
+            mejor versión.
+          </p>
+
+          <!-- Ventajas clave en mini badges -->
+          <div scrollReveal="up" scrollDelay="3" class="mt-8 grid grid-cols-2 gap-4">
+            <div class="rounded-2xl bg-[#faf5f0] p-4 border border-[#eee2d5]">
+              <span class="block font-serif text-sm font-semibold text-[#1a1a1a]">Alta Cosmética</span>
+              <span class="mt-1 block text-xs text-[#777]">Charlotte Tilbury, Dior, NARS &amp; MAC.</span>
+            </div>
+            <div class="rounded-2xl bg-[#faf5f0] p-4 border border-[#eee2d5]">
+              <span class="block font-serif text-sm font-semibold text-[#1a1a1a]">A Domicilio / Villas</span>
+              <span class="mt-1 block text-xs text-[#777]">Servicio en cualquier punto de Ibiza.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Composicion de imagenes editoriales -->
+        <div class="relative">
+          <div scrollReveal="right"
+            class="relative overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(26,26,26,0.12)]">
+            <img src="images/yonaida3.JPG" alt="Yonaida — maquillaje profesional"
+              class="w-full object-cover object-center aspect-[4/5]" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6 text-white">
+              <span class="font-serif text-[0.65rem] uppercase tracking-widest text-[#e8c6a0]">Acabado de
+                pasarela</span>
+              <p class="font-serif text-lg font-light">Piel radiante con técnica HD</p>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════════
-       GALERÍA DE FOTOS — YONAIDA 3 & 4
+       CATÁLOGO DETALLADO DE SERVICIOS
        ══════════════════════════════════════════ -->
-  <section class="overflow-hidden bg-[#fdfcfb] px-6 py-16 sm:px-10">
-    <div class="mx-auto grid max-w-[1100px] grid-cols-1 gap-5 sm:grid-cols-2">
+  <section class="bg-[#f7f2ed] px-6 py-20 sm:px-10 md:py-28 border-y border-[#ede0d0]">
+    <div class="mx-auto max-w-[1200px]">
 
-      <!-- Foto yonaida3 -->
-      <div scrollReveal="left" class="group relative overflow-hidden rounded-2xl shadow-[0_16px_50px_rgba(26,26,26,0.12)]">
-        <img
-          src="images/yonaida3.JPG"
-          alt="Yonaida — maquillaje profesional"
-          class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
-          style="aspect-ratio: 4/5; min-height: 360px;"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-        <div class="absolute bottom-0 left-0 px-7 py-6 translate-y-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-          <p class="font-serif text-[0.65rem] uppercase tracking-[0.25em] text-[#c4956a]">Maquillaje</p>
-          <p class="mt-1 font-serif text-[1.1rem] font-light text-white">Arte en cada detalle</p>
+      <div class="mx-auto max-w-2xl text-center mb-16">
+        <p scrollReveal="up" class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.32em] text-[#c4956a]">
+          Servicios Exclusivos</p>
+        <h2 scrollReveal="up" scrollDelay="1"
+          class="mt-3 font-serif text-[clamp(2.2rem,4vw,3.2rem)] font-light text-[#1a1a1a]">
+          Diseñados para cada momento
+        </h2>
+        <div class="mx-auto mt-5 h-[1.5px] w-12 bg-[#c4956a]"></div>
+      </div>
+
+      <!-- Rejilla de servicios con fotos y fichas de contenido -->
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+
+        <!-- ── 01 · NOVIAS & BODAS (DESTACADO) ── -->
+        <article id="servicio-novia" scrollReveal="up" scrollDelay="1"
+          class="group relative flex flex-col overflow-hidden rounded-[30px] bg-[#1a1a1a] text-white shadow-[0_20px_60px_rgba(26,26,26,0.25)] border border-white/10 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_30px_70px_rgba(196,149,106,0.3)]">
+
+          <!-- Imagen de cabecera -->
+          <div class="relative h-64 sm:h-72 w-full overflow-hidden bg-black">
+            <img src="images/IMG_1.PNG" alt="Maquillaje de Novia en Ibiza"
+              class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/40 to-transparent"></div>
+
+            <div class="absolute top-4 left-4 right-4 flex items-center justify-between">
+              <span
+                class="rounded-full bg-[#c4956a] px-3.5 py-1 font-serif text-[0.65rem] font-semibold uppercase tracking-widest text-white shadow-md">
+                ⭐ Servicio Estrella
+              </span>
+              <span class="rounded-full bg-black/60 px-3 py-1 text-[0.65rem] font-sans text-white/80 backdrop-blur-md">
+                Con cita previa
+              </span>
+            </div>
+          </div>
+
+          <!-- Contenido ficha -->
+          <div class="flex flex-1 flex-col p-8 sm:p-10">
+            <h3 class="font-serif text-[1.8rem] font-light text-white leading-snug">
+              Maquillaje <em class="italic text-[#e8c6a0]">de Novia</em>
+            </h3>
+            <p class="mt-3 font-sans text-sm font-light leading-relaxed text-white/75">
+              Tu boda en Ibiza requiere una preparación milimétrica. Creamos juntas el look que refleje tu esencia,
+              garantizando máxima duración frente a lágrimas, abrazos y clima cálido.
+            </p>
+
+            <div class="my-6 border-t border-white/10 pt-6 space-y-3">
+              <p class="font-serif text-xs uppercase tracking-[0.2em] text-[#c4956a]">¿Qué incluye este servicio?</p>
+              <ul class="space-y-2 text-xs sm:text-sm font-light text-white/70">
+                <li class="flex items-center gap-2.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Sesión previa de asesoría y visagismo personalizado.
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Prueba de maquillaje completa con registro fotográfico.
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Preparación de la piel con mascarilla hidratante previa.
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Kit de retoque de regalo para el transcurso de la boda.
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-auto pt-4 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+              <a routerLink="/contacto"
+                class="inline-flex items-center justify-center gap-2 rounded-full bg-[#c4956a] px-8 py-3.5 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-lg transition-all hover:bg-[#a87a52] active:scale-95">
+                <span>Solicitar propuesta de boda</span>
+                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+              <span class="text-center sm:text-right font-sans text-xs text-white/50">Ibiza &amp; Formentera</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── 02 · EVENTOS & SOCIAL ── -->
+        <article id="servicio-eventos" scrollReveal="up" scrollDelay="2"
+          class="group relative flex flex-col overflow-hidden rounded-[30px] bg-white text-[#1a1a1a] shadow-sm border border-[#ede0d0] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_rgba(196,149,106,0.18)]">
+
+          <div class="relative h-64 sm:h-72 w-full overflow-hidden bg-[#faf8f5]">
+            <img src="images/IMG_3.PNG" alt="Maquillaje para eventos y fiestas"
+              class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-white via-white/30 to-transparent"></div>
+
+            <div class="absolute top-4 left-4">
+              <span
+                class="rounded-full bg-[#1a1a1a] px-3.5 py-1 font-serif text-[0.65rem] font-semibold uppercase tracking-widest text-white shadow-md">
+                Social &amp; Fiesta
+              </span>
+            </div>
+          </div>
+
+          <div class="flex flex-1 flex-col p-8 sm:p-10">
+            <h3 class="font-serif text-[1.8rem] font-light text-[#1a1a1a] leading-snug">
+              Invitada <em class="italic text-[#c4956a]">&amp; Ocasiones Especiales</em>
+            </h3>
+            <p class="mt-3 font-sans text-sm font-light leading-relaxed text-[#666]">
+              Para graduaciones, galas, fiestas en Ibiza o invitadas de boda que buscan deslumbrar con un estilo
+              sofisticado y una piel fresca que dure toda la velada.
+            </p>
+
+            <div class="my-6 border-t border-[#eee5dc] pt-6 space-y-3">
+              <p class="font-serif text-xs uppercase tracking-[0.2em] text-[#c4956a]">¿Qué incluye este servicio?</p>
+              <ul class="space-y-2 text-xs sm:text-sm font-light text-[#555]">
+                <li class="flex items-center gap-2.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Diagnóstico rápido de piel y asesoría según estilismo.
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Pestañas individuales o tira a medida incluidas.
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Sellado profesional antitranspirante y fijación extrema.
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-auto pt-4 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+              <a routerLink="/contacto"
+                class="inline-flex items-center justify-center gap-2 rounded-full border border-[#c4956a] bg-white px-8 py-3.5 font-serif text-xs font-semibold uppercase tracking-widest text-[#c4956a] transition-all hover:bg-[#c4956a] hover:text-white active:scale-95">
+                <span>Reservar para evento</span>
+                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+              <span class="text-center sm:text-right font-sans text-xs text-[#888]">En estudio o a domicilio</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── 03 · EDITORIAL & MODA ── -->
+        <article id="servicio-editorial" scrollReveal="up" scrollDelay="1"
+          class="group relative flex flex-col overflow-hidden rounded-[30px] bg-white text-[#1a1a1a] shadow-sm border border-[#ede0d0] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_rgba(196,149,106,0.18)]">
+
+          <div class="relative h-64 sm:h-72 w-full overflow-hidden bg-[#faf8f5]">
+            <img src="images/IMG_4.PNG" alt="Maquillaje editorial para fotógrafos y moda"
+              class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-white via-white/30 to-transparent"></div>
+
+            <div class="absolute top-4 left-4">
+              <span
+                class="rounded-full bg-[#1a1a1a] px-3.5 py-1 font-serif text-[0.65rem] font-semibold uppercase tracking-widest text-white shadow-md">
+                Moda &amp; Revistas
+              </span>
+            </div>
+          </div>
+
+          <div class="flex flex-1 flex-col p-8 sm:p-10">
+            <h3 class="font-serif text-[1.8rem] font-light text-[#1a1a1a] leading-snug">
+              Editorial <em class="italic text-[#c4956a]">&amp; Sesiones de Foto</em>
+            </h3>
+            <p class="mt-3 font-sans text-sm font-light leading-relaxed text-[#666]">
+              Coordinación con fotógrafos, marcas y modelos para lookbooks, campañas publicitarias de moda y portadas
+              con precisión milimétrica bajo iluminación de estudio o luz natural de Ibiza.
+            </p>
+
+            <div class="my-6 border-t border-[#eee5dc] pt-6 space-y-3">
+              <p class="font-serif text-xs uppercase tracking-[0.2em] text-[#c4956a]">¿Qué incluye este servicio?</p>
+              <ul class="space-y-2 text-xs sm:text-sm font-light text-[#555]">
+                <li class="flex items-center gap-2.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Desarrollo de moodboard y concepto creativo con el equipo.
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Asistencia y retoque continuo durante todo el shooting.
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Cambios de look rápidos entre sets de vestuario.
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-auto pt-4 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+              <a routerLink="/contacto"
+                class="inline-flex items-center justify-center gap-2 rounded-full border border-[#c4956a] bg-white px-8 py-3.5 font-serif text-xs font-semibold uppercase tracking-widest text-[#c4956a] transition-all hover:bg-[#c4956a] hover:text-white active:scale-95">
+                <span>Tarifas por jornada</span>
+                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+              <span class="text-center sm:text-right font-sans text-xs text-[#888]">Media jornada o completa</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── 04 · AUDIOVISUAL & TELEVISIÓN ── -->
+        <article id="servicio-audiovisual" scrollReveal="up" scrollDelay="2"
+          class="group relative flex flex-col overflow-hidden rounded-[30px] bg-white text-[#1a1a1a] shadow-sm border border-[#ede0d0] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_rgba(196,149,106,0.18)]">
+
+          <div class="relative h-64 sm:h-72 w-full overflow-hidden bg-[#faf8f5]">
+            <img src="images/IMG_5.JPEG" alt="Maquillaje para cine, videoclips y televisión"
+              class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-white via-white/30 to-transparent"></div>
+
+            <div class="absolute top-4 left-4">
+              <span
+                class="rounded-full bg-[#1a1a1a] px-3.5 py-1 font-serif text-[0.65rem] font-semibold uppercase tracking-widest text-white shadow-md">
+                Cine &amp; Televisión
+              </span>
+            </div>
+          </div>
+
+          <div class="flex flex-1 flex-col p-8 sm:p-10">
+            <h3 class="font-serif text-[1.8rem] font-light text-[#1a1a1a] leading-snug">
+              Cine, Videoclips <em class="italic text-[#c4956a]">&amp; Publicidad</em>
+            </h3>
+            <p class="mt-3 font-sans text-sm font-light leading-relaxed text-[#666]">
+              Servicio para productoras audiovisuales, cadenas de televisión, spots comerciales y proyectos de ficción.
+              Técnicas específicas para ópticas 4K/8K sin brillos ni imperfecciones.
+            </p>
+
+            <div class="my-6 border-t border-[#eee5dc] pt-6 space-y-3">
+              <p class="font-serif text-xs uppercase tracking-[0.2em] text-[#c4956a]">¿Qué incluye este servicio?</p>
+              <ul class="space-y-2 text-xs sm:text-sm font-light text-[#555]">
+                <li class="flex items-center gap-2.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Raccord y control de continuidad entre escenas.
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Compatibilidad con cámaras digitales y focos de alta potencia.
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  Adaptación a rodajes exteriores en calas y barcos.
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-auto pt-4 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+              <a routerLink="/contacto"
+                class="inline-flex items-center justify-center gap-2 rounded-full border border-[#c4956a] bg-white px-8 py-3.5 font-serif text-xs font-semibold uppercase tracking-widest text-[#c4956a] transition-all hover:bg-[#c4956a] hover:text-white active:scale-95">
+                <span>Coordinar producción</span>
+                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+              <span class="text-center sm:text-right font-sans text-xs text-[#888]">Disponibilidad en rodajes</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       EL PROCESO YONAIDA: PASO A PASO
+       ══════════════════════════════════════════ -->
+  <section class="px-6 py-20 sm:px-10 md:py-28">
+    <div class="mx-auto max-w-[1140px]">
+
+      <div class="mx-auto max-w-2xl text-center mb-16">
+        <p scrollReveal="up" class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">
+          Tu Tranquilidad es lo Primero</p>
+        <h2 scrollReveal="up" scrollDelay="1"
+          class="mt-3 font-serif text-[clamp(2rem,3.8vw,3rem)] font-light text-[#1a1a1a]">
+          Cómo trabajamos juntas
+        </h2>
+        <div class="mx-auto mt-5 h-[1.5px] w-12 bg-[#c4956a]"></div>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <!-- Paso 1 -->
+        <div scrollReveal="up" scrollDelay="1"
+          class="rounded-3xl bg-white p-7 border border-[#ede0d0] shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="font-serif text-3xl font-light text-[#c4956a]">01</span>
+            <h4 class="mt-4 font-serif text-lg font-normal text-[#1a1a1a]">Consulta Inicial</h4>
+            <p class="mt-2 text-xs font-light text-[#666] leading-relaxed">
+              Hablamos sobre tu evento, el vestido, la hora de la celebración y tus preferencias personales.
+            </p>
+          </div>
+          <div class="mt-6 h-1 w-8 rounded-full bg-[#c4956a]/30"></div>
+        </div>
+
+        <!-- Paso 2 -->
+        <div scrollReveal="up" scrollDelay="2"
+          class="rounded-3xl bg-white p-7 border border-[#ede0d0] shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="font-serif text-3xl font-light text-[#c4956a]">02</span>
+            <h4 class="mt-4 font-serif text-lg font-normal text-[#1a1a1a]">Prueba &amp; Ajustes</h4>
+            <p class="mt-2 text-xs font-light text-[#666] leading-relaxed">
+              En novias realizamos una prueba meticulosa para afinar cada matiz de color, intensidad y duración.
+            </p>
+          </div>
+          <div class="mt-6 h-1 w-8 rounded-full bg-[#c4956a]/30"></div>
+        </div>
+
+        <!-- Paso 3 -->
+        <div scrollReveal="up" scrollDelay="3"
+          class="rounded-3xl bg-white p-7 border border-[#ede0d0] shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="font-serif text-3xl font-light text-[#c4956a]">03</span>
+            <h4 class="mt-4 font-serif text-lg font-normal text-[#1a1a1a]">Preparación Piel</h4>
+            <p class="mt-2 text-xs font-light text-[#666] leading-relaxed">
+              Rutina cosmética hidratante y masajes descongestionantes antes de aplicar cualquier pigmento.
+            </p>
+          </div>
+          <div class="mt-6 h-1 w-8 rounded-full bg-[#c4956a]/30"></div>
+        </div>
+
+        <!-- Paso 4 -->
+        <div scrollReveal="up" scrollDelay="4"
+          class="rounded-3xl bg-white p-7 border border-[#ede0d0] shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="font-serif text-3xl font-light text-[#c4956a]">04</span>
+            <h4 class="mt-4 font-serif text-lg font-normal text-[#1a1a1a]">El Gran Día</h4>
+            <p class="mt-2 text-xs font-light text-[#666] leading-relaxed">
+              Puntualidad rigurosa en tu villa, hotel o atelier para que disfrutes de un momento de calma y relax.
+            </p>
+          </div>
+          <div class="mt-6 h-1 w-8 rounded-full bg-[#c4956a]/30"></div>
         </div>
       </div>
 
-      <!-- Foto yonaida4 -->
-      <div scrollReveal="right" class="group relative overflow-hidden rounded-2xl shadow-[0_16px_50px_rgba(26,26,26,0.12)]">
-        <img
-          src="images/yonaida4.PNG"
-          alt="Yonaida — trabajo artístico de maquillaje"
-          class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
-          style="aspect-ratio: 4/5; min-height: 360px;"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-        <div class="absolute bottom-0 left-0 px-7 py-6 translate-y-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-          <p class="font-serif text-[0.65rem] uppercase tracking-[0.25em] text-[#c4956a]">Elegancia</p>
-          <p class="mt-1 font-serif text-[1.1rem] font-light text-white">Tu mejor versión</p>
-        </div>
-      </div>
-
     </div>
   </section>
 
   <!-- ══════════════════════════════════════════
-       GRID DE SERVICIOS — PREMIUM
+       CTA FINAL — FONDO YONAIDA 6 A PANTALLA COMPLETA
        ══════════════════════════════════════════ -->
-  <section class="bg-[#fdfcfb] px-6 py-20 sm:px-10">
-    <div class="mx-auto max-w-[1100px]">
-      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-
-        <!-- ── 01 · Eventos ── -->
-        <article scrollReveal="up" scrollDelay="1"
-                 class="service-card group relative flex flex-col overflow-hidden rounded-[20px] border border-[#ede0d0] bg-white p-10 shadow-[0_4px_24px_rgba(196,149,106,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.18)]" id="servicio-eventos">
-
-          <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-
-          <div class="mb-6 flex items-center gap-4">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5ede3] text-[#c4956a] transition-all duration-300 group-hover:bg-[#c4956a] group-hover:text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-            </div>
-            <p class="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Eventos &amp; Ocasiones</p>
-          </div>
-
-          <h2 class="mb-4 font-serif text-[clamp(1.6rem,2.5vw,2.1rem)] font-light leading-[1.2] text-[#1a1a1a]">Maquillaje<br><em class="italic text-[#c4956a]">para eventos</em></h2>
-          <div class="mb-5 h-[1.5px] w-10 bg-[#c4956a]"></div>
-
-          <p class="mb-6 font-sans text-[0.88rem] font-light leading-[1.8] text-[#666]">
-            Luce radiante en cualquier ocasión especial. Maquillajes personalizados para fiestas, galas, graduaciones, comuniones y todo tipo de eventos.
-          </p>
-
-          <ul class="mb-8 flex flex-col gap-2.5">
-            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Maquillaje de larga duración</li>
-            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Adaptado a tu estilo y facciones</li>
-            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Acabado profesional y elegante</li>
-          </ul>
-
-          <a routerLink="/reservar-cita" class="mt-auto inline-flex w-fit items-center gap-2 rounded-full border border-[#c4956a] px-6 py-2.5 font-serif text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white" id="cta-eventos">
-            Reservar cita
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </article>
-
-        <!-- ── 02 · Novia ── -->
-        <article scrollReveal="up" scrollDelay="2"
-                 class="service-card group relative flex flex-col overflow-hidden rounded-[20px] bg-[#1a1a1a] p-10 shadow-[0_4px_24px_rgba(26,26,26,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(26,26,26,0.35)]" id="servicio-novia">
-
-          <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-
-          <div class="mb-6 flex items-center gap-4">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#c4956a]/15 text-[#c4956a] transition-all duration-300 group-hover:bg-[#c4956a] group-hover:text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
-                <path d="M12 22s8-6 8-12a8 8 0 0 0-16 0c0 6 8 12 8 12z"/><circle cx="12" cy="10" r="3"/>
-              </svg>
-            </div>
-            <div class="flex flex-col gap-1">
-              <p class="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Novia &amp; Bodas</p>
-              <span class="badge-pulse w-fit rounded-full bg-[#c4956a]/20 px-2.5 py-0.5 font-sans text-[0.58rem] font-semibold uppercase tracking-wider text-[#c4956a]">⭐ Más solicitado</span>
-            </div>
-          </div>
-
-          <h2 class="mb-4 font-serif text-[clamp(1.6rem,2.5vw,2.1rem)] font-light leading-[1.2] text-white">Maquillaje<br><em class="italic text-[#c4956a]">de novia</em></h2>
-          <div class="mb-5 h-[1.5px] w-10 bg-[#c4956a]"></div>
-
-          <p class="mb-6 font-sans text-[0.88rem] font-light leading-[1.8] text-white/65">
-            Tu boda merece lo mejor. Te acompaño en todo el proceso para crear un look que refleje tu personalidad y resista toda la jornada perfectamente.
-          </p>
-
-          <ul class="mb-8 flex flex-col gap-2.5">
-            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-white/60"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Prueba de maquillaje previa</li>
-            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-white/60"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Asesoramiento personalizado</li>
-            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-white/60"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Resistente a lágrimas y calor</li>
-          </ul>
-
-          <a routerLink="/reservar-cita" class="mt-auto inline-flex w-fit items-center gap-2 rounded-full border border-[#c4956a] bg-[#c4956a] px-6 py-2.5 font-serif text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:bg-[#a87a52] hover:border-[#a87a52]" id="cta-novia">
-            Reservar cita
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </article>
-
-        <!-- ── 03 · Editorial ── -->
-        <article scrollReveal="up" scrollDelay="3"
-                 class="service-card group relative flex flex-col overflow-hidden rounded-[20px] border border-[#ede0d0] bg-white p-10 shadow-[0_4px_24px_rgba(196,149,106,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.18)]" id="servicio-editorial">
-
-          <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-
-          <div class="mb-6 flex items-center gap-4">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5ede3] text-[#c4956a] transition-all duration-300 group-hover:bg-[#c4956a] group-hover:text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
-                <rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 5V3M16 5V3"/>
-              </svg>
-            </div>
-            <p class="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Editorial &amp; Fotografía</p>
-          </div>
-
-          <h2 class="mb-4 font-serif text-[clamp(1.6rem,2.5vw,2.1rem)] font-light leading-[1.2] text-[#1a1a1a]">Maquillaje editorial<br><em class="italic text-[#c4956a]">&amp; fotografía</em></h2>
-          <div class="mb-5 h-[1.5px] w-10 bg-[#c4956a]"></div>
-
-          <p class="mb-6 font-sans text-[0.88rem] font-light leading-[1.8] text-[#666]">
-            Especializada en sesiones fotográficas, campañas publicitarias y creación de contenido. Cada look se diseña según la iluminación y el concepto creativo.
-          </p>
-
-          <ul class="mb-8 flex flex-col gap-2.5">
-            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Editorial de moda y belleza</li>
-            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Fotografía profesional</li>
-            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Contenido para marcas y redes sociales</li>
-          </ul>
-
-          <a routerLink="/reservar-cita" class="mt-auto inline-flex w-fit items-center gap-2 rounded-full border border-[#c4956a] px-6 py-2.5 font-serif text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white" id="cta-editorial">
-            Reservar cita
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </article>
-
-        <!-- ── 04 · Audiovisual ── -->
-        <article scrollReveal="up" scrollDelay="4"
-                 class="service-card group relative flex flex-col overflow-hidden rounded-[20px] border border-[#ede0d0] bg-white p-10 shadow-[0_4px_24px_rgba(196,149,106,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(196,149,106,0.18)]" id="servicio-audiovisual">
-
-          <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#c4956a] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-
-          <div class="mb-6 flex items-center gap-4">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5ede3] text-[#c4956a] transition-all duration-300 group-hover:bg-[#c4956a] group-hover:text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
-                <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>
-              </svg>
-            </div>
-            <p class="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#c4956a]">Cine &amp; Producción</p>
-          </div>
-
-          <h2 class="mb-4 font-serif text-[clamp(1.6rem,2.5vw,2.1rem)] font-light leading-[1.2] text-[#1a1a1a]">Maquillaje<br><em class="italic text-[#c4956a]">audiovisual</em></h2>
-          <div class="mb-5 h-[1.5px] w-10 bg-[#c4956a]"></div>
-
-          <p class="mb-6 font-sans text-[0.88rem] font-light leading-[1.8] text-[#666]">
-            Para producciones audiovisuales, televisión, cine, videoclips y publicidad. Resultados perfectos en cámara bajo cualquier tipo de iluminación.
-          </p>
-
-          <ul class="mb-8 flex flex-col gap-2.5">
-            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Grabaciones y rodajes</li>
-            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Producciones publicitarias</li>
-            <li class="flex items-center gap-2.5 font-sans text-[0.8rem] font-light text-[#555]"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4956a]"></span>Continuidad y adaptación a cámara</li>
-          </ul>
-
-          <a routerLink="/reservar-cita" class="mt-auto inline-flex w-fit items-center gap-2 rounded-full border border-[#c4956a] px-6 py-2.5 font-serif text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white" id="cta-audiovisual">
-            Reservar cita
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════
-       CTA FINAL — FONDO YONAIDA 6
-       ══════════════════════════════════════════ -->
-  <section class="relative overflow-hidden" style="min-height: 560px;">
-
+  <section class="relative overflow-hidden min-h-[580px] flex items-center">
     <!-- Imagen de fondo -->
-    <img
-      src="images/yonaida6.PNG"
-      alt="Yonaida — maquillaje de alta calidad"
-      class="absolute inset-0 h-full w-full object-cover"
-      style="object-position: center 30%;"
-    />
+    <img src="images/yonaida6.PNG" alt="Yonaida — maquillaje de alta calidad en Ibiza"
+      class="absolute inset-0 h-full w-full object-cover" style="object-position: center 30%;" />
     <!-- Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/30"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/35"></div>
 
     <!-- Contenido -->
-    <div class="relative z-10 flex h-full flex-col justify-center px-8 py-24 sm:px-16 md:px-24" style="min-height: 560px;">
+    <div class="relative z-10 mx-auto max-w-[1200px] w-full px-6 sm:px-10 py-20">
       <div class="max-w-[560px]">
 
-        <p scrollReveal="up" class="mb-5 font-serif text-[0.72rem] uppercase tracking-[0.35em] text-[#c4956a]">¿Lista para tu cambio?</p>
+        <p scrollReveal="up" class="mb-4 font-serif text-[0.72rem] uppercase tracking-[0.35em] text-[#e8c6a0]">Agenda
+          Abierta 2026</p>
 
-        <h2 scrollReveal="up" scrollDelay="1" class="mb-6 font-serif text-[clamp(2.2rem,4.5vw,3.5rem)] font-light leading-[1.2] text-white drop-shadow-md">
-          Tu momento<br><em class="italic text-[#c4956a]">empieza aquí</em>
+        <h2 scrollReveal="up" scrollDelay="1"
+          class="mb-5 font-serif text-[clamp(2.4rem,4.5vw,3.6rem)] font-light leading-[1.15] text-white drop-shadow-md">
+          Tu momento<br><em class="italic text-[#e8c6a0]">empieza aquí</em>
         </h2>
 
-        <div class="mb-8 h-[1.5px] w-14 bg-[#c4956a]"></div>
+        <div class="mb-7 h-[1.5px] w-14 bg-[#c4956a]"></div>
 
-        <p scrollReveal="up" scrollDelay="2" class="mb-10 max-w-[440px] font-sans text-[0.95rem] font-light leading-[1.85] text-white/75">
-          Cuéntame tu idea y juntas diseñamos el maquillaje perfecto para ti. Primera consulta gratuita y sin compromiso.
+        <p scrollReveal="up" scrollDelay="2"
+          class="mb-8 font-sans text-sm sm:text-base font-light leading-relaxed text-white/80">
+          Cuéntame la fecha de tu evento, las personas a maquillar y cualquier detalle que desees. Responderé
+          personalmente con disponibilidad y presupuesto.
         </p>
 
-        <blockquote scrollReveal="left" scrollDelay="3" class="mb-10 border-l-2 border-[#c4956a] pl-5">
-          <p class="font-serif text-[1rem] font-light italic leading-[1.7] text-white/60">
-            "Cada clienta merece sentirse única y absolutamente especial."
-          </p>
-          <footer class="mt-2 font-sans text-[0.68rem] uppercase tracking-[0.2em] text-[#c4956a]">— Yonaida</footer>
-        </blockquote>
-
-        <div scrollReveal="up" scrollDelay="4" class="flex flex-wrap gap-4">
-          <a routerLink="/reservar-cita"
-             class="inline-flex items-center gap-3 bg-[#c4956a] px-8 py-4 font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:bg-[#a87a52] hover:shadow-[0_8px_30px_rgba(196,149,106,0.4)]"
-             id="servicios-cta-reservar">
-            Reservar cita
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
+        <div scrollReveal="up" scrollDelay="3" class="flex flex-wrap gap-4">
+          <a routerLink="/contacto"
+            class="inline-flex items-center gap-3 rounded-full bg-[#c4956a] px-8 py-4 font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline shadow-xl transition-all duration-300 hover:bg-[#a87a52] hover:shadow-2xl active:scale-95">
+            <span>Contactar para cita</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
-          <a routerLink="/contacto"
-             class="inline-flex items-center gap-3 border-[1.5px] border-white/40 px-8 py-4 font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:border-white hover:bg-white/10"
-             id="servicios-cta-contactar">
-            Contactar
+          <a href="https://wa.me/34658728433?text=Hola%20Yonaida,%20quisiera%20consultar%20sobre%20tus%20servicios%20de%20maquillaje"
+            target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 backdrop-blur-sm px-8 py-4 font-serif text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:bg-white hover:text-[#1a1a1a] active:scale-95">
+            <span>Consultar por WhatsApp</span>
           </a>
         </div>
 

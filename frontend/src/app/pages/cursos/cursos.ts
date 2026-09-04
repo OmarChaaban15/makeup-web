@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
@@ -6,7 +7,8 @@ import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-cursos',
-  imports: [ScrollRevealDirective],
+  standalone: true,
+  imports: [CommonModule, ScrollRevealDirective],
   templateUrl: './cursos.html',
   styleUrl: './cursos.css',
 })
@@ -16,12 +18,21 @@ export class Cursos {
 
   comprando = false;
   errorMsg = '';
+  notificado = false;
+  emailAviso = '';
+
+  abrirAvisoProximamente(): void {
+    const email = prompt('Introduce tu email para recibir aviso preferente del lanzamiento:');
+    if (email && email.includes('@')) {
+      this.notificado = true;
+      alert('¡Gracias! Te avisaremos antes del lanzamiento con un descuento exclusivo.');
+    }
+  }
 
   comprarMasterclass(): void {
     const token = localStorage.getItem('auth_token');
 
     if (!token) {
-      // Si no está logueado, lo mandamos a login para que pueda comprar
       this.router.navigate(['/login'], { queryParams: { redirect: '/cursos' } });
       return;
     }
@@ -33,17 +44,16 @@ export class Cursos {
 
     this.http.post<{ pedido: any; checkout_url: string }>(
       `${environment.apiUrl}/pedidos`,
-      { tutoriales: [2] }, // id del tutorial "Masterclass de Automaquillaje Online"
+      { tutoriales: [2] },
       { headers }
     ).subscribe({
       next: (respuesta) => {
-        // Redirige al usuario a la pasarela de pago de Stripe
         window.location.href = respuesta.checkout_url;
       },
       error: () => {
         this.comprando = false;
-        this.errorMsg = 'No se pudo iniciar el pago. Inténtalo de nuevo.';
+        this.errorMsg = 'No se pudo iniciar el pago seguro con Stripe. Por favor, inténtalo de nuevo o contáctame por WhatsApp.';
       }
     });
   }
-}
+}
