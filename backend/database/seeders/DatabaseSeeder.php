@@ -47,7 +47,9 @@ class DatabaseSeeder extends Seeder
                 'descripcion_corta' => 'Aprende a maquillarte en 15 minutos con acabado profesional.',
                 'descripcion_larga' => 'Masterclass completa de automaquillaje: preparación de piel, base luminosa, ojos y labios, con acceso de por vida.',
                 'precio' => 45.00,
-                'stripe_price_id' => env('STRIPE_PRICE_MASTERCLASS'),
+                // Por config y no por env(): con la configuracion cacheada
+                // en produccion, env() devuelve null.
+                'stripe_price_id' => config('services.stripe.price_masterclass'),
                 'video_url' => null,
                 'miniatura_url' => 'images/portada_automaquillaje.png',
                 'nivel' => 'basico',
@@ -57,8 +59,8 @@ class DatabaseSeeder extends Seeder
 
         if (! $masterclass->stripe_price_id) {
             $this->command?->warn(
-                'La masterclass no tiene stripe_price_id. Define STRIPE_PRICE_MASTERCLASS en .env '
-                .'o el botón de compra devolverá 503.'
+                'La masterclass no tiene stripe_price_id: el botón de compra devolverá 503. '
+                .'Vincúlala con: php artisan stripe:vincular --listar'
             );
         }
 

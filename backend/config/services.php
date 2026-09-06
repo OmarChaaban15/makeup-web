@@ -39,6 +39,10 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
         'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+
+        // Precio de la masterclass que vende la pagina /cursos. Lo usa el
+        // seeder; despues se puede reasignar con: php artisan stripe:vincular
+        'price_masterclass' => env('STRIPE_PRICE_MASTERCLASS'),
     ],
 
 ];

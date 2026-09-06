@@ -126,6 +126,6 @@ return [
     |
     */
 
-    'contacto_destino' => env('MAIL_CONTACTO_DESTINO', 'info@makeupbyyona.com'),
+    'contacto_destino' => env('MAIL_CONTACTO_DESTINO', 'info@makeupbyyona.es'),
 
 ];

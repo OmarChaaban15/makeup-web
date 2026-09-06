@@ -109,7 +109,7 @@ export class Contacto implements OnDestroy {
   }
 
   copiarEmail(): void {
-    navigator.clipboard.writeText('info@makeupbyyona.com').then(() => {
+    navigator.clipboard.writeText('info@makeupbyyona.es').then(() => {
       this.emailCopiado = true;
       setTimeout(() => this.emailCopiado = false, 2500);
     });

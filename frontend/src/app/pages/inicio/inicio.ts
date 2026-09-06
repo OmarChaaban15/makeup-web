@@ -24,6 +24,7 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
     'videos/masterclass_noche_final.mp4',
   ];
   private heroVideoIndex = 0;
+  private readonly precargados = new Set<string>();
 
   @ViewChild('heroVideo') heroVideoRef!: ElementRef<HTMLVideoElement>;
   @ViewChild('particleCanvas') particleCanvasRef!: ElementRef<HTMLCanvasElement>;
@@ -124,32 +125,34 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
 
   // ── Hero Video ──
 
-  /**
-   * Cada vídeo del hero pesa más de 5 MB. En conexiones lentas o con el
-   * ahorro de datos activo no se descarga: se queda el poster del <video>.
-   */
-  private debeCargarVideo(): boolean {
-    if (!this.isBrowser) return false;
-
-    const conexion = (navigator as Navigator & {
-      connection?: { saveData?: boolean; effectiveType?: string };
-    }).connection;
-
-    if (!conexion) return true;
-    if (conexion.saveData) return false;
-
-    return !['slow-2g', '2g', '3g'].includes(conexion.effectiveType ?? '');
-  }
-
   private playHeroVideo(index: number): void {
     const video = this.heroVideoRef?.nativeElement;
-    if (!video || !this.debeCargarVideo()) return;
+    if (!video) return;
 
     video.muted = true;
     video.volume = 0;
     video.src = this.heroVideos[index];
     video.load();
     video.play().catch(() => {});
+
+    // Deja el siguiente vídeo del bucle ya en caché del navegador, para que
+    // el cambio al terminar el actual sea instantáneo y sin pérdida de
+    // calidad. Se lanza cuando el actual ya está reproduciéndose, así que
+    // no le roba ancho de banda.
+    video.addEventListener('playing', () => this.precargarSiguiente(index), { once: true });
+  }
+
+  private precargarSiguiente(indiceActual: number): void {
+    const siguiente = this.heroVideos[(indiceActual + 1) % this.heroVideos.length];
+    if (!siguiente || this.precargados.has(siguiente)) return;
+
+    this.precargados.add(siguiente);
+
+    const enlace = document.createElement('link');
+    enlace.rel = 'prefetch';
+    enlace.as = 'video';
+    enlace.href = siguiente;
+    document.head.appendChild(enlace);
   }
 
   onHeroVideoEnded(): void {

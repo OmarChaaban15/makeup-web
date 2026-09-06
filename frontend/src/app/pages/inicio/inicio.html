@@ -7,19 +7,18 @@
 
   <!-- ── Fondo de video ── -->
   <!--
-    poster: da imagen inmediata mientras llega el vídeo (5 MB por pieza).
-    preload="none": el componente decide si cargarlo; en conexiones lentas
-    o con ahorro de datos activado se queda solo el poster.
+    El vídeo se sirve íntegro y sin recorte de calidad: es la pieza
+    principal de la portada. preload="auto" para que empiece a bajar
+    en cuanto se puede, sin poster que compita por el ancho de banda.
   -->
   <video
     #heroVideo
     id="hero-video"
     class="absolute inset-0 h-full w-full object-cover"
-    poster="images/yonaida2.PNG"
     autoplay
     muted
     playsinline
-    preload="none"
+    preload="auto"
     aria-hidden="true"
     (ended)="onHeroVideoEnded()">
   </video>
@@ -127,7 +126,7 @@
 
       <!-- Columna derecha: foto de Yonaida -->
       <div scrollReveal="right" scrollDelay="2" class="group relative overflow-hidden rounded-[28px] shadow-[0_25px_60px_rgba(26,26,26,0.14)]">
-        <img loading="lazy" decoding="async" src="images/yonaida.jpg" alt="Yonaida, maquilladora profesional"
+        <img decoding="async" src="images/yonaida.jpg" alt="Yonaida, maquilladora profesional"
           class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
           style="aspect-ratio: 4/5; min-height: 380px;" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"></div>
@@ -164,7 +163,7 @@
       <a routerLink="/servicios"
          class="group relative flex flex-col overflow-hidden rounded-[26px] bg-white/5 border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:border-[#c4956a]/60 hover:shadow-[0_20px_50px_rgba(196,149,106,0.25)]">
         <div class="relative aspect-[4/5] w-full overflow-hidden">
-          <img loading="lazy" decoding="async" src="images/IMG_1.PNG" alt="Maquillaje de novia" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+          <img decoding="async" src="images/IMG_1.PNG" alt="Maquillaje de novia" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#161514] via-black/40 to-transparent"></div>
           <span class="absolute top-3.5 left-3.5 rounded-full bg-[#c4956a] px-3 py-1 text-[0.62rem] font-serif uppercase tracking-widest text-white shadow-md">
             Novias VIP
@@ -180,7 +179,7 @@
       <a routerLink="/servicios"
          class="group relative flex flex-col overflow-hidden rounded-[26px] bg-white/5 border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:border-[#c4956a]/60 hover:shadow-[0_20px_50px_rgba(196,149,106,0.25)]">
         <div class="relative aspect-[4/5] w-full overflow-hidden">
-          <img loading="lazy" decoding="async" src="images/IMG_3.PNG" alt="Maquillaje para eventos" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+          <img decoding="async" src="images/IMG_3.PNG" alt="Maquillaje para eventos" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#161514] via-black/40 to-transparent"></div>
           <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.62rem] font-serif uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
             Social
@@ -196,7 +195,7 @@
       <a routerLink="/servicios"
          class="group relative flex flex-col overflow-hidden rounded-[26px] bg-white/5 border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:border-[#c4956a]/60 hover:shadow-[0_20px_50px_rgba(196,149,106,0.25)]">
         <div class="relative aspect-[4/5] w-full overflow-hidden">
-          <img loading="lazy" decoding="async" src="images/IMG_4.PNG" alt="Maquillaje editorial" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+          <img decoding="async" src="images/IMG_4.PNG" alt="Maquillaje editorial" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#161514] via-black/40 to-transparent"></div>
           <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.62rem] font-serif uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
             Moda
@@ -212,7 +211,7 @@
       <a routerLink="/servicios"
          class="group relative flex flex-col overflow-hidden rounded-[26px] bg-white/5 border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:border-[#c4956a]/60 hover:shadow-[0_20px_50px_rgba(196,149,106,0.25)]">
         <div class="relative aspect-[4/5] w-full overflow-hidden">
-          <img loading="lazy" decoding="async" src="images/IMG_5.JPEG" alt="Maquillaje audiovisual" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+          <img decoding="async" src="images/IMG_5.JPEG" alt="Maquillaje audiovisual" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#161514] via-black/40 to-transparent"></div>
           <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.62rem] font-serif uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
             Cine &amp; TV
@@ -277,7 +276,7 @@
         </div>
 
         <div class="relative overflow-hidden rounded-2xl shadow-xl aspect-video border border-white/10">
-          <img loading="lazy" decoding="async" src="images/portada_automaquillaje.png" alt="Portada de la masterclass" class="h-full w-full object-cover" />
+          <img decoding="async" src="images/portada_automaquillaje.png" alt="Portada de la masterclass" class="h-full w-full object-cover" />
         </div>
       </div>
 
@@ -309,11 +308,11 @@
         <div class="absolute inset-0 overflow-hidden transition-opacity duration-700" [class.opacity-0]="currentIndex() !== i"
           [class.opacity-100]="currentIndex() === i" [class.pointer-events-none]="currentIndex() !== i"
           [class.z-10]="currentIndex() === i" [class.z-0]="currentIndex() !== i">
-          <img loading="lazy" decoding="async" [src]="slide.src" [alt]="slide.alt"
+          <img decoding="async" [src]="slide.src" [alt]="slide.alt"
                class="h-full w-full object-cover object-center cursor-zoom-in"
                [class]="currentIndex() === i ? getKenBurnsClass(i) : ''"
                [style.object-position]="slide.pos"
-               loading="lazy"
+              
                (click)="openLightbox(slide)" />
         </div>
         }
@@ -410,6 +409,6 @@
       <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
     </svg>
   </button>
-  <img loading="lazy" decoding="async" [src]="lightboxSrc()" [alt]="lightboxAlt()" (click)="$event.stopPropagation()" class="cursor-default" />
+  <img decoding="async" [src]="lightboxSrc()" [alt]="lightboxAlt()" (click)="$event.stopPropagation()" class="cursor-default" />
 </div>
 }

@@ -34,7 +34,7 @@ class ContactoController extends Controller
             // decirlo para que la persona use WhatsApp o el email directo.
             if (! app()->environment('local')) {
                 return response()->json([
-                    'mensaje' => 'No hemos podido enviar tu mensaje. Escríbenos por WhatsApp o a info@makeupbyyona.com.',
+                    'mensaje' => 'No hemos podido enviar tu mensaje. Escríbenos por WhatsApp o a info@makeupbyyona.es.',
                 ], 502);
             }
         }

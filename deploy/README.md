@@ -92,6 +92,25 @@ Sin `STRIPE_PRICE_MASTERCLASS` el botón de compra devuelve un 503 con un
 mensaje claro en lugar de romperse. Es la causa número uno de "la compra
 no funciona" en este proyecto.
 
+### Vincular el curso con su precio de Stripe
+
+El `price_id` lo genera Stripe al crear el producto; no se puede inventar.
+Para no tener que tocar la base de datos a mano:
+
+```bash
+cd /var/www/makeup-web/backend
+
+# Qué tutoriales hay, cuáles están sin vincular y qué precios tiene Stripe
+php artisan stripe:vincular --listar
+
+# Vincular (comprueba contra la API que el precio existe, está activo
+# y que el importe coincide con el de la web antes de guardarlo)
+php artisan stripe:vincular 2 price_1AbCdEf...
+```
+
+Si el seeder ya se ejecutó con `STRIPE_PRICE_MASTERCLASS` relleno, el
+curso queda vinculado solo y este paso no hace falta.
+
 ## 5. Permisos
 
 ```bash
@@ -180,7 +199,7 @@ Y en el navegador:
 
 | Síntoma                                     | Causa habitual                                                       |
 |---------------------------------------------|----------------------------------------------------------------------|
-| El botón de compra devuelve 503             | Falta `STRIPE_PRICE_MASTERCLASS` o el tutorial no tiene `stripe_price_id` |
+| El botón de compra devuelve 503             | El tutorial no tiene `stripe_price_id`: `php artisan stripe:vincular --listar` |
 | Se paga pero el curso no aparece            | El webhook no llega: revisar la URL y el secreto en Stripe            |
 | El webhook devuelve 500                     | `STRIPE_WEBHOOK_SECRET` vacío                                        |
 | Cambios en `.env` que no surten efecto      | Falta `php artisan config:cache`                                     |
@@ -196,13 +215,43 @@ tail -f /var/log/nginx/makeupbyyona.error.log
 journalctl -u makeup-queue -f
 ```
 
+## Medios (vídeo e imágenes)
+
+Son la pieza principal de la web y se sirven **íntegros, sin recorte de
+calidad ni carga diferida**: nada de `loading="lazy"`, ni posters
+sustitutivos, ni saltarse el vídeo en conexiones lentas.
+
+Lo que sí se hace para que carguen rápido sin tocar la calidad:
+
+- Nginx los cachea 30 días y sirve peticiones por rango (`Range`), que es
+  lo que permite al navegador empezar a reproducir el vídeo sin haberlo
+  descargado entero.
+- El segundo vídeo del bucle se precarga con `prefetch` en cuanto el
+  primero ya está reproduciéndose, así que el cambio es instantáneo.
+- Los `<img>` llevan `decoding="async"` (no bloquea el hilo principal; no
+  altera el resultado) y los de cabecera `fetchpriority="high"`.
+
+**Si en el futuro se quiere reducir el peso sin perder calidad**, la vía
+correcta es añadir formatos alternativos, no recomprimir el original:
+
+```bash
+# Vídeo: añadir una versión WebM/VP9 como <source> adicional.
+# El navegador elige; quien no soporte WebM sigue recibiendo el MP4 actual.
+ffmpeg -i masterclass_dia_final.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 -an \
+       masterclass_dia_final.webm
+
+# Imágenes: AVIF/WebP como <source> dentro de un <picture>, con el
+# PNG/JPEG original como fallback.
+ffmpeg -i IMG_1.PNG -c:v libaom-av1 -crf 28 -still-picture IMG_1.avif
+```
+
+Eso mantiene el original intacto y solo sirve el formato ligero a quien
+puede mostrarlo con la misma calidad percibida.
+
 ## Pendiente antes de abrir al público
 
-- **Peso de los medios**: `frontend/public/` ocupa ~32 MB, con dos vídeos de
-  ~5,4 MB en la portada y varios PNG de 2,2 MB. Conviene reconvertirlos
-  (`ffmpeg` a H.264/WebM ~1 MB, imágenes a WebP) antes de dar tráfico real.
-- **Correo del negocio**: la web muestra `info@makeupbyyona.com`. Si el buzón
-  pasa a ser `@makeupbyyona.es`, hay que cambiar `MAIL_CONTACTO_DESTINO` y
-  las referencias en `contacto.html`, `contacto.ts` y `footer.html`.
 - **Copias de seguridad**: no hay nada configurado. Como mínimo, un
   `mysqldump` diario de `makeup_web`.
+- **Correo**: verificar que `info@makeupbyyona.es` existe y que el SMTP
+  configurado puede enviar desde `no-reply@makeupbyyona.es` (SPF/DKIM del
+  dominio), o los correos acabarán en spam.

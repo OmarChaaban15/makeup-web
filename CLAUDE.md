@@ -76,7 +76,7 @@ Business entities are named in Spanish (models, tables and columns):
 - `Cita` — appointment; `timestamps` disabled, `estado` defaults to `pendiente`. Creating one mails `config('mail.contacto_destino')` (failures are logged, not fatal).
 - `Resena` — review, `aprobada` defaults to false. `AccesoTutorial` — per-user tutorial access grant.
 
-Note: the `remember_tokens` table and the `hotmart_*` columns on `tutoriales` are leftovers from earlier iterations and are not read by any code.
+Note: the `remember_tokens` table is a leftover from an earlier iteration and is not read by any code — auth goes through Sanctum.
 
 ### Frontend structure
 Angular standalone components (no NgModules). Routing in `src/app/app.routes.ts`; pages under `src/app/pages/`, shared services and UI under `src/app/shared/`, route guards under `src/app/guards/`. Providers in `src/app/app.config.ts` (`provideHttpClient(withInterceptors([authInterceptor]))`, router with in-memory scrolling).
@@ -86,6 +86,8 @@ Always build URLs from `environment.apiUrl` — never hardcode `http://localhost
 Scroll position is handled solely by the router's `withInMemoryScrolling`; do not add a manual `window.scrollTo` on `NavigationEnd`, it defeats back-button restoration.
 
 The Google Translate widget is injected on demand by `shared/translation.service.ts` when a non-Spanish language is selected. It is deliberately not in `index.html`: loading it on every visit was render-blocking and set third-party cookies before the consent banner appeared.
+
+**Media policy**: the photography and hero video are the point of this site. They are served at full quality and are never deferred — do not add `loading="lazy"`, poster placeholders that stand in for the video, or connection-based skipping. `decoding="async"` and `fetchpriority="high"` are fine (they change scheduling, not output). If bytes need cutting, add alternative formats as extra `<source>` entries (WebM/AVIF) with the originals as fallback rather than recompressing them; see `deploy/README.md`.
 
 ### CORS
 `backend/config/cors.php` reads `CORS_ALLOWED_ORIGINS` (comma-separated) and falls back to the local `ng serve` ports. `supports_credentials` is false — auth is Bearer-token, not cookie-based — and there are no wildcard origin patterns.
