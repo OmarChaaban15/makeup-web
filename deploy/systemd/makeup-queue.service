@@ -1,0 +1,24 @@
+# Worker de la cola de Laravel (QUEUE_CONNECTION=database).
+# Los correos de contacto, cita y recuperacion de contrasena se envian
+# desde aqui cuando se encolan, para que el SMTP no bloquee la peticion.
+#
+#   sudo cp deploy/systemd/makeup-queue.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now makeup-queue
+
+[Unit]
+Description=Makeup by Yona - worker de colas
+After=network.target mysql.service
+
+[Service]
+User=www-data
+Group=www-data
+Restart=always
+RestartSec=5
+WorkingDirectory=/var/www/makeup-web/backend
+ExecStart=/usr/bin/php artisan queue:work --sleep=3 --tries=3 --max-time=3600
+StandardOutput=append:/var/log/makeup-queue.log
+StandardError=append:/var/log/makeup-queue.log
+
+[Install]
+WantedBy=multi-user.target

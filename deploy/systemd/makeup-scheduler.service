@@ -1,0 +1,20 @@
+# Planificador de Laravel (routes/console.php).
+#
+# Tareas que dependen de el:
+#   - sanctum:prune-expired  -> borra los tokens de API ya caducados.
+#   - purga-eventos-stripe   -> limpia el registro de webhooks procesados.
+#
+# Se lanza cada minuto mediante makeup-scheduler.timer:
+#   sudo cp deploy/systemd/makeup-scheduler.* /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now makeup-scheduler.timer
+
+[Unit]
+Description=Makeup by Yona - planificador de tareas
+
+[Service]
+Type=oneshot
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/makeup-web/backend
+ExecStart=/usr/bin/php artisan schedule:run

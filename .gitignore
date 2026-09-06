@@ -8,3 +8,10 @@ frontend/dist/
 
 # Env
 .env
+
+# Salidas de build de Angular
+frontend/dist/
+frontend/.angular/
+
+# Artefactos empaquetados: el codigo vive en el repo, no en tarballs
+*.tar.gz
