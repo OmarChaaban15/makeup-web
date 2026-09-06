@@ -15,3 +15,6 @@ frontend/.angular/
 
 # Artefactos empaquetados: el codigo vive en el repo, no en tarballs
 *.tar.gz
+
+# Directorio publicado por deploy.sh en el servidor
+frontend-dist/
