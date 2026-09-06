@@ -119,7 +119,7 @@
 
               <!-- Cabecera / Portada del curso con efecto fotográfico -->
               <div class="relative aspect-video w-full overflow-hidden bg-[#161514]">
-                <img [src]="getMiniatura(curso)" [alt]="curso.titulo"
+                <img loading="lazy" decoding="async" [src]="getMiniatura(curso)" [alt]="curso.titulo"
                      class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
                 
                 <!-- Degradados para contraste perfecto -->

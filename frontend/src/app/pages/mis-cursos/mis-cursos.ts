@@ -1,10 +1,12 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { finalize } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { AuthService } from '../../shared/auth.service';
+import { mensajeDeError } from '../../shared/errores-api';
 
 interface Curso {
   id: number;
@@ -25,9 +27,10 @@ interface Curso {
   templateUrl: './mis-cursos.html',
   styleUrl: './mis-cursos.css'
 })
-export class MisCursos implements OnInit {
+export class MisCursos implements OnInit, OnDestroy {
   private http = inject(HttpClient);
   private sanitizer = inject(DomSanitizer);
+  private auth = inject(AuthService);
 
   cursos = signal<Curso[]>([]);
   isLoading = signal(true);
@@ -44,13 +47,13 @@ export class MisCursos implements OnInit {
     this.cargarCursos();
   }
 
+  ngOnDestroy(): void {
+    // Si se navega fuera con el modal abierto, el body se quedaba bloqueado.
+    document.body.style.overflow = '';
+  }
+
   get userName(): string {
-    try {
-      const user = JSON.parse(localStorage.getItem('user') || '{}');
-      return user?.name || 'Alumna VIP';
-    } catch {
-      return 'Alumna VIP';
-    }
+    return this.auth.usuario()?.name ?? 'Alumna VIP';
   }
 
   private cargarProgresoLocal(): void {
@@ -65,13 +68,17 @@ export class MisCursos implements OnInit {
   }
 
   toggleCompletado(cursoId: number, event?: Event): void {
-    if (event) {
-      event.stopPropagation();
-    }
+    event?.stopPropagation();
+
     const actual = { ...this.cursoCompletado() };
     actual[cursoId] = !actual[cursoId];
     this.cursoCompletado.set(actual);
-    localStorage.setItem('yona_cursos_progreso', JSON.stringify(actual));
+
+    try {
+      localStorage.setItem('yona_cursos_progreso', JSON.stringify(actual));
+    } catch {
+      // Modo privado o almacenamiento lleno: el progreso es accesorio.
+    }
   }
 
   isCompletado(cursoId: number): boolean {
@@ -79,14 +86,15 @@ export class MisCursos implements OnInit {
   }
 
   private cargarCursos(): void {
-    const token = localStorage.getItem('auth_token');
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-
-    this.http.get<Curso[]>(`${environment.apiUrl}/mis-cursos`, { headers })
+    // El Authorization lo pone authInterceptor; y si el token ha caducado,
+    // el propio interceptor devuelve al login.
+    this.http.get<Curso[]>(`${environment.apiUrl}/mis-cursos`)
       .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe({
-        next: (cursos) => this.cursos.set(cursos),
-        error: () => this.errorMsg.set('No se pudieron cargar tus cursos. Inténtalo de nuevo más tarde.')
+        next: cursos => this.cursos.set(cursos),
+        error: error => this.errorMsg.set(
+          mensajeDeError(error, 'No se pudieron cargar tus cursos. Inténtalo de nuevo más tarde.')
+        )
       });
   }
 
@@ -111,23 +119,37 @@ export class MisCursos implements OnInit {
     document.body.style.overflow = '';
   }
 
+  /** True solo si la URL es de una plataforma de vídeo que sabemos embeber. */
   esEmbed(url: string): boolean {
-    return /youtube\.com|youtu\.be|vimeo\.com/i.test(url);
+    return this.extraerEmbed(url) !== null;
   }
 
+  /**
+   * Devuelve la URL del iframe.
+   *
+   * Solo se marca como segura la URL que hemos construido nosotros a partir
+   * del ID extraido de YouTube o Vimeo. Antes se pasaba la URL de la base de
+   * datos tal cual a bypassSecurityTrustResourceUrl, saltandose la
+   * sanitizacion de Angular para cualquier valor.
+   */
   embedUrl(url: string): SafeResourceUrl {
-    let embed = url;
+    const embed = this.extraerEmbed(url);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(embed ?? 'about:blank');
+  }
+
+  private extraerEmbed(url: string): string | null {
+    if (!url) return null;
 
     const yt = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/i);
     if (yt) {
-      embed = `https://www.youtube.com/embed/${yt[1]}?autoplay=1&rel=0`;
+      return `https://www.youtube.com/embed/${yt[1]}?autoplay=1&rel=0`;
     }
 
     const vimeo = url.match(/vimeo\.com\/(?:video\/)?(\d+)/i);
     if (vimeo) {
-      embed = `https://player.vimeo.com/video/${vimeo[1]}?autoplay=1`;
+      return `https://player.vimeo.com/video/${vimeo[1]}?autoplay=1`;
     }
 
-    return this.sanitizer.bypassSecurityTrustResourceUrl(embed);
+    return null;
   }
 }

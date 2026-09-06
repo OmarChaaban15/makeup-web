@@ -6,7 +6,7 @@
   <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
     <!-- Imagen de fondo -->
     <img
-      src="images/yonaida4.PNG"
+      src="images/yonaida4.PNG" fetchpriority="high" decoding="async"
       alt="Yonaida, maquilladora profesional en Ibiza"
       class="absolute inset-0 h-full w-full object-cover object-center"
     />
@@ -87,7 +87,7 @@
         <div class="flex flex-col gap-6">
           <div scrollReveal="right" class="group relative overflow-hidden rounded-[28px] shadow-[0_25px_60px_rgba(26,26,26,0.14)]">
             <img
-              src="images/yonaida.jpg"
+              loading="lazy" decoding="async" src="images/yonaida.jpg"
               alt="Yonaida, maquilladora profesional"
               class="w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               style="aspect-ratio: 3/4;"
@@ -194,7 +194,7 @@
         <!-- Foto en acción -->
         <div scrollReveal="left" class="group relative overflow-hidden rounded-[28px] shadow-[0_25px_60px_rgba(26,26,26,0.12)]">
           <img
-            src="images/yonaida2.PNG"
+            loading="lazy" decoding="async" src="images/yonaida2.PNG"
             alt="Yonaida trabajando en maquillaje"
             class="w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
             style="aspect-ratio: 4/5; min-height: 400px;"

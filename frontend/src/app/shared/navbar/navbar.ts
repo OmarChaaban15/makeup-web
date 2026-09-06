@@ -1,9 +1,8 @@
 import { Component, HostListener, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { filter } from 'rxjs/operators';
 import { TranslationService } from '../translation.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,14 +18,18 @@ export class Navbar {
   isHeroPage = true; // transparent navbar on hero pages
 
   public translation = inject(TranslationService);
+  private auth = inject(AuthService);
+  private router = inject(Router);
 
-  constructor(private router: Router, private http: HttpClient) {
-    // Detect route changes to toggle transparent navbar
+  // Rutas con imagen a pantalla completa donde el navbar va transparente.
+  private readonly rutasHero = new Set(['/', '/inicio', '/sobre-mi', '/servicios']);
+
+  constructor() {
     this.router.events
       .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
       .subscribe(e => {
         const path = (e.urlAfterRedirects || e.url).split('?')[0];
-        this.isHeroPage = path === '/' || path === '/inicio' || path === '/sobre-mi' || path === '/servicios';
+        this.isHeroPage = this.rutasHero.has(path);
       });
   }
 
@@ -42,17 +45,14 @@ export class Navbar {
     this.langMenuOpen = false;
   }
 
+  // Leen signals del AuthService en lugar de tocar localStorage (y hacer
+  // JSON.parse) en cada ciclo de deteccion de cambios.
   get isLoggedIn(): boolean {
-    return !!localStorage.getItem('auth_token');
+    return this.auth.estaAutenticado();
   }
 
   get userName(): string {
-    try {
-      const user = JSON.parse(localStorage.getItem('user') || '{}');
-      return user?.name || 'Mi cuenta';
-    } catch {
-      return 'Mi cuenta';
-    }
+    return this.auth.nombre();
   }
 
   /** Returns true when navbar should be transparent (hero page, not scrolled) */
@@ -84,11 +84,7 @@ export class Navbar {
 
   private updateBodyScroll() {
     if (typeof document !== 'undefined') {
-      if (this.menuOpen) {
-        document.body.classList.add('overflow-hidden');
-      } else {
-        document.body.classList.remove('overflow-hidden');
-      }
+      document.body.classList.toggle('overflow-hidden', this.menuOpen);
     }
   }
 
@@ -103,21 +99,8 @@ export class Navbar {
   }
 
   logout() {
-    const token = localStorage.getItem('auth_token');
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-
-    // Invalida el token en el servidor; pase lo que pase limpiamos la sesión local.
-    this.http.post(`${environment.apiUrl}/auth/logout`, {}, { headers }).subscribe({
-      next: () => this.finishLogout(),
-      error: () => this.finishLogout()
-    });
-  }
-
-  private finishLogout() {
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('user');
     this.userMenuOpen = false;
     this.closeMenu();
-    this.router.navigate(['/inicio']);
+    this.auth.logout('/inicio');
   }
 }

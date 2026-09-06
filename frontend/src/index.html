@@ -6,6 +6,19 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Makeup by Yona – Artista de maquillaje profesional en Ibiza. Servicios de novias, eventos, cursos y masterclasses.">
+  <meta name="theme-color" content="#c4956a">
+  <link rel="canonical" href="https://makeupbyyona.es/">
+
+  <!-- Open Graph / redes sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Makeup by Yona">
+  <meta property="og:title" content="Makeup by Yona · Maquillaje profesional en Ibiza">
+  <meta property="og:description" content="Maquillaje de novias, eventos, editorial y masterclasses en Ibiza.">
+  <meta property="og:url" content="https://makeupbyyona.es/">
+  <meta property="og:image" content="https://makeupbyyona.es/images/yonaida2.PNG">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="icon" type="image/png" href="logo/my_logo.png">
   <link rel="alternate icon" type="image/svg+xml" href="logo/my_logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,19 +49,15 @@
     }
   </style>
 
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'es',
-        includedLanguages: 'es,en,it,de',
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
-  </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <!--
+    El script de Google Translate ya no se carga aquí.
+    Iba con URL protocolo-relativa (//translate.google.com), era bloqueante
+    en toda visita y fijaba cookies de terceros antes del banner de consentimiento.
+    Ahora lo inyecta TranslationService bajo demanda, solo si se elige un
+    idioma distinto del castellano.
+  -->
 </head>
 <body>
-  <div id="google_translate_element"></div>
   <app-root></app-root>
 </body>
 </html>

@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RouterLink, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { AuthService } from '../../shared/auth.service';
+import { mensajeDeError } from '../../shared/errores-api';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +15,9 @@ import { environment } from '../../../environments/environment';
 })
 export class Login implements OnInit {
   private fb = inject(FormBuilder);
-  private http = inject(HttpClient);
+  private auth = inject(AuthService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   loginForm!: FormGroup;
   forgotForm!: FormGroup;
@@ -30,14 +31,25 @@ export class Login implements OnInit {
   forgotLoading = false;
   forgotSuccess = false;
   forgotError = '';
+  forgotMsg = '';
+
+  /** Ruta a la que volver tras iniciar sesión (la pone el guard o el interceptor). */
+  private redirect = '/inicio';
 
   ngOnInit(): void {
     this.checkAuthStatus();
     this.initForms();
+
+    const params = this.route.snapshot.queryParamMap;
+    this.redirect = params.get('redirect') || '/inicio';
+
+    if (params.get('motivo') === 'sesion-caducada') {
+      this.errorMsg = 'Tu sesión ha caducado. Vuelve a iniciar sesión para continuar.';
+    }
   }
 
   private checkAuthStatus(): void {
-    if (localStorage.getItem('auth_token')) {
+    if (this.auth.estaAutenticado()) {
       this.router.navigate(['/inicio']);
     }
   }
@@ -61,6 +73,7 @@ export class Login implements OnInit {
     this.showForgotModal = true;
     this.forgotSuccess = false;
     this.forgotError = '';
+    this.forgotMsg = '';
     const currentEmail = this.loginForm.get('email')?.value;
     if (currentEmail) {
       this.forgotForm.patchValue({ email: currentEmail });
@@ -71,6 +84,10 @@ export class Login implements OnInit {
     this.showForgotModal = false;
   }
 
+  /**
+   * Solicita de verdad el enlace de recuperación.
+   * Antes esto era un setTimeout que fingía éxito sin enviar nada.
+   */
   submitForgot(): void {
     if (this.forgotForm.invalid) {
       this.forgotForm.markAllAsTouched();
@@ -80,18 +97,21 @@ export class Login implements OnInit {
     this.forgotLoading = true;
     this.forgotError = '';
 
-    // Simulamos / enviamos petición de recuperación
-    setTimeout(() => {
-      this.forgotLoading = false;
-      this.forgotSuccess = true;
-    }, 900);
-  }
-
-  private getErrorMessage(error: any, fallback: string): string {
-    if (!error || !error.error) return fallback;
-    if (error.status === 0) return 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.';
-    if (error.error?.message) return error.error.message;
-    return fallback;
+    this.auth
+      .solicitarRecuperacion(this.forgotForm.value.email)
+      .pipe(finalize(() => (this.forgotLoading = false)))
+      .subscribe({
+        next: respuesta => {
+          this.forgotSuccess = true;
+          this.forgotMsg = respuesta.message;
+        },
+        error: error => {
+          this.forgotError = mensajeDeError(
+            error,
+            'No se pudo enviar el correo de recuperación. Inténtalo de nuevo más tarde.'
+          );
+        }
+      });
   }
 
   onSubmit(): void {
@@ -105,22 +125,21 @@ export class Login implements OnInit {
     this.errorMsg = '';
     this.successMsg = '';
 
-    const credentials = this.loginForm.value;
+    const { email, password } = this.loginForm.value;
 
-    this.http.post<any>(`${environment.apiUrl}/auth/login`, credentials)
-      .pipe(finalize(() => this.isLoading = false))
+    this.auth
+      .login(email, password)
+      .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
-        next: (response) => {
+        next: () => {
           this.successMsg = '¡Bienvenida! Accediendo a tu cuenta...';
-          localStorage.setItem('auth_token', response.token);
-          localStorage.setItem('user', JSON.stringify(response.user));
-          
-          setTimeout(() => {
-            this.router.navigate(['/inicio']);
-          }, 800);
+          setTimeout(() => this.router.navigateByUrl(this.redirect), 800);
         },
-        error: (error) => {
-          this.errorMsg = this.getErrorMessage(error, 'Credenciales incorrectas. Por favor, compruébalas.');
+        error: error => {
+          this.errorMsg = mensajeDeError(
+            error,
+            'Credenciales incorrectas. Por favor, compruébalas.'
+          );
         }
       });
   }

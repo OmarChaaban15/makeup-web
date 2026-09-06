@@ -2,9 +2,9 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { finalize } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { AuthService } from '../../shared/auth.service';
+import { mensajeDeError } from '../../shared/errores-api';
 
 @Component({
   selector: 'app-registro',
@@ -15,7 +15,7 @@ import { environment } from '../../../environments/environment';
 })
 export class Registro implements OnInit {
   private fb = inject(FormBuilder);
-  private http = inject(HttpClient);
+  private auth = inject(AuthService);
   private router = inject(Router);
 
   registroForm!: FormGroup;
@@ -30,33 +30,9 @@ export class Registro implements OnInit {
   }
 
   private checkAuthStatus(): void {
-    if (localStorage.getItem('auth_token')) {
+    if (this.auth.estaAutenticado()) {
       this.router.navigate(['/inicio']);
     }
-  }
-
-  private getErrorMessage(error: any, fallback: string): string {
-    if (!error || !error.error) {
-      return fallback;
-    }
-
-    if (error.status === 0) {
-      return 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.';
-    }
-
-    if (error.error?.errors) {
-      const firstKey = Object.keys(error.error.errors)[0];
-      const firstError = error.error.errors[firstKey];
-      if (Array.isArray(firstError) && firstError.length) {
-        return firstError[0];
-      }
-    }
-
-    if (error.error?.message) {
-      return error.error.message;
-    }
-
-    return fallback;
   }
 
   private initForm(): void {
@@ -73,7 +49,7 @@ export class Registro implements OnInit {
   private passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password');
     const confirm = control.get('confirmPassword');
-    
+
     if (password && confirm && password.value !== confirm.value) {
       return { mismatch: true };
     }
@@ -109,20 +85,19 @@ export class Registro implements OnInit {
       password_confirmation: this.registroForm.value.confirmPassword
     };
 
-    this.http.post<any>(`${environment.apiUrl}/auth/register`, formData)
-      .pipe(finalize(() => this.isLoading = false))
+    this.auth
+      .registro(formData)
+      .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
-        next: (response) => {
+        next: () => {
           this.successMsg = '¡Cuenta creada! Redirigiendo...';
-          localStorage.setItem('auth_token', response.token);
-          localStorage.setItem('user', JSON.stringify(response.user));
-          
-          setTimeout(() => {
-            this.router.navigate(['/inicio']);
-          }, 1000);
+          setTimeout(() => this.router.navigate(['/inicio']), 1000);
         },
-        error: (error) => {
-          this.errorMsg = this.getErrorMessage(error, 'No se pudo crear la cuenta. Inténtalo de nuevo.');
+        error: error => {
+          this.errorMsg = mensajeDeError(
+            error,
+            'No se pudo crear la cuenta. Inténtalo de nuevo.'
+          );
         }
       });
   }

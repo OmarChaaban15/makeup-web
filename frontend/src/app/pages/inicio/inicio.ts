@@ -124,9 +124,27 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
 
   // ── Hero Video ──
 
+  /**
+   * Cada vídeo del hero pesa más de 5 MB. En conexiones lentas o con el
+   * ahorro de datos activo no se descarga: se queda el poster del <video>.
+   */
+  private debeCargarVideo(): boolean {
+    if (!this.isBrowser) return false;
+
+    const conexion = (navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    }).connection;
+
+    if (!conexion) return true;
+    if (conexion.saveData) return false;
+
+    return !['slow-2g', '2g', '3g'].includes(conexion.effectiveType ?? '');
+  }
+
   private playHeroVideo(index: number): void {
     const video = this.heroVideoRef?.nativeElement;
-    if (!video) return;
+    if (!video || !this.debeCargarVideo()) return;
+
     video.muted = true;
     video.volume = 0;
     video.src = this.heroVideos[index];

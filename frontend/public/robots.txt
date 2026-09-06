@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Zona privada de alumnas y pantallas de pago: no aportan nada en buscadores.
+Disallow: /mis-cursos
+Disallow: /pago-exitoso
+Disallow: /pago-cancelado
+Disallow: /restablecer-password
+
+Sitemap: https://makeupbyyona.es/sitemap.xml
