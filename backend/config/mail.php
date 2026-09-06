@@ -115,4 +115,17 @@ return [
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Buzon de avisos del negocio
+    |--------------------------------------------------------------------------
+    |
+    | Destinatario de los formularios de contacto y de las reservas de cita.
+    | Estaba escrito a mano en dos controladores; al centralizarlo aqui se
+    | puede cambiar por entorno sin tocar codigo.
+    |
+    */
+
+    'contacto_destino' => env('MAIL_CONTACTO_DESTINO', 'info@makeupbyyona.com'),
+
 ];

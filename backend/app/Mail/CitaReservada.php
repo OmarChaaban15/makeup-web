@@ -2,10 +2,10 @@
 
 namespace App\Mail;
 
+use App\Models\Cita;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Attachment;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -14,59 +14,56 @@ class CitaReservada extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $cita;
+    public function __construct(public Cita $cita) {}
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct(\App\Models\Cita $cita)
-    {
-        $this->cita = $cita;
-    }
-
-    /**
-     * Get the message envelope.
-     */
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Nueva Reserva de Cita: ' . $this->cita->nombre_cliente,
+            // El asunto tambien lleva datos del formulario: sin sanear, un
+            // salto de linea aqui permitiria inyectar cabeceras en el correo.
+            subject: 'Nueva reserva de cita: '.$this->limpiar($this->cita->nombre_cliente),
+            replyTo: filter_var($this->cita->email_cliente, FILTER_VALIDATE_EMAIL)
+                ? [new Address($this->cita->email_cliente, $this->limpiar($this->cita->nombre_cliente))]
+                : [],
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
     public function content(): Content
     {
         $fecha = \Carbon\Carbon::parse($this->cita->fecha_hora)->format('d/m/Y H:i');
-        
-        $html = "
-            <h2>Nueva Cita Reservada</h2>
-            <p>Se ha reservado una nueva cita a través de la web:</p>
-            <ul>
-                <li><strong>Nombre:</strong> {$this->cita->nombre_cliente}</li>
-                <li><strong>Email:</strong> {$this->cita->email_cliente}</li>
-                <li><strong>Teléfono:</strong> {$this->cita->telefono_cliente}</li>
-                <li><strong>Fecha y Hora:</strong> {$fecha}</li>
-                <li><strong>Servicio ID:</strong> {$this->cita->servicio_id}</li>
-                <li><strong>Notas:</strong> {$this->cita->notas}</li>
-            </ul>
-            <p>Por favor, contacta con el cliente para confirmar la cita si es necesario.</p>
-        ";
 
-        return new Content(
-            htmlString: $html,
-        );
+        // Todos los campos vienen de un formulario publico: hay que escaparlos
+        // antes de interpolarlos en el HTML del correo.
+        $nombre = e($this->cita->nombre_cliente);
+        $email = e($this->cita->email_cliente);
+        $telefono = e($this->cita->telefono_cliente ?: 'No indicado');
+        $servicio = e((string) $this->cita->servicio_id);
+        $notas = nl2br(e($this->cita->notas ?: 'Sin notas'));
+
+        $html = <<<HTML
+            <h2>Nueva cita reservada</h2>
+            <p>Se ha reservado una nueva cita a traves de la web:</p>
+            <ul>
+                <li><strong>Nombre:</strong> {$nombre}</li>
+                <li><strong>Email:</strong> {$email}</li>
+                <li><strong>Telefono:</strong> {$telefono}</li>
+                <li><strong>Fecha y hora:</strong> {$fecha}</li>
+                <li><strong>Servicio ID:</strong> {$servicio}</li>
+                <li><strong>Notas:</strong> {$notas}</li>
+            </ul>
+            <p>Contacta con el cliente para confirmar la cita si es necesario.</p>
+            HTML;
+
+        return new Content(htmlString: $html);
     }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, Attachment>
-     */
     public function attachments(): array
     {
         return [];
+    }
+
+    private function limpiar(?string $valor): string
+    {
+        return trim(preg_replace('/[\r\n]+/', ' ', (string) $valor));
     }
 }

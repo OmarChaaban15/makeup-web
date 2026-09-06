@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\AccesoTutorial;
+use App\Models\Categoria;
 use App\Models\Pedido;
 use App\Models\PedidoItem;
 use App\Models\Tutorial;
@@ -15,30 +16,18 @@ class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        $user = User::find(1);
+        $categoria = Categoria::firstOrCreate(
+            ['slug' => 'masterclass'],
+            ['nombre' => 'Masterclass', 'descripcion' => 'Formación en vídeo bajo demanda.']
+        );
 
-        if (! $user) {
-            $user = new User();
-            $user->id = 1;
-            $user->name = 'Test User';
-            $user->email = 'test-user-id1@example.com';
-            $user->password = Hash::make('password123');
-            $user->save();
-        } else {
-            $user->name = 'Test User';
-            $user->password = Hash::make('password123');
-            $user->save();
-        }
-
-        $tutorial = Tutorial::firstOrCreate(
+        // Curso de muestra gratuito.
+        Tutorial::firstOrCreate(
             ['titulo' => 'Video de maquillaje para principiantes'],
             [
-                'categoria_id' => null,
+                'categoria_id' => $categoria->id,
                 'descripcion_corta' => 'Video introductorio de maquillaje.',
                 'descripcion_larga' => 'Este tutorial muestra los fundamentos del maquillaje para principiantes.',
                 'precio' => 0,
@@ -49,36 +38,64 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        $pedido = Pedido::firstOrCreate(
+        // Masterclass de pago: es la que vende la pagina /cursos. El
+        // stripe_price_id viene del panel de Stripe (price_...), no se inventa.
+        $masterclass = Tutorial::firstOrCreate(
+            ['titulo' => 'Masterclass de Automaquillaje'],
             [
-                'user_id' => $user->id,
-                'estado' => 'pagado',
-            ],
-            [
-                'total' => $tutorial->precio,
-                'metodo_pago' => 'seed',
-                'referencia_pago' => 'seed-' . $tutorial->id,
+                'categoria_id' => $categoria->id,
+                'descripcion_corta' => 'Aprende a maquillarte en 15 minutos con acabado profesional.',
+                'descripcion_larga' => 'Masterclass completa de automaquillaje: preparación de piel, base luminosa, ojos y labios, con acceso de por vida.',
+                'precio' => 45.00,
+                'stripe_price_id' => env('STRIPE_PRICE_MASTERCLASS'),
+                'video_url' => null,
+                'miniatura_url' => 'images/portada_automaquillaje.png',
+                'nivel' => 'basico',
+                'activo' => true,
             ]
         );
 
-        $pedidoItem = PedidoItem::firstOrCreate(
+        if (! $masterclass->stripe_price_id) {
+            $this->command?->warn(
+                'La masterclass no tiene stripe_price_id. Define STRIPE_PRICE_MASTERCLASS en .env '
+                .'o el botón de compra devolverá 503.'
+            );
+        }
+
+        // A partir de aqui son datos de prueba: no deben crearse en produccion.
+        if (app()->environment('production')) {
+            return;
+        }
+
+        $this->sembrarUsuarioDePrueba();
+    }
+
+    private function sembrarUsuarioDePrueba(): void
+    {
+        $tutorialGratis = Tutorial::where('titulo', 'Video de maquillaje para principiantes')->first();
+
+        $user = User::firstOrNew(['email' => 'test-user-id1@example.com']);
+        $user->name = 'Test User';
+        $user->password = Hash::make('password123');
+        $user->save();
+
+        $pedido = Pedido::firstOrCreate(
+            ['user_id' => $user->id, 'referencia_pago' => 'seed-'.$tutorialGratis->id],
             [
-                'pedido_id' => $pedido->id,
-                'tutorial_id' => $tutorial->id,
-            ],
-            [
-                'precio_unitario' => $tutorial->precio,
+                'estado' => 'pagado',
+                'total' => $tutorialGratis->precio,
+                'metodo_pago' => 'seed',
             ]
+        );
+
+        PedidoItem::firstOrCreate(
+            ['pedido_id' => $pedido->id, 'tutorial_id' => $tutorialGratis->id],
+            ['precio_unitario' => $tutorialGratis->precio]
         );
 
         AccesoTutorial::firstOrCreate(
-            [
-                'user_id' => $user->id,
-                'tutorial_id' => $tutorial->id,
-            ],
-            [
-                'pedido_id' => $pedido->id,
-            ]
+            ['user_id' => $user->id, 'tutorial_id' => $tutorialGratis->id],
+            ['pedido_id' => $pedido->id]
         );
     }
 }

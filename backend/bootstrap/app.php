@@ -13,7 +13,17 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Detras de Nginx necesitamos el header X-Forwarded-* para que
+        // request()->ip() no devuelva siempre 127.0.0.1 (lo usan los
+        // rate limiters) y para que las URLs se generen en https.
+        $middleware->trustProxies(at: [
+            '127.0.0.1',
+            '::1',
+        ]);
+
+        // El grupo api del skeleton no incluye throttle. Los limitadores
+        // se definen en AppServiceProvider.
+        $middleware->throttleApi('api');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

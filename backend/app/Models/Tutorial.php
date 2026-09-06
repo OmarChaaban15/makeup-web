@@ -15,7 +15,7 @@ class Tutorial extends Model
     ];
 
     // video_url solo se devuelve si el usuario tiene acceso
-    protected $hidden = ['video_url'];
+    protected $hidden = ['video_url', 'stripe_price_id'];
 
     public function categoria()
     {

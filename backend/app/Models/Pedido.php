@@ -10,7 +10,7 @@ class Pedido extends Model
     protected $table = 'pedidos';
     protected $fillable = [
         'user_id', 'estado', 'total',
-        'metodo_pago', 'referencia_pago'
+        'metodo_pago', 'referencia_pago', 'actualizado_en'
     ];
 
     public function user()

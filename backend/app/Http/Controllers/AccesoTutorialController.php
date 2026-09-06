@@ -7,16 +7,19 @@ use Illuminate\Http\Request;
 
 class AccesoTutorialController extends Controller
 {
-    // Devuelve los cursos (tutoriales) a los que tiene acceso el usuario
-    // autenticado, incluyendo el video_url para poder reproducirlos.
+    /**
+     * Cursos a los que tiene acceso el usuario autenticado, con el video_url
+     * visible para poder reproducirlos.
+     *
+     * No se filtra por activo: si un curso se retira del catalogo, quien ya
+     * lo compro debe seguir viendolo.
+     */
     public function index(Request $request)
     {
-        $tutoriales = Tutorial::whereIn('id', function ($query) use ($request) {
-            $query->select('tutorial_id')
-                ->from('accesos_tutorial')
-                ->where('user_id', $request->user()->id);
-        })
+        $tutoriales = Tutorial::query()
+            ->whereHas('accesos', fn ($query) => $query->where('user_id', $request->user()->id))
             ->with('categoria')
+            ->orderBy('titulo')
             ->get()
             ->makeVisible('video_url');
 
