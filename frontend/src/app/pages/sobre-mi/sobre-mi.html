@@ -1,9 +1,9 @@
-<div class="min-h-screen bg-[#fcf9f6] font-sans text-[#1a1a1a] antialiased selection:bg-[#c4956a]/20">
+<div class="min-h-[100svh] bg-[#fcf9f6] font-sans text-[#1a1a1a] antialiased selection:bg-[#c4956a]/20">
 
   <!-- ══════════════════════════════════════════
        HERO — SOBRE MÍ (Pantalla Completa)
        ══════════════════════════════════════════ -->
-  <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+  <section class="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden pt-20">
     <!-- Imagen de fondo -->
     <img
       src="images/yonaida4.PNG" fetchpriority="high" decoding="async"
@@ -101,15 +101,15 @@
 
           <!-- Métricas en tarjetas estilizadas -->
           <div scrollReveal="up" scrollDelay="2" class="grid grid-cols-3 gap-3">
-            <div class="rounded-2xl border border-[#ede0d0] bg-white p-4 text-center shadow-sm">
+            <div class="rounded-2xl border border-[#ede0d0] bg-white p-3 sm:p-4 text-center shadow-sm">
               <span class="block font-serif text-2xl sm:text-3xl font-light text-[#c4956a]" style="font-variant-numeric: tabular-nums;">+{{ counterYears() }}</span>
               <span class="mt-1 block font-sans text-[0.6rem] sm:text-[0.65rem] font-semibold uppercase tracking-wider text-[#888]">Años</span>
             </div>
-            <div class="rounded-2xl border border-[#ede0d0] bg-white p-4 text-center shadow-sm">
+            <div class="rounded-2xl border border-[#ede0d0] bg-white p-3 sm:p-4 text-center shadow-sm">
               <span class="block font-serif text-2xl sm:text-3xl font-light text-[#c4956a]" style="font-variant-numeric: tabular-nums;">+{{ counterNovias() }}</span>
               <span class="mt-1 block font-sans text-[0.6rem] sm:text-[0.65rem] font-semibold uppercase tracking-wider text-[#888]">Novias &amp; Eventos</span>
             </div>
-            <div class="rounded-2xl border border-[#ede0d0] bg-white p-4 text-center shadow-sm">
+            <div class="rounded-2xl border border-[#ede0d0] bg-white p-3 sm:p-4 text-center shadow-sm">
               <span class="block font-serif text-2xl sm:text-3xl font-light text-[#c4956a]" style="font-variant-numeric: tabular-nums;">{{ counterPersonal() }}%</span>
               <span class="mt-1 block font-sans text-[0.6rem] sm:text-[0.65rem] font-semibold uppercase tracking-wider text-[#888]">Personalizado</span>
             </div>

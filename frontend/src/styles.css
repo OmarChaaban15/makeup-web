@@ -128,6 +128,36 @@ a, button, [role="button"], input[type="submit"], input[type="button"], .cursor-
 }
 
 /* ═══════════════════════════════════════════
+   MÓVIL — CAMPOS DE FORMULARIO
+   ═══════════════════════════════════════════ */
+
+/*
+  Safari en iOS hace zoom automático sobre la página al enfocar un campo
+  cuya tipografía sea menor de 16px, y luego no vuelve a desenfocar: el
+  usuario se queda con el diseño ampliado y desplazado.
+
+  Los formularios usan text-sm (14px), así que en pantallas pequeñas se
+  fuerzan 16px. La alternativa habitual (maximum-scale=1 en el viewport)
+  se descarta a propósito: impide hacer zoom con los dedos, que es una
+  ayuda de accesibilidad que no debemos quitar.
+*/
+@media (max-width: 640px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
+/*
+  El scroll horizontal está capado en html/body. Esto evita además que un
+  texto largo sin espacios (un correo, una URL pegada) fuerce el ancho.
+*/
+body {
+  overflow-wrap: break-word;
+}
+
+/* ═══════════════════════════════════════════
    GOLDEN SHIMMER EFFECT — REUSABLE
    ═══════════════════════════════════════════ */
 .shimmer-gold {
