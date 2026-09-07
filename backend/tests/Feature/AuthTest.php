@@ -4,8 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Password;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
@@ -81,9 +83,22 @@ class AuthTest extends TestCase
         $user = User::factory()->create();
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        $this->assertDatabaseCount('personal_access_tokens', 1);
+
         $this->withHeader('Authorization', 'Bearer '.$token)
             ->postJson('/api/auth/logout')
             ->assertOk();
+
+        // Evidencia directa de que el logout revoco el token.
+        $this->assertDatabaseCount('personal_access_tokens', 0);
+
+        // Las dos peticiones de un mismo test comparten la instancia de la
+        // aplicacion, y el guard de Sanctum se queda con el usuario que ya
+        // resolvio en la llamada a /auth/logout. Sin descartar los guards,
+        // la segunda peticion reutilizaria ese usuario cacheado y respondria
+        // 200 aunque el token ya no exista en la base de datos.
+        // En produccion cada peticion es un proceso nuevo y esto no pasa.
+        Auth::forgetGuards();
 
         $this->withHeader('Authorization', 'Bearer '.$token)
             ->getJson('/api/mis-cursos')
@@ -107,7 +122,7 @@ class AuthTest extends TestCase
     {
         $user = User::factory()->create(['email' => 'ana@example.com']);
         $tokenViejo = $user->createToken('auth_token')->plainTextToken;
-        $tokenReset = \Illuminate\Support\Facades\Password::createToken($user);
+        $tokenReset = Password::createToken($user);
 
         $this->postJson('/api/auth/reset-password', [
             'token' => $tokenReset,
@@ -120,6 +135,11 @@ class AuthTest extends TestCase
             'email' => 'ana@example.com',
             'password' => 'nuevaClave123',
         ])->assertOk();
+
+        // Igual que en el test de logout: hay que descartar los guards para
+        // que la comprobacion mire de verdad la base de datos y no un
+        // usuario cacheado de una peticion anterior del mismo test.
+        Auth::forgetGuards();
 
         $this->withHeader('Authorization', 'Bearer '.$tokenViejo)
             ->getJson('/api/mis-cursos')
