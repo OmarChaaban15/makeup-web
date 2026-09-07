@@ -56,7 +56,7 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
       estrellas: 5,
     },
     {
-      nombre: 'Sofía & Lucas',
+      nombre: 'Sofía & Laura',
       tipo: 'Editorial de Moda · Campaña Baño',
       texto: 'Profesionalidad intachable en set. Su técnica de piel luminosa y su rapidez para cambios de look elevaron las fotografías a nivel de revista de lujo. Un diez.',
       estrellas: 5,
@@ -71,11 +71,15 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
 
   // ── Slideshow (works section) ─────────────────
   readonly slides = [
-    { src: 'images/IMG_1.PNG', alt: 'Trabajo de maquillaje 1', pos: 'center center' },
-    { src: 'images/IMG_2.PNG', alt: 'Trabajo de maquillaje 2', pos: 'center 35%' },
-    { src: 'images/IMG_3.PNG', alt: 'Trabajo de maquillaje 3', pos: 'center 35%' },
-    { src: 'images/IMG_4.PNG', alt: 'Trabajo de maquillaje 4', pos: 'center 40%' },
-    { src: 'images/IMG_5.JPEG', alt: 'Trabajo de maquillaje 5', pos: 'center center' },
+    { src: 'images/IMG_1.PNG', alt: 'Maquillaje de novia en Ibiza', pos: 'center center' },
+    { src: 'images/IMG_8.jpg', alt: 'Detalle de visagismo y acabado de ojos en alta definición', pos: 'center 30%' },
+    { src: 'images/IMG_2.PNG', alt: 'Maquillaje social para eventos', pos: 'center 35%' },
+    { src: 'images/IMG_6.JPEG', alt: 'Editorial de moda y pasarela con mirada protagonista', pos: 'center 25%' },
+    { src: 'images/IMG_3.PNG', alt: 'Estilismo de fiesta e invitada', pos: 'center 35%' },
+    { src: 'images/IMG_7.jpg', alt: 'Sesión creativa y editorial contemporáneo', pos: 'center 25%' },
+    { src: 'images/IMG_4.PNG', alt: 'Producción de moda y campañas', pos: 'center 40%' },
+    { src: 'images/yonaida8.jpg', alt: 'Técnica de pigmentación glitter y textura de piel', pos: 'center 35%' },
+    { src: 'images/IMG_5.JPEG', alt: 'Rodaje y producción audiovisual', pos: 'center center' },
   ];
 
   currentIndex = signal(0);
@@ -133,7 +137,7 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
     video.volume = 0;
     video.src = this.heroVideos[index];
     video.load();
-    video.play().catch(() => {});
+    video.play().catch(() => { });
 
     // Deja el siguiente vídeo del bucle ya en caché del navegador, para que
     // el cambio al terminar el actual sea instantáneo y sin pérdida de

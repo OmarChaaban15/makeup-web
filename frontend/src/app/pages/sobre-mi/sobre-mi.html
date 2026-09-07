@@ -87,9 +87,9 @@
         <div class="flex flex-col gap-6">
           <div scrollReveal="right" class="group relative overflow-hidden rounded-[28px] shadow-[0_25px_60px_rgba(26,26,26,0.14)]">
             <img
-              decoding="async" src="images/yonaida.jpg"
-              alt="Yonaida, maquilladora profesional"
-              class="w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              decoding="async" src="images/yonaida7.jpg"
+              alt="Yonaida, maquilladora profesional en Ibiza"
+              class="w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               style="aspect-ratio: 3/4;"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
@@ -191,15 +191,24 @@
     <div class="mx-auto max-w-[1140px]">
       <div class="grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
 
-        <!-- Foto en acción -->
-        <div scrollReveal="left" class="group relative overflow-hidden rounded-[28px] shadow-[0_25px_60px_rgba(26,26,26,0.12)]">
-          <img
-            decoding="async" src="images/yonaida2.PNG"
-            alt="Yonaida trabajando en maquillaje"
-            class="w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-            style="aspect-ratio: 4/5; min-height: 400px;"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+        <!-- Foto en acción con detalle flotante de técnica -->
+        <div scrollReveal="left" class="relative">
+          <div class="group relative overflow-hidden rounded-[28px] shadow-[0_25px_60px_rgba(26,26,26,0.12)]">
+            <img
+              decoding="async" src="images/yonaida2.PNG"
+              alt="Yonaida trabajando en maquillaje"
+              class="w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              style="aspect-ratio: 4/5; min-height: 400px;"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+          </div>
+          <div class="hidden sm:flex absolute -bottom-5 -right-5 items-center gap-3 rounded-2xl border border-white/80 bg-white/95 p-3 shadow-xl backdrop-blur-md">
+            <img src="images/yonaida8.jpg" alt="Detalle de técnica de maquillaje" class="h-16 w-16 rounded-xl object-cover" />
+            <div class="pr-2">
+              <span class="block font-serif text-[0.62rem] uppercase tracking-widest text-[#c4956a] font-semibold">Técnica de Autor</span>
+              <span class="block font-serif text-xs text-[#1a1a1a]">Luminosidad &amp; Textura</span>
+            </div>
+          </div>
         </div>
 
         <!-- Contenido y llamada a la acción -->

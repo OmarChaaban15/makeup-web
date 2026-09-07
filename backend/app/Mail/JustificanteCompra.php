@@ -33,10 +33,10 @@ class JustificanteCompra extends Mailable
 
     public function content(): Content
     {
-        return new Content(htmlString: $this->html());
+        return new Content(htmlString: $this->cuerpoHtml());
     }
 
-    private function html(): string
+    private function cuerpoHtml(): string
     {
         $nombre = e($this->pedido->nombreContacto());
         $numero = e((string) $this->pedido->id);

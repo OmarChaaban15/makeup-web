@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(StripeClient::class, fn () => new StripeClient(
-            (string) config('services.stripe.secret')
+            config('services.stripe.secret') ?: 'sk_test_placeholder'
         ));
 
         $this->app->bind(PasarelaPago::class, StripePasarelaPago::class);

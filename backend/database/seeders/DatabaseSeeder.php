@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
         // en hora peninsular. La aplicacion trabaja en UTC (config/app.php),
         // asi que se convierte explicitamente con ->utc(): en septiembre
         // Madrid es UTC+2, y guardar "19:00" a secas seria dos horas tarde.
-        $masterclass = Tutorial::firstOrCreate(
+        $masterclass = Tutorial::updateOrCreate(
             ['titulo' => 'Masterclass de Automaquillaje'],
             [
                 'categoria_id' => $categoria->id,
@@ -63,8 +63,8 @@ class DatabaseSeeder extends Seeder
                 // produccion, env() devuelve null.
                 'stripe_price_id' => config('services.stripe.price_masterclass'),
                 'stripe_price_id_oferta' => config('services.stripe.price_masterclass_oferta'),
-                'oferta_inicio' => Carbon::parse('2026-09-08 19:00:00', 'Europe/Madrid')->utc(),
-                'oferta_fin' => Carbon::parse('2026-09-09 19:00:00', 'Europe/Madrid')->utc(),
+                'oferta_inicio' => Carbon::parse('2026-09-09 19:00:00', 'Europe/Madrid')->utc(),
+                'oferta_fin' => Carbon::parse('2026-09-10 19:00:00', 'Europe/Madrid')->utc(),
                 'duracion_acceso_meses' => 6,
                 'video_url' => null,
                 'miniatura_url' => 'images/portada_automaquillaje.png',

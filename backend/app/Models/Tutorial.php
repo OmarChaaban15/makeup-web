@@ -57,12 +57,14 @@ class Tutorial extends Model
         }
 
         $ahora = now();
+        $inicio = $this->oferta_inicio ? \Carbon\Carbon::parse($this->getRawOriginal('oferta_inicio'), 'UTC') : null;
+        $fin = $this->oferta_fin ? \Carbon\Carbon::parse($this->getRawOriginal('oferta_fin'), 'UTC') : null;
 
-        if ($this->oferta_inicio && $ahora->lt($this->oferta_inicio)) {
+        if ($inicio && $ahora->lt($inicio)) {
             return false;
         }
 
-        if ($this->oferta_fin && $ahora->gte($this->oferta_fin)) {
+        if ($fin && $ahora->gte($fin)) {
             return false;
         }
 

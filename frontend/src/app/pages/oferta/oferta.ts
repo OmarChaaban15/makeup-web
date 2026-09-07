@@ -103,6 +103,19 @@ export class Oferta implements OnInit {
     this.formVisible.set(true);
   }
 
+  /** Hace scroll suave a la caja de compra y abre el formulario */
+  scrollearACompra(): void {
+    const el = document.getElementById('seccion-compra');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    if (!this.estaAutenticado()) {
+      this.formVisible.set(true);
+    } else {
+      this.empezarCompra();
+    }
+  }
+
   comprarComoInvitado(): void {
     this.errorForm.set('');
 

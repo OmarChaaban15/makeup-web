@@ -1,1 +1,43 @@
-/* Los estilos vienen de Tailwind en la plantilla. */
+/* ══════════════════════════════════════════════════
+   ESTILOS EDITORIALES — LANDING OFERTA MASTERCLASS
+   ══════════════════════════════════════════════════ */
+
+.landing-glow-bg {
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(196, 149, 106, 0.16), transparent 70%),
+    radial-gradient(circle 600px at 85% 30%, rgba(196, 149, 106, 0.08), transparent 60%),
+    radial-gradient(circle 500px at 15% 70%, rgba(196, 149, 106, 0.06), transparent 50%),
+    #121110;
+}
+
+.gold-border-gradient {
+  border: 1px solid rgba(196, 149, 106, 0.3);
+  box-shadow: 0 0 35px -5px rgba(196, 149, 106, 0.12);
+}
+
+.gold-glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.gold-glass-card:hover {
+  border-color: rgba(196, 149, 106, 0.35);
+  box-shadow: 0 15px 40px -10px rgba(196, 149, 106, 0.15);
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(196, 149, 106, 0.25);
+    border-color: rgba(196, 149, 106, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(196, 149, 106, 0.5);
+    border-color: rgba(232, 198, 160, 0.7);
+  }
+}
+
+.pulsing-border {
+  animation: pulseGlow 3.5s infinite ease-in-out;
+}
