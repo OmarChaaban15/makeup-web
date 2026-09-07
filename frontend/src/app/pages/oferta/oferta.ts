@@ -1,4 +1,4 @@
-import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import { Component, HostListener, OnInit, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -7,6 +7,7 @@ import { AuthService } from '../../shared/auth.service';
 import { ContadorOferta } from '../../shared/contador-oferta/contador-oferta';
 import { Curso, CursosService } from '../../shared/cursos.service';
 import { mensajeDeError } from '../../shared/errores-api';
+import { TranslationService, Language } from '../../shared/translation.service';
 
 /**
  * Landing de campaña (destino del anuncio de Instagram).
@@ -29,6 +30,7 @@ export class Oferta implements OnInit {
   private cursos = inject(CursosService);
   private auth = inject(AuthService);
   private router = inject(Router);
+  public translation = inject(TranslationService);
 
   curso = signal<Curso | null>(null);
   cargando = signal(true);
@@ -45,6 +47,19 @@ export class Oferta implements OnInit {
   aceptaCondiciones = false;
   errorForm = signal('');
 
+  /** Selector de idioma desplegable */
+  langMenuOpen = signal(false);
+
+  /** Slider interactivo de Antes y Después */
+  sliderPos = signal(50);
+  sliderModo = signal<'dia' | 'noche'>('dia');
+
+  /** FAQ desplegable interactivo */
+  faqAbierta = signal<number | null>(0);
+
+  /** Barra flotante de compra rápida al hacer scroll */
+  mostrarBarraSticky = signal(false);
+
   readonly estaAutenticado = this.auth.estaAutenticado;
 
   readonly precio = computed(() => {
@@ -59,6 +74,30 @@ export class Oferta implements OnInit {
   });
 
   readonly mesesAcceso = computed(() => this.curso()?.duracion_acceso_meses ?? null);
+
+  @HostListener('window:scroll')
+  alHacerScroll(): void {
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    this.mostrarBarraSticky.set(scrollY > 650);
+  }
+
+  @HostListener('document:click')
+  cerrarMenuIdioma(): void {
+    if (this.langMenuOpen()) {
+      this.langMenuOpen.set(false);
+    }
+  }
+
+  toggleLangMenu(event?: Event): void {
+    if (event) event.stopPropagation();
+    this.langMenuOpen.update(v => !v);
+  }
+
+  selectLanguage(lang: Language, event?: Event): void {
+    if (event) event.stopPropagation();
+    this.translation.setLanguage(lang);
+    this.langMenuOpen.set(false);
+  }
 
   ngOnInit(): void {
     this.cargar();
@@ -113,6 +152,31 @@ export class Oferta implements OnInit {
       this.formVisible.set(true);
     } else {
       this.empezarCompra();
+    }
+  }
+
+  actualizarSlider(e: Event): void {
+    const target = e.target as HTMLInputElement;
+    this.sliderPos.set(Number(target.value));
+  }
+
+  setSliderModo(modo: 'dia' | 'noche'): void {
+    this.sliderModo.set(modo);
+  }
+
+  toggleFaq(index: number): void {
+    if (this.faqAbierta() === index) {
+      this.faqAbierta.set(null);
+    } else {
+      this.faqAbierta.set(index);
+    }
+  }
+
+  toggleSonido(video: HTMLVideoElement): void {
+    video.muted = !video.muted;
+    if (!video.muted) {
+      video.volume = 1;
+      video.play().catch(() => {});
     }
   }
 
@@ -177,3 +241,4 @@ export class Oferta implements OnInit {
     this.router.navigate(['/mis-cursos']);
   }
 }
+
