@@ -96,7 +96,13 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
-            'expire' => 60,
+
+            // 24 horas en lugar de los 60 minutos por defecto de Laravel.
+            // El correo de compra lleva un enlace para crear la contrasena de
+            // la cuenta recien dada de alta, y con una hora de margen quien
+            // abre el correo por la noche se queda fuera despues de haber
+            // pagado. Si caduca, la pantalla de acceso permite pedir otro.
+            'expire' => (int) env('AUTH_PASSWORD_RESET_EXPIRE', 1440),
             'throttle' => 60,
         ],
     ],

@@ -41,9 +41,9 @@ There is no shared build. Each app is installed, run and tested from its own dir
 All routes live in `backend/routes/api.php` and are prefixed `/api`.
 
 - **Public, read-only**: `GET` for `categorias`, `servicios`, `tutoriales`, `resenas`.
-- **Public, write** (rate limited): `POST resenas`, `POST citas`, `POST contacto`.
+- **Public, write** (rate limited): `POST resenas`, `POST citas`, `POST contacto`, `POST pedidos` (guest checkout is allowed, see Payments).
 - **Auth** (rate limited via `throttle:login`): `auth/register`, `auth/login`, `auth/forgot-password`, `auth/reset-password`.
-- **Private** (`auth:sanctum`): `auth/me`, `auth/logout`, `pedidos` (index/store), `citas` index, `mis-cursos`.
+- **Private** (`auth:sanctum`): `auth/me`, `auth/logout`, `pedidos` index, `citas` index, `mis-cursos`.
 - **Webhook**: `POST webhooks/stripe`, excluded from `throttle:api` so Stripe retries never hit a 429.
 
 Controllers are thin and return `response()->json(...)` directly; there are no API Resource classes or Form Request objects. Validation is inline in each controller action.
@@ -61,11 +61,24 @@ Password recovery uses Laravel's `Password` broker. `User::sendPasswordResetNoti
 On the frontend, `shared/auth.service.ts` owns the session as signals (`estaAutenticado`, `usuario`, `nombre`) and is the only place that touches `localStorage`. `shared/auth.interceptor.ts` attaches the Bearer token to same-API requests and, on a 401, clears the session and redirects to `/login?motivo=sesion-caducada`.
 
 ### Payments
-`PedidoController::store` validates the cart, rejects tutorials without a `stripe_price_id` (503) or already owned by the buyer (409), creates the `Pedido` + `PedidoItem` rows inside a transaction, then asks `App\Services\PasarelaPago` for a Checkout URL. The gateway call is deliberately outside the transaction (network I/O); if it throws, the order is marked `cancelado` rather than left dangling as `pendiente`.
+`POST /api/pedidos` is **public**. With a session it reads the buyer via `auth('sanctum')`; without one it requires `nombre` + `email` and the account is created later, in the webhook, once payment is confirmed — so an abandoned checkout never leaves a ghost user whose email would read as "already registered".
 
-`PasarelaPago` is an interface bound to `StripePasarelaPago` in `AppServiceProvider`, which exists so tests can swap in a fake instead of calling Stripe.
+`PedidoController::store` validates the cart, rejects tutorials with no Stripe price for the current amount (503) or already owned with a live grant (409), then creates `Pedido` + `PedidoItem` in a transaction. `pedidos.user_id` is nullable for that reason, with `email_cliente`/`nombre_cliente` alongside. The gateway call sits outside the transaction (network I/O); if it throws, the order is marked `cancelado` rather than left dangling as `pendiente`.
 
-`StripeWebhookController` verifies the signature, records `event.id` in `stripe_webhook_events` (unique index = idempotency against Stripe's retries), then handles `checkout.session.completed` (grant access), `checkout.session.expired` (cancel) and `charge.refunded` (revoke access). It refuses to run at all if `STRIPE_WEBHOOK_SECRET` is unset.
+`PasarelaPago` is an interface bound to `StripePasarelaPago` in `AppServiceProvider`, so tests can swap in a fake instead of calling Stripe.
+
+**Time-boxed pricing**: `tutoriales` carries `precio` (base) plus `precio_oferta` and an `oferta_inicio`/`oferta_fin` window. Stripe cannot change a price's amount, so each amount needs its own price object — hence `stripe_price_id` *and* `stripe_price_id_oferta`. `Tutorial::tieneOfertaActiva()` compares against **server** time and `stripePriceIdEfectivo()` picks the price that gets charged; the frontend only displays what the API returns. The API appends `precio_efectivo`, `oferta_activa` and `oferta_segundos_restantes` — a duration, not a deadline, so the countdown never depends on the visitor's clock.
+
+`StripeWebhookController` verifies the signature, records `event.id` in `stripe_webhook_events` (unique index = idempotency against Stripe's retries), then handles `checkout.session.completed`, `checkout.session.expired` (cancel) and `charge.refunded` (revoke access). It refuses to run at all if `STRIPE_WEBHOOK_SECRET` is unset.
+
+`App\Services\AltaDeCompra` is everything that happens once payment lands: create the account if the purchase was a guest one (random password, never emailed — the receipt carries a password-reset link instead), grant the accesses with their expiry, and send `JustificanteCompra` to the buyer with the business mailbox in CC. It lives outside the webhook so it can be tested without signing Stripe payloads.
+
+### Access expiry
+`accesos_tutorial.expira_en` holds the end of access; `null` means unlimited, which is what grants issued before this feature have and must keep. Duration comes from `tutoriales.duracion_acceso_meses` (6 by default).
+
+Enforcement is server-side in two places: `AccesoTutorial::scopeVigentes()` gates `TutorialController::show`, and `AccesoTutorialController::index` returns expired courses flagged (`acceso_vigente: false`) with `video_url` nulled — showing them is more honest than making them vanish. Any copy that promises lifetime access is therefore wrong; `deploy/README.md` lists where it lived.
+
+`cursos:avisar-caducidad` (scheduled daily at 10:00 Europe/Madrid) mails `AccesoPorCaducar` when a grant is 30 days from expiring, and stamps `aviso_expiracion_enviado_en` so it never repeats. `--simular` lists who would be mailed without sending.
 
 ### Domain model
 Business entities are named in Spanish (models, tables and columns):
@@ -80,6 +93,10 @@ Note: the `remember_tokens` table is a leftover from an earlier iteration and is
 
 ### Frontend structure
 Angular standalone components (no NgModules). Routing in `src/app/app.routes.ts`; pages under `src/app/pages/`, shared services and UI under `src/app/shared/`, route guards under `src/app/guards/`. Providers in `src/app/app.config.ts` (`provideHttpClient(withInterceptors([authInterceptor]))`, router with in-memory scrolling).
+
+`shared/cursos.service.ts` owns the catalogue and the purchase call (guest or authenticated) and is the only place that formats prices. `shared/contador-oferta/` is the countdown: it takes the seconds the API reports and decrements locally.
+
+A route with `data: { sinLayout: true }` renders without navbar or footer — `app.ts` reads it and `app.html` hides both. `/oferta` is the Instagram ad landing and uses it: a closed funnel with no links out before the purchase. It is `Disallow`ed in `robots.txt` so it does not compete with `/cursos`.
 
 Always build URLs from `environment.apiUrl` — never hardcode `http://localhost:8000`. In production `apiUrl` is the relative `/api`, because Nginx serves the SPA and the API from the same origin.
 

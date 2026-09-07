@@ -27,7 +27,11 @@ class TutorialController extends Controller
         // Hay que pedir el guard sanctum de forma explicita.
         $usuario = $request->user() ?? auth('sanctum')->user();
 
-        $tieneAcceso = $usuario && AccesoTutorial::where('user_id', $usuario->id)
+        // vigentes() excluye los accesos ya caducados: pasados los 6 meses,
+        // el video deja de entregarse.
+        $tieneAcceso = $usuario && AccesoTutorial::query()
+            ->vigentes()
+            ->where('user_id', $usuario->id)
             ->where('tutorial_id', $tutorial->id)
             ->exists();
 

@@ -19,3 +19,9 @@ Schedule::call(function () {
         ->where('procesado_en', '<', now()->subDays(30))
         ->delete();
 })->daily()->name('purga-eventos-stripe');
+
+// Aviso de "te queda un mes de acceso". A las 10:00 de Espana, que es una
+// hora razonable para que llegue un correo comercial.
+Schedule::command('cursos:avisar-caducidad')
+    ->dailyAt('10:00')
+    ->timezone('Europe/Madrid');

@@ -33,12 +33,16 @@ Route::post('/resenas', [ResenaController::class, 'store'])->middleware('throttl
 Route::post('/citas', [CitaController::class, 'store'])->middleware('throttle:correo');
 Route::post('/contacto', [ContactoController::class, 'enviar'])->middleware('throttle:correo');
 
+// Iniciar una compra es publico: se puede pagar sin cuenta previa (la
+// cuenta se crea en el webhook, con el pago ya confirmado). Con sesion
+// iniciada, el controlador lee el usuario via auth('sanctum').
+Route::post('/pedidos', [PedidoController::class, 'store'])->middleware('throttle:escritura-publica');
+
 // ─── Rutas privadas ──────────────────────────────────────────────────
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/auth/me', [AuthController::class, 'me']);
     Route::post('/auth/logout', [AuthController::class, 'logout']);
     Route::get('/pedidos', [PedidoController::class, 'index']);
-    Route::post('/pedidos', [PedidoController::class, 'store']);
     Route::get('/citas', [CitaController::class, 'index']);
     Route::get('/mis-cursos', [AccesoTutorialController::class, 'index']);
 });

@@ -19,6 +19,7 @@ class VincularPrecioStripe extends Command
     protected $signature = 'stripe:vincular
                             {tutorial? : ID del tutorial}
                             {price? : ID del precio en Stripe (price_...)}
+                            {--oferta : Vincula el precio de OFERTA en lugar del base}
                             {--listar : Muestra el estado actual y los precios disponibles}';
 
     protected $description = 'Asocia un tutorial con su precio de Stripe y verifica que existe';
@@ -56,10 +57,15 @@ class VincularPrecioStripe extends Command
 
         $importeStripe = $precio->unit_amount / 100;
 
-        if (abs($importeStripe - (float) $tutorial->precio) > 0.001) {
+        // Se compara contra el importe que toca: el base o el de oferta.
+        $importeWeb = $this->option('oferta')
+            ? (float) $tutorial->precio_oferta
+            : (float) $tutorial->precio;
+
+        if (abs($importeStripe - $importeWeb) > 0.001) {
             $this->warn(sprintf(
                 'Aviso: el tutorial cuesta %s € en la web y %s %s en Stripe.',
-                number_format((float) $tutorial->precio, 2),
+                number_format($importeWeb, 2),
                 number_format($importeStripe, 2),
                 strtoupper($precio->currency)
             ));
@@ -69,9 +75,16 @@ class VincularPrecioStripe extends Command
             }
         }
 
-        $tutorial->update(['stripe_price_id' => $precio->id]);
+        $columna = $this->option('oferta') ? 'stripe_price_id_oferta' : 'stripe_price_id';
 
-        $this->info(sprintf('"%s" vinculado con %s.', $tutorial->titulo, $precio->id));
+        $tutorial->update([$columna => $precio->id]);
+
+        $this->info(sprintf(
+            '"%s" %s vinculado con %s.',
+            $tutorial->titulo,
+            $this->option('oferta') ? '(precio de oferta)' : '(precio base)',
+            $precio->id
+        ));
 
         return self::SUCCESS;
     }
@@ -90,13 +103,19 @@ class VincularPrecioStripe extends Command
         }
 
         $this->table(
-            ['ID', 'Título', 'Precio', 'Activo', 'stripe_price_id'],
+            ['ID', 'Título', 'Base', 'price base', 'Oferta', 'price oferta', 'Vigente'],
             $tutoriales->map(fn (Tutorial $t) => [
                 $t->id,
-                $t->titulo,
+                \Illuminate\Support\Str::limit($t->titulo, 28),
                 number_format((float) $t->precio, 2).' €',
-                $t->activo ? 'sí' : 'no',
                 $t->stripe_price_id ?: '<fg=red>SIN VINCULAR</>',
+                $t->precio_oferta !== null ? number_format((float) $t->precio_oferta, 2).' €' : '—',
+                $t->precio_oferta === null
+                    ? '—'
+                    : ($t->stripe_price_id_oferta ?: '<fg=red>SIN VINCULAR</>'),
+                $t->tieneOfertaActiva()
+                    ? '<fg=green>oferta</>'
+                    : number_format((float) $t->precio_efectivo, 2).' €',
             ])->all()
         );
 
@@ -129,7 +148,8 @@ class VincularPrecioStripe extends Command
         );
 
         $this->line('');
-        $this->line('  Para vincular:  <info>php artisan stripe:vincular {ID tutorial} {price_id}</info>');
+        $this->line('  Precio base:    <info>php artisan stripe:vincular {ID} {price_id}</info>');
+        $this->line('  Precio oferta:  <info>php artisan stripe:vincular {ID} {price_id} --oferta</info>');
         $this->line('');
 
         return self::SUCCESS;

@@ -126,7 +126,8 @@ nano backend/.env
 | `DB_PASSWORD`              | La del paso 3                                             |
 | `STRIPE_SECRET`            | Stripe → Desarrolladores → Claves API (**live**, no test) |
 | `STRIPE_WEBHOOK_SECRET`    | Se obtiene en el paso 8                                   |
-| `STRIPE_PRICE_MASTERCLASS` | ID `price_...` del producto en Stripe                     |
+| `STRIPE_PRICE_MASTERCLASS` | ID `price_...` de 55 € (tarifa base)                      |
+| `STRIPE_PRICE_MASTERCLASS_OFERTA` | ID `price_...` de 45 € (oferta de lanzamiento)     |
 | `MAIL_*`                   | SMTP del proveedor de correo                              |
 
 ```bash
@@ -149,19 +150,55 @@ php artisan db:seed --force
 El seeder crea la categoría, el curso de muestra y la masterclass de pago.
 Detecta que está en producción y **no** crea el usuario de prueba.
 
-Después, vincular el curso con su precio de Stripe:
+### Los DOS precios de Stripe
+
+Stripe no permite cambiar el importe de un `price`: la tarifa base y la de
+oferta son **dos objetos distintos**. Hay que crear los dos en el panel
+(mismo producto, dos precios: 55 € y 45 €) y vincular cada uno.
 
 ```bash
-# Qué cursos hay, cuáles están sin vincular y qué precios ofrece Stripe
+# Qué cursos hay, qué precios les faltan y qué ofrece Stripe
 php artisan stripe:vincular --listar
 
-# Vincular (comprueba contra la API que el precio existe, está activo
-# y que el importe coincide con el de la web antes de guardarlo)
-php artisan stripe:vincular 2 price_1AbCdEf...
+# Tarifa base (55 €)
+php artisan stripe:vincular 2 price_ElDe55Euros
+
+# Tarifa de oferta (45 €)
+php artisan stripe:vincular 2 price_ElDe45Euros --oferta
 ```
 
-Si rellenaste `STRIPE_PRICE_MASTERCLASS` antes de sembrar, ya queda
-vinculado solo y este último comando no hace falta.
+El comando comprueba contra la API que el precio existe, está activo y que
+el importe coincide con el de la web antes de guardarlo.
+
+Si rellenaste las dos variables antes de sembrar, quedan vinculados solos
+y este paso no hace falta.
+
+### Ventana de la oferta
+
+El seeder la deja fijada del **08/09/2026 a las 19:00** al **09/09/2026 a
+las 19:00**, hora peninsular. Fuera de esa ventana se cobran 55 €.
+
+La comparación se hace con la hora del **servidor**, y la API manda al
+contador los *segundos restantes* en lugar de una fecha límite: así nadie
+cambia el precio cambiando el reloj de su móvil.
+
+Para moverla más adelante, sobre la tabla `tutoriales`:
+
+```sql
+-- OJO: la base de datos está en UTC. En horario de verano peninsular
+-- (CEST) hay que restar 2 horas; en invierno (CET), 1.
+UPDATE tutoriales
+   SET oferta_inicio = '2026-10-01 17:00:00',   -- 19:00 en España
+       oferta_fin    = '2026-10-02 17:00:00'
+ WHERE titulo = 'Masterclass de Automaquillaje';
+```
+
+### Duración del acceso
+
+Son 6 meses desde la compra, en `tutoriales.duracion_acceso_meses`. El fin
+concreto de cada alumna queda en `accesos_tutorial.expira_en`; `NULL`
+significa acceso sin límite, que es lo que conservan los accesos
+concedidos antes de este cambio.
 
 ## 6 · Permisos
 
@@ -253,8 +290,18 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now makeup-queue makeup-scheduler.timer
 ```
 
-El *timer* es el que ejecuta la poda de tokens caducados de Sanctum. Sin
-él, la tabla `personal_access_tokens` crece sin parar.
+El *timer* dispara el planificador de Laravel, del que dependen dos cosas:
+
+- `sanctum:prune-expired` — sin él, `personal_access_tokens` crece sin parar.
+- `cursos:avisar-caducidad` — el correo de "te queda un mes de acceso".
+  **Si el timer no está activo, ese aviso no se envía nunca.**
+
+Comprobar el aviso sin mandar nada a nadie:
+
+```bash
+cd /var/www/makeup-web/backend
+php artisan cursos:avisar-caducidad --simular
+```
 
 ## 10 · Primer despliegue
 
@@ -285,10 +332,15 @@ A mano, en el navegador y **también en un móvil real**:
 1. Registro y login.
 2. "¿Olvidaste tu contraseña?" → llega el correo → el enlace abre
    `/restablecer-password` → cambia la contraseña.
-3. Compra de la masterclass → vuelve a `/pago-exitoso` → el curso aparece
-   en `/mis-cursos` y el vídeo se reproduce.
-4. Formulario de contacto → llega el correo a `info@makeupbyyona.es`.
-5. Recarga la página estando en `/cursos` (comprueba el `try_files` del SPA).
+3. Compra **con** cuenta → vuelve a `/pago-exitoso` → el curso aparece en
+   `/mis-cursos`, con su fecha de fin de acceso, y el vídeo se reproduce.
+4. Compra **sin** cuenta desde `/oferta`: solo nombre y correo → paga →
+   llega el justificante con copia a `info@makeupbyyona.es` y un enlace
+   para crear la contraseña → ese enlace deja entrar en `/mis-cursos`.
+5. `/oferta` en un móvil: sin navbar ni footer, contador corriendo y el
+   precio que toque según la hora.
+6. Formulario de contacto → llega el correo a `info@makeupbyyona.es`.
+7. Recarga la página estando en `/cursos` (comprueba el `try_files` del SPA).
 
 ## 12 · Copias de seguridad
 
@@ -316,7 +368,11 @@ Y conviene copiar el resultado fuera del servidor.
 | Síntoma                                | Causa habitual                                                                |
 |----------------------------------------|-------------------------------------------------------------------------------|
 | `/cursos` aparece vacío                | Falta el paso 5 (`php artisan db:seed --force`)                               |
-| El botón de compra devuelve 503        | El tutorial no tiene `stripe_price_id`: `php artisan stripe:vincular --listar` |
+| El botón de compra devuelve 503        | Falta el `price` de Stripe del importe vigente: `php artisan stripe:vincular --listar` |
+| Cobra 55 € cuando debería cobrar 45 €  | Fuera de la ventana de la oferta, o falta `stripe_price_id_oferta` |
+| El contador no aparece                 | La oferta no está activa según la hora del servidor: `date` y la ventana en `tutoriales` |
+| No llega el aviso de "queda un mes"    | El timer del planificador no está activo (paso 9)                             |
+| Un curso comprado no se reproduce      | El acceso ha caducado: `expira_en` en `accesos_tutorial`                      |
 | Se paga pero el curso no aparece       | El webhook no llega: revisar URL y secreto en Stripe                          |
 | El webhook devuelve 500                | `STRIPE_WEBHOOK_SECRET` vacío                                                 |
 | Cambios en `.env` sin efecto           | Falta `php artisan config:cache`                                              |

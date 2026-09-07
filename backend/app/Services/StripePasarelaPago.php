@@ -15,12 +15,18 @@ class StripePasarelaPago implements PasarelaPago
     {
         $session = $this->stripe->checkout->sessions->create([
             'mode' => 'payment',
+
+            // stripePriceIdEfectivo() devuelve el price de la oferta mientras
+            // la promocion este viva y el base cuando ha terminado. El importe
+            // lo decide el servidor, no lo que llegue del navegador.
             'line_items' => $tutoriales->map(fn (Tutorial $tutorial) => [
-                'price' => $tutorial->stripe_price_id,
+                'price' => $tutorial->stripePriceIdEfectivo(),
                 'quantity' => 1,
             ])->values()->all(),
+
             'success_url' => $this->urlFrontend('/pago-exitoso?pedido='.$pedido->id),
             'cancel_url' => $this->urlFrontend('/pago-cancelado?pedido='.$pedido->id),
+
             // Enlaza la sesion con nuestro pedido: es lo que lee el webhook.
             'client_reference_id' => (string) $pedido->id,
             'customer_email' => $emailCliente,

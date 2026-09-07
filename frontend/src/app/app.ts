@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs/operators';
 import { Footer } from './shared/footer/footer';
 import { Navbar } from './shared/navbar/navbar';
 import { CookieBanner } from './shared/cookie-banner/cookie-banner';
@@ -14,9 +15,32 @@ import { TranslationService } from './shared/translation.service';
 })
 export class App {
   public translation = inject(TranslationService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
-  // El scroll al cambiar de pagina lo gestiona el router con
-  // withInMemoryScrolling (app.config.ts). Antes ademas se forzaba
-  // window.scrollTo(0,0) en cada NavigationEnd, lo que anulaba la
-  // restauracion de posicion al pulsar "atras" en el navegador.
+  /**
+   * Las páginas marcadas con data.sinLayout se muestran sin navbar ni
+   * footer. Es el caso de la landing de campaña: quien llega de un anuncio
+   * no debe tener enlaces que lo saquen del embudo de compra.
+   */
+  sinLayout = signal(false);
+
+  // El scroll al cambiar de página lo gestiona el router con
+  // withInMemoryScrolling (app.config.ts). No hay que forzar
+  // window.scrollTo aquí: anularía la restauración al pulsar "atrás".
+  constructor() {
+    this.router.events
+      .pipe(filter(evento => evento instanceof NavigationEnd))
+      .subscribe(() => this.sinLayout.set(this.rutaSinLayout()));
+  }
+
+  private rutaSinLayout(): boolean {
+    let ruta = this.route.snapshot.firstChild;
+
+    while (ruta?.firstChild) {
+      ruta = ruta.firstChild;
+    }
+
+    return ruta?.data?.['sinLayout'] === true;
+  }
 }

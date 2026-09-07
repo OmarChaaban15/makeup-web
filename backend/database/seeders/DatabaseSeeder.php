@@ -8,6 +8,7 @@ use App\Models\Pedido;
 use App\Models\PedidoItem;
 use App\Models\Tutorial;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -38,18 +39,33 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Masterclass de pago: es la que vende la pagina /cursos. El
-        // stripe_price_id viene del panel de Stripe (price_...), no se inventa.
+        // Masterclass de pago: es la que vende /cursos y la landing /oferta.
+        //
+        // precio        = tarifa base (55 EUR), la que queda al acabar la oferta
+        // precio_oferta = promocional (45 EUR) mientras dura la ventana
+        //
+        // Stripe no permite cambiar el importe de un price, asi que hacen
+        // falta dos objetos distintos, uno por importe.
+        //
+        // La ventana va de las 19:00 del 08/09/2026 a las 19:00 del 09/09/2026
+        // en hora peninsular. La aplicacion trabaja en UTC (config/app.php),
+        // asi que se convierte explicitamente con ->utc(): en septiembre
+        // Madrid es UTC+2, y guardar "19:00" a secas seria dos horas tarde.
         $masterclass = Tutorial::firstOrCreate(
             ['titulo' => 'Masterclass de Automaquillaje'],
             [
                 'categoria_id' => $categoria->id,
                 'descripcion_corta' => 'Aprende a maquillarte en 15 minutos con acabado profesional.',
-                'descripcion_larga' => 'Masterclass completa de automaquillaje: preparación de piel, base luminosa, ojos y labios, con acceso de por vida.',
-                'precio' => 45.00,
-                // Por config y no por env(): con la configuracion cacheada
-                // en produccion, env() devuelve null.
+                'descripcion_larga' => 'Masterclass completa de automaquillaje: preparación de piel, base luminosa, ojos y labios. Incluye 6 meses de acceso desde la compra.',
+                'precio' => 55.00,
+                'precio_oferta' => 45.00,
+                // Por config y no por env(): con la configuracion cacheada en
+                // produccion, env() devuelve null.
                 'stripe_price_id' => config('services.stripe.price_masterclass'),
+                'stripe_price_id_oferta' => config('services.stripe.price_masterclass_oferta'),
+                'oferta_inicio' => Carbon::parse('2026-09-08 19:00:00', 'Europe/Madrid')->utc(),
+                'oferta_fin' => Carbon::parse('2026-09-09 19:00:00', 'Europe/Madrid')->utc(),
+                'duracion_acceso_meses' => 6,
                 'video_url' => null,
                 'miniatura_url' => 'images/portada_automaquillaje.png',
                 'nivel' => 'basico',
@@ -57,10 +73,16 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        if (! $masterclass->stripe_price_id) {
+        $faltan = collect([
+            'stripe_price_id' => $masterclass->stripe_price_id,
+            'stripe_price_id_oferta' => $masterclass->stripe_price_id_oferta,
+        ])->filter(fn ($valor) => empty($valor))->keys();
+
+        if ($faltan->isNotEmpty()) {
             $this->command?->warn(
-                'La masterclass no tiene stripe_price_id: el botón de compra devolverá 503. '
-                .'Vincúlala con: php artisan stripe:vincular --listar'
+                'La masterclass no tiene '.$faltan->implode(' ni ').': el botón de compra '
+                .'devolverá 503 cuando toque ese importe. Vincúlalos con: '
+                .'php artisan stripe:vincular --listar'
             );
         }
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\AccesoTutorial;
 use App\Models\Pedido;
-use App\Models\PedidoItem;
+use App\Services\AltaDeCompra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -81,26 +81,10 @@ class StripeWebhookController extends Controller
             return;
         }
 
-        DB::transaction(function () use ($pedido, $session) {
-            $pedido->update([
-                'estado' => 'pagado',
-                'referencia_pago' => $session->payment_intent,
-                'actualizado_en' => now(),
-            ]);
-
-            $items = PedidoItem::where('pedido_id', $pedido->id)->get();
-
-            foreach ($items as $item) {
-                AccesoTutorial::firstOrCreate([
-                    'user_id' => $pedido->user_id,
-                    'tutorial_id' => $item->tutorial_id,
-                ], [
-                    'pedido_id' => $pedido->id,
-                ]);
-            }
-        });
-
-        Log::info('Pedido pagado y accesos concedidos', ['pedido_id' => $pedido->id]);
+        // Dar de alta la cuenta si la compra fue de invitado, conceder los
+        // accesos con su caducidad y enviar el justificante. Vive en
+        // AltaDeCompra para poder probarlo sin firmar payloads de Stripe.
+        app(AltaDeCompra::class)->completar($pedido, $session->payment_intent);
     }
 
     /**

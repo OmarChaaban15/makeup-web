@@ -7,4 +7,8 @@ Disallow: /pago-exitoso
 Disallow: /pago-cancelado
 Disallow: /restablecer-password
 
+# Landing de campana: destino de anuncios, no de busquedas. Indexarla
+# duplicaria el contenido de /cursos y competiria con ella.
+Disallow: /oferta
+
 Sitemap: https://makeupbyyona.es/sitemap.xml

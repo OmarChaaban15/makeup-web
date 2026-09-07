@@ -3,6 +3,7 @@ import { Inicio } from './pages/inicio/inicio';
 import { SobreMi } from './pages/sobre-mi/sobre-mi';
 import { Servicios } from './pages/servicios/servicios';
 import { Cursos } from './pages/cursos/cursos';
+import { Oferta } from './pages/oferta/oferta';
 import { Contacto } from './pages/contacto/contacto';
 import { PoliticaPrivacidad } from './pages/politica-privacidad/politica-privacidad';
 import { Login } from './pages/login/login';
@@ -19,6 +20,16 @@ export const routes: Routes = [
   { path: 'sobre-mi', component: SobreMi, title: 'Sobre mí · Makeup by Yona' },
   { path: 'servicios', component: Servicios, title: 'Servicios · Makeup by Yona' },
   { path: 'cursos', component: Cursos, title: 'Cursos y masterclasses · Makeup by Yona' },
+
+  // Landing de campaña (destino del anuncio de Instagram). sinLayout la
+  // sirve sin navbar ni footer: es un embudo cerrado, sin enlaces que
+  // saquen al visitante antes de comprar.
+  {
+    path: 'oferta',
+    component: Oferta,
+    data: { sinLayout: true },
+    title: 'Masterclass de Automaquillaje · Precio de lanzamiento'
+  },
   { path: 'contacto', component: Contacto, title: 'Contacto y reservas · Makeup by Yona' },
   { path: 'reservar-cita', redirectTo: 'contacto', pathMatch: 'full' },
   { path: 'politica-privacidad', component: PoliticaPrivacidad, title: 'Política de privacidad · Makeup by Yona' },

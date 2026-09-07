@@ -1,24 +1,11 @@
-import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { finalize } from 'rxjs';
-import { environment } from '../../../environments/environment';
 import { AuthService } from '../../shared/auth.service';
+import { CursoConAcceso, CursosService } from '../../shared/cursos.service';
 import { mensajeDeError } from '../../shared/errores-api';
-
-interface Curso {
-  id: number;
-  titulo: string;
-  descripcion_corta: string | null;
-  descripcion_larga: string | null;
-  precio: string;
-  video_url: string | null;
-  miniatura_url: string | null;
-  nivel: 'basico' | 'intermedio' | 'avanzado' | null;
-  categoria?: { id: number; nombre?: string } | null;
-}
 
 @Component({
   selector: 'app-mis-cursos',
@@ -28,19 +15,25 @@ interface Curso {
   styleUrl: './mis-cursos.css'
 })
 export class MisCursos implements OnInit, OnDestroy {
-  private http = inject(HttpClient);
   private sanitizer = inject(DomSanitizer);
   private auth = inject(AuthService);
+  private servicio = inject(CursosService);
 
-  cursos = signal<Curso[]>([]);
+  cursos = signal<CursoConAcceso[]>([]);
   isLoading = signal(true);
   errorMsg = signal('');
 
-  cursoActivo = signal<Curso | null>(null);
+  cursoActivo = signal<CursoConAcceso | null>(null);
   activeTab = signal<'temario' | 'recursos' | 'dudas'>('temario');
 
   // Estado de progreso guardado localmente por curso
   cursoCompletado = signal<Record<number, boolean>>({});
+
+  /** Cursos que siguen dentro de su periodo de acceso. */
+  readonly vigentes = computed(() => this.cursos().filter(c => c.acceso_vigente));
+
+  /** Cursos cuyo acceso ya ha terminado. Se muestran, pero sin vídeo. */
+  readonly caducados = computed(() => this.cursos().filter(c => !c.acceso_vigente));
 
   ngOnInit(): void {
     this.cargarProgresoLocal();
@@ -88,27 +81,49 @@ export class MisCursos implements OnInit, OnDestroy {
   private cargarCursos(): void {
     // El Authorization lo pone authInterceptor; y si el token ha caducado,
     // el propio interceptor devuelve al login.
-    this.http.get<Curso[]>(`${environment.apiUrl}/mis-cursos`)
+    this.servicio
+      .misCursos()
       .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe({
         next: cursos => this.cursos.set(cursos),
-        error: error => this.errorMsg.set(
-          mensajeDeError(error, 'No se pudieron cargar tus cursos. Inténtalo de nuevo más tarde.')
-        )
+        error: error =>
+          this.errorMsg.set(
+            mensajeDeError(error, 'No se pudieron cargar tus cursos. Inténtalo de nuevo más tarde.')
+          )
       });
   }
 
-  getMiniatura(curso: Curso): string {
+  /** "hasta el 09/03/2027" para mostrar el fin de acceso. */
+  fechaFinAcceso(curso: CursoConAcceso): string {
+    if (!curso.acceso_expira_en) return '';
+
+    return new Date(curso.acceso_expira_en).toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+  }
+
+  /** True cuando queda un mes o menos: es cuando conviene avisar en pantalla. */
+  accesoTerminaPronto(curso: CursoConAcceso): boolean {
+    const dias = curso.acceso_dias_restantes;
+    return curso.acceso_vigente && dias !== null && dias <= 30;
+  }
+
+  getMiniatura(curso: CursoConAcceso): string {
     if (curso.miniatura_url && !curso.miniatura_url.includes('img.youtube.com')) {
       return curso.miniatura_url;
     }
     return 'images/portada_automaquillaje.png';
   }
 
-  abrirCurso(curso: Curso): void {
-    if (!curso.video_url) {
+  abrirCurso(curso: CursoConAcceso): void {
+    // Sin acceso vigente el servidor no envía el vídeo, así que abrir el
+    // reproductor solo mostraría un hueco negro.
+    if (!curso.acceso_vigente || !curso.video_url) {
       return;
     }
+
     this.cursoActivo.set(curso);
     this.activeTab.set('temario');
     document.body.style.overflow = 'hidden';
