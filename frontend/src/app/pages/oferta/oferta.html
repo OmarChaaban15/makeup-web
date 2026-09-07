@@ -43,13 +43,13 @@
   } @else if (curso(); as c) {
 
     <!-- ══════════════════════════════════════════
-         HERO PRINCIPAL CON COMPOSICIÓN EDITORIAL
+         HERO PRINCIPAL (GUION YONAIDA)
          ══════════════════════════════════════════ -->
-    <section class="relative overflow-hidden px-5 pt-12 pb-8 sm:px-8 sm:pt-16 md:pt-20">
-      <div class="mx-auto max-w-[1100px]">
+    <section class="relative overflow-hidden px-5 pt-12 pb-8 sm:px-8 sm:pt-16 md:pt-20 text-center">
+      <div class="mx-auto max-w-[880px]">
 
         <!-- Badge de lanzamiento / oferta -->
-        <div class="text-center mb-6">
+        <div class="mb-6">
           @if (c.oferta_activa) {
             <div class="inline-flex items-center gap-2.5 rounded-full border border-[#c4956a]/60 bg-[#c4956a]/15 px-5 py-2 backdrop-blur-md shadow-lg shadow-[#c4956a]/10">
               <span class="relative flex h-2 w-2">
@@ -57,7 +57,7 @@
                 <span class="relative inline-flex h-2 w-2 rounded-full bg-[#c4956a]"></span>
               </span>
               <span class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.25em] text-[#e8c6a0]">
-                Edición Especial · Precio de Lanzamiento
+                Precio de Lanzamiento · Tiempo Limitado
               </span>
             </div>
           } @else {
@@ -69,77 +69,382 @@
           }
         </div>
 
-        <!-- Titular principal -->
-        <div class="mx-auto max-w-[860px] text-center">
-          <h1 class="font-serif text-[clamp(2.3rem,6.5vw,4.4rem)] font-light leading-[1.08] tracking-tight text-white">
-            Aprende a maquillarte<br>
-            <span class="italic text-[#e8c6a0]">como una auténtica profesional.</span>
-          </h1>
+        <!-- Titular en negrita según guion de Yonaida -->
+        <h1 class="font-serif text-[clamp(2.3rem,6.2vw,4.2rem)] font-bold leading-[1.12] tracking-tight text-white">
+          No necesitas más maquillaje.<br>
+          <span class="text-[#e8c6a0]">Necesitas descubrir qué funciona para ti.</span>
+        </h1>
 
-          <p class="mx-auto mt-6 max-w-[620px] font-sans text-sm sm:text-base font-light leading-[1.8] text-white/75">
-            La técnica paso a paso con la que clientas y novias en Ibiza consiguen una <strong class="text-white font-normal">piel luminosa, mirada abierta y fijación 24 horas</strong> en solo 15 minutos, sin productos imposibles.
-          </p>
+        <!-- Subtítulo en letra normal según guion -->
+        <p class="mx-auto mt-6 max-w-[620px] font-sans text-base sm:text-lg font-light leading-relaxed text-white/80">
+          Una masterclass online para aprender a realzar tu belleza.
+        </p>
 
-          <!-- Píldoras de valor -->
-          <div class="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs text-white/75 font-light">
-            <span class="flex items-center gap-1.5 rounded-full bg-white/[0.05] px-4 py-1.5 border border-white/10">
-              <svg class="h-3.5 w-3.5 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-              1h 45m en Ultra HD
+        <!-- Indicador de precio y acceso -->
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <span class="font-serif text-2xl sm:text-3xl font-bold text-white">
+            Masterclass online: {{ precio() }}
+          </span>
+          @if (precioBase()) {
+            <span class="font-serif text-xl text-white/40 line-through decoration-[#c4956a]">
+              {{ precioBase() }}
             </span>
-            <span class="flex items-center gap-1.5 rounded-full bg-white/[0.05] px-4 py-1.5 border border-white/10">
-              <svg class="h-3.5 w-3.5 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-              Guía de Productos PDF
-            </span>
-            <span class="flex items-center gap-1.5 rounded-full bg-white/[0.05] px-4 py-1.5 border border-white/10">
-              <svg class="h-3.5 w-3.5 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 2"/></svg>
-              6 Meses de Acceso 24/7
-            </span>
-          </div>
+          }
+          <span class="rounded-full bg-white/10 px-3 py-1 font-sans text-xs text-[#e8c6a0] border border-white/10">
+            6 meses de acceso
+          </span>
         </div>
 
-        <!-- ── SHOWCASE VISUAL DE LA FORMACIÓN ── -->
-        <div class="relative mx-auto mt-12 max-w-[820px]">
-          <div class="relative overflow-hidden rounded-[32px] border border-[#c4956a]/30 shadow-[0_25px_70px_rgba(0,0,0,0.7)] group">
-            <img decoding="async" src="images/portada_automaquillaje.png" alt="Masterclass de Automaquillaje con Yonaida"
-                 class="w-full object-cover aspect-[16/9] sm:aspect-[21/9] transition-transform duration-700 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-[#121110] via-black/40 to-transparent"></div>
-
-            <!-- Botón Play decorativo centrado -->
-            <div class="absolute inset-0 flex items-center justify-center">
-              <button type="button" (click)="scrollearACompra()"
-                      class="flex h-16 w-16 sm:h-20 sm:w-20 cursor-pointer items-center justify-center rounded-full bg-[#c4956a]/90 text-white shadow-[0_0_40px_rgba(196,149,106,0.6)] backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-[#c4956a] active:scale-95">
-                <svg class="h-7 w-7 sm:h-8 sm:w-8 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </button>
-            </div>
-
-            <!-- Badge autor inferior -->
-            <div class="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-              <div class="flex items-center gap-3">
-                <img src="images/yonaida7.jpg" alt="Yonaida" class="h-11 w-11 rounded-full object-cover border-2 border-[#c4956a] shadow-md" />
-                <div>
-                  <p class="font-serif text-sm font-medium text-white">Yonaida</p>
-                  <p class="text-[0.68rem] font-sans text-[#e8c6a0]">Makeup Artist &middot; Ibiza</p>
-                </div>
-              </div>
-              <div class="rounded-full bg-black/60 px-4 py-1.5 backdrop-blur-md border border-white/10 text-[0.68rem] text-white/90">
-                ⭐ 4.9/5 valoración de alumnas
-              </div>
-            </div>
-          </div>
+        <!-- 1er BOTÓN DE COMPRA (Quiero mi plaza) -->
+        <div class="mt-8 flex justify-center">
+          <button type="button" (click)="scrollearACompra()"
+                  class="cursor-pointer rounded-full bg-[#c4956a] px-10 py-4 font-serif text-sm font-bold uppercase tracking-[0.18em] text-white shadow-[0_12px_35px_rgba(196,149,106,0.4)] transition-all hover:bg-[#a87a52] hover:scale-105 active:scale-95">
+            Quiero mi plaza · {{ precio() }}
+          </button>
         </div>
 
       </div>
     </section>
 
     <!-- ══════════════════════════════════════════
-         CAJA DE COMPRA & CONTADOR DE URGENCIA
+         TRANSFORMACIÓN EN 3 FOTOS (GUION YONAIDA)
+         1. Sin makeup · 2. Makeup día · 3. Makeup noche
          ══════════════════════════════════════════ -->
-    <section id="seccion-compra" class="px-5 py-10 sm:px-8">
+    <section class="px-5 py-12 sm:px-8">
+      <div class="mx-auto max-w-[1100px]">
+
+        <div class="text-center mb-8">
+          <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">
+            El Proceso de Transformación
+          </p>
+          <h2 class="mt-2 font-serif text-[clamp(1.8rem,4vw,2.6rem)] font-light text-white">
+            De tu piel al natural hasta un look de fiesta
+          </h2>
+          <div class="mx-auto mt-4 h-0.5 w-12 bg-[#c4956a]"></div>
+        </div>
+
+        <!-- Rejilla de 3 columnas -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+
+          <!-- 1. Foto sin makeup -->
+          <div class="gold-glass-card group overflow-hidden rounded-3xl p-4 transition-all duration-300 flex flex-col">
+            <div class="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-[#1a1918]">
+              <img decoding="async" src="images/sin_maquillar.jpg" alt="Foto sin maquillaje — Imagen natural"
+                   class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+              <span class="absolute bottom-4 left-4 rounded-full bg-white/20 px-3 py-1 font-serif text-[0.65rem] font-semibold uppercase tracking-wider text-white backdrop-blur-md border border-white/20">
+                Paso 01 · Natural
+              </span>
+            </div>
+            <div class="p-4 text-center">
+              <h3 class="font-serif text-lg font-bold text-white">Foto sin makeup</h3>
+              <p class="mt-1 text-xs font-light text-white/70">Imagen natural y piel antes de preparar</p>
+            </div>
+          </div>
+
+          <!-- 2. Makeup día / tarde -->
+          <div class="gold-glass-card group overflow-hidden rounded-3xl p-4 transition-all duration-300 flex flex-col border-[#c4956a]/40 shadow-lg shadow-[#c4956a]/10">
+            <div class="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-[#1a1918]">
+              <img decoding="async" src="images/makeup_dia.jpg" alt="Makeup día y tarde"
+                   class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+              <span class="absolute bottom-4 left-4 rounded-full bg-[#c4956a] px-3 py-1 font-serif text-[0.65rem] font-semibold uppercase tracking-wider text-white shadow-md">
+                Paso 02 · Diario
+              </span>
+            </div>
+            <div class="p-4 text-center">
+              <h3 class="font-serif text-lg font-bold text-white">Makeup día / tarde</h3>
+              <p class="mt-1 text-xs font-light text-white/70">Piel luminosa, mirada fresca y fijación ligera</p>
+            </div>
+          </div>
+
+          <!-- 3. Makeup noche -->
+          <div class="gold-glass-card group overflow-hidden rounded-3xl p-4 transition-all duration-300 flex flex-col">
+            <div class="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-[#1a1918]">
+              <img decoding="async" src="images/makeup_noche.jpg" alt="Makeup noche"
+                   class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+              <span class="absolute bottom-4 left-4 rounded-full bg-[#1a1918]/80 px-3 py-1 font-serif text-[0.65rem] font-semibold uppercase tracking-wider text-[#e8c6a0] backdrop-blur-md border border-[#c4956a]/30">
+                Paso 03 · Noche en 5 min
+              </span>
+            </div>
+            <div class="p-4 text-center">
+              <h3 class="font-serif text-lg font-bold text-white">Makeup noche</h3>
+              <p class="mt-1 text-xs font-light text-white/70">Transformación rápida para eventos y cenas</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECCIÓN DE EMPATÍA: ¿TE HA PASADO? (GUION)
+         ══════════════════════════════════════════ -->
+    <section class="px-5 py-14 sm:px-8 border-y border-white/[0.06] bg-white/[0.02]">
+      <div class="mx-auto max-w-[760px] text-center">
+
+        <h2 class="font-serif text-[clamp(2.2rem,5vw,3.2rem)] font-bold text-white">
+          ¿Te ha pasado?
+        </h2>
+        <div class="mx-auto mt-4 h-0.5 w-12 bg-[#c4956a]"></div>
+
+        <div class="mt-10 space-y-4 text-left">
+          <!-- Punto 1 con emoji labial -->
+          <div class="gold-glass-card rounded-2xl p-5 sm:p-6 flex items-center gap-4">
+            <span class="text-3xl shrink-0">💄</span>
+            <p class="font-serif text-base sm:text-lg font-light text-white/90">
+              Te maquillas y no termina de convencerte.
+            </p>
+          </div>
+
+          <!-- Punto 2 con emoji paleta -->
+          <div class="gold-glass-card rounded-2xl p-5 sm:p-6 flex items-center gap-4">
+            <span class="text-3xl shrink-0">🎨</span>
+            <p class="font-serif text-base sm:text-lg font-light text-white/90">
+              No sabes qué colores te favorecen.
+            </p>
+          </div>
+
+          <!-- Punto 3 con emoji brocha -->
+          <div class="gold-glass-card rounded-2xl p-5 sm:p-6 flex items-center gap-4">
+            <span class="text-3xl shrink-0">🖌️</span>
+            <p class="font-serif text-base sm:text-lg font-light text-white/90">
+              Sientes que podrías sacarte mucho más partido.
+            </p>
+          </div>
+        </div>
+
+        <!-- Frase de impacto en negrita según guion -->
+        <div class="mt-10 rounded-3xl border border-[#c4956a]/30 bg-[#c4956a]/10 p-6 sm:p-8 backdrop-blur-md">
+          <p class="font-serif text-xl sm:text-2xl font-bold leading-snug text-white">
+            No necesitas maquillarte más.<br>
+            <span class="text-[#e8c6a0]">Necesitas saber qué te favorece a ti.</span>
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         LOS DOS TROZOS DE VÍDEO (DÍA Y NOCHE)
+         (Guion: Poner los dos trozos de video enseñando
+          el resultado final del makeup de día y de noche)
+         ══════════════════════════════════════════ -->
+    <section class="px-5 py-14 sm:px-8">
+      <div class="mx-auto max-w-[1100px]">
+
+        <div class="text-center mb-10">
+          <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">
+            Resultado Final en Movimiento
+          </p>
+          <h2 class="mt-2 font-serif text-[clamp(2rem,4vw,2.8rem)] font-light text-white">
+            Mira cómo queda en vídeo real
+          </h2>
+          <div class="mx-auto mt-4 h-0.5 w-12 bg-[#c4956a]"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+
+          <!-- Vídeo 1: Makeup de Día -->
+          <div class="gold-glass-card overflow-hidden rounded-3xl p-4 shadow-2xl">
+            <div class="relative overflow-hidden rounded-2xl bg-black aspect-[16/9]">
+              <video
+                src="videos/masterclass_dia_final.mp4"
+                class="h-full w-full object-cover"
+                autoplay
+                muted
+                loop
+                playsinline
+                controls
+                preload="metadata">
+              </video>
+              <span class="pointer-events-none absolute top-3 left-3 rounded-full bg-black/60 px-3 py-1 font-serif text-[0.62rem] uppercase tracking-wider text-white backdrop-blur-md border border-white/10">
+                Resultado: Look de Día
+              </span>
+            </div>
+            <div class="p-3 text-center">
+              <h4 class="font-serif text-base font-bold text-white">Acabado Diario &amp; Luz Natural</h4>
+              <p class="text-xs text-white/60 font-light mt-0.5">Piel fresca y uniforme sin sobrecargar</p>
+            </div>
+          </div>
+
+          <!-- Vídeo 2: Makeup de Noche -->
+          <div class="gold-glass-card overflow-hidden rounded-3xl p-4 shadow-2xl">
+            <div class="relative overflow-hidden rounded-2xl bg-black aspect-[16/9]">
+              <video
+                src="videos/masterclass_noche_final.mp4"
+                class="h-full w-full object-cover"
+                autoplay
+                muted
+                loop
+                playsinline
+                controls
+                preload="metadata">
+              </video>
+              <span class="pointer-events-none absolute top-3 left-3 rounded-full bg-black/60 px-3 py-1 font-serif text-[0.62rem] uppercase tracking-wider text-[#e8c6a0] backdrop-blur-md border border-[#c4956a]/30">
+                Resultado: Look de Noche
+              </span>
+            </div>
+            <div class="p-3 text-center">
+              <h4 class="font-serif text-base font-bold text-white">Acabado Noche &amp; Sofisticación</h4>
+              <p class="text-xs text-white/60 font-light mt-0.5">Mirada intensa lograda en 5 minutos</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         ¿QUÉ VAS A APRENDER? (GUION YONAIDA)
+         ══════════════════════════════════════════ -->
+    <section class="px-5 py-14 sm:px-8 border-y border-white/[0.06] bg-white/[0.02]">
+      <div class="mx-auto max-w-[800px]">
+
+        <div class="text-center mb-12">
+          <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">
+            Temario
+          </p>
+          <h2 class="mt-2 font-serif text-[clamp(2.2rem,5vw,3.2rem)] font-bold text-white">
+            ¿Qué vas a aprender?
+          </h2>
+          <div class="mx-auto mt-4 h-0.5 w-12 bg-[#c4956a]"></div>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2">
+
+          <!-- 1. Tu piel -->
+          <div class="gold-glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
+            <div>
+              <span class="font-serif text-2xl font-bold text-[#c4956a] block">01</span>
+              <h3 class="mt-2 font-serif text-xl font-bold text-white">Tu piel.</h3>
+              <p class="mt-2 font-sans text-sm font-light text-white/75 leading-relaxed">
+                Cómo conocerla y prepararla.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 text-[0.68rem] text-[#e8c6a0]">
+              ✓ Rutina previa para que la base dure intacta
+            </div>
+          </div>
+
+          <!-- 2. Tus colores -->
+          <div class="gold-glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
+            <div>
+              <span class="font-serif text-2xl font-bold text-[#c4956a] block">02</span>
+              <h3 class="mt-2 font-serif text-xl font-bold text-white">Tus colores.</h3>
+              <p class="mt-2 font-sans text-sm font-light text-white/75 leading-relaxed">
+                Los tonos que hacen que tu rostro se ilumine.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 text-[0.68rem] text-[#e8c6a0]">
+              ✓ Colorimetría para no fallar jamás de base
+            </div>
+          </div>
+
+          <!-- 3. Tu rostro -->
+          <div class="gold-glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
+            <div>
+              <span class="font-serif text-2xl font-bold text-[#c4956a] block">03</span>
+              <h3 class="mt-2 font-serif text-xl font-bold text-white">Tu rostro.</h3>
+              <p class="mt-2 font-sans text-sm font-light text-white/75 leading-relaxed">
+                Cómo potenciar tus facciones.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 text-[0.68rem] text-[#e8c6a0]">
+              ✓ Visagismo y contorno adaptado a tus rasgos reales
+            </div>
+          </div>
+
+          <!-- 4. Tu maquillaje -->
+          <div class="gold-glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
+            <div>
+              <span class="font-serif text-2xl font-bold text-[#c4956a] block">04</span>
+              <h3 class="mt-2 font-serif text-xl font-bold text-white">Tu maquillaje.</h3>
+              <p class="mt-2 font-sans text-sm font-light text-white/75 leading-relaxed">
+                Pasar de un look de día a uno de noche en 5 min.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 text-[0.68rem] text-[#e8c6a0]">
+              ✓ Transición rápida y fácil para salir a cenar
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 2º BOTÓN DE COMPRA (Quiero aprender a potenciarme) -->
+        <div class="mt-12 text-center">
+          <button type="button" (click)="scrollearACompra()"
+                  class="cursor-pointer rounded-full bg-[#c4956a] px-10 py-4 font-serif text-sm font-bold uppercase tracking-[0.18em] text-white shadow-[0_12px_35px_rgba(196,149,106,0.4)] transition-all hover:bg-[#a87a52] hover:scale-105 active:scale-95">
+            Quiero aprender a potenciarme
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECCIÓN YONAIDA (TEXTO LITERAL DEL GUION)
+         ══════════════════════════════════════════ -->
+    <section class="px-5 py-16 sm:px-8">
+      <div class="mx-auto max-w-[960px] rounded-[36px] border border-white/10 bg-white/[0.03] p-7 sm:p-12 backdrop-blur-md">
+        <div class="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+
+          <!-- Foto de Yonaida -->
+          <div class="relative overflow-hidden rounded-3xl shadow-2xl border border-white/15">
+            <img decoding="async" src="images/yonaida9.jpg" alt="Yonaida — Maquilladora profesional"
+                 class="h-full w-full object-cover object-top aspect-[4/5]" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <div class="absolute bottom-5 left-5 right-5 text-white">
+              <span class="font-serif text-xs uppercase tracking-widest text-[#e8c6a0]">Atelier Ibiza</span>
+              <p class="font-serif text-lg font-light">Yonaida</p>
+            </div>
+          </div>
+
+          <!-- Texto literal según el guion manuscrito -->
+          <div class="space-y-4">
+            <p class="font-serif text-xs uppercase tracking-[0.25em] text-[#c4956a] font-semibold">Foto de Yonaida</p>
+            <h2 class="font-serif text-2xl sm:text-3xl font-light text-white leading-tight">
+              Me llamo Yonaida, soy maquilladora profesional.
+            </h2>
+            <div class="h-0.5 w-12 bg-[#c4956a]"></div>
+
+            <p class="font-sans text-sm sm:text-base font-light text-white/85 leading-relaxed">
+              He creado esta masterclass porque siempre escucho el mismo problema:
+            </p>
+
+            <div class="space-y-2.5 rounded-2xl bg-white/[0.04] p-5 border border-white/10 font-serif italic text-sm text-[#e8c6a0]">
+              <p>"Tengo maquillaje pero no sé cómo utilizarlo."</p>
+              <p>"No sé qué hacerme en la cara para verme bien."</p>
+              <p>"Me maquillo y me veo peor que desmaquillada."</p>
+            </div>
+
+            <p class="font-sans text-sm sm:text-base font-light text-white/85 leading-relaxed pt-2">
+              Si te sientes identificada, esta masterclass es para ti. Hoy es el momento de aprender a maquillarte para realzar tu belleza.
+            </p>
+
+            <!-- 3r BOTÓN DE COMPRA -->
+            <div class="pt-4">
+              <button type="button" (click)="scrollearACompra()"
+                      class="w-full sm:w-auto cursor-pointer rounded-full bg-[#c4956a] px-9 py-4 font-serif text-xs sm:text-sm font-bold uppercase tracking-[0.16em] text-white shadow-lg transition-all hover:bg-[#a87a52] hover:scale-105 active:scale-95">
+                Acceder a la Masterclass · {{ precio() }}
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CAJA DE COMPRA & CONTADOR DE URGENCIA
+         (SECCIÓN DE PAGO SEGURO)
+         ══════════════════════════════════════════ -->
+    <section id="seccion-compra" class="px-5 py-12 sm:px-8 border-t border-white/[0.06]">
       <div class="mx-auto max-w-[580px] rounded-[36px] gold-border-gradient bg-[#181716]/95 p-7 sm:p-10 text-center backdrop-blur-xl shadow-2xl relative">
 
-        <!-- Brillo decorativo superior -->
         <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-48 h-10 bg-[#c4956a]/30 blur-2xl rounded-full pointer-events-none"></div>
 
         @if (c.oferta_activa && c.oferta_segundos_restantes !== null) {
@@ -159,7 +464,7 @@
 
         <!-- Bloque de Precio -->
         <div class="space-y-2">
-          <span class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-white/50 block">Acceso completo</span>
+          <span class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-white/50 block">Acceso completo durante 6 meses</span>
           <div class="flex items-baseline justify-center gap-3.5">
             <span class="font-serif text-[3.2rem] sm:text-[4rem] font-semibold leading-none text-white tracking-tight">
               {{ precio() }}
@@ -170,7 +475,7 @@
                   {{ precioBase() }}
                 </span>
                 <span class="rounded bg-[#c4956a]/20 px-2 py-0.5 text-[0.62rem] font-semibold uppercase tracking-wider text-[#e8c6a0]">
-                  Ahorras 10 €
+                  Precio de oferta
                 </span>
               </div>
             }
@@ -179,28 +484,28 @@
 
         @if (c.oferta_activa) {
           <p class="mt-3 font-serif text-[0.72rem] uppercase tracking-[0.16em] text-[#e8c6a0]">
-            Al finalizar el contador, el precio volverá a {{ precioBase() }}
+            Al terminar el contador, el precio sube a {{ precioBase() }}
           </p>
         }
 
-        <!-- Checklist de contenido incluido -->
+        <!-- Resumen de contenido incluido -->
         <div class="my-7 rounded-2xl bg-white/[0.03] p-5 border border-white/[0.07] text-left space-y-2.5">
-          <p class="font-serif text-xs uppercase tracking-[0.18em] text-[#c4956a] font-semibold mb-3">Todo lo que incluye:</p>
+          <p class="font-serif text-xs uppercase tracking-[0.18em] text-[#c4956a] font-semibold mb-3">Qué incluye tu plaza:</p>
           <div class="flex items-center gap-2.5 text-xs text-white/80 font-light">
             <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            <span><strong>1h 45m de clases en vídeo Full HD:</strong> planos cerrados paso a paso.</span>
+            <span><strong>Clases paso a paso en vídeo Full HD:</strong> planos cercanos y explicación clara.</span>
           </div>
           <div class="flex items-center gap-2.5 text-xs text-white/80 font-light">
             <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            <span><strong>Guía descargable:</strong> productos recomendados de todas las gamas.</span>
+            <span><strong>Guía descargable en PDF:</strong> lista de productos recomendados accesibles y pro.</span>
           </div>
           <div class="flex items-center gap-2.5 text-xs text-white/80 font-light">
             <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            <span><strong>Colorimetría &amp; Visagismo:</strong> para acertar siempre con tu base.</span>
+            <span><strong>Colorimetría &amp; Visagismo:</strong> aprende a maquillarte según tus facciones.</span>
           </div>
           <div class="flex items-center gap-2.5 text-xs text-white/80 font-light">
             <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            <span><strong>6 meses de acceso ilimitado:</strong> míralo a tu ritmo desde cualquier pantalla.</span>
+            <span><strong>6 meses de acceso 24/7:</strong> míralo a tu ritmo desde tu móvil, tablet o PC.</span>
           </div>
         </div>
 
@@ -216,8 +521,8 @@
         } @else if (!formVisible()) {
           <button type="button" (click)="empezarCompra()" [disabled]="comprando()"
                   id="oferta-cta-principal"
-                  class="mt-4 w-full cursor-pointer rounded-full bg-[#c4956a] px-8 py-4 font-serif text-[0.85rem] font-semibold uppercase tracking-[0.16em] text-white shadow-[0_12px_35px_rgba(196,149,106,0.4)] transition-all hover:bg-[#a87a52] hover:shadow-[0_16px_45px_rgba(196,149,106,0.6)] active:scale-[0.98] disabled:opacity-50">
-            {{ comprando() ? 'Conectando con Stripe...' : 'Quiero mi acceso · ' + precio() }}
+                  class="mt-4 w-full cursor-pointer rounded-full bg-[#c4956a] px-8 py-4 font-serif text-[0.85rem] font-bold uppercase tracking-[0.16em] text-white shadow-[0_12px_35px_rgba(196,149,106,0.4)] transition-all hover:bg-[#a87a52] hover:shadow-[0_16px_45px_rgba(196,149,106,0.6)] active:scale-[0.98] disabled:opacity-50">
+            {{ comprando() ? 'Conectando con Stripe...' : 'Quiero mi plaza · ' + precio() }}
           </button>
 
           <div class="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[0.68rem] text-white/50">
@@ -235,14 +540,14 @@
             </p>
           }
         } @else {
-          <!-- Compra sin cuenta (solo lo imprescindible) -->
+          <!-- Formulario de compra para invitados -->
           <form (ngSubmit)="comprarComoInvitado()" class="mt-4 space-y-3.5 text-left rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
             <div class="text-center pb-1">
               <p class="font-serif text-sm font-medium text-white">
                 Completa tus datos para activar tu acceso
               </p>
               <p class="mt-1 font-sans text-xs text-white/50">
-                Recibirás el acceso en tu bandeja de correo inmediatamente tras el pago.
+                Recibirás el acceso en tu correo inmediatamente tras el pago.
               </p>
             </div>
 
@@ -285,7 +590,7 @@
             }
 
             <button type="submit" [disabled]="comprando()"
-                    class="w-full cursor-pointer rounded-full bg-[#c4956a] px-8 py-4 font-serif text-[0.8rem] font-semibold uppercase tracking-[0.16em] text-white shadow-[0_12px_40px_rgba(196,149,106,0.35)] transition-all hover:bg-[#a87a52] active:scale-[0.98] disabled:opacity-50">
+                    class="w-full cursor-pointer rounded-full bg-[#c4956a] px-8 py-4 font-serif text-[0.8rem] font-bold uppercase tracking-[0.16em] text-white shadow-[0_12px_40px_rgba(196,149,106,0.35)] transition-all hover:bg-[#a87a52] active:scale-[0.98] disabled:opacity-50">
               {{ comprando() ? 'Conectando con Stripe...' : 'Ir al pago seguro · ' + precio() }}
             </button>
 
@@ -298,288 +603,6 @@
             }
           </form>
         }
-
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         GALERÍA DE RESULTADOS — LO QUE VAS A LOGRAR
-         ══════════════════════════════════════════ -->
-    <section class="px-5 py-14 sm:px-8">
-      <div class="mx-auto max-w-[1100px]">
-
-        <div class="text-center mb-12">
-          <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">
-            Resultados Reales
-          </p>
-          <h2 class="mt-2 font-serif text-[clamp(2rem,4vw,3rem)] font-light text-white">
-            El acabado que aprenderás a crear
-          </h2>
-          <div class="mx-auto mt-4 h-0.5 w-12 bg-[#c4956a]"></div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-          <!-- Card 1: Piel -->
-          <div class="gold-glass-card group overflow-hidden rounded-3xl p-4 transition-all duration-300">
-            <div class="relative h-64 sm:h-72 w-full overflow-hidden rounded-2xl bg-black">
-              <img decoding="async" src="images/IMG_1.PNG" alt="Piel luminosa y duradera"
-                   class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-              <span class="absolute bottom-4 left-4 rounded-full bg-[#c4956a] px-3 py-1 font-serif text-[0.62rem] font-semibold uppercase tracking-wider text-white">
-                Piel Radiante
-              </span>
-            </div>
-            <div class="p-4">
-              <h3 class="font-serif text-lg font-normal text-white">Preparación &amp; Textura Real</h3>
-              <p class="mt-2 text-xs font-light text-white/70 leading-relaxed">
-                Sin efecto máscara ni brillos indeseados. Aprenderás a hidratar estratégicamente para que tu base respire y dure intacta todo el día.
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 2: Mirada y labios -->
-          <div class="gold-glass-card group overflow-hidden rounded-3xl p-4 transition-all duration-300">
-            <div class="relative h-64 sm:h-72 w-full overflow-hidden rounded-2xl bg-black">
-              <img decoding="async" src="images/IMG_8.jpg" alt="Detalle de visagismo y ojos"
-                   class="h-full w-full object-cover object-[center_18%] transition-transform duration-700 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-              <span class="absolute bottom-4 left-4 rounded-full bg-[#c4956a] px-3 py-1 font-serif text-[0.62rem] font-semibold uppercase tracking-wider text-white">
-                Ojos &amp; Difuminados
-              </span>
-            </div>
-            <div class="p-4">
-              <h3 class="font-serif text-lg font-normal text-white">Mirada Abierta &amp; Labios</h3>
-              <p class="mt-2 text-xs font-light text-white/70 leading-relaxed">
-                Dominarás el eyeliner sin temblores, la sombra de transición para dar profundidad y el perfilado de labios para un volumen natural.
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 3: Noche y fiesta -->
-          <div class="gold-glass-card group overflow-hidden rounded-3xl p-4 transition-all duration-300">
-            <div class="relative h-64 sm:h-72 w-full overflow-hidden rounded-2xl bg-black">
-              <img decoding="async" src="images/IMG_3.PNG" alt="Maquillaje de noche en 5 minutos"
-                   class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-              <span class="absolute bottom-4 left-4 rounded-full bg-[#c4956a] px-3 py-1 font-serif text-[0.62rem] font-semibold uppercase tracking-wider text-white">
-                Transformación Exprés
-              </span>
-            </div>
-            <div class="p-4">
-              <h3 class="font-serif text-lg font-normal text-white">De Día a Noche en 5 Minutos</h3>
-              <p class="mt-2 text-xs font-light text-white/70 leading-relaxed">
-                La técnica que te permite salir del trabajo o tu rutina y subir la intensidad con 3 toques clave para una cena o evento.
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         TEMARIO DETALLADO: LOS 4 MÓDULOS
-         ══════════════════════════════════════════ -->
-    <section class="px-5 py-14 sm:px-8 border-y border-white/[0.06] bg-white/[0.02]">
-      <div class="mx-auto max-w-[880px]">
-
-        <div class="text-center mb-12">
-          <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">
-            Paso a Paso
-          </p>
-          <h2 class="mt-2 font-serif text-[clamp(2rem,4vw,3rem)] font-light text-white">
-            El contenido de la formación
-          </h2>
-          <div class="mx-auto mt-4 h-0.5 w-12 bg-[#c4956a]"></div>
-        </div>
-
-        <div class="grid gap-4 sm:grid-cols-2">
-
-          <!-- Modulo 1 -->
-          <div class="gold-glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
-            <div>
-              <span class="font-serif text-3xl font-light text-[#c4956a]">01</span>
-              <h3 class="mt-3 font-serif text-lg text-white font-medium">Diagnóstico &amp; Preparación de Piel</h3>
-              <p class="mt-2.5 text-xs sm:text-sm font-light text-white/70 leading-relaxed">
-                Aprende si tu piel es grasa, mixta o deshidratada y el orden exacto de skincare para que la base no se agriete ni cree parches durante el día.
-              </p>
-            </div>
-            <div class="mt-6 flex items-center gap-2 text-[0.68rem] text-[#e8c6a0]">
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              <span>Técnica anti-acartonamiento</span>
-            </div>
-          </div>
-
-          <!-- Modulo 2 -->
-          <div class="gold-glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
-            <div>
-              <span class="font-serif text-3xl font-light text-[#c4956a]">02</span>
-              <h3 class="mt-3 font-serif text-lg text-white font-medium">Fototipos &amp; Colorimetría</h3>
-              <p class="mt-2.5 text-xs sm:text-sm font-light text-white/70 leading-relaxed">
-                Descubrirás tu subtono real (cálido, frío o neutro). Nunca más comprarás una base que te deje el rostro naranja o pálido en fotos.
-              </p>
-            </div>
-            <div class="mt-6 flex items-center gap-2 text-[0.68rem] text-[#e8c6a0]">
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              <span>Acierto seguro de tonos</span>
-            </div>
-          </div>
-
-          <!-- Modulo 3 -->
-          <div class="gold-glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
-            <div>
-              <span class="font-serif text-3xl font-light text-[#c4956a]">03</span>
-              <h3 class="mt-3 font-serif text-lg text-white font-medium">Visagismo &amp; Armonía Facial</h3>
-              <p class="mt-2.5 text-xs sm:text-sm font-light text-white/70 leading-relaxed">
-                Contorno y colorete estratégicos según la morfología de tu rostro. Resalta pómulos, estiliza mandíbula y abre la mirada sin excesos de Instagram.
-              </p>
-            </div>
-            <div class="mt-6 flex items-center gap-2 text-[0.68rem] text-[#e8c6a0]">
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              <span>Efecto lifting natural</span>
-            </div>
-          </div>
-
-          <!-- Modulo 4 -->
-          <div class="gold-glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
-            <div>
-              <span class="font-serif text-3xl font-light text-[#c4956a]">04</span>
-              <h3 class="mt-3 font-serif text-lg text-white font-medium">De Día a Noche en 5 Minutos</h3>
-              <p class="mt-2.5 text-xs sm:text-sm font-light text-white/70 leading-relaxed">
-                Cómo elevar tu maquillaje de diario a uno de noche cambiando solo la intensidad de la mirada y los labios, sin desmaquillarte ni empezar de cero.
-              </p>
-            </div>
-            <div class="mt-6 flex items-center gap-2 text-[0.68rem] text-[#e8c6a0]">
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              <span>Fácil y rápido para eventos</span>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         CONOCE A TU INSTRUCTORA — YONAIDA
-         ══════════════════════════════════════════ -->
-    <section class="px-5 py-16 sm:px-8">
-      <div class="mx-auto max-w-[960px] rounded-[36px] border border-white/10 bg-white/[0.03] p-7 sm:p-12 backdrop-blur-md">
-        <div class="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-
-          <!-- Retrato de Yonaida -->
-          <div class="relative overflow-hidden rounded-3xl shadow-2xl border border-white/15">
-            <img decoding="async" src="images/yonaida9.jpg" alt="Yonaida — Maquilladora profesional"
-                 class="h-full w-full object-cover object-top aspect-[4/5]" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-            <div class="absolute bottom-5 left-5 right-5 text-white">
-              <span class="font-serif text-xs uppercase tracking-widest text-[#e8c6a0]">Atelier Ibiza</span>
-              <p class="font-serif text-lg font-light">Yonaida</p>
-            </div>
-          </div>
-
-          <!-- Texto biográfico -->
-          <div class="space-y-5">
-            <p class="font-serif text-xs uppercase tracking-[0.25em] text-[#c4956a] font-semibold">Tu Instructora</p>
-            <h2 class="font-serif text-3xl sm:text-4xl font-light text-white leading-tight">
-              "El maquillaje debe darte seguridad, no esconderte."
-            </h2>
-            <div class="h-0.5 w-12 bg-[#c4956a]"></div>
-            <p class="font-sans text-sm font-light text-white/75 leading-relaxed">
-              Durante más de 5 años he trabajado con novias exclusivas, producciones de moda y televisión en Ibiza. He visto a cientos de mujeres sentirse frustradas porque no consiguen que los tutoriales de internet les queden bien en su propia piel.
-            </p>
-            <p class="font-sans text-sm font-light text-white/75 leading-relaxed">
-              En esta masterclass condensé exactamente lo que enseño a mis clientas en persona: trucos reales, sin filtros y con explicaciones sencillas para que aprendas a conocer tu rostro y sacarte el máximo partido todos los días.
-            </p>
-
-            <div class="pt-2">
-              <button type="button" (click)="scrollearACompra()"
-                      class="inline-flex items-center gap-2 font-serif text-xs uppercase tracking-widest text-[#e8c6a0] hover:text-white transition-colors">
-                <span>Acceder a la masterclass con Yonaida</span>
-                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-              </button>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         PRUEBA SOCIAL — OPINIONES DE ALUMNAS
-         ══════════════════════════════════════════ -->
-    <section class="px-5 py-14 sm:px-8 border-t border-white/[0.06]">
-      <div class="mx-auto max-w-[1000px]">
-
-        <div class="text-center mb-12">
-          <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">
-            Testimonios
-          </p>
-          <h2 class="mt-2 font-serif text-[clamp(2rem,4vw,3rem)] font-light text-white">
-            Lo que dicen quienes ya la han visto
-          </h2>
-          <div class="mx-auto mt-4 h-0.5 w-12 bg-[#c4956a]"></div>
-        </div>
-
-        <div class="grid gap-6 md:grid-cols-3">
-
-          <!-- Testimonio 1 -->
-          <div class="gold-glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
-            <div>
-              <div class="mb-4 flex gap-1 text-[#e8c6a0]">
-                @for (estrella of [1, 2, 3, 4, 5]; track estrella) {
-                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5 4.8 1.3 6.8L12 17.4 5.9 20.7 7.2 13.9 2.2 9.1l6.9-.8z"/></svg>
-                }
-              </div>
-              <p class="font-serif text-sm font-light italic leading-relaxed text-white/85">
-                "Nunca conseguía hacerme el eyeliner ni que la base no se viese pesada. Con sus explicaciones paso a paso he aprendido a maquillarme en 15 minutos viéndome radiante."
-              </p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
-              <span class="font-serif text-xs text-white">Carlota R.</span>
-              <span class="text-[0.62rem] uppercase tracking-wider text-[#c4956a]">Alumna verificada</span>
-            </div>
-          </div>
-
-          <!-- Testimonio 2 -->
-          <div class="gold-glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
-            <div>
-              <div class="mb-4 flex gap-1 text-[#e8c6a0]">
-                @for (estrella of [1, 2, 3, 4, 5]; track estrella) {
-                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5 4.8 1.3 6.8L12 17.4 5.9 20.7 7.2 13.9 2.2 9.1l6.9-.8z"/></svg>
-                }
-              </div>
-              <p class="font-serif text-sm font-light italic leading-relaxed text-white/85">
-                "El módulo de colorimetría me ahorró cientos de euros. Siempre compraba bases equivocadas. Ahora sé exactamente qué buscar y mi piel parece de revista."
-              </p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
-              <span class="font-serif text-xs text-white">Laura S.</span>
-              <span class="text-[0.62rem] uppercase tracking-wider text-[#c4956a]">Alumna verificada</span>
-            </div>
-          </div>
-
-          <!-- Testimonio 3 -->
-          <div class="gold-glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
-            <div>
-              <div class="mb-4 flex gap-1 text-[#e8c6a0]">
-                @for (estrella of [1, 2, 3, 4, 5]; track estrella) {
-                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5 4.8 1.3 6.8L12 17.4 5.9 20.7 7.2 13.9 2.2 9.1l6.9-.8z"/></svg>
-                }
-              </div>
-              <p class="font-serif text-sm font-light italic leading-relaxed text-white/85">
-                "La calidad de imagen es brutal, se ve cada poro y cómo se desliza la brocha. Se nota el cariño y el nivel profesional de Yonaida. Muy recomendable."
-              </p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
-              <span class="font-serif text-xs text-white">Marta G.</span>
-              <span class="text-[0.62rem] uppercase tracking-wider text-[#c4956a]">Alumna verificada</span>
-            </div>
-          </div>
-
-        </div>
 
       </div>
     </section>
@@ -629,58 +652,16 @@
     </section>
 
     <!-- ══════════════════════════════════════════
-         CIERRE FINAL CON LLAMADA A LA ACCIÓN
+         PIE DE PÁGINA (LEGAL)
          ══════════════════════════════════════════ -->
-    <section class="px-5 pt-8 pb-20 text-center sm:px-8 border-t border-white/[0.06]">
-      <div class="mx-auto max-w-[620px] rounded-[36px] gold-border-gradient bg-[#181716] p-8 sm:p-12 shadow-2xl">
-
-        @if (c.oferta_activa && c.oferta_segundos_restantes !== null) {
-          <div class="mb-6 flex flex-col items-center justify-center">
-            <span class="mb-2 font-serif text-[0.68rem] uppercase tracking-[0.2em] text-[#e8c6a0]">
-              Última oportunidad con precio rebajado:
-            </span>
-            <app-contador-oferta
-              [segundos]="c.oferta_segundos_restantes"
-              tema="claro"
-              (terminado)="alTerminarOferta()" />
-          </div>
-        }
-
-        <h2 class="font-serif text-2xl sm:text-3xl font-light text-white leading-tight">
-          Empieza hoy a dominar tu imagen.
-        </h2>
-        <p class="mt-3 font-sans text-xs sm:text-sm font-light text-white/70">
-          Aprende con técnicas profesionales y disfruta mirándote al espejo cada día.
-        </p>
-
-        @if (!yaLoTiene()) {
-          <button type="button" (click)="scrollearACompra()"
-                  id="oferta-cta-cierre"
-                  class="mt-8 w-full cursor-pointer rounded-full bg-[#c4956a] px-8 py-4 font-serif text-[0.85rem] font-semibold uppercase tracking-[0.16em] text-white shadow-[0_12px_35px_rgba(196,149,106,0.4)] transition-all hover:bg-[#a87a52] active:scale-[0.98]">
-            Quiero mi acceso por {{ precio() }}
-          </button>
-
-          @if (mesesAcceso()) {
-            <p class="mt-3.5 font-sans text-[0.68rem] text-white/45">
-              Acceso completo durante {{ mesesAcceso() }} meses &middot; Pago único seguro &middot; Sin suscripciones
-            </p>
-          }
-        } @else {
-          <button type="button" (click)="irAMisCursos()"
-                  class="mt-8 w-full cursor-pointer rounded-full bg-emerald-600 px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-emerald-700">
-            Ir a mis cursos
-          </button>
-        }
-
-        <p class="mt-10 font-sans text-[0.66rem] leading-relaxed text-white/35">
-          Makeup by Yona &middot; Atelier de Maquillaje en Ibiza<br>
-          <a routerLink="/politica-privacidad" class="text-white/50 hover:text-white underline underline-offset-2">Política de privacidad</a>
-          &middot;
-          <a routerLink="/cursos" class="text-white/50 hover:text-white underline underline-offset-2">Ver catálogo</a>
-        </p>
-
+    <footer class="px-5 pt-6 pb-12 text-center text-white/40 text-xs border-t border-white/[0.06]">
+      <p>Makeup by Yona &middot; Atelier de Maquillaje en Ibiza</p>
+      <div class="mt-2 flex items-center justify-center gap-4">
+        <a routerLink="/politica-privacidad" class="underline underline-offset-2 hover:text-white">Política de privacidad</a>
+        <span>&bull;</span>
+        <a routerLink="/cursos" class="underline underline-offset-2 hover:text-white">Ver catálogo de cursos</a>
       </div>
-    </section>
+    </footer>
 
   }
 </div>
