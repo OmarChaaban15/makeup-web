@@ -1,12 +1,12 @@
-<div class="min-h-screen bg-[#fcf9f6] font-sans text-[#1a1a1a] antialiased selection:bg-[#c4956a]/20">
+<div class="min-h-[100svh] bg-[#fcf9f6] font-sans text-[#1a1a1a] antialiased selection:bg-[#c4956a]/20">
 
   <!-- ══════════════════════════════════════════
        HERO — SOBRE MÍ (Pantalla Completa)
        ══════════════════════════════════════════ -->
-  <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+  <section class="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden pt-20">
     <!-- Imagen de fondo -->
     <img
-      src="images/yonaida4.PNG"
+      src="images/yonaida4.PNG" fetchpriority="high" decoding="async"
       alt="Yonaida, maquilladora profesional en Ibiza"
       class="absolute inset-0 h-full w-full object-cover object-center"
     />
@@ -87,9 +87,9 @@
         <div class="flex flex-col gap-6">
           <div scrollReveal="right" class="group relative overflow-hidden rounded-[28px] shadow-[0_25px_60px_rgba(26,26,26,0.14)]">
             <img
-              src="images/yonaida.jpg"
-              alt="Yonaida, maquilladora profesional"
-              class="w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              decoding="async" src="images/yonaida7.jpg"
+              alt="Yonaida, maquilladora profesional en Ibiza"
+              class="w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               style="aspect-ratio: 3/4;"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
@@ -101,15 +101,15 @@
 
           <!-- Métricas en tarjetas estilizadas -->
           <div scrollReveal="up" scrollDelay="2" class="grid grid-cols-3 gap-3">
-            <div class="rounded-2xl border border-[#ede0d0] bg-white p-4 text-center shadow-sm">
+            <div class="rounded-2xl border border-[#ede0d0] bg-white p-3 sm:p-4 text-center shadow-sm">
               <span class="block font-serif text-2xl sm:text-3xl font-light text-[#c4956a]" style="font-variant-numeric: tabular-nums;">+{{ counterYears() }}</span>
               <span class="mt-1 block font-sans text-[0.6rem] sm:text-[0.65rem] font-semibold uppercase tracking-wider text-[#888]">Años</span>
             </div>
-            <div class="rounded-2xl border border-[#ede0d0] bg-white p-4 text-center shadow-sm">
+            <div class="rounded-2xl border border-[#ede0d0] bg-white p-3 sm:p-4 text-center shadow-sm">
               <span class="block font-serif text-2xl sm:text-3xl font-light text-[#c4956a]" style="font-variant-numeric: tabular-nums;">+{{ counterNovias() }}</span>
               <span class="mt-1 block font-sans text-[0.6rem] sm:text-[0.65rem] font-semibold uppercase tracking-wider text-[#888]">Novias &amp; Eventos</span>
             </div>
-            <div class="rounded-2xl border border-[#ede0d0] bg-white p-4 text-center shadow-sm">
+            <div class="rounded-2xl border border-[#ede0d0] bg-white p-3 sm:p-4 text-center shadow-sm">
               <span class="block font-serif text-2xl sm:text-3xl font-light text-[#c4956a]" style="font-variant-numeric: tabular-nums;">{{ counterPersonal() }}%</span>
               <span class="mt-1 block font-sans text-[0.6rem] sm:text-[0.65rem] font-semibold uppercase tracking-wider text-[#888]">Personalizado</span>
             </div>
@@ -191,15 +191,24 @@
     <div class="mx-auto max-w-[1140px]">
       <div class="grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
 
-        <!-- Foto en acción -->
-        <div scrollReveal="left" class="group relative overflow-hidden rounded-[28px] shadow-[0_25px_60px_rgba(26,26,26,0.12)]">
-          <img
-            src="images/yonaida2.PNG"
-            alt="Yonaida trabajando en maquillaje"
-            class="w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-            style="aspect-ratio: 4/5; min-height: 400px;"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+        <!-- Foto en acción con detalle flotante de técnica -->
+        <div scrollReveal="left" class="relative">
+          <div class="group relative overflow-hidden rounded-[28px] shadow-[0_25px_60px_rgba(26,26,26,0.12)]">
+            <img
+              decoding="async" src="images/yonaida2.PNG"
+              alt="Yonaida trabajando en maquillaje"
+              class="w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              style="aspect-ratio: 4/5; min-height: 400px;"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+          </div>
+          <div class="hidden sm:flex absolute -bottom-5 -right-5 items-center gap-3 rounded-2xl border border-white/80 bg-white/95 p-3 shadow-xl backdrop-blur-md">
+            <img src="images/yonaida8.jpg" alt="Detalle de técnica de maquillaje" class="h-16 w-16 rounded-xl object-cover" />
+            <div class="pr-2">
+              <span class="block font-serif text-[0.62rem] uppercase tracking-widest text-[#c4956a] font-semibold">Técnica de Autor</span>
+              <span class="block font-serif text-xs text-[#1a1a1a]">Luminosidad &amp; Textura</span>
+            </div>
+          </div>
         </div>
 
         <!-- Contenido y llamada a la acción -->

@@ -24,6 +24,7 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
     'videos/masterclass_noche_final.mp4',
   ];
   private heroVideoIndex = 0;
+  private readonly precargados = new Set<string>();
 
   @ViewChild('heroVideo') heroVideoRef!: ElementRef<HTMLVideoElement>;
   @ViewChild('particleCanvas') particleCanvasRef!: ElementRef<HTMLCanvasElement>;
@@ -55,7 +56,7 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
       estrellas: 5,
     },
     {
-      nombre: 'Sofía & Lucas',
+      nombre: 'Sofía & Laura',
       tipo: 'Editorial de Moda · Campaña Baño',
       texto: 'Profesionalidad intachable en set. Su técnica de piel luminosa y su rapidez para cambios de look elevaron las fotografías a nivel de revista de lujo. Un diez.',
       estrellas: 5,
@@ -70,11 +71,15 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
 
   // ── Slideshow (works section) ─────────────────
   readonly slides = [
-    { src: 'images/IMG_1.PNG', alt: 'Trabajo de maquillaje 1', pos: 'center center' },
-    { src: 'images/IMG_2.PNG', alt: 'Trabajo de maquillaje 2', pos: 'center 35%' },
-    { src: 'images/IMG_3.PNG', alt: 'Trabajo de maquillaje 3', pos: 'center 35%' },
-    { src: 'images/IMG_4.PNG', alt: 'Trabajo de maquillaje 4', pos: 'center 40%' },
-    { src: 'images/IMG_5.JPEG', alt: 'Trabajo de maquillaje 5', pos: 'center center' },
+    { src: 'images/IMG_1.PNG', alt: 'Maquillaje de novia en Ibiza', pos: 'center center' },
+    { src: 'images/IMG_8.jpg', alt: 'Detalle de visagismo y acabado de ojos en alta definición', pos: 'center 30%' },
+    { src: 'images/IMG_2.PNG', alt: 'Maquillaje social para eventos', pos: 'center 35%' },
+    { src: 'images/IMG_6.JPEG', alt: 'Editorial de moda y pasarela con mirada protagonista', pos: 'center 25%' },
+    { src: 'images/IMG_3.PNG', alt: 'Estilismo de fiesta e invitada', pos: 'center 35%' },
+    { src: 'images/IMG_7.jpg', alt: 'Sesión creativa y editorial contemporáneo', pos: 'center 25%' },
+    { src: 'images/IMG_4.PNG', alt: 'Producción de moda y campañas', pos: 'center 40%' },
+    { src: 'images/yonaida8.jpg', alt: 'Técnica de pigmentación glitter y textura de piel', pos: 'center 35%' },
+    { src: 'images/IMG_5.JPEG', alt: 'Rodaje y producción audiovisual', pos: 'center center' },
   ];
 
   currentIndex = signal(0);
@@ -127,11 +132,31 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   private playHeroVideo(index: number): void {
     const video = this.heroVideoRef?.nativeElement;
     if (!video) return;
+
     video.muted = true;
     video.volume = 0;
     video.src = this.heroVideos[index];
     video.load();
-    video.play().catch(() => {});
+    video.play().catch(() => { });
+
+    // Deja el siguiente vídeo del bucle ya en caché del navegador, para que
+    // el cambio al terminar el actual sea instantáneo y sin pérdida de
+    // calidad. Se lanza cuando el actual ya está reproduciéndose, así que
+    // no le roba ancho de banda.
+    video.addEventListener('playing', () => this.precargarSiguiente(index), { once: true });
+  }
+
+  private precargarSiguiente(indiceActual: number): void {
+    const siguiente = this.heroVideos[(indiceActual + 1) % this.heroVideos.length];
+    if (!siguiente || this.precargados.has(siguiente)) return;
+
+    this.precargados.add(siguiente);
+
+    const enlace = document.createElement('link');
+    enlace.rel = 'prefetch';
+    enlace.as = 'video';
+    enlace.href = siguiente;
+    document.head.appendChild(enlace);
   }
 
   onHeroVideoEnded(): void {

@@ -2,8 +2,9 @@ import { afterNextRender, Component, ElementRef, OnDestroy, ViewChild } from '@a
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
 import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
+import { environment } from '../../../environments/environment';
+import { mensajeDeError } from '../../shared/errores-api';
 import * as L from 'leaflet';
 
 @Component({
@@ -60,10 +61,19 @@ export class Contacto implements OnDestroy {
       return;
     }
 
+    // El formulario usa ngModel sin validadores, así que el formato del
+    // correo hay que comprobarlo aquí: sin esto la respuesta nunca llegaría.
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(this.formData.email.trim())) {
+      this.error = 'Revisa tu correo electrónico: no parece una dirección válida.';
+      return;
+    }
+
     this.error = '';
     this.enviando = true;
 
-    this.http.post('http://localhost:8000/api/contacto', this.formData).subscribe({
+    // La URL sale de environment: estaba escrita a mano apuntando a
+    // localhost:8000, lo que rompía el formulario en producción.
+    this.http.post(`${environment.apiUrl}/contacto`, this.formData).subscribe({
       next: () => {
         this.enviando = false;
         this.enviado = true;
@@ -78,9 +88,11 @@ export class Contacto implements OnDestroy {
       },
       error: (err) => {
         this.enviando = false;
-        // Si hay algún problema de red, le mostramos opción directa de correo o WhatsApp
-        this.error = 'Hubo un inconveniente al enviar el mensaje. También puedes escribirme directamente por email o WhatsApp.';
-        console.error('Error enviando formulario:', err);
+        // Si algo falla, ofrecemos la vía directa de correo o WhatsApp.
+        this.error = mensajeDeError(
+          err,
+          'Hubo un inconveniente al enviar el mensaje. También puedes escribirme directamente por email o WhatsApp.'
+        );
       }
     });
   }
@@ -97,7 +109,7 @@ export class Contacto implements OnDestroy {
   }
 
   copiarEmail(): void {
-    navigator.clipboard.writeText('info@makeupbyyona.com').then(() => {
+    navigator.clipboard.writeText('info@makeupbyyona.es').then(() => {
       this.emailCopiado = true;
       setTimeout(() => this.emailCopiado = false, 2500);
     });

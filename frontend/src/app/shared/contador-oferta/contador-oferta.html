@@ -1,0 +1,38 @@
+@if (!haTerminado()) {
+  <div class="inline-flex flex-col items-center gap-2">
+    <span class="font-serif text-[0.62rem] font-semibold uppercase tracking-[0.22em]"
+          [class]="tema === 'claro' ? 'text-[#e8c6a0]' : 'text-[#c4956a]'">
+      La oferta termina en
+    </span>
+
+    <div class="flex items-start gap-2 sm:gap-3" role="timer" aria-live="off">
+      <div class="flex flex-col items-center">
+        <span class="contador-digito"
+              [class]="tema === 'claro' ? 'contador-claro' : 'contador-oscuro'">
+          {{ dosDigitos(horas()) }}
+        </span>
+        <span class="contador-etiqueta" [class.text-white]="tema === 'claro'">horas</span>
+      </div>
+
+      <span class="contador-separador" [class.text-white]="tema === 'claro'">:</span>
+
+      <div class="flex flex-col items-center">
+        <span class="contador-digito"
+              [class]="tema === 'claro' ? 'contador-claro' : 'contador-oscuro'">
+          {{ dosDigitos(minutos()) }}
+        </span>
+        <span class="contador-etiqueta" [class.text-white]="tema === 'claro'">min</span>
+      </div>
+
+      <span class="contador-separador" [class.text-white]="tema === 'claro'">:</span>
+
+      <div class="flex flex-col items-center">
+        <span class="contador-digito"
+              [class]="tema === 'claro' ? 'contador-claro' : 'contador-oscuro'">
+          {{ dosDigitos(segundosVisibles()) }}
+        </span>
+        <span class="contador-etiqueta" [class.text-white]="tema === 'claro'">seg</span>
+      </div>
+    </div>
+  </div>
+}

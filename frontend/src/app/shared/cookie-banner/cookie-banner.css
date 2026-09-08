@@ -1,1 +1,17 @@
-/* Cookie Banner – todo el estilo via Tailwind en el HTML */
+/*
+  En pantallas muy estrechas (320-379px) los tres botones tienen unos
+  72px utiles cada uno. "Configurar", con 0.68rem y tracking 0.08em, se
+  pasa por poco y salta a dos lineas, lo que engorda el banner.
+
+  El banner se dibuja por encima del menu movil, asi que cada pixel de
+  alto que gana es menu que tapa: se recorta el espaciado de letras y se
+  reduce el tamano lo justo para que entre en una linea.
+*/
+@media (max-width: 379px) {
+  :host .banner-acciones button {
+    letter-spacing: 0.02em;
+    font-size: 0.62rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+}

@@ -21,6 +21,16 @@ export class ScrollRevealDirective implements OnInit, OnDestroy {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const element = this.el.nativeElement as HTMLElement;
+
+    // El atributo data-scroll-reveal pone opacity:0 y solo la clase
+    // "revealed" lo devuelve a la vista. Si no hay IntersectionObserver,
+    // nadie añade esa clase y el contenido quedaría invisible para
+    // siempre, así que sin él no se toca el elemento: se ve tal cual,
+    // sin animación. Falla la animación, no el contenido.
+    if (typeof IntersectionObserver === 'undefined') {
+      return;
+    }
+
     const finalDirection = this.direction || this.appDirection || 'up';
     element.setAttribute('data-scroll-reveal', finalDirection);
 

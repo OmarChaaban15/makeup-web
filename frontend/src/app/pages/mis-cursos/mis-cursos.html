@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-[#fcf9f6] pt-28 pb-28 font-sans text-[#1a1a1a] antialiased selection:bg-[#c4956a]/20">
+<div class="min-h-[100svh] bg-[#fcf9f6] pt-28 pb-28 font-sans text-[#1a1a1a] antialiased selection:bg-[#c4956a]/20">
 
   <!-- ══════════════════════════════════════════
        HERO / BIENVENIDA ALUMNA
@@ -24,7 +24,7 @@
               <span class="italic text-[#e8c6a0]">{{ userName }}</span>
             </h1>
             <p class="mt-4 font-sans text-sm sm:text-base font-light text-white/75 leading-relaxed">
-              Accede a tus masterclasses sin límite de tiempo, repasa las técnicas paso a paso y descarga tus guías de productos.
+              Accede a tus masterclasses con 6 meses de acceso, repasa las técnicas paso a paso y descarga tus guías de productos.
             </p>
           </div>
 
@@ -36,7 +36,7 @@
             </div>
             <div class="flex-1 md:flex-initial rounded-2xl bg-white/5 p-4 sm:px-6 sm:py-4 border border-white/10 backdrop-blur-md">
               <span class="block font-sans text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[#c4956a]">Resolución HD</span>
-              <span class="mt-1 block font-serif text-sm sm:text-base font-normal text-white">1080p · Sin límites</span>
+              <span class="mt-1 block font-serif text-sm sm:text-base font-normal text-white">1080p · Móvil y PC</span>
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@
       <div class="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-[#eadecd] pb-5">
         <div>
           <h2 class="font-serif text-[1.4rem] font-normal text-[#1a1a1a]">Tus Masterclasses adquiridas</h2>
-          <p class="mt-0.5 text-xs text-[#777]">Acceso vitalicio garantizado en alta definición</p>
+          <p class="mt-0.5 text-xs text-[#777]">Alta definición · 6 meses de acceso desde la compra</p>
         </div>
         <div class="flex items-center gap-3">
           <a routerLink="/cursos"
@@ -115,11 +115,17 @@
           @for (curso of cursos(); track curso.id) {
             <article
               (click)="abrirCurso(curso)"
-              class="cursos-fade-up group relative flex cursor-pointer flex-col overflow-hidden rounded-[26px] border border-[#ede0d0] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(196,149,106,0.18)]">
+              class="cursos-fade-up group relative flex flex-col overflow-hidden rounded-[26px] border bg-white shadow-sm transition-all duration-300"
+              [class.cursor-pointer]="curso.acceso_vigente"
+              [class.border-[#ede0d0]]="curso.acceso_vigente"
+              [class.hover:-translate-y-1.5]="curso.acceso_vigente"
+              [class.hover:shadow-[0_20px_50px_rgba(196,149,106,0.18)]]="curso.acceso_vigente"
+              [class.border-[#e3d9d0]]="!curso.acceso_vigente"
+              [class.opacity-70]="!curso.acceso_vigente">
 
               <!-- Cabecera / Portada del curso con efecto fotográfico -->
               <div class="relative aspect-video w-full overflow-hidden bg-[#161514]">
-                <img [src]="getMiniatura(curso)" [alt]="curso.titulo"
+                <img decoding="async" [src]="getMiniatura(curso)" [alt]="curso.titulo"
                      class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
                 
                 <!-- Degradados para contraste perfecto -->
@@ -155,14 +161,28 @@
                   </button>
                 </div>
 
-                <!-- Botón flotante Play central -->
-                <div class="absolute inset-0 flex items-center justify-center">
-                  <div class="flex h-14 w-14 items-center justify-center rounded-full bg-[#c4956a] text-white shadow-xl transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#a87a52]">
-                    <svg class="h-6 w-6 ml-0.5" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
+                <!-- Botón flotante Play central: solo si el acceso sigue vivo -->
+                @if (curso.acceso_vigente) {
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="flex h-14 w-14 items-center justify-center rounded-full bg-[#c4956a] text-white shadow-xl transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#a87a52]">
+                      <svg class="h-6 w-6 ml-0.5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
                   </div>
-                </div>
+                } @else {
+                  <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/45 px-4 text-center backdrop-blur-[2px]">
+                    <svg class="h-7 w-7 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                    <span class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-white">
+                      Acceso finalizado
+                    </span>
+                    <span class="font-sans text-[0.66rem] font-light text-white/70">
+                      Terminó el {{ fechaFinAcceso(curso) }}
+                    </span>
+                  </div>
+                }
 
                 <!-- Duración / Formato en footer de imagen -->
                 <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs text-white/80">
@@ -189,6 +209,29 @@
                   </p>
                 }
 
+                <!-- Periodo de acceso. Visible siempre: es una condicion de
+                     lo comprado, no un detalle que se pueda esconder. -->
+                @if (curso.acceso_expira_en) {
+                  <p class="mt-4 inline-flex items-center gap-1.5 self-start rounded-full px-3 py-1 font-sans text-[0.68rem] font-medium"
+                     [class.bg-[#faf5f0]]="curso.acceso_vigente && !accesoTerminaPronto(curso)"
+                     [class.text-[#8a6d4f]]="curso.acceso_vigente && !accesoTerminaPronto(curso)"
+                     [class.bg-amber-50]="accesoTerminaPronto(curso)"
+                     [class.text-amber-700]="accesoTerminaPronto(curso)"
+                     [class.bg-[#f4f0ed]]="!curso.acceso_vigente"
+                     [class.text-[#888]]="!curso.acceso_vigente">
+                    <svg class="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 2"/>
+                    </svg>
+                    @if (!curso.acceso_vigente) {
+                      Acceso finalizado el {{ fechaFinAcceso(curso) }}
+                    } @else if (accesoTerminaPronto(curso)) {
+                      Te quedan {{ curso.acceso_dias_restantes }} días de acceso
+                    } @else {
+                      Acceso hasta el {{ fechaFinAcceso(curso) }}
+                    }
+                  </p>
+                }
+
                 <!-- Barra de estado / Progreso visual -->
                 <div class="mt-6 pt-5 border-t border-[#f0e6dc] flex items-center justify-between">
                   <div class="flex items-center gap-2">
@@ -200,12 +243,20 @@
                     </span>
                   </div>
 
-                  <span class="inline-flex items-center gap-1 font-serif text-[0.75rem] font-semibold uppercase tracking-wider text-[#c4956a] group-hover:translate-x-0.5 transition-transform">
-                    Reproducir
-                    <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
+                  @if (curso.acceso_vigente) {
+                    <span class="inline-flex items-center gap-1 font-serif text-[0.75rem] font-semibold uppercase tracking-wider text-[#c4956a] group-hover:translate-x-0.5 transition-transform">
+                      Reproducir
+                      <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  } @else {
+                    <a routerLink="/contacto"
+                       (click)="$event.stopPropagation()"
+                       class="inline-flex items-center gap-1 font-serif text-[0.75rem] font-semibold uppercase tracking-wider text-[#888] underline underline-offset-2 hover:text-[#c4956a]">
+                      Ampliar acceso
+                    </a>
+                  }
                 </div>
 
               </div>
@@ -256,11 +307,11 @@
 @if (cursoActivo()) {
   <div class="fixed inset-0 z-[2000] flex items-center justify-center bg-black/90 p-3 sm:p-6 backdrop-blur-md"
        (click)="cerrarModal()">
-    <div class="relative flex flex-col w-full max-w-[1060px] max-h-[92vh] overflow-hidden rounded-[28px] bg-[#141312] border border-white/10 shadow-[0_30px_90px_rgba(0,0,0,0.8)]"
+    <div class="relative flex flex-col w-full max-w-[1060px] max-h-[92dvh] overflow-hidden rounded-[28px] bg-[#141312] border border-white/10 shadow-[0_30px_90px_rgba(0,0,0,0.8)]"
          (click)="$event.stopPropagation()">
 
       <!-- Barra superior del reproductor -->
-      <div class="flex items-center justify-between border-b border-white/10 bg-[#1a1918] px-6 py-4">
+      <div class="flex items-center justify-between border-b border-white/10 bg-[#1a1918] px-4 py-3 sm:px-6 sm:py-4">
         <div class="flex items-center gap-3 min-w-0">
           <span class="flex h-3 w-3 shrink-0 rounded-full bg-emerald-500"></span>
           <span class="truncate font-serif text-sm sm:text-base font-normal text-white">

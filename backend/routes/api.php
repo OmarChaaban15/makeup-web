@@ -9,13 +9,17 @@ use App\Http\Controllers\CitaController;
 use App\Http\Controllers\ResenaController;
 use App\Http\Controllers\AccesoTutorialController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\Api\StripeWebhookController;
 
-// Auth routes (sin login)
-Route::post('/auth/register', [AuthController::class, 'register']);
-Route::post('/auth/login', [AuthController::class, 'login']);
+// ─── Autenticacion (sin sesion previa) ───────────────────────────────
+// throttle:login limita por IP y por email para frenar la fuerza bruta.
+Route::post('/auth/register', [AuthController::class, 'register'])->middleware('throttle:login');
+Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:login');
+Route::post('/auth/forgot-password', [AuthController::class, 'forgotPassword'])->middleware('throttle:correo');
+Route::post('/auth/reset-password', [AuthController::class, 'resetPassword'])->middleware('throttle:login');
 
-// Rutas públicas (sin login)
+// ─── Lectura publica ─────────────────────────────────────────────────
 Route::get('/categorias', [CategoriaController::class, 'index']);
 Route::get('/categorias/{id}', [CategoriaController::class, 'show']);
 Route::get('/servicios', [ServicioController::class, 'index']);
@@ -23,16 +27,27 @@ Route::get('/servicios/{id}', [ServicioController::class, 'show']);
 Route::get('/tutoriales', [TutorialController::class, 'index']);
 Route::get('/tutoriales/{id}', [TutorialController::class, 'show']);
 Route::get('/resenas', [ResenaController::class, 'index']);
-Route::post('/resenas', [ResenaController::class, 'store']);
-Route::post('/citas', [CitaController::class, 'store']);
-Route::post('/contacto', [\App\Http\Controllers\ContactoController::class, 'enviar']);
 
-// Rutas privadas (requieren login)
+// ─── Escritura publica (con limite de peticiones) ────────────────────
+Route::post('/resenas', [ResenaController::class, 'store'])->middleware('throttle:escritura-publica');
+Route::post('/citas', [CitaController::class, 'store'])->middleware('throttle:correo');
+Route::post('/contacto', [ContactoController::class, 'enviar'])->middleware('throttle:correo');
+
+// Iniciar una compra es publico: se puede pagar sin cuenta previa (la
+// cuenta se crea en el webhook, con el pago ya confirmado). Con sesion
+// iniciada, el controlador lee el usuario via auth('sanctum').
+Route::post('/pedidos', [PedidoController::class, 'store'])->middleware('throttle:escritura-publica');
+
+// ─── Rutas privadas ──────────────────────────────────────────────────
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/auth/me', [AuthController::class, 'me']);
     Route::post('/auth/logout', [AuthController::class, 'logout']);
     Route::get('/pedidos', [PedidoController::class, 'index']);
-    Route::post('/pedidos', [PedidoController::class, 'store']);
     Route::get('/citas', [CitaController::class, 'index']);
     Route::get('/mis-cursos', [AccesoTutorialController::class, 'index']);
 });
-Route::post('/webhooks/stripe', [StripeWebhookController::class, 'handle']);
+
+// ─── Webhook de Stripe ───────────────────────────────────────────────
+// Sin throttle: Stripe reintenta y no debe toparse con un 429.
+Route::post('/webhooks/stripe', [StripeWebhookController::class, 'handle'])
+    ->withoutMiddleware('throttle:api');

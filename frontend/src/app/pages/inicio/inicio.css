@@ -131,11 +131,26 @@
 
 .lightbox-overlay img {
   max-width: 90vw;
-  max-height: 85vh;
+  max-height: 85dvh;
   object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
   animation: lightboxImgIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/*
+  En movil, 2rem de margen a cada lado se comen un tercio del ancho util
+  de un telefono pequeno. La foto es el contenido: se le deja el sitio.
+*/
+@media (max-width: 640px) {
+  .lightbox-overlay {
+    padding: 0.75rem;
+  }
+
+  .lightbox-overlay img {
+    max-width: 96vw;
+    max-height: 88dvh;
+  }
 }
 
 @keyframes lightboxIn {

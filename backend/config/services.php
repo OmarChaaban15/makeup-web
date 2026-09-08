@@ -39,6 +39,13 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
         'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+
+        // Precios de la masterclass. Stripe no permite cambiar el importe de
+        // un price, asi que la tarifa base y la de oferta son dos objetos
+        // distintos. Los usa el seeder; despues se pueden reasignar con:
+        // php artisan stripe:vincular
+        'price_masterclass' => env('STRIPE_PRICE_MASTERCLASS'),
+        'price_masterclass_oferta' => env('STRIPE_PRICE_MASTERCLASS_OFERTA'),
     ],
 
 ];

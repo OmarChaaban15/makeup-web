@@ -1,0 +1,49 @@
+/* Cifras a ancho fijo: sin esto el marcador se mueve al pasar de 09 a 10. */
+.contador-digito {
+  display: block;
+  min-width: 2.6rem;
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.75rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 640px) {
+  .contador-digito {
+    min-width: 3.1rem;
+    font-size: 1.9rem;
+  }
+}
+
+.contador-oscuro {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.contador-claro {
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  backdrop-filter: blur(6px);
+}
+
+.contador-etiqueta {
+  margin-top: 0.35rem;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.contador-separador {
+  padding-top: 0.55rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #c4956a;
+}

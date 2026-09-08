@@ -27,7 +27,14 @@
     </div>
 
     <!-- Botones -->
-    <div class="grid grid-cols-3 gap-2 sm:flex sm:flex-shrink-0 sm:flex-wrap sm:gap-3 w-full sm:w-auto">
+    <!--
+      Se mantienen las tres columnas también en pantallas estrechas: el
+      banner se superpone al menú móvil (z-1500 sobre z-1050), así que
+      apilarlos lo haría alto y taparía el final del menú. El grid iguala
+      las alturas, y en cookie-banner.css se afina el texto por debajo de
+      380px para que "Configurar" quepa en una línea.
+    -->
+    <div class="banner-acciones grid grid-cols-3 gap-2 sm:flex sm:flex-shrink-0 sm:flex-wrap sm:gap-3 w-full sm:w-auto">
       <button (click)="configure()"
               class="cursor-pointer border border-black/[0.15] bg-transparent px-2 sm:px-5 py-[0.55rem] text-center font-serif text-[0.68rem] sm:text-[0.72rem] font-semibold uppercase tracking-[0.08em] sm:tracking-[0.14em] text-[#555] transition-all duration-200 hover:border-[#c4956a] hover:text-[#c4956a] active:scale-95">
         Configurar

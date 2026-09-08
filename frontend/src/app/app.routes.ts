@@ -3,10 +3,12 @@ import { Inicio } from './pages/inicio/inicio';
 import { SobreMi } from './pages/sobre-mi/sobre-mi';
 import { Servicios } from './pages/servicios/servicios';
 import { Cursos } from './pages/cursos/cursos';
+import { Oferta } from './pages/oferta/oferta';
 import { Contacto } from './pages/contacto/contacto';
 import { PoliticaPrivacidad } from './pages/politica-privacidad/politica-privacidad';
 import { Login } from './pages/login/login';
 import { Registro } from './pages/registro/registro';
+import { RestablecerPassword } from './pages/restablecer-password/restablecer-password';
 import { MisCursos } from './pages/mis-cursos/mis-cursos';
 import { authGuard } from './guards/auth-guard';
 import { PagoExitoso } from './pages/pago-exitoso/pago-exitoso';
@@ -14,17 +16,28 @@ import { PagoCancelado } from './pages/pago-cancelado/pago-cancelado';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-  { path: 'inicio', component: Inicio },
-  { path: 'sobre-mi', component: SobreMi },
-  { path: 'servicios', component: Servicios },
-  { path: 'cursos', component: Cursos },
-  { path: 'contacto', component: Contacto },
+  { path: 'inicio', component: Inicio, title: 'Makeup by Yona · Maquillaje profesional en Ibiza' },
+  { path: 'sobre-mi', component: SobreMi, title: 'Sobre mí · Makeup by Yona' },
+  { path: 'servicios', component: Servicios, title: 'Servicios · Makeup by Yona' },
+  { path: 'cursos', component: Cursos, title: 'Cursos y masterclasses · Makeup by Yona' },
+
+  // Landing de campaña (destino del anuncio de Instagram). sinLayout la
+  // sirve sin navbar ni footer: es un embudo cerrado, sin enlaces que
+  // saquen al visitante antes de comprar.
+  {
+    path: 'oferta',
+    component: Oferta,
+    data: { sinLayout: true },
+    title: 'Masterclass de Automaquillaje · Precio de lanzamiento'
+  },
+  { path: 'contacto', component: Contacto, title: 'Contacto y reservas · Makeup by Yona' },
   { path: 'reservar-cita', redirectTo: 'contacto', pathMatch: 'full' },
-  { path: 'politica-privacidad', component: PoliticaPrivacidad },
-  { path: 'mis-cursos', component: MisCursos, canActivate: [authGuard] },
-  { path: 'login', component: Login },
-  { path: 'registro', component: Registro },
-  { path: 'pago-exitoso', component: PagoExitoso },
-  { path: 'pago-cancelado', component: PagoCancelado },
+  { path: 'politica-privacidad', component: PoliticaPrivacidad, title: 'Política de privacidad · Makeup by Yona' },
+  { path: 'mis-cursos', component: MisCursos, canActivate: [authGuard], title: 'Mis cursos · Makeup by Yona' },
+  { path: 'login', component: Login, title: 'Acceder · Makeup by Yona' },
+  { path: 'registro', component: Registro, title: 'Crear cuenta · Makeup by Yona' },
+  { path: 'restablecer-password', component: RestablecerPassword, title: 'Nueva contraseña · Makeup by Yona' },
+  { path: 'pago-exitoso', component: PagoExitoso, title: 'Pago completado · Makeup by Yona' },
+  { path: 'pago-cancelado', component: PagoCancelado, title: 'Pago cancelado · Makeup by Yona' },
   { path: '**', redirectTo: 'inicio' }
 ];

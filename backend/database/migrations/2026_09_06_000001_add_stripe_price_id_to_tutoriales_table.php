@@ -7,20 +7,21 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * El modelo Tutorial y PedidoController ya usaban stripe_price_id,
+     * pero ninguna migracion creaba la columna: el checkout de Stripe
+     * recibia price=null y fallaba siempre.
      */
     public function up(): void
     {
         Schema::table('tutoriales', function (Blueprint $table) {
-            $table->string('hotmart_product_id', 50)->nullable()->after('video_url');
-            $table->string('hotmart_checkout_url', 300)->nullable()->after('hotmart_product_id');
+            $table->string('stripe_price_id', 100)->nullable()->after('precio');
         });
     }
 
     public function down(): void
     {
         Schema::table('tutoriales', function (Blueprint $table) {
-            $table->dropColumn(['hotmart_product_id', 'hotmart_checkout_url']);
+            $table->dropColumn('stripe_price_id');
         });
     }
 };

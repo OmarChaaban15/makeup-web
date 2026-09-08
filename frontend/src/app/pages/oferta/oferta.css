@@ -1,0 +1,166 @@
+/* ══════════════════════════════════════════════════
+   ESTILOS EDITORIALES — LANDING OFERTA MASTERCLASS
+   ══════════════════════════════════════════════════ */
+
+.landing-glow-bg {
+  background: 
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(196, 149, 106, 0.22), transparent 70%),
+    radial-gradient(circle 700px at 90% 25%, rgba(196, 149, 106, 0.12), transparent 60%),
+    radial-gradient(circle 600px at 10% 65%, rgba(196, 149, 106, 0.08), transparent 55%),
+    radial-gradient(ellipse 80% 40% at 50% 100%, rgba(196, 149, 106, 0.15), transparent 70%),
+    #121110;
+}
+
+.gold-border-gradient {
+  border: 1px solid rgba(196, 149, 106, 0.35);
+  box-shadow: 0 0 45px -5px rgba(196, 149, 106, 0.18), inset 0 0 25px rgba(196, 149, 106, 0.04);
+}
+
+.gold-glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gold-glass-card:hover {
+  border-color: rgba(196, 149, 106, 0.45);
+  box-shadow: 0 20px 45px -10px rgba(196, 149, 106, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ── Botón Dorado con Barrido de Brillo (Gold Sheen) ── */
+.btn-gold-luxury {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #c4956a 0%, #a87a52 100%);
+  box-shadow: 0 12px 35px rgba(196, 149, 106, 0.42);
+  transition: all 0.3s ease;
+}
+
+.btn-gold-luxury::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.35) 45%,
+    rgba(255, 255, 255, 0.65) 50%,
+    rgba(255, 255, 255, 0.35) 55%,
+    transparent 80%
+  );
+  transform: rotate(25deg) translateY(-100%);
+  transition: transform 0.75s ease-in-out;
+  pointer-events: none;
+}
+
+.btn-gold-luxury:hover::after {
+  transform: rotate(25deg) translateY(100%);
+}
+
+.btn-gold-luxury:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 16px 45px rgba(196, 149, 106, 0.55);
+}
+
+.btn-gold-luxury:active {
+  transform: scale(0.98);
+}
+
+/* ── Estilos del Comparador Deslizante (Before/After Slider) ── */
+.comparison-slider-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: ew-resize;
+  z-index: 30;
+  margin: 0;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.slider-handle-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #f5dfc6, #c4956a, #f5dfc6);
+  box-shadow: 0 0 12px rgba(196, 149, 106, 0.85);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.slider-handle-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #141312;
+  border: 2px solid #c4956a;
+  box-shadow: 0 0 16px rgba(196, 149, 106, 0.8), inset 0 0 8px rgba(196, 149, 106, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e8c6a0;
+  pointer-events: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Animación Glow Suave ── */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(196, 149, 106, 0.25);
+    border-color: rgba(196, 149, 106, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(196, 149, 106, 0.55);
+    border-color: rgba(232, 198, 160, 0.75);
+  }
+}
+
+.pulsing-border {
+  animation: pulseGlow 3.5s infinite ease-in-out;
+}
+
+/* ── Barra Flotante Sticky de Compra Optimizada para Móviles ── */
+.sticky-cta-bar {
+  animation: slideUpSticky 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+@keyframes slideUpSticky {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Evitar zoom automático en iOS al hacer focus en inputs & mejorar legibilidad móvil */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"] {
+    font-size: 16px !important;
+  }
+}
+
+/* Asegurar que nada sobrepase la pantalla en móviles pequeños */
+@media (max-width: 480px) {
+  h1, h2, h3, h4, p, span {
+    word-break: break-word;
+  }
+}
+
