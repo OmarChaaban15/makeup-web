@@ -32,7 +32,7 @@ There is no shared build. Each app is installed, run and tested from its own dir
 
 ### Frontend (`cd frontend`)
 - `npm start` (`ng serve`) — dev server at http://localhost:4200.
-- `npm run build` (`ng build`) — production build; swaps `environment.ts` for `environment.prod.ts` via `fileReplacements`.
+- `npm run build` (`ng build`) — production build; swaps `environment.ts` for `environment.prod.ts` via `fileReplacements`. It prerenders the public routes (`outputMode: static`) and the `postbuild` hook writes `sitemap.xml` into the output (see SEO).
 - `npm test` (`ng test`) — Vitest, not Karma/Jasmine.
 
 ## Architecture
@@ -96,7 +96,7 @@ Angular standalone components (no NgModules). Routing in `src/app/app.routes.ts`
 
 `shared/cursos.service.ts` owns the catalogue and the purchase call (guest or authenticated) and is the only place that formats prices. `shared/contador-oferta/` is the countdown: it takes the seconds the API reports and decrements locally.
 
-A route with `data: { sinLayout: true }` renders without navbar or footer — `app.ts` reads it and `app.html` hides both. `/oferta` is the Instagram ad landing and uses it: a closed funnel with no links out before the purchase. It is `Disallow`ed in `robots.txt` so it does not compete with `/cursos`.
+A route with `data: { sinLayout: true }` renders without navbar or footer — `app.ts` reads it and `app.html` hides both. `/oferta` is the Instagram ad landing and uses it: a closed funnel with no links out before the purchase. It is indexed (own canonical, title and H1 distinct from `/cursos`); see SEO.
 
 Always build URLs from `environment.apiUrl` — never hardcode `http://localhost:8000`. In production `apiUrl` is the relative `/api`, because Nginx serves the SPA and the API from the same origin.
 
@@ -105,6 +105,15 @@ Scroll position is handled solely by the router's `withInMemoryScrolling`; do no
 The Google Translate widget is injected on demand by `shared/translation.service.ts` when a non-Spanish language is selected. It is deliberately not in `index.html`: loading it on every visit was render-blocking and set third-party cookies before the consent banner appeared.
 
 **Media policy**: the photography and hero video are the point of this site. They are served at full quality and are never deferred — do not add `loading="lazy"`, poster placeholders that stand in for the video, or connection-based skipping. `decoding="async"` and `fetchpriority="high"` are fine (they change scheduling, not output). If bytes need cutting, add alternative formats as extra `<source>` entries (WebM/AVIF) with the originals as fallback rather than recompressing them; see `deploy/README.md`.
+
+### SEO
+Details and the operational checklist live in `docs/seo-guia.md`. What matters when changing code:
+
+- **Per-route metadata**: each route in `app.routes.ts` declares `title` and `data.seo` (`SeoRuta`: description, optional `nombre` for breadcrumbs, `noindex`, `schema`). `shared/seo.service.ts` (started from `App`) applies description, canonical, robots, Open Graph, Twitter, hreflang and JSON-LD on every `NavigationEnd`. There is no static canonical in `index.html`. A new public page needs its `data.seo`, an entry in `scripts/generar-sitemap.mjs`, and a template with exactly one `<h1>` and no skipped levels (`seo-encabezados.spec.ts` lists the pages it checks).
+- **Private or funnel pages use `noindex`, not `Disallow`** in `robots.txt`: a blocked URL never shows the crawler its `noindex`. `robots.txt` stays open to all bots. `/oferta` is indexed on purpose.
+- **Structured data** is in `shared/seo-schemas.ts`. Do not add `AggregateRating`/`Review` or a street address until there are real, visible reviews and a public address. Course prices come from the API (`precio_efectivo`), never typed by hand.
+- **Prerender**: `app.routes.server.ts` decides what is prerendered. Browser-only code (`window`, `localStorage`, Leaflet) must not run at module load or in constructors for prerendered pages: load it lazily or guard with `isPlatformBrowser`. Private routes and `/oferta` render in the browser (`index.csr.html`) because they depend on session or API. Nginx serves `<ruta>/index.html`, `index.csr.html` for those, and a real 404 otherwise (`deploy/nginx`).
+- **English** lives under `/en` as hand-written pages (`pages/en/`), not machine translation. `shared/idioma.ts` pairs the Spanish and English routes; navbar, footer and cookie banner switch text by route. Italian and German still use the Google Translate widget. Course pages are Spanish only.
 
 ### CORS
 `backend/config/cors.php` reads `CORS_ALLOWED_ORIGINS` (comma-separated) and falls back to the local `ng serve` ports. `supports_credentials` is false — auth is Bearer-token, not cookie-based — and there are no wildcard origin patterns.
