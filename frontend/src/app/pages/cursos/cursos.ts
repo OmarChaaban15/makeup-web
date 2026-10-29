@@ -1,5 +1,5 @@
-import { Component, OnInit, computed, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, computed, inject, signal } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
@@ -24,6 +24,7 @@ export class Cursos implements OnInit {
   private auth = inject(AuthService);
   private cursos = inject(CursosService);
   private seo = inject(SeoService);
+  private esNavegador = isPlatformBrowser(inject(PLATFORM_ID));
 
   comprando = false;
   errorMsg = '';
@@ -61,7 +62,11 @@ export class Cursos implements OnInit {
   readonly mesesAcceso = computed(() => this.masterclass()?.duracion_acceso_meses ?? null);
 
   ngOnInit(): void {
-    this.cargarMasterclass();
+    // Al prerenderizar no hay API: sin esta guarda la peticion fallaba y el
+    // HTML estatico salia con el aviso de error del catalogo.
+    if (this.esNavegador) {
+      this.cargarMasterclass();
+    }
   }
 
   /**

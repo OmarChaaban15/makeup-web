@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit, computed, inject, signal } from '@angular/core';
+import { Component, HostListener, OnInit, PLATFORM_ID, computed, inject, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -30,6 +31,7 @@ import { TranslationService, Language } from '../../shared/translation.service';
 export class Oferta implements OnInit {
   private cursos = inject(CursosService);
   private seo = inject(SeoService);
+  private esNavegador = isPlatformBrowser(inject(PLATFORM_ID));
   private auth = inject(AuthService);
   private router = inject(Router);
   public translation = inject(TranslationService);
@@ -63,6 +65,9 @@ export class Oferta implements OnInit {
   mostrarBarraSticky = signal(false);
 
   readonly estaAutenticado = this.auth.estaAutenticado;
+
+  /** " · 45 €" cuando se conoce el precio; nada mientras carga. */
+  readonly sufijoPrecio = computed(() => (this.precio() ? ` · ${this.precio()}` : ''));
 
   readonly precio = computed(() => {
     const curso = this.curso();
@@ -102,7 +107,11 @@ export class Oferta implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargar();
+    // Al prerenderizar no hay API a la que llamar: la pagina sale con su
+    // contenido fijo y el precio y el contador se rellenan en el navegador.
+    if (this.esNavegador) {
+      this.cargar();
+    }
   }
 
   private cargar(): void {

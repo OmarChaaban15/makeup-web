@@ -39,11 +39,10 @@ el codigo esta resumido en la seccion 1.
    curl -s  https://makeupbyyona.es/sitemap.xml | head
    ```
 
-Nota: `/oferta` y la zona privada se renderizan en el navegador (no se prerenderizan).
-`/oferta` depende por completo del curso que devuelve la API, que no esta disponible al
-compilar. Google la indexa ejecutando JavaScript, como antes. Si algun dia hace falta
-HTML estatico, hay dos caminos: pintar el contenido fijo de la pagina sin esperar a la API,
-o consultar la API durante el build.
+Nota: la zona privada (login, registro, mis-cursos, pagos) se renderiza en el navegador. `/oferta` y
+`/cursos` se prerenderizan con su contenido fijo; el precio, el contador y el `Course` del JSON-LD
+se rellenan en el navegador porque dependen de la API, que no existe al compilar. No se
+prerenderiza el precio a proposito: quedaria desactualizado al terminar la oferta.
 
 ## 3. Google Search Console
 
