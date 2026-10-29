@@ -3,31 +3,56 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 /**
- * Paginas que existen en español y en ingles. El resto del sitio (cursos,
- * zona privada, politica de privacidad) solo esta en español.
+ * Idiomas del sitio. Español es el original; ingles, italiano y aleman son
+ * paginas escritas en ese idioma (no una traduccion automatica) bajo /en,
+ * /it y /de, por lo que Google puede indexarlas con hreflang.
  *
- * El ingles vive bajo /en. Son paginas escritas en ingles, no una
- * traduccion automatica: por eso Google puede indexarlas con hreflang.
+ * Solo cuatro paginas existen en los cuatro idiomas. El resto (cursos, blog,
+ * zona privada, privacidad) esta unicamente en español.
  */
-export const PARES_IDIOMA: ReadonlyArray<{ es: string; en: string }> = [
-  { es: '/', en: '/en' },
-  { es: '/servicios', en: '/en/services' },
-  { es: '/sobre-mi', en: '/en/about' },
-  { es: '/contacto', en: '/en/contact' }
-];
+export type Idioma = 'es' | 'en' | 'it' | 'de';
 
-export function esRutaIngles(ruta: string): boolean {
-  return ruta === '/en' || ruta.startsWith('/en/');
+export const IDIOMAS: readonly Idioma[] = ['es', 'en', 'it', 'de'];
+
+export type Pagina = 'inicio' | 'sobre' | 'servicios' | 'contacto';
+
+export const RUTAS: Record<Idioma, Record<Pagina, string>> = {
+  es: { inicio: '/', sobre: '/sobre-mi', servicios: '/servicios', contacto: '/contacto' },
+  en: { inicio: '/en', sobre: '/en/about', servicios: '/en/services', contacto: '/en/contact' },
+  it: { inicio: '/it', sobre: '/it/chi-sono', servicios: '/it/servizi', contacto: '/it/contatti' },
+  de: { inicio: '/de', sobre: '/de/ueber-mich', servicios: '/de/leistungen', contacto: '/de/kontakt' }
+};
+
+/** Prefijo de URL de cada idioma que no es el original. */
+const PREFIJOS: ReadonlyArray<Exclude<Idioma, 'es'>> = ['en', 'it', 'de'];
+
+export function idiomaDeRuta(ruta: string): Idioma {
+  return PREFIJOS.find(idioma => ruta === `/${idioma}` || ruta.startsWith(`/${idioma}/`)) ?? 'es';
 }
 
-/** La ruta equivalente en ingles, o null si la pagina no tiene version. */
-export function aIngles(ruta: string): string | null {
-  return PARES_IDIOMA.find(par => par.es === ruta)?.en ?? null;
+export const esRutaIngles = (ruta: string): boolean => idiomaDeRuta(ruta) === 'en';
+
+/** A que pagina "de pareja" corresponde una ruta, si es una de las cuatro. */
+export function paginaDeRuta(ruta: string): Pagina | null {
+  const idioma = idiomaDeRuta(ruta);
+
+  return (Object.keys(RUTAS[idioma]) as Pagina[]).find(pagina => RUTAS[idioma][pagina] === ruta) ?? null;
 }
 
-/** La ruta equivalente en español, o null si la pagina no tiene version. */
-export function aEspanol(ruta: string): string | null {
-  return PARES_IDIOMA.find(par => par.en === ruta)?.es ?? null;
+/** La ruta equivalente en otro idioma, o null si la pagina no tiene version. */
+export function aIdioma(ruta: string, idioma: Idioma): string | null {
+  const pagina = paginaDeRuta(ruta);
+
+  return pagina ? RUTAS[idioma][pagina] : null;
+}
+
+/** Todas las versiones de una pagina, por idioma. Null si no tiene pareja. */
+export function versiones(ruta: string): Partial<Record<Idioma, string>> | null {
+  const pagina = paginaDeRuta(ruta);
+
+  if (!pagina) return null;
+
+  return Object.fromEntries(IDIOMAS.map(idioma => [idioma, RUTAS[idioma][pagina]]));
 }
 
 /** Ruta sin parametros, fragmento ni barra final. "/inicio" es la portada. */
@@ -38,8 +63,9 @@ export function normalizarRuta(url: string): string {
 }
 
 /**
- * Idioma de la pagina visible segun la URL. Lo usan la barra de navegacion
- * y el pie para mostrar sus textos y enlaces en el idioma de la pagina.
+ * Idioma de la pagina visible segun la URL. Lo usan la barra de navegacion,
+ * el pie y el banner de cookies para mostrar sus textos y enlaces en el
+ * idioma de la pagina.
  */
 @Injectable({ providedIn: 'root' })
 export class IdiomaRuta {
@@ -47,7 +73,7 @@ export class IdiomaRuta {
 
   private ruta = signal(normalizarRuta(this.router.url));
 
-  readonly ingles = computed(() => esRutaIngles(this.ruta()));
+  readonly idioma = computed<Idioma>(() => idiomaDeRuta(this.ruta()));
 
   constructor() {
     this.router.events
@@ -55,13 +81,18 @@ export class IdiomaRuta {
       .subscribe(evento => this.ruta.set(normalizarRuta(evento.urlAfterRedirects)));
   }
 
-  /** Destino de "cambiar de idioma" desde la pagina actual, si lo hay. */
-  equivalente(idioma: 'es' | 'en'): string | null {
+  /**
+   * Destino de "cambiar de idioma" desde la pagina actual, si lo hay. Desde
+   * una pagina que no tiene pareja pero ya esta en otro idioma (el articulo
+   * en ingles del blog), se lleva a la portada del idioma pedido.
+   */
+  equivalente(idioma: Idioma): string | null {
     const ruta = this.ruta();
+    const pareja = aIdioma(ruta, idioma);
 
-    // El blog solo tiene un articulo en ingles: desde alli, "ES" lleva al blog.
-    if (idioma === 'es' && ruta.startsWith('/en/blog/')) return '/blog';
+    if (pareja) return pareja;
+    if (idiomaDeRuta(ruta) === 'es') return null;
 
-    return idioma === 'en' ? aIngles(ruta) : aEspanol(ruta);
+    return idioma === 'es' && ruta.startsWith('/en/blog/') ? '/blog' : RUTAS[idioma].inicio;
   }
 }

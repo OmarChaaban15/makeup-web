@@ -22,10 +22,10 @@ const PAGINAS = [
   'pago-cancelado',
   'restablecer-password',
   'no-encontrada',
-  'en/home',
-  'en/services',
-  'en/about',
-  'en/contact',
+  'multi/inicio',
+  'multi/servicios',
+  'multi/sobre-mi',
+  'multi/contacto',
   'blog',
   'blog-articulo'
 ];

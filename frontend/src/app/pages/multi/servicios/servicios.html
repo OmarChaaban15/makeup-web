@@ -1,0 +1,112 @@
+<!-- Hero -->
+<section class="relative flex min-h-[80svh] w-full items-center justify-center overflow-hidden pt-20 text-center">
+  <img decoding="async" fetchpriority="high" src="images/yonaida5.PNG" [alt]="t.altHero"
+       class="absolute inset-0 h-full w-full object-cover object-center" />
+  <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/85"></div>
+
+  <div class="relative z-10 mx-auto max-w-[820px] px-6 text-white">
+    <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-[#c4956a]/40 bg-[#c4956a]/15 px-4 py-1.5 backdrop-blur-md">
+      <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+      <span class="font-serif text-[0.7rem] uppercase tracking-[0.28em] text-[#e8c6a0]">{{ t.insignia }}</span>
+    </div>
+    <h1 class="font-serif text-[clamp(2.6rem,6.5vw,5.5rem)] font-light leading-[1.08] text-white drop-shadow-2xl">
+      {{ t.h1 }} <br><em class="italic text-[#e8c6a0]">{{ t.h1Em }}</em>
+    </h1>
+    <p class="mx-auto mt-6 max-w-[540px] font-sans text-sm sm:text-base font-light leading-[1.8] text-white/85">{{ t.intro }}</p>
+  </div>
+</section>
+
+<!-- Philosophy -->
+<section class="px-6 py-20 sm:px-10 md:py-28">
+  <div class="mx-auto grid max-w-[1140px] items-center gap-12 lg:grid-cols-2 lg:gap-20">
+    <div>
+      <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">{{ t.filosofiaKicker }}</p>
+      <h2 class="mt-4 font-serif text-[clamp(2rem,3.8vw,3rem)] font-light leading-[1.2] text-[#1a1a1a]">
+        {{ t.filosofiaH2 }} <br><em class="italic text-[#c4956a]">{{ t.filosofiaH2Em }}</em>
+      </h2>
+      <p class="mt-6 font-sans text-[0.95rem] font-light leading-[1.85] text-[#555]">{{ t.filosofiaTexto }}</p>
+      <div class="mt-8 grid grid-cols-2 gap-4">
+        <div class="rounded-2xl border border-[#eee2d5] bg-[#faf5f0] p-4">
+          <span class="block font-serif text-sm font-semibold text-[#1a1a1a]">{{ t.badge1Titulo }}</span>
+          <span class="mt-1 block text-xs text-[#777]">{{ t.badge1Texto }}</span>
+        </div>
+        <div class="rounded-2xl border border-[#eee2d5] bg-[#faf5f0] p-4">
+          <span class="block font-serif text-sm font-semibold text-[#1a1a1a]">{{ t.badge2Titulo }}</span>
+          <span class="mt-1 block text-xs text-[#777]">{{ t.badge2Texto }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(26,26,26,0.12)]">
+      <img decoding="async" src="images/yonaida3.JPG" [alt]="t.altFoto" class="aspect-[4/5] w-full object-cover object-center" />
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="border-y border-[#ede0d0] bg-[#f7f2ed] px-6 py-20 sm:px-10 md:py-28">
+  <div class="mx-auto max-w-[1200px]">
+    <div class="mx-auto mb-16 max-w-2xl text-center">
+      <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.32em] text-[#c4956a]">{{ t.serviciosKicker }}</p>
+      <h2 class="mt-3 font-serif text-[clamp(2.2rem,4vw,3.2rem)] font-light text-[#1a1a1a]">{{ t.serviciosH2 }}</h2>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+      @for (servicio of t.servicios; track $index) {
+        <article class="overflow-hidden rounded-[30px] shadow-sm"
+                 [class]="$first ? 'bg-[#1a1a1a] text-white shadow-[0_20px_60px_rgba(26,26,26,0.25)]' : 'border border-[#ede0d0] bg-white'">
+          <img decoding="async" [src]="imagenes[$index]" [alt]="servicio.alt"
+               class="h-64 w-full object-cover object-center sm:h-80"
+               [class.object-[center_18%]]="$first" />
+          <div class="p-8 sm:p-10">
+            <h3 class="font-serif text-[1.8rem] font-light leading-snug" [class.text-[#1a1a1a]]="!$first">
+              {{ servicio.titulo }} <em class="italic" [class.text-[#e8c6a0]]="$first" [class.text-[#c4956a]]="!$first">{{ servicio.tituloEm }}</em>
+            </h3>
+            <p class="mt-3 text-sm font-light leading-relaxed" [class.text-white]="$first" [class.opacity-75]="$first" [class.text-[#666]]="!$first">{{ servicio.texto }}</p>
+            <p class="mt-6 font-serif text-xs uppercase tracking-[0.2em] text-[#c4956a]">{{ t.incluyeEtiqueta }}</p>
+            <ul class="mt-3 list-disc space-y-2 pl-5 text-sm font-light" [class.text-white]="$first" [class.opacity-70]="$first" [class.text-[#666]]="!$first">
+              @for (item of servicio.items; track $index) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+            <a [routerLink]="r.contacto"
+               class="mt-8 inline-block rounded-full px-6 py-3 font-serif text-xs font-semibold uppercase tracking-widest no-underline"
+               [class]="$first ? 'bg-[#c4956a] text-white' : 'border border-[#c4956a] text-[#c4956a]'">
+              {{ servicio.boton }}
+            </a>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="px-6 py-20 sm:px-10 md:py-28">
+  <div class="mx-auto max-w-[1140px]">
+    <div class="mx-auto mb-14 max-w-2xl text-center">
+      <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">{{ t.procesoKicker }}</p>
+      <h2 class="mt-3 font-serif text-[clamp(2rem,3.8vw,3rem)] font-light text-[#1a1a1a]">{{ t.procesoH2 }}</h2>
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      @for (paso of t.pasos; track $index) {
+        <div>
+          <h3 class="font-serif text-lg font-normal text-[#1a1a1a]">{{ paso.titulo }}</h3>
+          <p class="mt-2 text-sm font-light leading-relaxed text-[#666]">{{ paso.texto }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Call to action -->
+<section class="bg-[#1a1a1a] px-6 py-20 text-center text-white sm:px-10">
+  <div class="mx-auto max-w-[640px]">
+    <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">{{ t.cierreKicker }}</p>
+    <h2 class="mt-3 font-serif text-[clamp(2rem,4vw,3rem)] font-light">{{ t.cierreH2 }}</h2>
+    <p class="mt-5 text-sm font-light leading-relaxed text-white/70">{{ t.cierreTexto }}</p>
+    <a [routerLink]="r.contacto"
+       class="mt-8 inline-block rounded-full bg-[#c4956a] px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline transition-all duration-300 hover:bg-[#a87a52]">
+      {{ t.cierreBoton }}
+    </a>
+  </div>
+</section>

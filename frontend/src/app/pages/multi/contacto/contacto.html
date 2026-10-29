@@ -1,48 +1,51 @@
 <div class="min-h-[100svh] bg-[#fcf9f6] px-6 pb-24 pt-32 sm:px-10">
   <div class="mx-auto max-w-[900px]">
 
-    <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">Appointments &middot; Ibiza</p>
+    <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">{{ t.kicker }}</p>
     <h1 class="mt-4 font-serif text-[clamp(2.6rem,5.2vw,4.8rem)] font-light leading-[1.08] text-[#1a1a1a]">
-      Book your makeup <br><span class="italic text-[#c4956a]">in Ibiza.</span>
+      {{ t.h1 }} <br><span class="italic text-[#c4956a]">{{ t.h1Em }}</span>
     </h1>
     <div class="mt-6 h-[2px] w-16 bg-[#c4956a]"></div>
 
     <p class="mt-8 max-w-[640px] text-sm sm:text-base font-light leading-7 text-[#555]">
-      Every makeup service is arranged in a <strong>completely personal, hands-on way</strong>. Message me with the details of your event and I will reply personally with availability and a quote.
+      @for (parte of t.intro; track $index) {
+        @if (parte.b) {
+          <strong>{{ parte.t }}</strong>
+        } @else {
+          {{ parte.t }}
+        }
+      }
     </p>
 
     <div class="mt-10 flex flex-wrap gap-3">
-      <a href="https://wa.me/34658728433?text=Hello%20Yonaida,%20I%20would%20like%20to%20ask%20about%20your%20makeup%20services"
-         target="_blank" rel="noopener noreferrer"
+      <a [href]="enlaceWhatsapp" target="_blank" rel="noopener noreferrer"
          class="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white no-underline shadow-sm transition-all duration-300 hover:bg-[#1EBE5D]">
-        WhatsApp
+        {{ t.whatsapp }}
       </a>
       <a href="mailto:info@makeupbyyona.es"
          class="inline-flex items-center gap-2 rounded-full border border-black/15 bg-white px-6 py-3 text-xs font-semibold uppercase tracking-wider text-[#1a1a1a] no-underline shadow-sm transition-all duration-200 hover:border-[#c4956a] hover:text-[#c4956a]">
-        Send an email
+        {{ t.correo }}
       </a>
     </div>
 
-    <h2 class="mt-16 font-serif text-2xl font-light text-[#1a1a1a]">Contact details</h2>
+    <h2 class="mt-16 font-serif text-2xl font-light text-[#1a1a1a]">{{ t.datosH2 }}</h2>
     <ul class="mt-5 list-none space-y-3 p-0 text-sm font-light text-[#555]">
-      <li><span class="font-semibold text-[#1a1a1a]">Phone / WhatsApp:</span>
+      <li><span class="font-semibold text-[#1a1a1a]">{{ t.etTelefono }}</span>
         <a href="tel:+34658728433" class="text-[#555] no-underline hover:text-[#c4956a]">+34 658 728 433</a></li>
-      <li><span class="font-semibold text-[#1a1a1a]">Email:</span>
+      <li><span class="font-semibold text-[#1a1a1a]">{{ t.etCorreo }}</span>
         <a href="mailto:info@makeupbyyona.es" class="text-[#555] no-underline hover:text-[#c4956a]">info&#64;makeupbyyona.es</a></li>
-      <li><span class="font-semibold text-[#1a1a1a]">Instagram:</span>
+      <li><span class="font-semibold text-[#1a1a1a]">{{ t.etInstagram }}</span>
         <a href="https://www.instagram.com/byyonai" target="_blank" rel="noopener noreferrer" class="text-[#555] no-underline hover:text-[#c4956a]">&#64;byyonai</a></li>
-      <li><span class="font-semibold text-[#1a1a1a]">Hours:</span> Monday to Saturday &middot; by appointment</li>
+      <li><span class="font-semibold text-[#1a1a1a]">{{ t.etHorario }}</span> {{ t.horario }}</li>
     </ul>
 
-    <h2 class="mt-12 font-serif text-2xl font-light text-[#1a1a1a]">Where I work</h2>
-    <p class="mt-4 max-w-[640px] text-sm font-light leading-7 text-[#555]">
-      At my studio in Ibiza, or travelling to hotels, fincas and villas anywhere on the island. Weddings, events, fashion and film productions.
-    </p>
+    <h2 class="mt-12 font-serif text-2xl font-light text-[#1a1a1a]">{{ t.dondeH2 }}</h2>
+    <p class="mt-4 max-w-[640px] text-sm font-light leading-7 text-[#555]">{{ t.dondeTexto }}</p>
 
     <p class="mt-12 text-sm font-light text-[#888]">
-      <a routerLink="/en/services" class="text-[#c4956a] no-underline">See all services</a>
+      <a [routerLink]="r.servicios" class="text-[#c4956a] no-underline">{{ t.verServicios }}</a>
       &middot;
-      <a routerLink="/contacto" class="text-[#888] no-underline hover:text-[#c4956a]">Versión en español</a>
+      <a routerLink="/contacto" class="text-[#888] no-underline hover:text-[#c4956a]">{{ t.enEspanol }}</a>
     </p>
   </div>
 </div>

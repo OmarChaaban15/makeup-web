@@ -1,22 +1,10 @@
 import { Component, HostListener, computed, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { IdiomaRuta } from '../idioma';
+import { IdiomaRuta, RUTAS } from '../idioma';
+import { NAVBAR } from '../textos';
 import { TranslationService } from '../translation.service';
 import { AuthService } from '../auth.service';
-
-const TEXTOS = {
-  es: {
-    inicio: 'Inicio', sobre: 'Sobre mí', servicios: 'Servicios', cursos: 'Cursos', contacto: 'Contacto',
-    blog: 'Blog', misCursos: 'Mis Cursos', contactar: 'Contactar ahora', sesion: 'Sesión iniciada', cerrar: 'Cerrar sesión',
-    iniciar: 'Iniciar sesión', menuUsuario: 'Menú de usuario', abrirMenu: 'Abrir menú'
-  },
-  en: {
-    inicio: 'Home', sobre: 'About', servicios: 'Services', cursos: 'Courses (ES)', contacto: 'Contact',
-    blog: 'Blog (ES)', misCursos: 'My Courses', contactar: 'Get in touch', sesion: 'Signed in', cerrar: 'Log out',
-    iniciar: 'Log in', menuUsuario: 'User menu', abrirMenu: 'Open menu'
-  }
-};
 
 @Component({
   selector: 'app-navbar',
@@ -36,22 +24,24 @@ export class Navbar {
   private router = inject(Router);
   private idioma = inject(IdiomaRuta);
 
-  readonly ingles = this.idioma.ingles;
+  /** Idioma de la pagina visible (por la URL). */
+  readonly idiomaPagina = this.idioma.idioma;
 
-  /** Idioma que se marca como activo: el de la pagina, si es una de /en. */
-  readonly idiomaActual = computed(() => (this.ingles() ? 'en' : this.translation.currentLang()));
-
-  readonly t = computed(() => (this.ingles() ? TEXTOS.en : TEXTOS.es));
-
-  /** Enlaces del menu. Cursos solo existe en español. */
-  readonly r = computed(() =>
-    this.ingles()
-      ? { inicio: '/en', sobre: '/en/about', servicios: '/en/services', cursos: '/cursos', blog: '/blog', contacto: '/en/contact' }
-      : { inicio: '/', sobre: '/sobre-mi', servicios: '/servicios', cursos: '/cursos', blog: '/blog', contacto: '/contacto' }
+  /** Idioma que se marca como activo: el de la pagina, o el del traductor en las paginas en español. */
+  readonly idiomaActual = computed(() =>
+    this.idiomaPagina() === 'es' ? this.translation.currentLang() : this.idiomaPagina()
   );
 
+  readonly t = computed(() => NAVBAR[this.idiomaPagina()]);
+
+  /** Enlaces del menu. Cursos y blog solo existen en español. */
+  readonly r = computed(() => ({ ...RUTAS[this.idiomaPagina()], cursos: '/cursos', blog: '/blog' }));
+
   // Rutas con imagen a pantalla completa donde el navbar va transparente.
-  private readonly rutasHero = new Set(['/', '/inicio', '/sobre-mi', '/servicios', '/en', '/en/about', '/en/services']);
+  private readonly rutasHero = new Set([
+    '/inicio',
+    ...Object.values(RUTAS).flatMap(rutas => [rutas.inicio, rutas.sobre, rutas.servicios])
+  ]);
 
   constructor() {
     this.router.events
@@ -72,17 +62,14 @@ export class Navbar {
     if (event) event.stopPropagation();
     this.langMenuOpen = false;
 
-    // Español e ingles son paginas distintas cuando existe la pareja; solo
-    // el resto (cursos, privacidad...) y los demas idiomas pasan por el
-    // traductor de Google.
-    if (lang === 'es' || lang === 'en') {
-      const destino = this.idioma.equivalente(lang);
+    // Si la pagina existe en ese idioma se navega a ella; solo el resto
+    // (cursos, blog, privacidad...) pasa por el traductor de Google.
+    const destino = this.idioma.equivalente(lang);
 
-      if (destino) {
-        this.closeMenu();
-        this.router.navigateByUrl(destino);
-        return;
-      }
+    if (destino) {
+      this.closeMenu();
+      this.router.navigateByUrl(destino);
+      return;
     }
 
     this.translation.setLanguage(lang);

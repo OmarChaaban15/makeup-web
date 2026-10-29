@@ -5,10 +5,12 @@
 // ultimo commit que toco los archivos de cada pagina, no la de hoy: un
 // lastmod que cambia siempre hace que Google deje de fiarse de el.
 //
-// Las paginas con version en ingles llevan xhtml:link hreflang en las dos
-// URLs, apuntandose entre si (igual que el <head>, ver SeoService).
+// Las cuatro paginas que existen en español, ingles, italiano y aleman
+// llevan xhtml:link hreflang en todas sus URLs, apuntandose entre si
+// (igual que el <head>, ver SeoService). x-default es la version en español.
 //
-// Al añadir una pagina indexable, añadirla tambien a PAGINAS.
+// Al añadir una pagina indexable, añadirla tambien aqui. Las rutas de
+// RUTAS deben coincidir con RUTAS de src/app/shared/idioma.ts (hay un test).
 
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -19,29 +21,42 @@ const ORIGEN = 'https://makeupbyyona.es';
 const RAIZ = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SALIDA = join(RAIZ, 'dist', 'frontend', 'browser', 'sitemap.xml');
 
+const IDIOMAS = ['es', 'en', 'it', 'de'];
+
+const RUTAS = {
+  es: { inicio: '/', sobre: '/sobre-mi', servicios: '/servicios', contacto: '/contacto' },
+  en: { inicio: '/en', sobre: '/en/about', servicios: '/en/services', contacto: '/en/contact' },
+  it: { inicio: '/it', sobre: '/it/chi-sono', servicios: '/it/servizi', contacto: '/it/contatti' },
+  de: { inicio: '/de', sobre: '/de/ueber-mich', servicios: '/de/leistungen', contacto: '/de/kontakt' }
+};
+
 const pagina = (carpeta) => {
   const nombre = carpeta.split('/').pop();
 
   return [`src/app/pages/${carpeta}/${nombre}.html`, `src/app/pages/${carpeta}/${nombre}.ts`];
 };
 
-// `en`: ruta de la version inglesa, si existe (debe coincidir con
-// PARES_IDIOMA en src/app/shared/idioma.ts).
-const PAGINAS = [
-  { ruta: '/', en: '/en', archivos: [...pagina('inicio'), 'src/app/shared/seo-schemas.ts'] },
-  { ruta: '/sobre-mi', en: '/en/about', archivos: pagina('sobre-mi') },
-  { ruta: '/servicios', en: '/en/services', archivos: pagina('servicios') },
+// Archivos de los que depende cada pagina, para el lastmod.
+const ARCHIVOS = {
+  es: {
+    inicio: [...pagina('inicio'), 'src/app/shared/seo-schemas.ts'],
+    sobre: pagina('sobre-mi'),
+    servicios: pagina('servicios'),
+    contacto: pagina('contacto')
+  },
+  otros: {
+    inicio: [...pagina('multi/inicio'), 'src/app/pages/multi/contenido.ts'],
+    sobre: [...pagina('multi/sobre-mi'), 'src/app/pages/multi/contenido.ts'],
+    servicios: [...pagina('multi/servicios'), 'src/app/pages/multi/contenido.ts'],
+    contacto: [...pagina('multi/contacto'), 'src/app/pages/multi/contenido.ts']
+  }
+};
+
+// Paginas solo en español.
+const SOLO_ESPANOL = [
   { ruta: '/cursos', archivos: pagina('cursos') },
   { ruta: '/oferta', archivos: pagina('oferta') },
-  { ruta: '/contacto', en: '/en/contact', archivos: pagina('contacto') },
   { ruta: '/politica-privacidad', archivos: pagina('politica-privacidad') }
-];
-
-const INGLES = [
-  { ruta: '/en', es: '/', archivos: pagina('en/home') },
-  { ruta: '/en/about', es: '/sobre-mi', archivos: pagina('en/about') },
-  { ruta: '/en/services', es: '/servicios', archivos: pagina('en/services') },
-  { ruta: '/en/contact', es: '/contacto', archivos: pagina('en/contact') }
 ];
 
 // Articulos del blog: la fecha de publicacion es el lastmod. Los de /en/blog no
@@ -65,21 +80,24 @@ function ultimaModificacion(archivos) {
   return null;
 }
 
-function alternativas(es, en) {
+function alternativas(pag) {
   const enlace = (hreflang, ruta) =>
     `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="${loc(ruta)}"/>`;
 
-  return [enlace('es', es), enlace('en', en), enlace('x-default', es)];
+  return [
+    ...IDIOMAS.map((idioma) => enlace(idioma, RUTAS[idioma][pag])),
+    enlace('x-default', RUTAS.es[pag])
+  ];
 }
 
-function entrada(ruta, archivos, es, en, fecha) {
+function entrada(ruta, archivos, { pag, fecha } = {}) {
   const lastmod = fecha ?? ultimaModificacion(archivos);
 
   return [
     '  <url>',
     `    <loc>${loc(ruta)}</loc>`,
     ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
-    ...(es && en ? alternativas(es, en) : []),
+    ...(pag ? alternativas(pag) : []),
     '  </url>'
   ].join('\n');
 }
@@ -87,12 +105,17 @@ function entrada(ruta, archivos, es, en, fecha) {
 const ultimaFechaBlog = ARTICULOS.map((articulo) => articulo.fecha).sort().at(-1);
 
 const urls = [
-  ...PAGINAS.map(({ ruta, en, archivos }) => entrada(ruta, archivos, ruta, en)),
-  entrada('/blog', [], undefined, undefined, ultimaFechaBlog),
-  ...ARTICULOS.map((articulo) =>
-    entrada(articulo.idioma === 'en' ? `/en/blog/${articulo.slug}` : `/blog/${articulo.slug}`, [], undefined, undefined, articulo.fecha)
+  // Las cuatro paginas en los cuatro idiomas, agrupadas por pagina.
+  ...Object.keys(RUTAS.es).flatMap((pag) =>
+    IDIOMAS.map((idioma) =>
+      entrada(RUTAS[idioma][pag], idioma === 'es' ? ARCHIVOS.es[pag] : ARCHIVOS.otros[pag], { pag })
+    )
   ),
-  ...INGLES.map(({ ruta, es, archivos }) => entrada(ruta, archivos, es, ruta))
+  ...SOLO_ESPANOL.map(({ ruta, archivos }) => entrada(ruta, archivos)),
+  entrada('/blog', [], { fecha: ultimaFechaBlog }),
+  ...ARTICULOS.map((articulo) =>
+    entrada(articulo.idioma === 'en' ? `/en/blog/${articulo.slug}` : `/blog/${articulo.slug}`, [], { fecha: articulo.fecha })
+  )
 ];
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>

@@ -4,7 +4,7 @@ import { Meta } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import type { Curso } from './cursos.service';
-import { aEspanol, aIngles, esRutaIngles, normalizarRuta } from './idioma';
+import { IDIOMAS, Idioma, RUTAS, idiomaDeRuta, normalizarRuta, versiones } from './idioma';
 import { SITIO, schemaCurso, schemaMigas, schemaNegocio, schemaServicios, url } from './seo-schemas';
 
 /** Lo que cada ruta declara en `data.seo` de app.routes.ts. */
@@ -22,6 +22,11 @@ export interface SeoRuta {
   /** Migas completas; sustituyen a las de por defecto (Inicio > nombre). */
   migas?: { nombre: string; ruta: string }[];
 }
+
+/** Primera miga de cada idioma. */
+const NOMBRE_INICIO: Record<Idioma, string> = { es: 'Inicio', en: 'Home', it: 'Home', de: 'Startseite' };
+
+const LOCALE: Record<Idioma, string> = { es: 'es_ES', en: 'en_US', it: 'it_IT', de: 'de_DE' };
 
 const ID_JSONLD = 'seo-jsonld';
 const ID_JSONLD_CURSO = 'seo-jsonld-curso';
@@ -114,10 +119,10 @@ export class SeoService {
 
     if (seo.migas) {
       grafo.push(schemaMigas(seo.migas));
-    } else if (seo.nombre && ruta !== '/' && ruta !== '/en') {
+    } else if (seo.nombre && ruta !== RUTAS[idiomaDeRuta(ruta)].inicio) {
       grafo.push(
         schemaMigas([
-          esRutaIngles(ruta) ? { nombre: 'Home', ruta: '/en' } : { nombre: 'Inicio', ruta: '/' },
+          { nombre: NOMBRE_INICIO[idiomaDeRuta(ruta)], ruta: RUTAS[idiomaDeRuta(ruta)].inicio },
           { nombre: seo.nombre, ruta }
         ])
       );
@@ -146,29 +151,33 @@ export class SeoService {
 
   /**
    * Idioma del documento, og:locale y enlaces hreflang. Solo las paginas que
-   * existen en los dos idiomas declaran alternativas; hreflang exige que se
-   * apunten entre si, asi que no se publica en el resto.
+   * existen en varios idiomas declaran alternativas; hreflang exige que se
+   * apunten entre si, asi que no se publica en el resto. x-default es la
+   * version en español.
    */
   private ponerIdiomas(ruta: string): void {
-    const ingles = esRutaIngles(ruta);
-    const es = ingles ? aEspanol(ruta) : ruta;
-    const en = ingles ? ruta : aIngles(ruta);
+    const idioma = idiomaDeRuta(ruta);
+    const alternativas = versiones(ruta);
 
-    this.doc.documentElement.setAttribute('lang', ingles ? 'en' : 'es');
-    this.fijar('property', 'og:locale', ingles ? 'en_US' : 'es_ES');
+    this.doc.documentElement.setAttribute('lang', idioma);
+    this.fijar('property', 'og:locale', LOCALE[idioma]);
 
-    this.doc.head
-      .querySelectorAll('link[rel="alternate"][hreflang]')
-      .forEach(enlace => enlace.remove());
+    this.doc.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach(enlace => enlace.remove());
+    this.meta.removeTag("property='og:locale:alternate'");
+    this.doc.head.querySelectorAll('meta[property="og:locale:alternate"]').forEach(etiqueta => etiqueta.remove());
 
-    if (es === null || en === null) {
-      this.meta.removeTag("property='og:locale:alternate'");
-      return;
+    if (alternativas === null) return;
+
+    for (const otro of IDIOMAS.filter(i => i !== idioma)) {
+      this.meta.addTag({ property: 'og:locale:alternate', content: LOCALE[otro] });
     }
 
-    this.fijar('property', 'og:locale:alternate', ingles ? 'es_ES' : 'en_US');
+    const enlaces: [string, string][] = [
+      ...IDIOMAS.map((i): [string, string] => [i, alternativas[i]!]),
+      ['x-default', alternativas['es']!]
+    ];
 
-    for (const [hreflang, destino] of [['es', es], ['en', en], ['x-default', es]]) {
+    for (const [hreflang, destino] of enlaces) {
       const enlace = this.doc.createElement('link');
       enlace.setAttribute('rel', 'alternate');
       enlace.setAttribute('hreflang', hreflang);

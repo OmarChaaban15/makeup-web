@@ -14,7 +14,7 @@ el codigo esta resumido en la seccion 1.
 | Paginas privadas con `noindex` (no bloqueadas en robots) | `data.seo.noindex` |
 | Prerender de las paginas publicas | `outputMode: static` en `angular.json`, `app.routes.server.ts` |
 | 404 real y rutas por Nginx | `deploy/nginx/makeupbyyona.es.conf` |
-| Version en ingles bajo `/en` con hreflang | `pages/en/`, `shared/idioma.ts` |
+| Version en ingles, italiano y aleman (`/en`, `/it`, `/de`) con hreflang | `pages/multi/` (el texto esta en `contenido.ts`), `shared/idioma.ts` |
 | `robots.txt` abierto y `sitemap.xml` generado en cada build | `public/robots.txt`, `scripts/generar-sitemap.mjs` |
 
 ## 2. Antes de desplegar
@@ -49,9 +49,9 @@ prerenderiza el precio a proposito: quedaria desactualizado al terminar la ofert
 1. Entrar en <https://search.google.com/search-console> y añadir la propiedad de tipo
    **Dominio** (`makeupbyyona.es`). Se verifica con un registro TXT en el DNS.
 2. Menu **Sitemaps**: enviar `https://makeupbyyona.es/sitemap.xml`. Debe aparecer como
-   "Correcto" con 11 URLs descubiertas.
+   "Correcto" con 30 URLs descubiertas.
 3. Menu **Inspeccion de URLs**: pegar cada pagina clave (`/`, `/servicios`, `/sobre-mi`,
-   `/cursos`, `/oferta`, `/contacto`, `/en`, `/en/services`) y pulsar "Solicitar
+   `/cursos`, `/oferta`, `/contacto`, `/en`, `/it`, `/de`) y pulsar "Solicitar
    indexacion". Comprobar en "Ver pagina probada" que el HTML renderizado trae el H1 y
    que el canonical es el esperado.
 4. Para Bing: <https://www.bing.com/webmasters> permite importar la propiedad desde
@@ -139,22 +139,37 @@ enlace interno al servicio relacionado y fecha de actualizacion visible. Evitar 
 
 ## 7. Medicion tecnica
 
-Las fotos y el video de portada se sirven a calidad completa y sin diferir (politica del
-proyecto), asi que el trabajo de rendimiento se centra en lo demas. Medir antes de tocar:
+Medido con Lighthouse 12, perfil movil y red lenta simulada por el navegador (throttling real), contra
+el build servido con las mismas reglas de Nginx (gzip, cache, AVIF/WebP):
+
+| Pagina | Antes | Despues |
+|---|---|---|
+| Portada | rendimiento 71, LCP 5,4 s, 7,9 MB | rendimiento 90, LCP 1,2 s, 5,6 MB |
+| Servicios | rendimiento 73, LCP 3,6 s, 7,9 MB | rendimiento 79, LCP 0,9 s, 2,0 MB |
+
+Que lo mejoro, sin tocar el contenido visual de fotos ni video (politica del proyecto):
+
+- **Copias AVIF y WebP** de las fotos, servidas por Nginx en la misma URL segun la cabecera Accept y
+  con la original de respaldo (`npm run formatos` las genera junto a cada foto usada). Las 21
+  fotos pasan de unos 27 MB a unos 4,5 MB en el mejor formato; la comparacion al 100 % no muestra
+  diferencias apreciables.
+- **Titular de la portada** con animacion CSS en lugar de una transicion que arrancaba con JavaScript,
+  y `scroll-reveal` que ya no oculta lo que se ve al cargar.
+- **Prerender**: el HTML llega con el contenido, sin esperar al arranque de Angular.
+
+Lo que queda por vigilar:
+
+- **TBT en servicios** sube (de 60 a 880 ms en la prueba): ahora el HTML pinta antes y la hidratacion de
+  Angular compite con el hilo principal. No afecta a la carga visible, pero es el siguiente punto a mirar.
+- **El video de la portada** y los dos de la masterclass (unos 5 MB cada uno) se sirven integros. La
+  politica del proyecto permite añadir versiones WebM como `<source>` extra con el MP4 de respaldo;
+  haria falta ffmpeg, que no esta instalado en este equipo.
+- **Originales sin usar en `public/`**: `sin_maquillar.JPEG` (15 MB) y `makeup_dia.JPEG` (12 MB) no los
+  referencia ninguna pagina pero se despliegan. Conviene retirarlos del repositorio.
+- **Bundle inicial**: unos 810 kB, por encima del presupuesto de 700 kB que ya se superaba antes.
+- Las cifras son de un equipo local contra un servidor local: sirven para comparar antes y despues, no
+  como valor absoluto. Conviene repetir la medicion sobre la web real tras desplegar:
 
 ```bash
-npx lighthouse https://makeupbyyona.es/ --only-categories=performance,seo --form-factor=mobile --view
-npx lighthouse https://makeupbyyona.es/servicios --only-categories=performance,seo --form-factor=mobile --view
+npx lighthouse https://makeupbyyona.es/ --only-categories=performance,seo --form-factor=mobile --throttling-method=devtools --view
 ```
-
-Puntos a vigilar, sin cambiar el contenido visual:
-
-- **LCP:** la imagen o el video de portada. `fetchpriority="high"` y `decoding="async"`
-  estan permitidos; WebM/AVIF como `<source>` extra con el original de respaldo tambien.
-- **CLS:** imagenes con `width` y `height` (o `aspect-ratio`) para reservar el espacio.
-- **INP:** el canvas de particulas y los listeners de `mousemove` de la portada.
-- **Bundle inicial:** el build avisa de que supera el presupuesto de 700 kB. Cargar en
-  diferido el codigo de paginas poco visitadas (como ya se hace con el ingles y Leaflet)
-  lo reduce sin tocar medios.
-
-Hasta que haya una medicion, estos puntos son hipotesis; no se han medido.
