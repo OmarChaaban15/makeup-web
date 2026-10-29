@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -10,6 +10,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './cookie-banner.css'
 })
 export class CookieBanner implements OnInit {
+  private esNavegador = isPlatformBrowser(inject(PLATFORM_ID));
+
   isVisible = false;
   isHiding = false;
   showConfig = false;
@@ -17,6 +19,9 @@ export class CookieBanner implements OnInit {
   marketingEnabled = false;
 
   ngOnInit() {
+    // En el prerender no hay localStorage ni consentimiento que leer.
+    if (!this.esNavegador) return;
+
     const consent = localStorage.getItem('cookie-consent');
     if (!consent) {
       // Pequeño delay para que no aparezca de golpe al cargar

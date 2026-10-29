@@ -13,6 +13,7 @@ import { MisCursos } from './pages/mis-cursos/mis-cursos';
 import { authGuard } from './guards/auth-guard';
 import { PagoExitoso } from './pages/pago-exitoso/pago-exitoso';
 import { PagoCancelado } from './pages/pago-cancelado/pago-cancelado';
+import { NoEncontrada } from './pages/no-encontrada/no-encontrada';
 import type { SeoRuta } from './shared/seo.service';
 
 const NOINDEX: SeoRuta = { descripcion: '', noindex: true };
@@ -119,5 +120,5 @@ export const routes: Routes = [
   { path: 'restablecer-password', component: RestablecerPassword, title: 'Nueva contraseña · Makeup by Yona', data: { seo: NOINDEX } },
   { path: 'pago-exitoso', component: PagoExitoso, title: 'Pago completado · Makeup by Yona', data: { seo: NOINDEX } },
   { path: 'pago-cancelado', component: PagoCancelado, title: 'Pago cancelado · Makeup by Yona', data: { seo: NOINDEX } },
-  { path: '**', redirectTo: '' }
+  { path: '**', component: NoEncontrada, title: 'Página no encontrada · Makeup by Yona', data: { seo: NOINDEX } }
 ];

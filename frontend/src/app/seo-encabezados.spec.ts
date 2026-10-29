@@ -20,7 +20,8 @@ const PAGINAS = [
   'mis-cursos',
   'pago-exitoso',
   'pago-cancelado',
-  'restablecer-password'
+  'restablecer-password',
+  'no-encontrada'
 ];
 
 function niveles(pagina: string): number[] {

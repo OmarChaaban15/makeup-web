@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
 import { environment } from '../../../environments/environment';
 import { mensajeDeError } from '../../shared/errores-api';
-import * as L from 'leaflet';
+import type * as L from 'leaflet';
 
 @Component({
   selector: 'app-contacto',
@@ -18,6 +18,7 @@ export class Contacto implements OnDestroy {
   @ViewChild('mapContainer') private mapContainer?: ElementRef<HTMLDivElement>;
 
   private map?: L.Map;
+  private destruido = false;
   private readonly studioLocation: L.LatLngExpression = [38.9067, 1.4206];
 
   formData = {
@@ -48,6 +49,7 @@ export class Contacto implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.destruido = true;
     this.map?.remove();
   }
 
@@ -115,8 +117,17 @@ export class Contacto implements OnDestroy {
     });
   }
 
-  private initMap(): void {
+  private async initMap(): Promise<void> {
     if (!this.mapContainer || this.map) {
+      return;
+    }
+
+    // Leaflet usa `window` nada mas cargarse. Se importa aqui, ya en el
+    // navegador, para que el prerender no falle al evaluar este modulo.
+    const modulo = await import('leaflet');
+    const L = ('default' in modulo ? modulo.default : modulo) as typeof import('leaflet');
+
+    if (this.destruido || !this.mapContainer || this.map) {
       return;
     }
 
