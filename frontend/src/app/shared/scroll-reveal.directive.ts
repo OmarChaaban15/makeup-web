@@ -31,6 +31,15 @@ export class ScrollRevealDirective implements OnInit, OnDestroy {
       return;
     }
 
+    // Lo que ya se ve al cargar (la cabecera de la pagina) no se anima:
+    // el HTML prerenderizado ya lo muestra, y ocultarlo para volver a
+    // revelarlo lo haria parpadear y retrasaria el LCP hasta que arranque
+    // JavaScript. Solo se anima lo que aparece al hacer scroll.
+    const caja = element.getBoundingClientRect();
+    if (caja.height > 0 && caja.top < window.innerHeight && caja.bottom > 0) {
+      return;
+    }
+
     const finalDirection = this.direction || this.appDirection || 'up';
     element.setAttribute('data-scroll-reveal', finalDirection);
 
