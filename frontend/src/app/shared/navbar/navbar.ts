@@ -1,8 +1,22 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, computed, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { IdiomaRuta } from '../idioma';
 import { TranslationService } from '../translation.service';
 import { AuthService } from '../auth.service';
+
+const TEXTOS = {
+  es: {
+    inicio: 'Inicio', sobre: 'Sobre mí', servicios: 'Servicios', cursos: 'Cursos', contacto: 'Contacto',
+    misCursos: 'Mis Cursos', contactar: 'Contactar ahora', sesion: 'Sesión iniciada', cerrar: 'Cerrar sesión',
+    iniciar: 'Iniciar sesión', menuUsuario: 'Menú de usuario', abrirMenu: 'Abrir menú'
+  },
+  en: {
+    inicio: 'Home', sobre: 'About', servicios: 'Services', cursos: 'Courses (ES)', contacto: 'Contact',
+    misCursos: 'My Courses', contactar: 'Get in touch', sesion: 'Signed in', cerrar: 'Log out',
+    iniciar: 'Log in', menuUsuario: 'User menu', abrirMenu: 'Open menu'
+  }
+};
 
 @Component({
   selector: 'app-navbar',
@@ -20,9 +34,24 @@ export class Navbar {
   public translation = inject(TranslationService);
   private auth = inject(AuthService);
   private router = inject(Router);
+  private idioma = inject(IdiomaRuta);
+
+  readonly ingles = this.idioma.ingles;
+
+  /** Idioma que se marca como activo: el de la pagina, si es una de /en. */
+  readonly idiomaActual = computed(() => (this.ingles() ? 'en' : this.translation.currentLang()));
+
+  readonly t = computed(() => (this.ingles() ? TEXTOS.en : TEXTOS.es));
+
+  /** Enlaces del menu. Cursos solo existe en español. */
+  readonly r = computed(() =>
+    this.ingles()
+      ? { inicio: '/en', sobre: '/en/about', servicios: '/en/services', cursos: '/cursos', contacto: '/en/contact' }
+      : { inicio: '/', sobre: '/sobre-mi', servicios: '/servicios', cursos: '/cursos', contacto: '/contacto' }
+  );
 
   // Rutas con imagen a pantalla completa donde el navbar va transparente.
-  private readonly rutasHero = new Set(['/', '/inicio', '/sobre-mi', '/servicios']);
+  private readonly rutasHero = new Set(['/', '/inicio', '/sobre-mi', '/servicios', '/en', '/en/about', '/en/services']);
 
   constructor() {
     this.router.events
@@ -41,8 +70,22 @@ export class Navbar {
 
   selectLanguage(lang: 'es' | 'en' | 'it' | 'de', event?: Event): void {
     if (event) event.stopPropagation();
-    this.translation.setLanguage(lang);
     this.langMenuOpen = false;
+
+    // Español e ingles son paginas distintas cuando existe la pareja; solo
+    // el resto (cursos, privacidad...) y los demas idiomas pasan por el
+    // traductor de Google.
+    if (lang === 'es' || lang === 'en') {
+      const destino = this.idioma.equivalente(lang);
+
+      if (destino) {
+        this.closeMenu();
+        this.router.navigateByUrl(destino);
+        return;
+      }
+    }
+
+    this.translation.setLanguage(lang);
   }
 
   // Leen signals del AuthService en lugar de tocar localStorage (y hacer

@@ -17,12 +17,12 @@
     <div class="mx-auto max-w-[1180px] text-center">
 
       <!-- Logo / Marca -->
-      <a routerLink="/" class="group inline-block no-underline" scrollReveal="up">
+      <a [routerLink]="t().inicio" class="group inline-block no-underline" scrollReveal="up">
         <span class="block font-serif text-[1.6rem] font-bold uppercase tracking-[0.2em] text-white transition-colors duration-300 group-hover:text-[#c4956a] sm:text-[1.8rem]">
           MAKEUP BY YONA
         </span>
         <span class="mt-1 block font-serif text-[0.78rem] font-normal italic tracking-[0.04em] text-[#c4956a]">
-          Estudio Profesional de Maquillaje y Estilismo
+          {{ t().lema }}
         </span>
       </a>
 
@@ -33,12 +33,12 @@
           <span class="mx-2">|</span>
           <a href="tel:+34658728433" class="no-underline transition-colors duration-300 hover:text-[#c4956a]">+34 658 728 433</a>
         </p>
-        <p>Ibiza, España</p>
+        <p>{{ t().lugar }}</p>
       </div>
 
       <!-- Redes sociales con efecto magnético -->
       <div scrollReveal="up" scrollDelay="2" class="mt-12">
-        <p class="mb-6 font-serif text-[0.7rem] uppercase tracking-[0.3em] text-white/30">Sígueme en</p>
+        <p class="mb-6 font-serif text-[0.7rem] uppercase tracking-[0.3em] text-white/30">{{ t().seguir }}</p>
         <div class="flex flex-wrap items-center justify-center gap-4">
 
           <!-- Instagram profesional -->
@@ -55,7 +55,7 @@
             </svg>
             <span class="flex flex-col text-left leading-tight">
               <span class="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white transition-colors duration-300 group-hover:text-[#c4956a]">&#64;byyonai</span>
-              <span class="text-[0.6rem] font-light text-white/35">Maquillaje profesional</span>
+              <span class="text-[0.6rem] font-light text-white/35">{{ t().igPro }}</span>
             </span>
           </a>
 
@@ -73,7 +73,7 @@
             </svg>
             <span class="flex flex-col text-left leading-tight">
               <span class="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white transition-colors duration-300 group-hover:text-[#c4956a]">&#64;yonadobe</span>
-              <span class="text-[0.6rem] font-light text-white/35">Perfil personal</span>
+              <span class="text-[0.6rem] font-light text-white/35">{{ t().igPers }}</span>
             </span>
           </a>
 
@@ -106,16 +106,16 @@
   <!-- Barra inferior -->
   <div class="relative z-10 px-6 py-5 sm:px-10">
     <div class="mx-auto flex max-w-[1180px] flex-col items-center justify-center gap-2 text-[0.72rem] font-light text-white/25">
-      <span>&copy; {{ currentYear }} Makeup By Yona. Todos los derechos reservados.</span>
+      <span>&copy; {{ currentYear }} Makeup By Yona. {{ t().derechos }}</span>
       <div class="flex items-center gap-4">
         <a routerLink="/politica-privacidad"
            class="no-underline transition-colors duration-300 hover:text-[#c4956a]">
-          Política de privacidad
+          {{ t().privacidad }}
         </a>
         <span class="text-white/10">|</span>
         <button (click)="resetCookies()"
                 class="cursor-pointer border-none bg-transparent p-0 text-[0.72rem] font-light text-white/25 transition-colors duration-300 hover:text-[#c4956a]">
-          Gestionar cookies
+          {{ t().cookies }}
         </button>
       </div>
     </div>

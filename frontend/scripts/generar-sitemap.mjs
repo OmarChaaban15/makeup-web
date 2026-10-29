@@ -5,6 +5,9 @@
 // ultimo commit que toco los archivos de cada pagina, no la de hoy: un
 // lastmod que cambia siempre hace que Google deje de fiarse de el.
 //
+// Las paginas con version en ingles llevan xhtml:link hreflang en las dos
+// URLs, apuntandose entre si (igual que el <head>, ver SeoService).
+//
 // Al añadir una pagina indexable, añadirla tambien a PAGINAS.
 
 import { execFileSync } from 'node:child_process';
@@ -16,20 +19,32 @@ const ORIGEN = 'https://makeupbyyona.es';
 const RAIZ = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SALIDA = join(RAIZ, 'dist', 'frontend', 'browser', 'sitemap.xml');
 
-const pagina = (carpeta) => [
-  `src/app/pages/${carpeta}/${carpeta}.html`,
-  `src/app/pages/${carpeta}/${carpeta}.ts`
-];
+const pagina = (carpeta) => {
+  const nombre = carpeta.split('/').pop();
 
+  return [`src/app/pages/${carpeta}/${nombre}.html`, `src/app/pages/${carpeta}/${nombre}.ts`];
+};
+
+// `en`: ruta de la version inglesa, si existe (debe coincidir con
+// PARES_IDIOMA en src/app/shared/idioma.ts).
 const PAGINAS = [
-  { ruta: '/', archivos: [...pagina('inicio'), 'src/app/shared/seo-schemas.ts'] },
-  { ruta: '/sobre-mi', archivos: pagina('sobre-mi') },
-  { ruta: '/servicios', archivos: pagina('servicios') },
+  { ruta: '/', en: '/en', archivos: [...pagina('inicio'), 'src/app/shared/seo-schemas.ts'] },
+  { ruta: '/sobre-mi', en: '/en/about', archivos: pagina('sobre-mi') },
+  { ruta: '/servicios', en: '/en/services', archivos: pagina('servicios') },
   { ruta: '/cursos', archivos: pagina('cursos') },
   { ruta: '/oferta', archivos: pagina('oferta') },
-  { ruta: '/contacto', archivos: pagina('contacto') },
+  { ruta: '/contacto', en: '/en/contact', archivos: pagina('contacto') },
   { ruta: '/politica-privacidad', archivos: pagina('politica-privacidad') }
 ];
+
+const INGLES = [
+  { ruta: '/en', es: '/', archivos: pagina('en/home') },
+  { ruta: '/en/about', es: '/sobre-mi', archivos: pagina('en/about') },
+  { ruta: '/en/services', es: '/servicios', archivos: pagina('en/services') },
+  { ruta: '/en/contact', es: '/contacto', archivos: pagina('en/contact') }
+];
+
+const loc = (ruta) => (ruta === '/' ? `${ORIGEN}/` : `${ORIGEN}${ruta}`);
 
 function ultimaModificacion(archivos) {
   try {
@@ -46,19 +61,36 @@ function ultimaModificacion(archivos) {
   return null;
 }
 
-const urls = PAGINAS.map(({ ruta, archivos }) => {
-  const lastmod = ultimaModificacion(archivos);
-  const loc = ruta === '/' ? `${ORIGEN}/` : `${ORIGEN}${ruta}`;
+function alternativas(es, en) {
+  const enlace = (hreflang, ruta) =>
+    `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="${loc(ruta)}"/>`;
 
-  return `  <url>\n    <loc>${loc}</loc>${lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : ''}\n  </url>`;
-});
+  return [enlace('es', es), enlace('en', en), enlace('x-default', es)];
+}
+
+function entrada(ruta, archivos, es, en) {
+  const lastmod = ultimaModificacion(archivos);
+
+  return [
+    '  <url>',
+    `    <loc>${loc(ruta)}</loc>`,
+    ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
+    ...(es && en ? alternativas(es, en) : []),
+    '  </url>'
+  ].join('\n');
+}
+
+const urls = [
+  ...PAGINAS.map(({ ruta, en, archivos }) => entrada(ruta, archivos, ruta, en)),
+  ...INGLES.map(({ ruta, es, archivos }) => entrada(ruta, archivos, es, ruta))
+];
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${urls.join('\n')}
 </urlset>
 `;
 
 mkdirSync(dirname(SALIDA), { recursive: true });
 writeFileSync(SALIDA, xml);
-console.log(`sitemap.xml generado con ${PAGINAS.length} URLs en ${SALIDA}`);
+console.log(`sitemap.xml generado con ${urls.length} URLs en ${SALIDA}`);

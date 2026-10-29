@@ -103,6 +103,57 @@ export const routes: Routes = [
     }
   },
   { path: 'reservar-cita', redirectTo: 'contacto', pathMatch: 'full' },
+
+  // Version en ingles (ver shared/idioma.ts). Cada pagina tiene su pareja
+  // en español; el SeoService publica el hreflang entre ellas.
+  {
+    path: 'en',
+    pathMatch: 'full',
+    loadComponent: () => import('./pages/en/home/home').then(m => m.EnHome),
+    title: 'Professional Makeup Artist in Ibiza · Makeup by Yona',
+    data: {
+      seo: {
+        descripcion:
+          'Professional makeup artist in Ibiza. Bridal, event, fashion and editorial makeup with luminous, long-lasting finishes. Book your appointment.'
+      } satisfies SeoRuta
+    }
+  },
+  {
+    path: 'en/services',
+    loadComponent: () => import('./pages/en/services/services').then(m => m.EnServices),
+    title: 'Makeup Services in Ibiza · Makeup by Yona',
+    data: {
+      seo: {
+        nombre: 'Services',
+        descripcion:
+          'Makeup services in Ibiza: brides, events, fashion and editorial, film and TV. At the studio or at your villa, hotel or finca.'
+      } satisfies SeoRuta
+    }
+  },
+  {
+    path: 'en/about',
+    loadComponent: () => import('./pages/en/about/about').then(m => m.EnAbout),
+    title: 'Yonaida, Makeup Artist in Ibiza · Makeup by Yona',
+    data: {
+      seo: {
+        nombre: 'About',
+        descripcion:
+          'Yonaida Belhuman, professional makeup artist in Ibiza with more than five years of experience in destination weddings, fashion and audiovisual productions.'
+      } satisfies SeoRuta
+    }
+  },
+  {
+    path: 'en/contact',
+    loadComponent: () => import('./pages/en/contact/contact').then(m => m.EnContact),
+    title: 'Book Your Makeup in Ibiza · Makeup by Yona',
+    data: {
+      seo: {
+        nombre: 'Contact',
+        descripcion:
+          'Contact Makeup by Yona to book your makeup in Ibiza: weddings, events and shoots. Message me on WhatsApp or by email.'
+      } satisfies SeoRuta
+    }
+  },
   {
     path: 'politica-privacidad',
     component: PoliticaPrivacidad,

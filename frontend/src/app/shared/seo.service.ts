@@ -4,6 +4,7 @@ import { Meta } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import type { Curso } from './cursos.service';
+import { aEspanol, aIngles, esRutaIngles, normalizarRuta } from './idioma';
 import { SITIO, schemaCurso, schemaMigas, schemaNegocio, schemaServicios, url } from './seo-schemas';
 
 /** Lo que cada ruta declara en `data.seo` de app.routes.ts. */
@@ -80,6 +81,8 @@ export class SeoService {
       seo && !seo.noindex ? 'index,follow,max-image-preview:large' : 'noindex,follow'
     );
 
+    this.ponerIdiomas(ruta);
+
     this.fijar('property', 'og:title', titulo);
     this.fijar('property', 'og:description', descripcion);
     this.fijar('property', 'og:url', url(ruta));
@@ -103,10 +106,10 @@ export class SeoService {
     if (seo.schema === 'negocio') grafo.push(schemaNegocio());
     if (seo.schema === 'servicios') grafo.push(schemaServicios());
 
-    if (seo.nombre && ruta !== '/') {
+    if (seo.nombre && ruta !== '/' && ruta !== '/en') {
       grafo.push(
         schemaMigas([
-          { nombre: 'Inicio', ruta: '/' },
+          esRutaIngles(ruta) ? { nombre: 'Home', ruta: '/en' } : { nombre: 'Inicio', ruta: '/' },
           { nombre: seo.nombre, ruta }
         ])
       );
@@ -130,9 +133,40 @@ export class SeoService {
 
   /** Ruta sin parametros, fragmento ni barra final: una URL por pagina. */
   private rutaActual(): string {
-    const ruta = this.router.url.split(/[?#]/)[0].replace(/\/+$/, '');
+    return normalizarRuta(this.router.url);
+  }
 
-    return ruta === '' || ruta === '/inicio' ? '/' : ruta;
+  /**
+   * Idioma del documento, og:locale y enlaces hreflang. Solo las paginas que
+   * existen en los dos idiomas declaran alternativas; hreflang exige que se
+   * apunten entre si, asi que no se publica en el resto.
+   */
+  private ponerIdiomas(ruta: string): void {
+    const ingles = esRutaIngles(ruta);
+    const es = ingles ? aEspanol(ruta) : ruta;
+    const en = ingles ? ruta : aIngles(ruta);
+
+    this.doc.documentElement.setAttribute('lang', ingles ? 'en' : 'es');
+    this.fijar('property', 'og:locale', ingles ? 'en_US' : 'es_ES');
+
+    this.doc.head
+      .querySelectorAll('link[rel="alternate"][hreflang]')
+      .forEach(enlace => enlace.remove());
+
+    if (es === null || en === null) {
+      this.meta.removeTag("property='og:locale:alternate'");
+      return;
+    }
+
+    this.fijar('property', 'og:locale:alternate', ingles ? 'es_ES' : 'en_US');
+
+    for (const [hreflang, destino] of [['es', es], ['en', en], ['x-default', es]]) {
+      const enlace = this.doc.createElement('link');
+      enlace.setAttribute('rel', 'alternate');
+      enlace.setAttribute('hreflang', hreflang);
+      enlace.setAttribute('href', url(destino));
+      this.doc.head.appendChild(enlace);
+    }
   }
 
   private fijar(atributo: 'name' | 'property', clave: string, contenido: string): void {

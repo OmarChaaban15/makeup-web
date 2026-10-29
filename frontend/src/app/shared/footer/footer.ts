@@ -1,7 +1,21 @@
-import { Component, ElementRef, HostListener, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, ElementRef, HostListener, PLATFORM_ID, Inject, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { IdiomaRuta } from '../idioma';
 import { ScrollRevealDirective } from '../scroll-reveal.directive';
+
+const TEXTOS = {
+  es: {
+    inicio: '/', lema: 'Estudio Profesional de Maquillaje y Estilismo', lugar: 'Ibiza, España', seguir: 'Sígueme en',
+    igPro: 'Maquillaje profesional', igPers: 'Perfil personal', derechos: 'Todos los derechos reservados.',
+    privacidad: 'Política de privacidad', cookies: 'Gestionar cookies'
+  },
+  en: {
+    inicio: '/en', lema: 'Professional Makeup and Styling Studio', lugar: 'Ibiza, Spain', seguir: 'Follow me on',
+    igPro: 'Professional makeup', igPers: 'Personal profile', derechos: 'All rights reserved.',
+    privacidad: 'Privacy policy (Spanish)', cookies: 'Manage cookies'
+  }
+};
 
 @Component({
   selector: 'app-footer',
@@ -11,6 +25,10 @@ import { ScrollRevealDirective } from '../scroll-reveal.directive';
 })
 export class Footer {
   currentYear = new Date().getFullYear();
+
+  private idioma = inject(IdiomaRuta);
+
+  readonly t = computed(() => (this.idioma.ingles() ? TEXTOS.en : TEXTOS.es));
   private isBrowser: boolean;
 
   constructor(

@@ -21,11 +21,15 @@ const PAGINAS = [
   'pago-exitoso',
   'pago-cancelado',
   'restablecer-password',
-  'no-encontrada'
+  'no-encontrada',
+  'en/home',
+  'en/services',
+  'en/about',
+  'en/contact'
 ];
 
 function niveles(pagina: string): number[] {
-  const ruta = join(process.cwd(), 'src', 'app', 'pages', pagina, `${pagina}.html`);
+  const ruta = join(process.cwd(), 'src', 'app', 'pages', pagina, `${pagina.split('/').pop()}.html`);
   const html = readFileSync(ruta, 'utf8');
 
   // \b y no ">" : las etiquetas con atributos pueden partirse en varias lineas.

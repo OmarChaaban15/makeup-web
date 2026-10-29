@@ -7,33 +7,33 @@
     <!-- Links izquierda (Escritorio) -->
     <ul class="hidden list-none items-center justify-end gap-6 lg:gap-8 min-[1150px]:flex pr-8 lg:pr-12">
       <li>
-        <a routerLink="/" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}" id="nav-inicio"
+        <a [routerLink]="r().inicio" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}" id="nav-inicio"
            class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
            [class.text-white]="isTransparent"
            [class.text-[#1a1a1a]]="!isTransparent">
-          Inicio
+          {{ t().inicio }}
         </a>
       </li>
       <li>
-        <a routerLink="/sobre-mi" routerLinkActive="nav-active" id="nav-sobre-mi"
+        <a [routerLink]="r().sobre" routerLinkActive="nav-active" id="nav-sobre-mi"
            class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
            [class.text-white]="isTransparent"
            [class.text-[#1a1a1a]]="!isTransparent">
-          Sobre mí
+          {{ t().sobre }}
         </a>
       </li>
       <li>
-        <a routerLink="/servicios" routerLinkActive="nav-active" id="nav-servicios"
+        <a [routerLink]="r().servicios" routerLinkActive="nav-active" id="nav-servicios"
            class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
            [class.text-white]="isTransparent"
            [class.text-[#1a1a1a]]="!isTransparent">
-          Servicios
+          {{ t().servicios }}
         </a>
       </li>
     </ul>
 
     <!-- Logo centro (Siempre en el medio exacto) -->
-    <a class="group shimmer-gold pointer-events-auto flex flex-col items-center justify-center text-center no-underline max-[1149px]:absolute max-[1149px]:left-1/2 max-[1149px]:top-1/2 max-[1149px]:-translate-x-1/2 max-[1149px]:-translate-y-1/2 max-[1149px]:w-max px-4" routerLink="/" id="nav-logo">
+    <a class="group shimmer-gold pointer-events-auto flex flex-col items-center justify-center text-center no-underline max-[1149px]:absolute max-[1149px]:left-1/2 max-[1149px]:top-1/2 max-[1149px]:-translate-x-1/2 max-[1149px]:-translate-y-1/2 max-[1149px]:w-max px-4" [routerLink]="r().inicio" id="nav-logo">
       <span class="font-serif text-[1rem] min-[380px]:text-[1.15rem] sm:text-[1.25rem] md:text-[1.32rem] font-bold uppercase leading-none tracking-[0.12em] sm:tracking-[0.16em] transition-colors duration-300 group-hover:text-[#c4956a]"
             [class.text-white]="isTransparent"
             [class.text-[#1a1a1a]]="!isTransparent">MAKEUP BY YONA</span>
@@ -45,20 +45,20 @@
     <!-- Links derecha (Escritorio) -->
     <ul class="hidden list-none items-center justify-start gap-4 lg:gap-5 xl:gap-6 min-[1150px]:flex pl-8 lg:pl-12">
       <li>
-        <a routerLink="/cursos" routerLinkActive="nav-active" id="nav-cursos"
+        <a [routerLink]="r().cursos" routerLinkActive="nav-active" id="nav-cursos"
            class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
            [class.text-white]="isTransparent"
            [class.text-[#1a1a1a]]="!isTransparent">
-          Cursos
+          {{ t().cursos }}
         </a>
       </li>
       <li>
-        <a routerLink="/contacto" routerLinkActive="active" id="nav-contacto"
+        <a [routerLink]="r().contacto" routerLinkActive="active" id="nav-contacto"
            class="inline-flex min-w-[7.5rem] xl:min-w-[8.5rem] shrink-0 items-center justify-center whitespace-nowrap border-[1.5px] border-[#c4956a] px-[1rem] py-[0.5rem] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white lg:px-[1.2rem] lg:py-[0.55rem]"
            [class.border-white]="isTransparent"
            [class.text-white]="isTransparent"
            [class.hover:border-[#c4956a]]="isTransparent">
-          Contacto
+          {{ t().contacto }}
         </a>
       </li>
       <!-- ✦ Mis Cursos (solo con sesión iniciada) -->
@@ -68,7 +68,7 @@
             class="nav-link relative pb-[3px] whitespace-nowrap font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
             [class.text-white]="isTransparent"
             [class.text-[#1a1a1a]]="!isTransparent">
-            Mis Cursos
+            {{ t().misCursos }}
           </a>
         </li>
       }
@@ -95,7 +95,7 @@
             <div class="absolute right-0 top-full mt-3 w-60 overflow-hidden rounded-[14px] border border-black/[0.06] bg-white py-2 shadow-[0_12px_40px_rgba(0,0,0,0.12)]"
                  (click)="$event.stopPropagation()">
               <div class="border-b border-black/[0.06] px-4 py-3">
-                <p class="font-sans text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-[#888]">Sesión iniciada</p>
+                <p class="font-sans text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-[#888]">{{ t().sesion }}</p>
                 <p class="mt-1 truncate font-serif text-[0.95rem] font-light text-[#1a1a1a]">{{ userName }}</p>
               </div>
               <button (click)="logout()"
@@ -103,7 +103,7 @@
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/>
                 </svg>
-                Cerrar sesión
+                {{ t().cerrar }}
               </button>
             </div>
           }
@@ -112,7 +112,7 @@
                   class="cursor-pointer border-none bg-transparent p-[6px] transition-colors duration-300 hover:text-[#c4956a]"
                   [class.text-white]="isTransparent"
                   [class.text-[#1a1a1a]]="!isTransparent"
-                  aria-label="Iniciar sesión" id="nav-usuario">
+                  [attr.aria-label]="t().iniciar" id="nav-usuario">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
               <circle cx="12" cy="7" r="4"/>
@@ -139,18 +139,18 @@
                 aria-label="Seleccionar idioma"
                 title="Seleccionar idioma / Select language">
           <!-- Bandera activa -->
-          @if (translation.currentLang() === 'es') {
+          @if (idiomaActual() === 'es') {
             <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 750 500"><rect width="750" height="500" fill="#c60b1e"/><rect width="750" height="250" y="125" fill="#ffc400"/></svg>
-          } @else if (translation.currentLang() === 'en') {
+          } @else if (idiomaActual() === 'en') {
             <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 60 30"><clipPath id="s1"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t1"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#s1)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t1)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>
-          } @else if (translation.currentLang() === 'it') {
+          } @else if (idiomaActual() === 'it') {
             <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 3 2"><rect width="1" height="2" fill="#009246"/><rect width="1" height="2" x="1" fill="#fff"/><rect width="1" height="2" x="2" fill="#ce2b37"/></svg>
-          } @else if (translation.currentLang() === 'de') {
+          } @else if (idiomaActual() === 'de') {
             <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 5 3"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#dd0000"/><rect width="5" height="1" y="2" fill="#ffce00"/></svg>
           }
 
           <span class="font-serif text-[0.72rem] font-bold uppercase tracking-wider">
-            {{ translation.currentLang() }}
+            {{ idiomaActual() }}
           </span>
           <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
                class="transition-transform duration-300 opacity-70" [class.rotate-180]="langMenuOpen">
@@ -165,14 +165,14 @@
             <!-- Opción ES -->
             <button type="button" (click)="selectLanguage('es', $event)"
                     class="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-left font-serif text-xs transition-colors hover:bg-[#faf4ee]"
-                    [class.text-[#c4956a]]="translation.currentLang() === 'es'"
-                    [class.font-bold]="translation.currentLang() === 'es'"
-                    [class.text-[#1a1a1a]]="translation.currentLang() !== 'es'">
+                    [class.text-[#c4956a]]="idiomaActual() === 'es'"
+                    [class.font-bold]="idiomaActual() === 'es'"
+                    [class.text-[#1a1a1a]]="idiomaActual() !== 'es'">
               <span class="flex items-center gap-2.5">
                 <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 750 500"><rect width="750" height="500" fill="#c60b1e"/><rect width="750" height="250" y="125" fill="#ffc400"/></svg>
                 <span>Español</span>
               </span>
-              @if (translation.currentLang() === 'es') {
+              @if (idiomaActual() === 'es') {
                 <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
               }
             </button>
@@ -180,29 +180,30 @@
             <!-- Opción EN -->
             <button type="button" (click)="selectLanguage('en', $event)"
                     class="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-left font-serif text-xs transition-colors hover:bg-[#faf4ee]"
-                    [class.text-[#c4956a]]="translation.currentLang() === 'en'"
-                    [class.font-bold]="translation.currentLang() === 'en'"
-                    [class.text-[#1a1a1a]]="translation.currentLang() !== 'en'">
+                    [class.text-[#c4956a]]="idiomaActual() === 'en'"
+                    [class.font-bold]="idiomaActual() === 'en'"
+                    [class.text-[#1a1a1a]]="idiomaActual() !== 'en'">
               <span class="flex items-center gap-2.5">
                 <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 60 30"><clipPath id="s2"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t2"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#s2)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t2)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>
                 <span>English</span>
               </span>
-              @if (translation.currentLang() === 'en') {
+              @if (idiomaActual() === 'en') {
                 <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
               }
             </button>
 
             <!-- Opción IT -->
-            <button type="button" (click)="selectLanguage('it', $event)"
+            @if (!ingles()) {
+<button type="button" (click)="selectLanguage('it', $event)"
                     class="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-left font-serif text-xs transition-colors hover:bg-[#faf4ee]"
-                    [class.text-[#c4956a]]="translation.currentLang() === 'it'"
-                    [class.font-bold]="translation.currentLang() === 'it'"
-                    [class.text-[#1a1a1a]]="translation.currentLang() !== 'it'">
+                    [class.text-[#c4956a]]="idiomaActual() === 'it'"
+                    [class.font-bold]="idiomaActual() === 'it'"
+                    [class.text-[#1a1a1a]]="idiomaActual() !== 'it'">
               <span class="flex items-center gap-2.5">
                 <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 3 2"><rect width="1" height="2" fill="#009246"/><rect width="1" height="2" x="1" fill="#fff"/><rect width="1" height="2" x="2" fill="#ce2b37"/></svg>
                 <span>Italiano</span>
               </span>
-              @if (translation.currentLang() === 'it') {
+              @if (idiomaActual() === 'it') {
                 <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
               }
             </button>
@@ -210,17 +211,18 @@
             <!-- Opción DE -->
             <button type="button" (click)="selectLanguage('de', $event)"
                     class="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-left font-serif text-xs transition-colors hover:bg-[#faf4ee]"
-                    [class.text-[#c4956a]]="translation.currentLang() === 'de'"
-                    [class.font-bold]="translation.currentLang() === 'de'"
-                    [class.text-[#1a1a1a]]="translation.currentLang() !== 'de'">
+                    [class.text-[#c4956a]]="idiomaActual() === 'de'"
+                    [class.font-bold]="idiomaActual() === 'de'"
+                    [class.text-[#1a1a1a]]="idiomaActual() !== 'de'">
               <span class="flex items-center gap-2.5">
                 <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 5 3"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#dd0000"/><rect width="5" height="1" y="2" fill="#ffce00"/></svg>
                 <span>Deutsch</span>
               </span>
-              @if (translation.currentLang() === 'de') {
+              @if (idiomaActual() === 'de') {
                 <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
               }
             </button>
+}
           </div>
         }
       </li>
@@ -233,7 +235,7 @@
               class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-none bg-transparent transition-colors duration-300 hover:text-[#c4956a]"
               [class.text-white]="isTransparent"
               [class.text-[#1a1a1a]]="!isTransparent"
-              [attr.aria-label]="isLoggedIn ? 'Menú de usuario' : 'Iniciar sesión'">
+              [attr.aria-label]="isLoggedIn ? t().menuUsuario : t().iniciar">
         <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
           <circle cx="12" cy="7" r="4"/>
@@ -241,7 +243,7 @@
       </button>
 
       <button class="hamburger-btn flex h-10 w-10 cursor-pointer items-center justify-center flex-col gap-[5px] border-none bg-transparent"
-              (click)="toggleMenu()" [class.hamburger-open]="menuOpen" id="nav-hamburger" aria-label="Abrir menú">
+              (click)="toggleMenu()" [class.hamburger-open]="menuOpen" id="nav-hamburger" [attr.aria-label]="t().abrirMenu">
         <span class="block h-[1.5px] w-6 transition-all duration-300"
               [class.bg-white]="isTransparent"
               [class.bg-[#1a1a1a]]="!isTransparent"></span>
@@ -265,94 +267,96 @@
          (click)="$event.stopPropagation()">
       <button type="button" (click)="selectLanguage('es', $event)"
               class="flex flex-1 items-center justify-center gap-1.5 rounded-xl py-2 transition-all"
-              [class.bg-white]="translation.currentLang() === 'es'"
-              [class.shadow-sm]="translation.currentLang() === 'es'"
-              [class.text-[#c4956a]]="translation.currentLang() === 'es'"
-              [class.font-bold]="translation.currentLang() === 'es'"
-              [class.text-[#888]]="translation.currentLang() !== 'es'">
+              [class.bg-white]="idiomaActual() === 'es'"
+              [class.shadow-sm]="idiomaActual() === 'es'"
+              [class.text-[#c4956a]]="idiomaActual() === 'es'"
+              [class.font-bold]="idiomaActual() === 'es'"
+              [class.text-[#888]]="idiomaActual() !== 'es'">
         <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 750 500"><rect width="750" height="500" fill="#c60b1e"/><rect width="750" height="250" y="125" fill="#ffc400"/></svg>
         <span class="font-serif text-xs uppercase tracking-wider">ES</span>
       </button>
 
       <button type="button" (click)="selectLanguage('en', $event)"
               class="flex flex-1 items-center justify-center gap-1.5 rounded-xl py-2 transition-all"
-              [class.bg-white]="translation.currentLang() === 'en'"
-              [class.shadow-sm]="translation.currentLang() === 'en'"
-              [class.text-[#c4956a]]="translation.currentLang() === 'en'"
-              [class.font-bold]="translation.currentLang() === 'en'"
-              [class.text-[#888]]="translation.currentLang() !== 'en'">
+              [class.bg-white]="idiomaActual() === 'en'"
+              [class.shadow-sm]="idiomaActual() === 'en'"
+              [class.text-[#c4956a]]="idiomaActual() === 'en'"
+              [class.font-bold]="idiomaActual() === 'en'"
+              [class.text-[#888]]="idiomaActual() !== 'en'">
         <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 60 30"><clipPath id="ms2"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="mt2"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#ms2)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#mt2)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>
         <span class="font-serif text-xs uppercase tracking-wider">EN</span>
       </button>
 
-      <button type="button" (click)="selectLanguage('it', $event)"
+      @if (!ingles()) {
+<button type="button" (click)="selectLanguage('it', $event)"
               class="flex flex-1 items-center justify-center gap-1.5 rounded-xl py-2 transition-all"
-              [class.bg-white]="translation.currentLang() === 'it'"
-              [class.shadow-sm]="translation.currentLang() === 'it'"
-              [class.text-[#c4956a]]="translation.currentLang() === 'it'"
-              [class.font-bold]="translation.currentLang() === 'it'"
-              [class.text-[#888]]="translation.currentLang() !== 'it'">
+              [class.bg-white]="idiomaActual() === 'it'"
+              [class.shadow-sm]="idiomaActual() === 'it'"
+              [class.text-[#c4956a]]="idiomaActual() === 'it'"
+              [class.font-bold]="idiomaActual() === 'it'"
+              [class.text-[#888]]="idiomaActual() !== 'it'">
         <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 3 2"><rect width="1" height="2" fill="#009246"/><rect width="1" height="2" x="1" fill="#fff"/><rect width="1" height="2" x="2" fill="#ce2b37"/></svg>
         <span class="font-serif text-xs uppercase tracking-wider">IT</span>
       </button>
 
       <button type="button" (click)="selectLanguage('de', $event)"
               class="flex flex-1 items-center justify-center gap-1.5 rounded-xl py-2 transition-all"
-              [class.bg-white]="translation.currentLang() === 'de'"
-              [class.shadow-sm]="translation.currentLang() === 'de'"
-              [class.text-[#c4956a]]="translation.currentLang() === 'de'"
-              [class.font-bold]="translation.currentLang() === 'de'"
-              [class.text-[#888]]="translation.currentLang() !== 'de'">
+              [class.bg-white]="idiomaActual() === 'de'"
+              [class.shadow-sm]="idiomaActual() === 'de'"
+              [class.text-[#c4956a]]="idiomaActual() === 'de'"
+              [class.font-bold]="idiomaActual() === 'de'"
+              [class.text-[#888]]="idiomaActual() !== 'de'">
         <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 5 3"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#dd0000"/><rect width="5" height="1" y="2" fill="#ffce00"/></svg>
         <span class="font-serif text-xs uppercase tracking-wider">DE</span>
       </button>
+}
     </div>
 
-    <a routerLink="/" routerLinkActive="!text-[#c4956a]" [routerLinkActiveOptions]="{exact:true}"
+    <a [routerLink]="r().inicio" routerLinkActive="!text-[#c4956a]" [routerLinkActiveOptions]="{exact:true}"
        class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
-      <span>Inicio</span>
+      <span>{{ t().inicio }}</span>
       <span class="text-xs text-[#c4956a]">→</span>
     </a>
-    <a routerLink="/sobre-mi" routerLinkActive="!text-[#c4956a]"
+    <a [routerLink]="r().sobre" routerLinkActive="!text-[#c4956a]"
        class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
-      <span>Sobre mí</span>
+      <span>{{ t().sobre }}</span>
       <span class="text-xs text-[#c4956a]">→</span>
     </a>
-    <a routerLink="/servicios" routerLinkActive="!text-[#c4956a]"
+    <a [routerLink]="r().servicios" routerLinkActive="!text-[#c4956a]"
        class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
-      <span>Servicios</span>
+      <span>{{ t().servicios }}</span>
       <span class="text-xs text-[#c4956a]">→</span>
     </a>
-    <a routerLink="/cursos" routerLinkActive="!text-[#c4956a]"
+    <a [routerLink]="r().cursos" routerLinkActive="!text-[#c4956a]"
        class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
-      <span>Cursos</span>
+      <span>{{ t().cursos }}</span>
       <span class="text-xs text-[#c4956a]">→</span>
     </a>
-    <a routerLink="/contacto" routerLinkActive="!text-[#c4956a]"
+    <a [routerLink]="r().contacto" routerLinkActive="!text-[#c4956a]"
        class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
-      <span>Contacto</span>
+      <span>{{ t().contacto }}</span>
       <span class="text-xs text-[#c4956a]">→</span>
     </a>
     <!-- ✦ Mis Cursos en menú móvil (solo con sesión iniciada) -->
     @if (isLoggedIn) {
       <a routerLink="/mis-cursos" routerLinkActive="!text-[#c4956a]"
          class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
-        <span>Mis Cursos</span>
+        <span>{{ t().misCursos }}</span>
         <span class="text-xs text-[#c4956a]">→</span>
       </a>
     }
 
     <!-- Botón CTA Contacto -->
-    <a routerLink="/contacto" routerLinkActive="active"
+    <a [routerLink]="r().contacto" routerLinkActive="active"
        class="mt-3 flex h-12 items-center justify-center rounded-xl border-[1.5px] border-[#c4956a] bg-[#c4956a] px-6 text-center font-serif text-[0.85rem] font-semibold uppercase tracking-[0.16em] text-white no-underline shadow-[0_6px_20px_rgba(196,149,106,0.3)] transition-all active:scale-[0.98]">
-      Contactar ahora
+      {{ t().contactar }}
     </a>
 
     <!-- ✦ Usuario en menú móvil -->
     @if (isLoggedIn) {
       <div class="mt-4 flex flex-col gap-3 rounded-xl bg-[#faf7f4] p-4 border border-[#eee5dd]">
         <div>
-          <p class="font-sans text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[#888]">Sesión iniciada</p>
+          <p class="font-sans text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[#888]">{{ t().sesion }}</p>
           <p class="mt-0.5 truncate font-serif text-[1rem] font-medium text-[#1a1a1a]">{{ userName }}</p>
         </div>
         <button (click)="logout()"
@@ -360,7 +364,7 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/>
           </svg>
-          Cerrar sesión
+          {{ t().cerrar }}
         </button>
       </div>
     } @else {
@@ -370,7 +374,7 @@
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
           <circle cx="12" cy="7" r="4"/>
         </svg>
-        Iniciar sesión
+        {{ t().iniciar }}
       </button>
     }
   </div>
