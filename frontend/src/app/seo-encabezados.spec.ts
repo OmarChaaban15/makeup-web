@@ -25,7 +25,9 @@ const PAGINAS = [
   'en/home',
   'en/services',
   'en/about',
-  'en/contact'
+  'en/contact',
+  'blog',
+  'blog-articulo'
 ];
 
 function niveles(pagina: string): number[] {

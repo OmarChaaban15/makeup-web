@@ -14,6 +14,7 @@ import { authGuard } from './guards/auth-guard';
 import { PagoExitoso } from './pages/pago-exitoso/pago-exitoso';
 import { PagoCancelado } from './pages/pago-cancelado/pago-cancelado';
 import { NoEncontrada } from './pages/no-encontrada/no-encontrada';
+import { articuloResolver, seoResolver, tituloResolver } from './blog/blog-rutas';
 import type { SeoRuta } from './shared/seo.service';
 
 const NOINDEX: SeoRuta = { descripcion: '', noindex: true };
@@ -103,6 +104,35 @@ export const routes: Routes = [
     }
   },
   { path: 'reservar-cita', redirectTo: 'contacto', pathMatch: 'full' },
+
+  // Blog: los articulos estan en blog/articulos.json. El titulo y los
+  // metadatos de cada uno los calculan los resolvers; el articulo en ingles
+  // cuelga de /en para que navbar y pie salgan en ingles.
+  {
+    path: 'blog',
+    pathMatch: 'full',
+    loadComponent: () => import('./pages/blog/blog').then(m => m.Blog),
+    title: 'Blog de maquillaje en Ibiza · Makeup by Yona',
+    data: {
+      seo: {
+        nombre: 'Blog',
+        descripcion:
+          'Guías de maquillaje de novia, invitadas y eventos, cuidado de la piel y automaquillaje, por una maquilladora profesional en Ibiza.'
+      } satisfies SeoRuta
+    }
+  },
+  {
+    path: 'blog/:slug',
+    loadComponent: () => import('./pages/blog-articulo/blog-articulo').then(m => m.BlogArticulo),
+    title: tituloResolver('es'),
+    resolve: { articulo: articuloResolver('es'), seo: seoResolver('es') }
+  },
+  {
+    path: 'en/blog/:slug',
+    loadComponent: () => import('./pages/blog-articulo/blog-articulo').then(m => m.BlogArticulo),
+    title: tituloResolver('en'),
+    resolve: { articulo: articuloResolver('en'), seo: seoResolver('en') }
+  },
 
   // Version en ingles (ver shared/idioma.ts). Cada pagina tiene su pareja
   // en español; el SeoService publica el hreflang entre ellas.

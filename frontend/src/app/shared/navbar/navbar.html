@@ -53,6 +53,14 @@
         </a>
       </li>
       <li>
+        <a [routerLink]="r().blog" routerLinkActive="nav-active" id="nav-blog"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#c4956a] after:transition-all after:duration-300 hover:text-[#c4956a] hover:after:w-full"
+           [class.text-white]="isTransparent"
+           [class.text-[#1a1a1a]]="!isTransparent">
+          {{ t().blog }}
+        </a>
+      </li>
+      <li>
         <a [routerLink]="r().contacto" routerLinkActive="active" id="nav-contacto"
            class="inline-flex min-w-[7.5rem] xl:min-w-[8.5rem] shrink-0 items-center justify-center whitespace-nowrap border-[1.5px] border-[#c4956a] px-[1rem] py-[0.5rem] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white lg:px-[1.2rem] lg:py-[0.55rem]"
            [class.border-white]="isTransparent"
@@ -330,6 +338,11 @@
     <a [routerLink]="r().cursos" routerLinkActive="!text-[#c4956a]"
        class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
       <span>{{ t().cursos }}</span>
+      <span class="text-xs text-[#c4956a]">→</span>
+    </a>
+    <a [routerLink]="r().blog" routerLinkActive="!text-[#c4956a]"
+       class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
+      <span>{{ t().blog }}</span>
       <span class="text-xs text-[#c4956a]">→</span>
     </a>
     <a [routerLink]="r().contacto" routerLinkActive="!text-[#c4956a]"

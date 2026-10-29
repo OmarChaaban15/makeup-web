@@ -105,10 +105,20 @@ Cada uno mejora el SEO cuando se pueda aportar:
 
 ## 6. Plan de contenidos (blog)
 
-Hoy no hay seccion de blog. Seria una fase aparte (rutas `/blog/...`, prerender y entrada en
-el sitemap). Estos diez articulos atacan busquedas de intencion alta y enlazan a las
-paginas que convierten. Los terminos son hipotesis a validar en Search Console, no datos de
-volumen.
+El blog esta implementado y los diez articulos de la tabla ya estan escritos
+(`frontend/src/app/blog/articulos.json`). Los textos estan redactados en primera persona, con la
+voz de la web, a partir de lo que ya dice el sitio sobre los servicios; conviene que Yonaida los
+revise y ajuste lo que no suene a ella. No llevan precios ni cifras que no se puedan sostener.
+Los terminos son hipotesis a validar en Search Console, no datos de volumen.
+
+Como añadir un articulo:
+
+1. Añadir un objeto al array de `articulos.json` (slug, idioma, titulo, descripcion, fecha, imagen y alt,
+   lectura, contenido y relacionados). Los enlaces internos se escriben `[texto](/ruta)`.
+2. Usar solo `h2` y `h3` en el cuerpo (el `h1` es el titulo) y una descripcion de 60 a 160 caracteres.
+3. `npm test` comprueba longitudes, enlaces internos y relacionados; `npm run build` prerenderiza la
+   pagina y la añade al sitemap con la fecha del articulo.
+4. Si la imagen es nueva, ejecutar `npm run formatos` para generar sus copias AVIF y WebP.
 
 | # | Titulo | Palabra clave principal | Secundarias | Enlaza a |
 |---|---|---|---|---|

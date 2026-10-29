@@ -1,0 +1,71 @@
+<div class="min-h-[100svh] bg-[#fcf9f6] px-6 pb-24 pt-32 sm:px-10">
+  <div class="mx-auto max-w-[1140px]">
+
+    <header class="max-w-[720px]">
+      <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">Blog</p>
+      <h1 class="mt-4 font-serif text-[clamp(2.4rem,5vw,4.2rem)] font-light leading-[1.1] text-[#1a1a1a]">
+        Blog de maquillaje <em class="italic text-[#c4956a]">en Ibiza</em>
+      </h1>
+      <div class="mt-6 h-[2px] w-16 bg-[#c4956a]"></div>
+      <p class="mt-6 text-sm sm:text-base font-light leading-7 text-[#555]">
+        Guías prácticas sobre maquillaje de novia, invitadas y eventos, cuidado de la piel y
+        automaquillaje, escritas desde mi experiencia como maquilladora profesional en Ibiza.
+      </p>
+    </header>
+
+    <ul class="mt-14 grid list-none gap-8 p-0 sm:grid-cols-2 lg:grid-cols-3">
+      @for (articulo of espanol; track articulo.slug) {
+        <li>
+          <article class="group flex h-full flex-col overflow-hidden rounded-3xl border border-[#ede0d0] bg-white shadow-sm transition-shadow duration-300 hover:shadow-md">
+            <a [routerLink]="rutaDe(articulo)" class="block overflow-hidden no-underline">
+              <img decoding="async" [src]="articulo.imagen" [alt]="articulo.alt"
+                   class="aspect-[4/3] w-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+            </a>
+            <div class="flex flex-1 flex-col p-6">
+              <p class="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#c4956a]">
+                {{ articulo.lectura }} min de lectura
+              </p>
+              <h2 class="mt-2 font-serif text-xl font-normal leading-snug text-[#1a1a1a]">
+                <a [routerLink]="rutaDe(articulo)" class="text-[#1a1a1a] no-underline hover:text-[#c4956a]">
+                  {{ articulo.titulo }}
+                </a>
+              </h2>
+              <p class="mt-3 flex-1 text-sm font-light leading-relaxed text-[#666]">{{ articulo.descripcion }}</p>
+              <a [routerLink]="rutaDe(articulo)"
+                 class="mt-5 font-serif text-xs font-semibold uppercase tracking-[0.18em] text-[#c4956a] no-underline">
+                Leer el artículo &rarr;
+              </a>
+            </div>
+          </article>
+        </li>
+      }
+    </ul>
+
+    @if (ingles.length > 0) {
+      <section class="mt-20 border-t border-[#ede0d0] pt-12">
+        <h2 class="font-serif text-2xl font-light text-[#1a1a1a]">In English</h2>
+        <ul class="mt-6 list-none space-y-4 p-0">
+          @for (articulo of ingles; track articulo.slug) {
+            <li>
+              <a [routerLink]="rutaDe(articulo)" class="font-serif text-lg text-[#1a1a1a] no-underline hover:text-[#c4956a]">
+                {{ articulo.titulo }}
+              </a>
+              <p class="mt-1 text-sm font-light text-[#666]">{{ articulo.descripcion }}</p>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+
+    <section class="mt-20 rounded-3xl bg-[#1a1a1a] px-8 py-12 text-center text-white">
+      <h2 class="font-serif text-[clamp(1.6rem,3vw,2.2rem)] font-light">¿Tienes un evento en Ibiza?</h2>
+      <p class="mx-auto mt-4 max-w-[520px] text-sm font-light leading-relaxed text-white/70">
+        Cuéntame la fecha y los detalles y te responderé personalmente con disponibilidad y presupuesto.
+      </p>
+      <a routerLink="/contacto"
+         class="mt-7 inline-block rounded-full bg-[#c4956a] px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline transition-all duration-300 hover:bg-[#a87a52]">
+        Contactar
+      </a>
+    </section>
+  </div>
+</div>

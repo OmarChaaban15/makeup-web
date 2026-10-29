@@ -59,6 +59,9 @@ export class IdiomaRuta {
   equivalente(idioma: 'es' | 'en'): string | null {
     const ruta = this.ruta();
 
+    // El blog solo tiene un articulo en ingles: desde alli, "ES" lleva al blog.
+    if (idioma === 'es' && ruta.startsWith('/en/blog/')) return '/blog';
+
     return idioma === 'en' ? aIngles(ruta) : aEspanol(ruta);
   }
 }

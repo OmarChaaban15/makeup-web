@@ -8,12 +8,12 @@ import { AuthService } from '../auth.service';
 const TEXTOS = {
   es: {
     inicio: 'Inicio', sobre: 'Sobre mí', servicios: 'Servicios', cursos: 'Cursos', contacto: 'Contacto',
-    misCursos: 'Mis Cursos', contactar: 'Contactar ahora', sesion: 'Sesión iniciada', cerrar: 'Cerrar sesión',
+    blog: 'Blog', misCursos: 'Mis Cursos', contactar: 'Contactar ahora', sesion: 'Sesión iniciada', cerrar: 'Cerrar sesión',
     iniciar: 'Iniciar sesión', menuUsuario: 'Menú de usuario', abrirMenu: 'Abrir menú'
   },
   en: {
     inicio: 'Home', sobre: 'About', servicios: 'Services', cursos: 'Courses (ES)', contacto: 'Contact',
-    misCursos: 'My Courses', contactar: 'Get in touch', sesion: 'Signed in', cerrar: 'Log out',
+    blog: 'Blog (ES)', misCursos: 'My Courses', contactar: 'Get in touch', sesion: 'Signed in', cerrar: 'Log out',
     iniciar: 'Log in', menuUsuario: 'User menu', abrirMenu: 'Open menu'
   }
 };
@@ -46,8 +46,8 @@ export class Navbar {
   /** Enlaces del menu. Cursos solo existe en español. */
   readonly r = computed(() =>
     this.ingles()
-      ? { inicio: '/en', sobre: '/en/about', servicios: '/en/services', cursos: '/cursos', contacto: '/en/contact' }
-      : { inicio: '/', sobre: '/sobre-mi', servicios: '/servicios', cursos: '/cursos', contacto: '/contacto' }
+      ? { inicio: '/en', sobre: '/en/about', servicios: '/en/services', cursos: '/cursos', blog: '/blog', contacto: '/en/contact' }
+      : { inicio: '/', sobre: '/sobre-mi', servicios: '/servicios', cursos: '/cursos', blog: '/blog', contacto: '/contacto' }
   );
 
   // Rutas con imagen a pantalla completa donde el navbar va transparente.

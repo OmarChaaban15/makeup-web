@@ -1,3 +1,4 @@
+import type { Articulo } from '../blog/blog';
 import type { Curso } from './cursos.service';
 
 /**
@@ -138,5 +139,22 @@ export function schemaCurso(curso: Curso, ruta: string): object {
       availability: 'https://schema.org/InStock',
       url: url(ruta)
     }
+  };
+}
+
+/** BlogPosting con la autora y el negocio ya definidos en la portada (@id). */
+export function schemaArticulo(articulo: Articulo, ruta: string): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: articulo.titulo,
+    description: articulo.descripcion,
+    image: url(`/${articulo.imagen}`),
+    datePublished: articulo.fecha,
+    dateModified: articulo.fecha,
+    inLanguage: articulo.idioma === 'en' ? 'en' : 'es-ES',
+    mainEntityOfPage: url(ruta),
+    author: { '@id': ID_PERSONA },
+    publisher: { '@id': ID_NEGOCIO }
   };
 }

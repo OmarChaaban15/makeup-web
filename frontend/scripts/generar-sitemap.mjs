@@ -11,7 +11,7 @@
 // Al añadir una pagina indexable, añadirla tambien a PAGINAS.
 
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -44,6 +44,10 @@ const INGLES = [
   { ruta: '/en/contact', es: '/contacto', archivos: pagina('en/contact') }
 ];
 
+// Articulos del blog: la fecha de publicacion es el lastmod. Los de /en/blog no
+// tienen pareja en español, asi que van sin hreflang.
+const ARTICULOS = JSON.parse(readFileSync(join(RAIZ, 'src', 'app', 'blog', 'articulos.json'), 'utf8'));
+
 const loc = (ruta) => (ruta === '/' ? `${ORIGEN}/` : `${ORIGEN}${ruta}`);
 
 function ultimaModificacion(archivos) {
@@ -68,8 +72,8 @@ function alternativas(es, en) {
   return [enlace('es', es), enlace('en', en), enlace('x-default', es)];
 }
 
-function entrada(ruta, archivos, es, en) {
-  const lastmod = ultimaModificacion(archivos);
+function entrada(ruta, archivos, es, en, fecha) {
+  const lastmod = fecha ?? ultimaModificacion(archivos);
 
   return [
     '  <url>',
@@ -80,8 +84,14 @@ function entrada(ruta, archivos, es, en) {
   ].join('\n');
 }
 
+const ultimaFechaBlog = ARTICULOS.map((articulo) => articulo.fecha).sort().at(-1);
+
 const urls = [
   ...PAGINAS.map(({ ruta, en, archivos }) => entrada(ruta, archivos, ruta, en)),
+  entrada('/blog', [], undefined, undefined, ultimaFechaBlog),
+  ...ARTICULOS.map((articulo) =>
+    entrada(articulo.idioma === 'en' ? `/en/blog/${articulo.slug}` : `/blog/${articulo.slug}`, [], undefined, undefined, articulo.fecha)
+  ),
   ...INGLES.map(({ ruta, es, archivos }) => entrada(ruta, archivos, es, ruta))
 ];
 

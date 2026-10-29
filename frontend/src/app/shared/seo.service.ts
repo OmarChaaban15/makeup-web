@@ -17,6 +17,10 @@ export interface SeoRuta {
   /** Ruta de la imagen para redes. Por defecto, la de la marca. */
   imagen?: string;
   schema?: 'negocio' | 'servicios';
+  /** JSON-LD propio de la pagina (p. ej. BlogPosting), calculado por un resolver. */
+  jsonLd?: object;
+  /** Migas completas; sustituyen a las de por defecto (Inicio > nombre). */
+  migas?: { nombre: string; ruta: string }[];
 }
 
 const ID_JSONLD = 'seo-jsonld';
@@ -106,7 +110,11 @@ export class SeoService {
     if (seo.schema === 'negocio') grafo.push(schemaNegocio());
     if (seo.schema === 'servicios') grafo.push(schemaServicios());
 
-    if (seo.nombre && ruta !== '/' && ruta !== '/en') {
+    if (seo.jsonLd) grafo.push(seo.jsonLd);
+
+    if (seo.migas) {
+      grafo.push(schemaMigas(seo.migas));
+    } else if (seo.nombre && ruta !== '/' && ruta !== '/en') {
       grafo.push(
         schemaMigas([
           esRutaIngles(ruta) ? { nombre: 'Home', ruta: '/en' } : { nombre: 'Inicio', ruta: '/' },
