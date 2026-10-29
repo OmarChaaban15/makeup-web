@@ -6,6 +6,7 @@ import { finalize } from 'rxjs';
 import { AuthService } from '../../shared/auth.service';
 import { ContadorOferta } from '../../shared/contador-oferta/contador-oferta';
 import { Curso, CursosService } from '../../shared/cursos.service';
+import { SeoService } from '../../shared/seo.service';
 import { mensajeDeError } from '../../shared/errores-api';
 import { TranslationService, Language } from '../../shared/translation.service';
 
@@ -28,6 +29,7 @@ import { TranslationService, Language } from '../../shared/translation.service';
 })
 export class Oferta implements OnInit {
   private cursos = inject(CursosService);
+  private seo = inject(SeoService);
   private auth = inject(AuthService);
   private router = inject(Router);
   public translation = inject(TranslationService);
@@ -110,6 +112,7 @@ export class Oferta implements OnInit {
       .subscribe({
         next: curso => {
           this.curso.set(curso);
+          if (curso) this.seo.publicarCurso(curso);
           if (!curso) {
             this.errorCarga.set('El curso no está disponible en este momento.');
           }

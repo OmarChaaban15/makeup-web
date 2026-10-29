@@ -34,14 +34,14 @@ export class Login implements OnInit {
   forgotMsg = '';
 
   /** Ruta a la que volver tras iniciar sesión (la pone el guard o el interceptor). */
-  private redirect = '/inicio';
+  private redirect = '/';
 
   ngOnInit(): void {
     this.checkAuthStatus();
     this.initForms();
 
     const params = this.route.snapshot.queryParamMap;
-    this.redirect = params.get('redirect') || '/inicio';
+    this.redirect = params.get('redirect') || '/';
 
     if (params.get('motivo') === 'sesion-caducada') {
       this.errorMsg = 'Tu sesión ha caducado. Vuelve a iniciar sesión para continuar.';
@@ -50,7 +50,7 @@ export class Login implements OnInit {
 
   private checkAuthStatus(): void {
     if (this.auth.estaAutenticado()) {
-      this.router.navigate(['/inicio']);
+      this.router.navigate(['/']);
     }
   }
 

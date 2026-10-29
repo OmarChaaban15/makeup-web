@@ -31,7 +31,7 @@ export class Registro implements OnInit {
 
   private checkAuthStatus(): void {
     if (this.auth.estaAutenticado()) {
-      this.router.navigate(['/inicio']);
+      this.router.navigate(['/']);
     }
   }
 
@@ -91,7 +91,7 @@ export class Registro implements OnInit {
       .subscribe({
         next: () => {
           this.successMsg = '¡Cuenta creada! Redirigiendo...';
-          setTimeout(() => this.router.navigate(['/inicio']), 1000);
+          setTimeout(() => this.router.navigate(['/']), 1000);
         },
         error: error => {
           this.errorMsg = mensajeDeError(

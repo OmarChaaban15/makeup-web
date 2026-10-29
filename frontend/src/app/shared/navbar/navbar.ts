@@ -101,6 +101,6 @@ export class Navbar {
   logout() {
     this.userMenuOpen = false;
     this.closeMenu();
-    this.auth.logout('/inicio');
+    this.auth.logout('/');
   }
 }

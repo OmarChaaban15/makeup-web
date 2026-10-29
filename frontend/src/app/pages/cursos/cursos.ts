@@ -8,6 +8,7 @@ import { ContadorOferta } from '../../shared/contador-oferta/contador-oferta';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../shared/auth.service';
 import { Curso, CursosService } from '../../shared/cursos.service';
+import { SeoService } from '../../shared/seo.service';
 import { mensajeDeError } from '../../shared/errores-api';
 
 @Component({
@@ -22,6 +23,7 @@ export class Cursos implements OnInit {
   private router = inject(Router);
   private auth = inject(AuthService);
   private cursos = inject(CursosService);
+  private seo = inject(SeoService);
 
   comprando = false;
   errorMsg = '';
@@ -71,6 +73,7 @@ export class Cursos implements OnInit {
     this.cursos.masterclass().subscribe({
       next: curso => {
         this.masterclass.set(curso);
+        if (curso) this.seo.publicarCurso(curso);
         this.cargandoCatalogo.set(false);
       },
       error: () => {

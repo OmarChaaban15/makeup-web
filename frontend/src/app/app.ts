@@ -5,6 +5,7 @@ import { filter } from 'rxjs/operators';
 import { Footer } from './shared/footer/footer';
 import { Navbar } from './shared/navbar/navbar';
 import { CookieBanner } from './shared/cookie-banner/cookie-banner';
+import { SeoService } from './shared/seo.service';
 import { TranslationService } from './shared/translation.service';
 
 @Component({
@@ -17,6 +18,10 @@ export class App {
   public translation = inject(TranslationService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+
+  // Se instancia aqui para que empiece a escuchar la navegacion desde la
+  // primera ruta: gestiona canonical, robots, Open Graph y JSON-LD.
+  private seo = inject(SeoService);
 
   /**
    * Las páginas marcadas con data.sinLayout se muestran sin navbar ni
