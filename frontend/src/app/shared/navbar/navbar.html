@@ -1,4 +1,4 @@
-<nav class="fixed top-0 left-0 right-0 z-[1000] transition-all duration-500"
+<nav class="fixed top-0 left-0 right-0 z-[1000] transition-[background-color,box-shadow,border-color] duration-300"
      [class.navbar-scrolled]="isScrolled"
      [class.navbar-transparent]="isTransparent"
      [class.navbar-solid]="!isTransparent">
@@ -8,7 +8,7 @@
     <ul class="hidden list-none items-center justify-end gap-6 lg:gap-8 min-[1150px]:flex pr-8 lg:pr-12">
       <li>
         <a [routerLink]="r().inicio" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}" id="nav-inicio"
-           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-oro after:transition-all after:duration-300 hover:text-oro hover:after:w-full"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-oro after:transition-transform after:duration-300 after:ease-salida hover:text-oro hover:after:scale-x-100"
            [class.text-white]="isTransparent"
            [class.text-tinta]="!isTransparent">
           {{ t().inicio }}
@@ -16,7 +16,7 @@
       </li>
       <li>
         <a [routerLink]="r().sobre" routerLinkActive="nav-active" id="nav-sobre-mi"
-           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-oro after:transition-all after:duration-300 hover:text-oro hover:after:w-full"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-oro after:transition-transform after:duration-300 after:ease-salida hover:text-oro hover:after:scale-x-100"
            [class.text-white]="isTransparent"
            [class.text-tinta]="!isTransparent">
           {{ t().sobre }}
@@ -24,7 +24,7 @@
       </li>
       <li>
         <a [routerLink]="r().servicios" routerLinkActive="nav-active" id="nav-servicios"
-           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-oro after:transition-all after:duration-300 hover:text-oro hover:after:w-full"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-oro after:transition-transform after:duration-300 after:ease-salida hover:text-oro hover:after:scale-x-100"
            [class.text-white]="isTransparent"
            [class.text-tinta]="!isTransparent">
           {{ t().servicios }}
@@ -46,7 +46,7 @@
     <ul class="hidden list-none items-center justify-start gap-4 lg:gap-5 xl:gap-6 min-[1150px]:flex pl-8 lg:pl-12">
       <li>
         <a [routerLink]="r().cursos" routerLinkActive="nav-active" id="nav-cursos"
-           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-oro after:transition-all after:duration-300 hover:text-oro hover:after:w-full"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-oro after:transition-transform after:duration-300 after:ease-salida hover:text-oro hover:after:scale-x-100"
            [class.text-white]="isTransparent"
            [class.text-tinta]="!isTransparent">
           {{ t().cursos }}
@@ -54,7 +54,7 @@
       </li>
       <li>
         <a [routerLink]="r().blog" routerLinkActive="nav-active" id="nav-blog"
-           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-oro after:transition-all after:duration-300 hover:text-oro hover:after:w-full"
+           class="nav-link relative pb-[3px] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-oro after:transition-transform after:duration-300 after:ease-salida hover:text-oro hover:after:scale-x-100"
            [class.text-white]="isTransparent"
            [class.text-tinta]="!isTransparent">
           {{ t().blog }}
@@ -73,7 +73,7 @@
       @if (isLoggedIn) {
         <li>
           <a routerLink="/mis-cursos" routerLinkActive="nav-active" id="nav-mis-cursos"
-            class="nav-link relative pb-[3px] whitespace-nowrap font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-oro after:transition-all after:duration-300 hover:text-oro hover:after:w-full"
+            class="nav-link relative pb-[3px] whitespace-nowrap font-serif text-[0.78rem] font-semibold uppercase tracking-[0.12em] no-underline transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-oro after:transition-transform after:duration-300 after:ease-salida hover:text-oro hover:after:scale-x-100"
             [class.text-white]="isTransparent"
             [class.text-tinta]="!isTransparent">
             {{ t().misCursos }}
@@ -248,16 +248,16 @@
         </svg>
       </button>
 
-      <button class="hamburger-btn flex h-10 w-10 cursor-pointer items-center justify-center flex-col gap-[5px] border-none bg-transparent"
+      <button #botonMenu class="hamburger-btn flex h-11 w-11 cursor-pointer items-center justify-center flex-col gap-[5px] border-none bg-transparent"
               (click)="toggleMenu()" [class.hamburger-open]="menuOpen" id="nav-hamburger" [attr.aria-label]="t().abrirMenu"
               [attr.aria-expanded]="menuOpen" aria-controls="menu-movil">
-        <span class="block h-[1.5px] w-6 transition-all duration-300"
+        <span class="block h-[1.5px] w-6 transition-[transform,opacity,background-color] duration-200 ease-salida"
               [class.bg-white]="isTransparent"
               [class.bg-tinta]="!isTransparent"></span>
-        <span class="block h-[1.5px] w-6 transition-all duration-300"
+        <span class="block h-[1.5px] w-6 transition-[transform,opacity,background-color] duration-200 ease-salida"
               [class.bg-white]="isTransparent"
               [class.bg-tinta]="!isTransparent"></span>
-        <span class="block h-[1.5px] w-6 transition-all duration-300"
+        <span class="block h-[1.5px] w-6 transition-[transform,opacity,background-color] duration-200 ease-salida"
               [class.bg-white]="isTransparent"
               [class.bg-tinta]="!isTransparent"></span>
       </button>
@@ -265,7 +265,7 @@
   </div>
 
   <!-- Menú móvil desplegable (Full height con scroll interno libre y fondo 100% opaco) -->
-  <div id="menu-movil" [attr.inert]="menuOpen ? null : ''" class="mobile-panel pointer-events-none fixed top-20 left-0 right-0 bottom-0 h-[calc(100dvh-5rem)] overflow-y-auto hidden flex-col gap-4 border-t border-black/[0.06] bg-[#faf8f6] px-6 pb-20 pt-5 opacity-0 shadow-[0_12px_40px_rgba(0,0,0,0.12)] transition-all duration-300 min-[1150px]:hidden z-[1050]"
+  <div id="menu-movil" [attr.inert]="menuOpen ? null : ''" class="mobile-panel pointer-events-none fixed top-20 left-0 right-0 bottom-0 h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain hidden flex-col gap-4 border-t border-black/[0.06] bg-[#faf8f6] px-6 pb-20 pt-5 opacity-0 shadow-[0_12px_40px_rgba(0,0,0,0.12)] min-[1150px]:hidden z-[1050]"
        [class.mobile-open]="menuOpen"
        (click)="closeMenu()">
 
@@ -318,49 +318,56 @@
     </div>
 
     <a [routerLink]="r().inicio" routerLinkActive="!text-bronce" [routerLinkActiveOptions]="{exact:true}"
-       class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-tinta no-underline transition-colors hover:text-oro">
+       class="menu-item flex min-h-12 items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-tinta no-underline transition-colors hover:text-oro">
       <span>{{ t().inicio }}</span>
       <span class="text-xs text-bronce">→</span>
     </a>
     <a [routerLink]="r().sobre" routerLinkActive="!text-bronce"
-       class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-tinta no-underline transition-colors hover:text-oro">
+       class="menu-item flex min-h-12 items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-tinta no-underline transition-colors hover:text-oro">
       <span>{{ t().sobre }}</span>
       <span class="text-xs text-bronce">→</span>
     </a>
     <a [routerLink]="r().servicios" routerLinkActive="!text-bronce"
-       class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-tinta no-underline transition-colors hover:text-oro">
+       class="menu-item flex min-h-12 items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-tinta no-underline transition-colors hover:text-oro">
       <span>{{ t().servicios }}</span>
       <span class="text-xs text-bronce">→</span>
     </a>
     <a [routerLink]="r().cursos" routerLinkActive="!text-bronce"
-       class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-tinta no-underline transition-colors hover:text-oro">
+       class="menu-item flex min-h-12 items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-tinta no-underline transition-colors hover:text-oro">
       <span>{{ t().cursos }}</span>
       <span class="text-xs text-bronce">→</span>
     </a>
     <a [routerLink]="r().blog" routerLinkActive="!text-bronce"
-       class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-tinta no-underline transition-colors hover:text-oro">
+       class="menu-item flex min-h-12 items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-tinta no-underline transition-colors hover:text-oro">
       <span>{{ t().blog }}</span>
       <span class="text-xs text-bronce">→</span>
     </a>
     <a [routerLink]="r().contacto" routerLinkActive="!text-bronce"
-       class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-tinta no-underline transition-colors hover:text-oro">
+       class="menu-item flex min-h-12 items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-tinta no-underline transition-colors hover:text-oro">
       <span>{{ t().contacto }}</span>
       <span class="text-xs text-bronce">→</span>
     </a>
     <!-- ✦ Mis Cursos en menú móvil (solo con sesión iniciada) -->
     @if (isLoggedIn) {
       <a routerLink="/mis-cursos" routerLinkActive="!text-bronce"
-         class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-tinta no-underline transition-colors hover:text-oro">
+         class="menu-item flex min-h-12 items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-tinta no-underline transition-colors hover:text-oro">
         <span>{{ t().misCursos }}</span>
         <span class="text-xs text-bronce">→</span>
       </a>
     }
 
-    <!-- Botón CTA Contacto -->
-    <a [routerLink]="r().contacto" routerLinkActive="active"
-       class="mt-3 flex h-12 items-center justify-center rounded-xl border-[1.5px] border-oro bg-cobre px-6 text-center font-serif text-[0.85rem] font-semibold uppercase tracking-[0.16em] text-white no-underline shadow-[0_6px_20px_rgba(196,149,106,0.3)] transition-all active:scale-[0.98]">
-      {{ t().contactar }}
-    </a>
+    <!-- Botones de contacto: cita y WhatsApp, lo que buscan casi todas las visitas -->
+    <div class="menu-item mt-3 grid grid-cols-[1fr_auto] gap-2">
+      <a [routerLink]="r().contacto" routerLinkActive="active"
+         class="pulsable flex h-12 items-center justify-center whitespace-nowrap rounded-xl border-[1.5px] border-oro bg-cobre px-4 text-center font-serif text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-white no-underline shadow-[0_6px_20px_rgba(196,149,106,0.3)]">
+        {{ t().contactar }}
+      </a>
+      <a [href]="whatsapp()" target="_blank" rel="noopener"
+         class="pulsable flex h-12 items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 font-sans text-sm font-medium text-tinta no-underline">
+        <svg class="h-5 w-5 text-[#1f7a4d]" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.39 9.39 0 0 1-1.44-5.01c0-5.19 4.23-9.42 9.43-9.42a9.37 9.37 0 0 1 6.66 2.76 9.36 9.36 0 0 1 2.76 6.67c0 5.2-4.23 9.42-9.43 9.42zm8.02-17.44A11.28 11.28 0 0 0 12.05.75C5.8.75.72 5.83.72 12.08c0 2 .52 3.95 1.52 5.66L.62 23.25l5.65-1.48a11.3 11.3 0 0 0 5.78 1.47h.01c6.25 0 11.33-5.08 11.33-11.33 0-3.03-1.18-5.87-3.32-8.01z"/></svg>
+        WhatsApp
+      </a>
+    </div>
 
     <!-- ✦ Usuario en menú móvil -->
     @if (isLoggedIn) {

@@ -97,21 +97,64 @@ export interface TextosCookies {
   region: string;
 }
 
+// El aviso es informativo (ver cookie-banner.ts): basta con decir que no hay
+// cookies de analisis ni publicidad y enlazar la politica. Corto a proposito,
+// para que en un movil ocupe una franja y no tape el contenido.
 export const COOKIES: Record<Idioma, TextosCookies> = {
   es: {
-    aviso: 'Esta web no usa cookies de análisis ni de publicidad. Solo guarda en tu navegador lo necesario para que funcione, como tu sesión o tu idioma.',
-    mas: 'Política de cookies', entendido: 'Entendido', region: 'Aviso de cookies'
+    aviso: 'Sin cookies de análisis ni de publicidad: solo lo necesario para que la web funcione.',
+    mas: 'Más información', entendido: 'Entendido', region: 'Aviso de cookies'
   },
   en: {
-    aviso: 'This website does not use analytics or advertising cookies. It only stores what it needs to work in your browser, such as your session or language.',
+    aviso: 'No analytics or advertising cookies: only what the site needs to work.',
     mas: 'Cookie policy (Spanish)', entendido: 'Got it', region: 'Cookie notice'
   },
   it: {
-    aviso: 'Questo sito non usa cookie analitici né pubblicitari. Salva nel tuo browser solo ciò che serve per funzionare, come la sessione o la lingua.',
+    aviso: 'Nessun cookie analitico o pubblicitario: solo ciò che serve al sito per funzionare.',
     mas: 'Cookie policy (in spagnolo)', entendido: 'Ho capito', region: 'Avviso sui cookie'
   },
   de: {
-    aviso: 'Diese Website verwendet keine Analyse- oder Werbe-Cookies. Sie speichert in deinem Browser nur, was sie zum Funktionieren braucht, etwa deine Sitzung oder Sprache.',
+    aviso: 'Keine Analyse- oder Werbe-Cookies: nur das, was die Website zum Funktionieren braucht.',
     mas: 'Cookie-Richtlinie (auf Spanisch)', entendido: 'Verstanden', region: 'Cookie-Hinweis'
   }
 };
+
+export interface TextosAccion {
+  /** Boton principal de la barra fija del movil y del cierre del pie. */
+  cita: string;
+  whatsapp: string;
+  /** Mensaje que llega ya escrito al abrir WhatsApp. */
+  mensajeWhatsapp: string;
+  /** Nombre accesible de la barra fija. */
+  region: string;
+  /** Frase de cierre del pie, encima de los botones. */
+  cierre: string;
+}
+
+export const ACCION: Record<Idioma, TextosAccion> = {
+  es: {
+    cita: 'Solicitar cita', whatsapp: 'WhatsApp', region: 'Reservar',
+    mensajeWhatsapp: 'Hola Yonaida, me gustaría información sobre tus servicios de maquillaje',
+    cierre: 'Cuéntame tu fecha y te respondo con disponibilidad en 24-48 horas.'
+  },
+  en: {
+    cita: 'Book an appointment', whatsapp: 'WhatsApp', region: 'Book',
+    mensajeWhatsapp: 'Hello Yonaida, I would like to ask about your makeup services',
+    cierre: 'Tell me your date and I will reply with availability within 24-48 hours.'
+  },
+  it: {
+    cita: 'Richiedi un appuntamento', whatsapp: 'WhatsApp', region: 'Prenota',
+    mensajeWhatsapp: 'Ciao Yonaida, vorrei informazioni sui tuoi servizi di trucco',
+    cierre: 'Dimmi la tua data e ti rispondo con la disponibilità entro 24-48 ore.'
+  },
+  de: {
+    cita: 'Termin anfragen', whatsapp: 'WhatsApp', region: 'Buchen',
+    mensajeWhatsapp: 'Hallo Yonaida, ich möchte mich über deine Make-up-Leistungen informieren',
+    cierre: 'Nenne mir dein Datum, ich antworte innerhalb von 24-48 Stunden mit meiner Verfügbarkeit.'
+  }
+};
+
+/** Enlace a WhatsApp con el mensaje del idioma ya escrito. */
+export function enlaceWhatsapp(idioma: Idioma): string {
+  return `https://wa.me/34658728433?text=${encodeURIComponent(ACCION[idioma].mensajeWhatsapp)}`;
+}

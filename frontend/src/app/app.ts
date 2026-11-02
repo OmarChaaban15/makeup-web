@@ -5,6 +5,7 @@ import { filter } from 'rxjs/operators';
 import { Footer } from './shared/footer/footer';
 import { Navbar } from './shared/navbar/navbar';
 import { CookieBanner } from './shared/cookie-banner/cookie-banner';
+import { BarraAccion } from './shared/barra-accion/barra-accion';
 import { IdiomaRuta } from './shared/idioma';
 import { NAVBAR } from './shared/textos';
 import { SeoService } from './shared/seo.service';
@@ -12,7 +13,7 @@ import { TranslationService } from './shared/translation.service';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, Navbar, Footer, CookieBanner],
+  imports: [CommonModule, RouterOutlet, Navbar, Footer, CookieBanner, BarraAccion],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

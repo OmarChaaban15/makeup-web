@@ -32,7 +32,7 @@
  * las clases habituales: text-oro, bg-cobre/15, border-linea, rounded-foto,
  * ease-salida... Cambiar un valor aqui lo cambia en toda la web.
  */
-@theme {
+@theme static {
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
@@ -185,6 +185,25 @@ a, button, [role="button"], input[type="submit"], input[type="button"], .cursor-
   outline: 2px solid #c4956a;
   outline-offset: 3px;
   border-radius: 2px;
+}
+
+/* ═══════════════════════════════════════════
+   PULSACION — respuesta inmediata al tocar
+   ═══════════════════════════════════════════ */
+
+/*
+  Todo lo que se pulsa (botones, tarjetas enlace) se hunde un 3% al
+  presionarlo: confirma que la web ha recibido el toque. Solo transform,
+  que no recalcula el diseno. Sin quitar el resaltado de toque de iOS: se
+  sustituye por esta respuesta, que es mas sutil y de marca.
+*/
+.pulsable {
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 160ms var(--ease-salida), background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.pulsable:active {
+  transform: scale(0.97);
 }
 
 /* ═══════════════════════════════════════════

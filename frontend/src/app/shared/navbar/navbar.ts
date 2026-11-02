@@ -1,8 +1,9 @@
-import { Component, HostListener, computed, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild, computed, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { IdiomaRuta, RUTAS } from '../idioma';
-import { NAVBAR } from '../textos';
+import { NAVBAR, enlaceWhatsapp } from '../textos';
+import { InterfazService } from '../interfaz.service';
 import { TranslationService } from '../translation.service';
 import { AuthService } from '../auth.service';
 
@@ -23,6 +24,9 @@ export class Navbar {
   private auth = inject(AuthService);
   private router = inject(Router);
   private idioma = inject(IdiomaRuta);
+  private interfaz = inject(InterfazService);
+
+  @ViewChild('botonMenu') botonMenu?: ElementRef<HTMLButtonElement>;
 
   /** Idioma de la pagina visible (por la URL). */
   readonly idiomaPagina = this.idioma.idioma;
@@ -33,6 +37,8 @@ export class Navbar {
   );
 
   readonly t = computed(() => NAVBAR[this.idiomaPagina()]);
+
+  readonly whatsapp = computed(() => enlaceWhatsapp(this.idiomaPagina()));
 
   /** Enlaces del menu. Cursos y blog solo existen en español. */
   readonly r = computed(() => ({ ...RUTAS[this.idiomaPagina()], cursos: '/cursos', blog: '/blog' }));
@@ -49,6 +55,8 @@ export class Navbar {
       .subscribe(e => {
         const path = (e.urlAfterRedirects || e.url).split('?')[0];
         this.isHeroPage = this.rutasHero.has(path);
+        // Al llegar a otra pagina el menu ya ha cumplido: se cierra.
+        if (this.menuOpen) this.closeMenu();
       });
   }
 
@@ -105,6 +113,14 @@ export class Navbar {
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
     this.updateBodyScroll();
+    // Al abrir, el foco entra en el menu (primera opcion) para quien navega
+    // con teclado o lector de pantalla; el panel pasa de inert a activo en
+    // este mismo ciclo, por eso se espera al siguiente fotograma.
+    if (this.menuOpen) {
+      requestAnimationFrame(() =>
+        document.querySelector<HTMLElement>('#menu-movil a, #menu-movil button')?.focus()
+      );
+    }
   }
 
   closeMenu() {
@@ -112,10 +128,21 @@ export class Navbar {
     this.updateBodyScroll();
   }
 
+  /** Escape cierra el menu y devuelve el foco al boton que lo abrio. */
+  @HostListener('document:keydown.escape')
+  cerrarConEscape() {
+    this.userMenuOpen = false;
+    this.langMenuOpen = false;
+    if (!this.menuOpen) return;
+    this.closeMenu();
+    this.botonMenu?.nativeElement.focus();
+  }
+
   private updateBodyScroll() {
     if (typeof document !== 'undefined') {
       document.body.classList.toggle('overflow-hidden', this.menuOpen);
     }
+    this.interfaz.menuAbierto.set(this.menuOpen);
   }
 
   toggleUserMenu(event: Event) {
@@ -125,7 +152,9 @@ export class Navbar {
 
   openLogin() {
     this.router.navigate(['/login']);
-    this.menuOpen = false;
+    // closeMenu y no menuOpen = false: tambien hay que devolver el scroll
+    // de la pagina, que el menu abierto habia bloqueado.
+    this.closeMenu();
   }
 
   logout() {

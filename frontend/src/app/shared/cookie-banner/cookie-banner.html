@@ -1,29 +1,23 @@
 <!-- Aviso de cookies (informativo, ver cookie-banner.ts) -->
 @if (visible()) {
+  <!--
+    Tarjeta pequena flotante: en movil ocupa una franja de unos 90 px en vez
+    de un cuarto de pantalla, y en escritorio se queda en la esquina sin
+    cubrir el contenido. Queda por debajo de la cabecera (z-1000) para que
+    el menu movil abierto la tape y no al reves.
+  -->
   <div role="region" [attr.aria-label]="t().region"
-       class="fixed bottom-0 left-0 right-0 z-[1500] border-t border-black/[0.07] bg-white shadow-[0_-4px_32px_rgba(0,0,0,0.10)] transition-all duration-500"
-       [class.translate-y-full]="ocultando()"
-       [class.opacity-0]="ocultando()">
-
-    <div class="mx-auto flex max-w-[1300px] items-center gap-4 px-5 py-3.5 sm:gap-8 sm:px-8">
-      <div class="flex flex-1 items-start gap-3 sm:gap-4">
-        <div class="mt-[2px] hidden flex-none text-bronce sm:block" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
-            <path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/>
-          </svg>
-        </div>
-        <p class="font-serif text-[0.8rem] leading-relaxed text-[#444]">
-          {{ t().aviso }}
-          <a routerLink="/politica-cookies"
-             class="ml-1 font-semibold text-bronce underline underline-offset-2 transition-colors hover:text-cobre-oscuro">
-            {{ t().mas }}
-          </a>
-        </p>
-      </div>
-
+       class="aviso-cookies fixed inset-x-3 bottom-3 z-[950] mx-auto max-w-[560px] rounded-2xl border border-linea bg-white/95 px-4 py-3 shadow-[0_8px_30px_rgba(26,26,26,0.12)] sm:inset-x-auto sm:left-5 sm:bottom-5 sm:max-w-[420px] sm:mx-0"
+       [class.aviso-saliendo]="ocultando()"
+       style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom));">
+    <div class="flex items-center gap-3">
+      <p class="flex-1 font-sans text-[0.8125rem] leading-snug text-texto-suave">
+        {{ t().aviso }}
+        <a routerLink="/politica-cookies"
+           class="whitespace-nowrap font-medium text-bronce underline underline-offset-2 hover:text-cobre-oscuro">{{ t().mas }}</a>
+      </p>
       <button type="button" (click)="cerrar()"
-              class="flex-none cursor-pointer border-[1.5px] border-cobre bg-cobre px-5 py-[0.55rem] font-serif text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white transition-all duration-200 hover:bg-cobre-oscuro active:scale-95">
+              class="pulsable min-h-11 flex-none cursor-pointer rounded-full bg-cobre px-4 font-serif text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white hover:bg-cobre-oscuro">
         {{ t().entendido }}
       </button>
     </div>

@@ -26,8 +26,10 @@
   color: #c4956a !important;
 }
 
+/* El subrayado crece con transform (scaleX) en vez de con width: no
+   recalcula el diseno de la cabecera en cada fotograma. */
 :host .nav-active::after {
-  width: 100% !important;
+  transform: scaleX(1) !important;
 }
 
 /* ── Hamburger open animation ── */
@@ -42,9 +44,44 @@
 }
 
 /* ── Mobile menu open ── */
+/*
+  El panel cae 8 px con fundido (200 ms, curva de salida) y las opciones
+  le siguen escalonadas 30 ms: se lee como una sola pieza que se despliega,
+  no como una pantalla que aparece de golpe. Cerrar es instantaneo: la
+  usuaria ya ha decidido y no tiene que esperar a nada.
+*/
 :host .mobile-open {
   display: flex !important;
   opacity: 1 !important;
-  transform: translateY(0);
   pointer-events: all !important;
+  animation: menuEntra 200ms var(--ease-salida) both;
+}
+
+:host .mobile-open .menu-item {
+  animation: menuEntra 220ms var(--ease-salida) both;
+}
+
+:host .mobile-open .menu-item:nth-of-type(1) { animation-delay: 30ms; }
+:host .mobile-open .menu-item:nth-of-type(2) { animation-delay: 60ms; }
+:host .mobile-open .menu-item:nth-of-type(3) { animation-delay: 90ms; }
+:host .mobile-open .menu-item:nth-of-type(4) { animation-delay: 120ms; }
+:host .mobile-open .menu-item:nth-of-type(5) { animation-delay: 150ms; }
+:host .mobile-open .menu-item:nth-of-type(6) { animation-delay: 180ms; }
+:host .mobile-open .menu-item:nth-of-type(n+7) { animation-delay: 200ms; }
+
+@keyframes menuEntra {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host .mobile-open,
+  :host .mobile-open .menu-item {
+    animation-name: menuFunde;
+  }
+
+  @keyframes menuFunde {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 }

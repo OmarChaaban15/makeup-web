@@ -1,0 +1,21 @@
+/* Entra subiendo 12 px con fundido; se va mas rapido de lo que entra. */
+.aviso-cookies {
+  transition: transform 200ms var(--ease-salida), opacity 200ms var(--ease-salida);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.aviso-saliendo {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aviso-cookies,
+  .aviso-saliendo {
+    transform: none;
+  }
+}
