@@ -26,56 +26,54 @@
   <!-- Overlay semitransparente para mantener legibilidad del texto -->
   <div class="hero-video-overlay absolute inset-0"></div>
 
-  <!-- Canvas de partículas doradas -->
-  <canvas #particleCanvas class="particle-canvas absolute inset-0 h-full w-full"></canvas>
+  <!-- Canvas de partículas doradas (solo se anima en escritorio con ratón) -->
+  <canvas #particleCanvas class="particle-canvas absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
 
   <!-- Contenido del hero -->
-  <div class="relative z-10 max-w-[760px] px-5 sm:px-8"
-       [style.transform]="'translate(' + mouseX() * 0.3 + 'px, ' + mouseY() * 0.3 + 'px)'">
-    <div class="hero-text-enter mb-4 sm:mb-5 inline-flex items-center gap-2 rounded-full border border-oro/40 bg-oro/15 px-4 py-1.5 backdrop-blur-md hero-text-delay-1"
-         [class.visible]="heroTextVisible()">
-      <span class="h-1.5 w-1.5 rounded-full bg-cobre animate-pulse"></span>
-      <span class="font-serif text-[0.7rem] uppercase tracking-[0.28em] text-oro-palido">Atelier de Maquillaje &middot; Ibiza</span>
+  <!--
+    El titular se ve desde el primer fotograma (es el LCP): solo sube 12 px.
+    El resto entra con fundido escalonado y corto, todo en menos de 0,8 s.
+  -->
+  <div class="relative z-10 max-w-[760px] px-5 sm:px-8">
+    <div class="hero-entra hero-paso-1 mb-4 sm:mb-5 inline-flex items-center gap-2 rounded-full border border-oro/40 bg-black/25 px-4 py-1.5">
+      <span class="h-1.5 w-1.5 rounded-full bg-oro" aria-hidden="true"></span>
+      <span class="font-serif text-[0.72rem] uppercase tracking-[0.28em] text-oro-palido">Atelier de Maquillaje &middot; Ibiza</span>
     </div>
 
-    <h1 class="hero-text-enter mb-5 sm:mb-7 font-serif text-[clamp(2.5rem,6.5vw,5.5rem)] font-light leading-[1.1] text-white hero-text-delay-2 drop-shadow-2xl"
-        [class.visible]="heroTextVisible()">
+    <h1 class="hero-titular mb-5 sm:mb-7 font-serif text-[clamp(2.5rem,6.5vw,5.5rem)] font-light leading-[1.1] text-white">
       Maquillaje profesional en Ibiza <br><em class="italic text-oro-palido">hecho para ti</em>
     </h1>
 
-    <p class="hero-text-enter mx-auto mb-9 sm:mb-11 max-w-[540px] font-sans text-sm sm:text-base font-light leading-[1.8] text-[rgba(255,255,255,0.88)] hero-text-delay-3"
-       [class.visible]="heroTextVisible()">
+    <p class="hero-entra hero-paso-2 mx-auto mb-9 sm:mb-11 max-w-[540px] font-sans text-[0.9375rem] sm:text-base font-light leading-[1.75] text-white/90">
       Realzando tu esencia natural con técnica de alta costura, pieles luminosas y fijación impecable frente a cualquier clima y emoción.
     </p>
 
-    <div class="hero-text-enter flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 hero-text-delay-4 w-full"
-         [class.visible]="heroTextVisible()">
+    <div class="hero-entra hero-paso-3 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full">
       <a routerLink="/contacto"
-        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-cobre px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-xl transition-all duration-300 hover:bg-cobre-oscuro hover:shadow-2xl active:scale-95"
+        class="boton-principal pulsable w-full sm:w-auto inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-cobre px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-xl"
         id="inicio-cta-contacto">
         <span>Solicitar Cita</span>
-        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        <svg class="flecha h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
       </a>
       <a routerLink="/servicios"
-        class="w-full sm:w-auto inline-flex items-center justify-center rounded-full border border-white/40 bg-white/10 backdrop-blur-md px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white transition-all duration-300 hover:bg-white hover:text-tinta active:scale-95"
+        class="boton-cristal pulsable w-full sm:w-auto inline-flex min-h-[52px] items-center justify-center rounded-full border border-white/40 bg-white/10 px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white"
         id="inicio-cta-servicios">
         Ver Servicios
       </a>
     </div>
   </div>
 
-  <!-- Pausa del movimiento (WCAG 2.2.2) -->
+  <!-- Pausa del movimiento (WCAG 2.2.2): icono con nombre accesible -->
   <button type="button" (click)="toggleMovimiento()" [attr.aria-pressed]="movimientoPausado()"
-          class="absolute bottom-6 left-4 z-20 flex min-h-11 items-center gap-2 rounded-full border border-white/40 bg-black/40 px-4 py-2 font-sans text-xs font-medium text-white backdrop-blur-md transition-colors hover:bg-black/60 cursor-pointer sm:left-6">
-    {{ movimientoPausado() ? 'Reanudar movimiento' : 'Pausar movimiento' }}
+          [attr.aria-label]="movimientoPausado() ? 'Reanudar movimiento' : 'Pausar movimiento'"
+          [attr.title]="movimientoPausado() ? 'Reanudar movimiento' : 'Pausar movimiento'"
+          class="pulsable absolute bottom-5 left-4 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/35 text-white cursor-pointer hover:bg-black/55 sm:left-6">
+    @if (movimientoPausado()) {
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+    } @else {
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6.5" y="5" width="3.5" height="14" rx="1"/><rect x="14" y="5" width="3.5" height="14" rx="1"/></svg>
+    }
   </button>
-
-  <!-- Scroll indicator -->
-  <div class="scroll-indicator absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(232,201,154,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 5v14M19 12l-7 7-7-7"/>
-    </svg>
-  </div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -92,7 +90,7 @@
           Hola, soy <em class="italic text-bronce">Yonaida</em>
         </h2>
 
-        <div scrollReveal="up" scrollDelay="2" class="space-y-5 font-sans text-sm sm:text-base font-light leading-[1.85] text-texto-suave">
+        <div scrollReveal="up" scrollDelay="2" class="space-y-5 font-sans text-[0.9375rem] sm:text-base font-light leading-[1.8] text-texto-suave">
           <p>
             Maquilladora profesional afincada en <strong class="font-medium text-tinta">Ibiza</strong> con más de cinco años de experiencia ayudando a novias, clientas particulares y marcas a proyectar su mejor versión.
           </p>
@@ -101,39 +99,31 @@
           </p>
         </div>
 
-        <!-- Animated counters -->
-        <div scrollReveal="up" scrollDelay="3"
-             class="mt-10 grid grid-cols-3 gap-3"
-             (mouseenter)="animateCounters()"
-             #counterSection>
-          <div class="flex flex-col items-center gap-1 rounded-2xl border border-linea bg-white p-4 text-center shadow-sm">
-            <span class="counter-number font-serif text-2xl sm:text-3xl font-light leading-none text-bronce">+{{ counterYears() }}</span>
-            <span class="font-sans text-[0.72rem] font-semibold uppercase tracking-wider text-texto-tenue">Años</span>
-          </div>
-          <div class="flex flex-col items-center gap-1 rounded-2xl border border-linea bg-white p-4 text-center shadow-sm">
-            <span class="counter-number font-serif text-2xl sm:text-3xl font-light leading-none text-bronce">+{{ counterClients() }}</span>
-            <span class="font-sans text-[0.72rem] font-semibold uppercase tracking-wider text-texto-tenue">Clientas</span>
-          </div>
-          <div class="flex flex-col items-center gap-1 rounded-2xl border border-linea bg-white p-4 text-center shadow-sm">
-            <span class="counter-number font-serif text-2xl sm:text-3xl font-light leading-none text-bronce">{{ counterPersonal() }}%</span>
-            <span class="font-sans text-[0.72rem] font-semibold uppercase tracking-wider text-texto-tenue">A Medida</span>
-          </div>
-        </div>
+        <!-- Cifras: dato, no adorno; se leen directamente -->
+        <dl scrollReveal="up" scrollDelay="3" class="mt-10 grid grid-cols-3 gap-3">
+          @for (cifra of cifras; track cifra.etiqueta) {
+            <div class="flex flex-col-reverse items-center gap-1 rounded-2xl border border-linea bg-white p-4 text-center">
+              <dt class="font-sans text-[0.72rem] font-semibold uppercase tracking-wider text-texto-tenue">{{ cifra.etiqueta }}</dt>
+              <dd class="counter-number font-serif text-2xl sm:text-3xl font-light leading-none text-bronce">{{ cifra.valor }}</dd>
+            </div>
+          }
+        </dl>
 
         <div scrollReveal="up" scrollDelay="4" class="mt-8 flex flex-wrap gap-4">
           <a routerLink="/sobre-mi"
-            class="inline-flex items-center gap-2 font-serif text-xs font-semibold uppercase tracking-[0.18em] text-bronce no-underline transition-all duration-300 hover:gap-3"
+            class="enlace-flecha inline-flex min-h-11 items-center gap-2 font-serif text-xs font-semibold uppercase tracking-[0.18em] text-bronce no-underline"
             id="inicio-link-sobre-mi">
             <span>Conoce mi historia y filosofía</span>
-            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            <svg class="flecha h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
         </div>
       </div>
 
       <!-- Columna derecha: foto de Yonaida -->
-      <div scrollReveal="right" scrollDelay="2" class="group relative overflow-hidden rounded-[28px] shadow-[0_25px_60px_rgba(26,26,26,0.14)]">
+      <div scrollReveal="right" scrollDelay="2" class="foto-zoom relative overflow-hidden rounded-[28px] shadow-[0_25px_60px_rgba(26,26,26,0.14)]">
         <img decoding="async" src="images/yonaida-belhuman-maquilladora-ibiza.jpg" alt="Yonaida, maquilladora profesional en Ibiza"
-          class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+          width="800" height="1000"
+          class="h-full w-full object-cover object-top"
           style="aspect-ratio: 4/5; min-height: 380px;" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"></div>
         <div class="absolute bottom-6 left-6 right-6 text-white">
@@ -149,95 +139,80 @@
 <!-- ══════════════════════════════════════════
      SERVICIOS DESTACADOS CON FOTOS REALES
      ══════════════════════════════════════════ -->
-<section class="relative overflow-hidden bg-noche px-6 py-28 sm:px-10 text-white">
-  
+<!--
+  Jerarquia: novias (el servicio estrella) ocupa la tarjeta grande; los
+  otros tres van en filas compactas al lado. Cada tarjeta lleva a la pagina
+  de su servicio. El hueco "desde X €" esta preparado en inicio.ts y solo
+  aparece cuando la duena escriba el precio.
+-->
+<section class="relative overflow-hidden bg-noche px-6 py-24 sm:px-10 md:py-28 text-white">
+
   <div class="relative mx-auto max-w-[1140px]">
 
     <!-- Encabezado -->
-    <div class="mb-16 text-center">
+    <div class="mb-12 text-center md:mb-16">
       <p scrollReveal="up" class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.3em] text-oro">Servicios Especializados</p>
       <h2 scrollReveal="up" scrollDelay="1" class="font-serif text-[clamp(2.2rem,4vw,3.4rem)] font-light leading-[1.2] text-white">
         Elegancia en cada <em class="italic text-oro-claro">disciplina</em>
       </h2>
-      <div class="gradient-line-animated mx-auto mt-6 h-px w-20"></div>
+      <div class="mx-auto mt-6 h-px w-20 bg-gradient-to-r from-transparent via-oro to-transparent" aria-hidden="true"></div>
     </div>
 
-    <!-- Grid de tarjetas fotográficas de servicios -->
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="grid gap-5 lg:grid-cols-[1.15fr_1fr] lg:gap-6">
 
-      <!-- Novias -->
-      <a routerLink="/servicios"
-         class="group relative flex flex-col overflow-hidden rounded-[26px] bg-white/5 border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:border-oro/60 hover:shadow-[0_20px_50px_rgba(196,149,106,0.25)]">
-        <div class="relative aspect-[4/5] w-full overflow-hidden">
-          <img decoding="async" src="images/maquillaje-novia-ibiza.png" alt="Maquillaje de novia" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-          <div class="absolute inset-0 bg-gradient-to-t from-noche via-black/40 to-transparent"></div>
-          <span class="absolute top-3.5 left-3.5 rounded-full bg-cobre px-3 py-1 text-[0.72rem] font-serif uppercase tracking-widest text-white shadow-md">
-            Novias VIP
+      <!-- Servicio estrella -->
+      <a scrollReveal="up" [routerLink]="servicioEstrella.ruta"
+         class="tarjeta-servicio pulsable group relative flex flex-col overflow-hidden rounded-foto border border-oro/30 bg-white/5 no-underline">
+        <div class="relative aspect-[4/5] w-full overflow-hidden lg:aspect-auto lg:min-h-[560px] lg:flex-1">
+          <img decoding="async" [src]="servicioEstrella.img" [alt]="servicioEstrella.alt" width="900" height="1125"
+               class="foto-tarjeta absolute inset-0 h-full w-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-noche via-black/30 to-transparent"></div>
+          <span class="absolute top-4 left-4 rounded-full bg-cobre px-3 py-1 text-[0.72rem] font-serif uppercase tracking-widest text-white">
+            {{ servicioEstrella.etiqueta }}
           </span>
-        </div>
-        <div class="p-6">
-          <h3 class="font-serif text-lg font-normal text-white group-hover:text-oro-claro transition-colors">Novias &amp; Bodas</h3>
-          <p class="mt-2 text-xs font-light text-white/60 leading-relaxed">Prueba previa personalizada, kit de retoque y preparación en villas u hoteles de Ibiza.</p>
+          <div class="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+            <h3 class="font-serif text-[1.75rem] font-light leading-tight text-white sm:text-[2.1rem]">{{ servicioEstrella.titulo }}</h3>
+            <p class="mt-2 max-w-[42ch] text-[0.9375rem] font-light leading-relaxed text-white/80">{{ servicioEstrella.texto }}</p>
+            @if (servicioEstrella.desde) {
+              <p class="mt-3 font-serif text-lg text-oro-claro">Desde {{ servicioEstrella.desde }}</p>
+            }
+            <span class="enlace-flecha mt-5 inline-flex items-center gap-2 font-serif text-xs font-semibold uppercase tracking-[0.18em] text-oro-claro">
+              Ver servicio de novia
+              <svg class="flecha h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </span>
+          </div>
         </div>
       </a>
 
-      <!-- Eventos -->
-      <a routerLink="/servicios"
-         class="group relative flex flex-col overflow-hidden rounded-[26px] bg-white/5 border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:border-oro/60 hover:shadow-[0_20px_50px_rgba(196,149,106,0.25)]">
-        <div class="relative aspect-[4/5] w-full overflow-hidden">
-          <img decoding="async" src="images/maquillaje-invitada-fiesta-ibiza.png" alt="Maquillaje para eventos" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-          <div class="absolute inset-0 bg-gradient-to-t from-noche via-black/40 to-transparent"></div>
-          <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.72rem] font-serif uppercase tracking-widest text-oro-claro backdrop-blur-md border border-white/10">
-            Social
-          </span>
-        </div>
-        <div class="p-6">
-          <h3 class="font-serif text-lg font-normal text-white group-hover:text-oro-claro transition-colors">Invitadas &amp; Galas</h3>
-          <p class="mt-2 text-xs font-light text-white/60 leading-relaxed">Looks de fiesta sofisticados con pestañas a medida y fijación extrema para bailar toda la noche.</p>
-        </div>
-      </a>
-
-      <!-- Editorial -->
-      <a routerLink="/servicios"
-         class="group relative flex flex-col overflow-hidden rounded-[26px] bg-white/5 border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:border-oro/60 hover:shadow-[0_20px_50px_rgba(196,149,106,0.25)]">
-        <div class="relative aspect-[4/5] w-full overflow-hidden">
-          <img decoding="async" src="images/maquillaje-editorial-moda-ibiza.png" alt="Maquillaje editorial" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-          <div class="absolute inset-0 bg-gradient-to-t from-noche via-black/40 to-transparent"></div>
-          <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.72rem] font-serif uppercase tracking-widest text-oro-claro backdrop-blur-md border border-white/10">
-            Moda
-          </span>
-        </div>
-        <div class="p-6">
-          <h3 class="font-serif text-lg font-normal text-white group-hover:text-oro-claro transition-colors">Editorial &amp; Campañas</h3>
-          <p class="mt-2 text-xs font-light text-white/60 leading-relaxed">Concepto creativo para marcas de moda, lookbooks y shootings con fotógrafos internacionales.</p>
-        </div>
-      </a>
-
-      <!-- Audiovisual -->
-      <a routerLink="/servicios"
-         class="group relative flex flex-col overflow-hidden rounded-[26px] bg-white/5 border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:border-oro/60 hover:shadow-[0_20px_50px_rgba(196,149,106,0.25)]">
-        <div class="relative aspect-[4/5] w-full overflow-hidden">
-          <img decoding="async" src="images/maquillaje-cine-rodaje-ibiza.jpeg" alt="Maquillaje audiovisual" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-          <div class="absolute inset-0 bg-gradient-to-t from-noche via-black/40 to-transparent"></div>
-          <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.72rem] font-serif uppercase tracking-widest text-oro-claro backdrop-blur-md border border-white/10">
-            Cine &amp; TV
-          </span>
-        </div>
-        <div class="p-6">
-          <h3 class="font-serif text-lg font-normal text-white group-hover:text-oro-claro transition-colors">Rodajes &amp; TV</h3>
-          <p class="mt-2 text-xs font-light text-white/60 leading-relaxed">Control de brillo y textura específico para ópticas 4K/8K en exteriores, spots y videoclips.</p>
-        </div>
-      </a>
-
+      <!-- Resto de servicios: filas compactas, mas faciles de recorrer en el movil -->
+      <div class="flex flex-col gap-5 lg:gap-6">
+        @for (servicio of otrosServicios; track servicio.ruta; let i = $index) {
+          <a scrollReveal="up" [scrollDelay]="'' + (i + 1)" [routerLink]="servicio.ruta"
+             class="tarjeta-servicio pulsable group grid grid-cols-[112px_1fr] overflow-hidden rounded-foto border border-white/10 bg-white/5 no-underline sm:grid-cols-[160px_1fr] lg:flex-1">
+            <div class="relative overflow-hidden">
+              <img decoding="async" [src]="servicio.img" [alt]="servicio.alt" width="320" height="400"
+                   class="foto-tarjeta absolute inset-0 h-full w-full object-cover" />
+            </div>
+            <div class="flex flex-col justify-center gap-1.5 p-5 sm:p-6">
+              <span class="font-serif text-[0.72rem] uppercase tracking-widest text-oro-claro">{{ servicio.etiqueta }}</span>
+              <h3 class="font-serif text-xl font-normal leading-snug text-white">{{ servicio.titulo }}</h3>
+              <p class="text-[0.8125rem] font-light leading-relaxed text-white/70">{{ servicio.texto }}</p>
+              @if (servicio.desde) {
+                <p class="font-serif text-base text-oro-claro">Desde {{ servicio.desde }}</p>
+              }
+            </div>
+          </a>
+        }
+      </div>
     </div>
 
     <!-- CTA servicios -->
-    <div scrollReveal="up" class="mt-14 text-center">
+    <div scrollReveal="up" class="mt-12 text-center md:mt-14">
       <a routerLink="/servicios"
-        class="inline-flex items-center gap-3 rounded-full bg-cobre px-10 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white transition-all duration-300 hover:bg-cobre-oscuro hover:shadow-[0_10px_35px_rgba(196,149,106,0.4)] active:scale-95"
+        class="boton-principal pulsable inline-flex min-h-[52px] items-center gap-3 rounded-full bg-cobre px-10 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white"
         id="inicio-link-servicios">
         <span>Explorar todos los servicios</span>
-        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        <svg class="flecha h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
       </a>
     </div>
 
@@ -249,40 +224,51 @@
      ══════════════════════════════════════════ -->
 <section class="bg-crema px-6 py-20 sm:px-10">
   <div class="mx-auto max-w-[1140px]">
-    <div scrollReveal="up" class="relative overflow-hidden rounded-[32px] bg-gradient-to-r from-[#211e1b] via-[#2a2622] to-[#1a1918] text-white p-8 sm:p-12 lg:p-14 shadow-2xl border border-white/10">
-      
+    <div scrollReveal="up" class="relative overflow-hidden rounded-bloque bg-gradient-to-r from-[#211e1b] via-[#2a2622] to-[#1a1918] text-white p-8 sm:p-12 lg:p-14 shadow-2xl border border-white/10">
+
       <div class="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
           <span class="inline-flex items-center gap-2 rounded-full border border-oro/50 bg-oro/15 px-3.5 py-1 text-[0.72rem] font-serif uppercase tracking-widest text-oro-claro">
-            <span class="h-1.5 w-1.5 rounded-full bg-cobre animate-pulse"></span>
+            <span class="h-1.5 w-1.5 rounded-full bg-oro" aria-hidden="true"></span>
             Aprende Conmigo Desde Casa
           </span>
-          
+
           <h2 class="mt-4 font-serif text-[clamp(1.8rem,3.5vw,3rem)] font-light leading-tight">
             Masterclass de<br><em class="italic text-oro-claro">Automaquillaje Online</em>
           </h2>
 
-          <p class="mt-4 text-sm sm:text-base font-light text-white/75 leading-relaxed max-w-[550px]">
+          <p class="mt-4 text-[0.9375rem] sm:text-base font-light text-white/80 leading-relaxed max-w-[550px]">
             En mi masterclass de automaquillaje quiero enseñarte de una forma sencilla a conocer tu piel y saber cómo hidratarla para que tu maquillaje quede mucho más bonito. También aprenderás a maquillarte teniendo en cuenta la forma de tu rostro, qué colores te favorecen según tu fototipo de piel y, por supuesto, cómo crear un maquillaje de día y transformarlo en solo 5 minutos en un maquillaje de noche.
           </p>
 
-          <div class="mt-6 flex items-baseline gap-4">
-            <span class="font-serif text-3xl sm:text-4xl font-semibold text-white">45 €</span>
-            <span class="font-serif text-lg text-white/70 line-through">55 €</span>
-            <span class="text-xs uppercase tracking-wider text-bronce font-semibold">6 meses de acceso</span>
+          <!--
+            Precio y acceso desde la API, igual que en /cursos. La fila reserva
+            su alto para que no salte el diseno cuando llegan los datos; en el
+            HTML prerenderizado (y si la API falla) queda vacia, sin inventar cifras.
+          -->
+          <div class="mt-6 flex min-h-[2.75rem] flex-wrap items-baseline gap-x-4 gap-y-1" aria-live="polite">
+            @if (precioMasterclass(); as precio) {
+              <span class="font-serif text-3xl sm:text-4xl font-semibold text-white">{{ precio }}</span>
+              @if (precioAnterior(); as anterior) {
+                <span class="font-serif text-lg text-white/70 line-through">{{ anterior }}</span>
+              }
+              @if (mesesAcceso(); as meses) {
+                <span class="text-xs uppercase tracking-wider text-oro-claro font-semibold">{{ meses }} meses de acceso</span>
+              }
+            }
           </div>
 
-          <div class="mt-8 flex flex-wrap gap-4">
+          <div class="mt-6 flex flex-wrap gap-4">
             <a routerLink="/cursos"
-               class="inline-flex items-center gap-2 rounded-full bg-cobre px-8 py-3.5 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-lg transition-all hover:bg-cobre-oscuro active:scale-95">
+               class="boton-principal pulsable inline-flex min-h-[52px] items-center gap-2 rounded-full bg-cobre px-8 py-3.5 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-lg">
               <span>Ver Masterclass</span>
-              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              <svg class="flecha h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </a>
           </div>
         </div>
 
         <div class="relative overflow-hidden rounded-2xl shadow-xl aspect-video border border-white/10">
-          <img decoding="async" src="images/masterclass-automaquillaje-portada.png" alt="Portada de la masterclass" class="h-full w-full object-cover" />
+          <img decoding="async" src="images/masterclass-automaquillaje-portada.png" alt="Portada de la masterclass" width="1280" height="720" class="h-full w-full object-cover" />
         </div>
       </div>
 
@@ -297,74 +283,82 @@
   <div class="mx-auto max-w-[1100px]">
 
     <!-- Encabezado -->
-    <div class="mb-14 text-center">
+    <div class="mb-12 text-center md:mb-14">
       <p scrollReveal="up" class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.3em] text-bronce">Galería de Trabajos</p>
-      <h2 scrollReveal="up" scrollDelay="1" class="font-serif text-[clamp(2.2rem,4vw,3.2rem)] font-light leading-[1.2] text-tinta">
+      <h2 scrollReveal="up" scrollDelay="1" id="galeria-titulo" class="font-serif text-[clamp(2.2rem,4vw,3.2rem)] font-light leading-[1.2] text-tinta">
         Momentos <em class="italic text-bronce">inolvidables</em>
       </h2>
-      <div class="mx-auto mt-4 h-[1.5px] w-12 bg-cobre"></div>
+      <div class="mx-auto mt-4 h-[1.5px] w-12 bg-cobre" aria-hidden="true"></div>
     </div>
 
-    <!-- Carrusel -->
-    <div scrollReveal="scale" class="relative" id="inicio-carousel">
+    <!--
+      Carrusel. Las fotos son retratos: en el movil se ven en 4:5 (antes 16:10
+      cortaba las caras). Se pasa de foto deslizando con el dedo, con las
+      flechas o con los puntos; tocar la foto la abre a pantalla completa.
+    -->
+    <div scrollReveal="scale" class="relative" id="inicio-carousel"
+         role="region" aria-roledescription="carrusel" aria-labelledby="galeria-titulo">
 
-      <!-- Pista: grid para apilar todos los slides en la misma celda -->
-      <div class="relative overflow-hidden rounded-[24px] bg-tinta shadow-[0_24px_70px_rgba(26,26,26,0.18)] aspect-[16/10] sm:aspect-[16/9] w-full">
+      <div class="carrusel-pista relative overflow-hidden rounded-[24px] bg-tinta shadow-[0_24px_70px_rgba(26,26,26,0.18)] aspect-[4/5] sm:aspect-[4/3] lg:aspect-[16/9] w-full"
+           (pointerdown)="alEmpezarToque($event)" (pointerup)="alTerminarToque($event)" (pointercancel)="alTerminarToque($event)">
         @for (slide of slides; track slide.src; let i = $index) {
         <div class="absolute inset-0 overflow-hidden transition-opacity duration-700" [class.opacity-0]="currentIndex() !== i"
           [class.opacity-100]="currentIndex() === i" [class.pointer-events-none]="currentIndex() !== i"
-          [class.z-10]="currentIndex() === i" [class.z-0]="currentIndex() !== i">
-          <img decoding="async" [src]="slide.src" [alt]="slide.alt"
-               class="h-full w-full object-cover object-center cursor-zoom-in"
-               [class]="currentIndex() === i ? getKenBurnsClass(i) : ''"
-               [style.object-position]="slide.pos"
-              
-               (click)="openLightbox(slide)" />
+          [class.z-10]="currentIndex() === i" [class.z-0]="currentIndex() !== i"
+          role="group" aria-roledescription="foto" [attr.aria-label]="(i + 1) + ' de ' + slides.length"
+          [attr.aria-hidden]="currentIndex() !== i">
+          <button type="button" class="block h-full w-full cursor-zoom-in border-0 bg-transparent p-0"
+                  [attr.tabindex]="currentIndex() === i ? 0 : -1"
+                  [attr.aria-label]="'Ampliar foto: ' + slide.alt"
+                  (click)="abrirVisor(i, $event)">
+            <img decoding="async" [src]="slide.src" [alt]="slide.alt" draggable="false"
+                 class="h-full w-full object-cover object-center select-none"
+                 [class]="currentIndex() === i && !movimientoPausado() ? getKenBurnsClass(i) : ''"
+                 [style.object-position]="slide.pos" />
+          </button>
         </div>
         }
       </div>
 
       <!-- Progress bar -->
-      <div class="mt-5 h-[3px] w-full overflow-hidden rounded-full bg-tinta/10">
-        <div class="carousel-progress" [style.width.%]="progressWidth()"></div>
+      <div class="mt-5 h-[3px] w-full overflow-hidden rounded-full bg-tinta/10" aria-hidden="true">
+        <div class="carousel-progress" [style.transform]="'scaleX(' + progressWidth() / 100 + ')'"></div>
       </div>
 
       <!-- Flechas -->
-      <button
-        class="absolute left-3 sm:left-6 top-[calc(50%-22px)] z-20 flex h-11 w-11 sm:h-12 sm:w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/50 text-white backdrop-blur-md transition-all duration-250 hover:scale-105 active:scale-95 hover:bg-oro"
-        (click)="prev()" aria-label="Anterior" id="carousel-prev">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      <button type="button"
+        class="flecha-carrusel pulsable absolute left-3 sm:left-6 top-[calc(50%-22px)] z-20 flex h-11 w-11 sm:h-12 sm:w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/50 text-white"
+        (click)="prev()" aria-label="Foto anterior" id="carousel-prev">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
           stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 sm:w-5 sm:h-5">
           <path d="M15 18l-6-6 6-6" />
         </svg>
       </button>
 
-      <button
-        class="absolute right-3 sm:right-6 top-[calc(50%-22px)] z-20 flex h-11 w-11 sm:h-12 sm:w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/50 text-white backdrop-blur-md transition-all duration-250 hover:scale-105 active:scale-95 hover:bg-oro"
-        (click)="next()" aria-label="Siguiente" id="carousel-next">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      <button type="button"
+        class="flecha-carrusel pulsable absolute right-3 sm:right-6 top-[calc(50%-22px)] z-20 flex h-11 w-11 sm:h-12 sm:w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/50 text-white"
+        (click)="next()" aria-label="Foto siguiente" id="carousel-next">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
           stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 sm:w-5 sm:h-5">
           <path d="M9 18l6-6-6-6" />
         </svg>
       </button>
 
-      <!-- Puntos de paginación -->
-      <div class="mt-4 flex justify-center">
+      <!-- Puntos y pausa en una sola fila -->
+      <div class="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+        <div class="flex items-center justify-center gap-0.5">
+          @for (slide of slides; track slide.src; let i = $index) {
+          <button type="button" class="flex h-8 min-w-7 items-center justify-center border-none bg-transparent p-0 cursor-pointer"
+            (click)="goTo(i)" [attr.aria-label]="'Ver foto ' + (i + 1) + ' de ' + slides.length"
+            [attr.aria-current]="currentIndex() === i ? 'true' : null" [id]="'carousel-dot-' + i">
+            <span class="punto block h-2 w-7 rounded-full" [class.punto-activo]="currentIndex() === i" aria-hidden="true"></span>
+          </button>
+          }
+        </div>
         <button type="button" (click)="toggleMovimiento()" [attr.aria-pressed]="movimientoPausado()"
-                class="min-h-11 cursor-pointer rounded-full border border-tinta/20 bg-transparent px-4 font-sans text-xs font-medium text-[#444] transition-colors hover:border-cobre hover:text-cobre-oscuro">
+                class="pulsable min-h-11 cursor-pointer rounded-full border border-tinta/20 bg-transparent px-4 font-sans text-xs font-medium text-[#444] hover:border-cobre hover:text-cobre-oscuro">
           {{ movimientoPausado() ? 'Reanudar pase de fotos' : 'Pausar pase de fotos' }}
         </button>
-      </div>
-      <div class="mt-4 flex items-center justify-center gap-1" role="tablist" aria-label="Diapositivas">
-        @for (slide of slides; track slide.src; let i = $index) {
-        <button type="button" class="flex h-6 min-w-6 items-center justify-center border-none bg-transparent p-0 cursor-pointer"
-          (click)="goTo(i)" [attr.aria-label]="'Ir a diapositiva ' + (i + 1)" role="tab"
-          [attr.aria-selected]="currentIndex() === i" [id]="'carousel-dot-' + i">
-          <span class="block h-2 rounded-full transition-all duration-300" [class.w-2]="currentIndex() !== i"
-            [class.bg-tinta/40]="currentIndex() !== i" [class.w-7]="currentIndex() === i"
-            [class.bg-cobre]="currentIndex() === i"></span>
-        </button>
-        }
       </div>
     </div>
 
@@ -376,13 +370,13 @@
      ══════════════════════════════════════════ -->
 <section class="bg-arena px-6 py-24 sm:px-10 border-t border-linea">
   <div class="mx-auto max-w-[1140px]">
-    
+
     <div class="text-center mb-16">
       <p scrollReveal="up" class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-bronce">Testimonios &amp; Reseñas</p>
       <h2 scrollReveal="up" scrollDelay="1" class="mt-2 font-serif text-[clamp(2.2rem,4vw,3.2rem)] font-light text-tinta">
         Lo que dicen mis <em class="italic text-bronce">clientas</em>
       </h2>
-      <div class="mx-auto mt-4 h-[1.5px] w-12 bg-cobre"></div>
+      <div class="mx-auto mt-4 h-[1.5px] w-12 bg-cobre" aria-hidden="true"></div>
     </div>
 
     <div class="grid gap-8 sm:grid-cols-3">
@@ -390,14 +384,14 @@
         <article scrollReveal="up" class="rounded-3xl bg-white p-8 border border-linea shadow-sm flex flex-col justify-between">
           <div>
             <!-- Estrellas doradas -->
-            <div class="flex gap-1 text-bronce mb-4">
+            <div class="flex gap-1 text-bronce mb-4" role="img" [attr.aria-label]="testimonio.estrellas + ' de 5 estrellas'">
               @for (star of [1,2,3,4,5]; track star) {
-                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20" aria-hidden="true">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                 </svg>
               }
             </div>
-            <p class="font-sans text-xs sm:text-sm font-light text-texto-suave leading-relaxed italic">
+            <p class="font-sans text-sm font-light text-texto-suave leading-relaxed italic">
               "{{ testimonio.texto }}"
             </p>
           </div>
@@ -413,16 +407,44 @@
 </section>
 
 <!-- ══════════════════════════════════════════
-     LIGHTBOX
+     VISOR DE FOTOS (pantalla completa)
      ══════════════════════════════════════════ -->
-@if (lightboxOpen()) {
-<div class="lightbox-overlay" (click)="closeLightbox()">
-  <button class="absolute right-6 top-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20"
-          (click)="closeLightbox()" aria-label="Cerrar">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-    </svg>
+<!--
+  Dialogo modal: foco dentro mientras esta abierto (Tab no se escapa),
+  flechas del teclado y deslizar con el dedo para pasar, Escape o tocar
+  fuera para salir. Al cerrar, el foco vuelve a la foto que lo abrio.
+-->
+@if (visorFoto(); as foto) {
+<div class="visor fixed inset-0 z-[2000] flex flex-col bg-black/95"
+     role="dialog" aria-modal="true" aria-label="Galería de trabajos ampliada"
+     (click)="alTocarFondoVisor()"
+     (pointerdown)="alEmpezarToque($event)" (pointerup)="alTerminarToque($event, true)">
+
+  <div class="flex items-center justify-between px-4 pt-[max(1rem,env(safe-area-inset-top))] pb-2 text-white sm:px-6">
+    <span class="font-sans text-sm tabular-nums text-white/80" aria-live="polite">{{ (visorIndice() ?? 0) + 1 }} / {{ slides.length }}</span>
+    <button #botonCerrarVisor type="button" (click)="cerrarVisor(); $event.stopPropagation()" aria-label="Cerrar"
+            class="pulsable flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <figure class="relative flex min-h-0 flex-1 flex-col items-center justify-center px-3 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-20">
+    @for (f of [foto]; track f.src) {
+      <img [src]="f.src" [alt]="f.alt" draggable="false" (click)="$event.stopPropagation()"
+           class="visor-foto max-h-full min-h-0 max-w-full select-none rounded-lg object-contain" />
+    }
+    <figcaption class="mt-3 max-w-[60ch] text-center font-serif text-base italic text-white/80" (click)="$event.stopPropagation()">{{ foto.alt }}</figcaption>
+  </figure>
+
+  <button type="button" (click)="visorAnterior(); $event.stopPropagation()" aria-label="Foto anterior"
+          class="pulsable absolute left-2 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 sm:left-5">
+    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
   </button>
-  <img decoding="async" [src]="lightboxSrc()" [alt]="lightboxAlt()" (click)="$event.stopPropagation()" class="cursor-default" />
+  <button type="button" (click)="visorSiguiente(); $event.stopPropagation()" aria-label="Foto siguiente"
+          class="pulsable absolute right-2 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 sm:right-5">
+    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>
+  </button>
 </div>
 }
