@@ -20,9 +20,9 @@ export interface DatosLegales {
 }
 
 export const DATOS_LEGALES: DatosLegales = {
-  titular: 'Yonaida Belhuman',
+  titular: 'Yonaida Douhri Belhuman',
   nombreComercial: 'Makeup by Yona',
-  nif: null,
+  nif: '47256536T',
   domicilio: null,
   email: 'info@makeupbyyona.es',
   telefono: '+34 658 728 433',
