@@ -246,7 +246,20 @@
 
           <!-- Mapa del estudio -->
           <div scrollReveal="up" class="overflow-hidden rounded-3xl border border-[#e0d4c8] bg-white shadow-sm">
-            <div #mapContainer class="h-[240px] w-full sm:h-[260px]"></div>
+            <!-- El mapa pide teselas a OpenStreetMap (un tercero que recibe la IP):
+                 solo se carga cuando la visita lo pide. -->
+            <div class="relative">
+              <div #mapContainer class="h-[240px] w-full sm:h-[260px]"></div>
+              @if (!mapaVisible()) {
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#f4ebe5] px-6 text-center">
+                  <p class="text-xs font-light text-[#555555]">El mapa se carga desde OpenStreetMap, un servicio externo.</p>
+                  <button type="button" (click)="mostrarMapa()"
+                          class="cursor-pointer rounded-full border border-[#8a5f3a] bg-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-[#7a5130] transition-colors hover:bg-[#8a5f3a] hover:text-white">
+                    Mostrar mapa
+                  </button>
+                </div>
+              }
+            </div>
             <div class="flex items-center justify-between bg-[#faf8f6] px-6 py-4 border-t border-[#ede0d0]">
               <span class="text-xs sm:text-sm font-light text-[#555555]">Ibiza · Islas Baleares, España</span>
               <a href="https://www.google.com/maps/search/?api=1&query=Ibiza%2C%20Espa%C3%B1a" target="_blank"

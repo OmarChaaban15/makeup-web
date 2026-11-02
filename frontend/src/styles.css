@@ -1,4 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+/*
+ * Fuentes servidas desde la propia web (paquetes @fontsource) y no desde Google:
+ * sin ellas cada visita enviaba la IP a Google antes de cualquier consentimiento.
+ * Solo latin y latin-ext: cubren español, ingles, italiano y aleman.
+ */
+@import "@fontsource/cormorant-garamond/latin-300.css";
+@import "@fontsource/cormorant-garamond/latin-400.css";
+@import "@fontsource/cormorant-garamond/latin-500.css";
+@import "@fontsource/cormorant-garamond/latin-600.css";
+@import "@fontsource/cormorant-garamond/latin-700.css";
+@import "@fontsource/cormorant-garamond/latin-300-italic.css";
+@import "@fontsource/cormorant-garamond/latin-400-italic.css";
+@import "@fontsource/cormorant-garamond/latin-500-italic.css";
+@import "@fontsource/inter/latin-300.css";
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/cormorant-garamond/latin-ext-300.css";
+@import "@fontsource/cormorant-garamond/latin-ext-400.css";
+@import "@fontsource/cormorant-garamond/latin-ext-500.css";
+@import "@fontsource/cormorant-garamond/latin-ext-600.css";
+@import "@fontsource/cormorant-garamond/latin-ext-700.css";
+@import "@fontsource/cormorant-garamond/latin-ext-300-italic.css";
+@import "@fontsource/cormorant-garamond/latin-ext-400-italic.css";
+@import "@fontsource/cormorant-garamond/latin-ext-500-italic.css";
+@import "@fontsource/inter/latin-ext-300.css";
+@import "@fontsource/inter/latin-ext-400.css";
+@import "@fontsource/inter/latin-ext-500.css";
+@import "@fontsource/inter/latin-ext-600.css";
 @import "leaflet/dist/leaflet.css";
 @import "tailwindcss";
 

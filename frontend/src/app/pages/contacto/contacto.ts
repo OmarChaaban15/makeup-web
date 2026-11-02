@@ -1,4 +1,4 @@
-import { afterNextRender, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -44,8 +44,14 @@ export class Contacto implements OnDestroy {
   error = '';
   emailCopiado = false;
 
-  constructor(private http: HttpClient) {
-    afterNextRender(() => this.initMap());
+  /** El mapa no se carga hasta que la visita lo pide (ver contacto.html). */
+  mapaVisible = signal(false);
+
+  constructor(private http: HttpClient) {}
+
+  mostrarMapa(): void {
+    this.mapaVisible.set(true);
+    this.initMap();
   }
 
   ngOnDestroy(): void {

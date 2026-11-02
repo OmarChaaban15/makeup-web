@@ -157,12 +157,14 @@ export class MisCursos implements OnInit, OnDestroy {
 
     const yt = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/i);
     if (yt) {
-      return `https://www.youtube.com/embed/${yt[1]}?autoplay=1&rel=0`;
+      // Dominio sin cookies de YouTube: no deja cookies hasta que se reproduce.
+      return `https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1&rel=0`;
     }
 
     const vimeo = url.match(/vimeo\.com\/(?:video\/)?(\d+)/i);
     if (vimeo) {
-      return `https://player.vimeo.com/video/${vimeo[1]}?autoplay=1`;
+      // dnt=1: Vimeo no registra la sesion para seguimiento.
+      return `https://player.vimeo.com/video/${vimeo[1]}?autoplay=1&dnt=1`;
     }
 
     return null;
