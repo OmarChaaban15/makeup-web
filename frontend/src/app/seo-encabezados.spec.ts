@@ -29,6 +29,7 @@ const PAGINAS = [
   'multi/servicios',
   'multi/sobre-mi',
   'multi/contacto',
+  'servicio',
   'blog',
   'blog-articulo'
 ];

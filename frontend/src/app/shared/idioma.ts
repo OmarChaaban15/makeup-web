@@ -7,20 +7,51 @@ import { filter } from 'rxjs/operators';
  * paginas escritas en ese idioma (no una traduccion automatica) bajo /en,
  * /it y /de, por lo que Google puede indexarlas con hreflang.
  *
- * Solo cuatro paginas existen en los cuatro idiomas. El resto (cursos, blog,
- * zona privada, privacidad) esta unicamente en español.
+ * Las paginas de RUTAS existen en los cuatro idiomas: inicio, sobre mi,
+ * servicios, contacto y una por servicio. El resto (cursos, blog, zona
+ * privada, textos legales) esta unicamente en español.
  */
 export type Idioma = 'es' | 'en' | 'it' | 'de';
 
 export const IDIOMAS: readonly Idioma[] = ['es', 'en', 'it', 'de'];
 
-export type Pagina = 'inicio' | 'sobre' | 'servicios' | 'contacto';
+/** Las cuatro paginas con plantilla propia en pages/multi. */
+export type PaginaBase = 'inicio' | 'sobre' | 'servicios' | 'contacto';
+
+/** Una pagina por servicio (pages/servicio), con la misma plantilla en los cuatro idiomas. */
+export type PaginaServicio = 'novias' | 'eventos' | 'editorial' | 'cine';
+
+export type Pagina = PaginaBase | PaginaServicio;
 
 export const RUTAS: Record<Idioma, Record<Pagina, string>> = {
-  es: { inicio: '/', sobre: '/sobre-mi', servicios: '/servicios', contacto: '/contacto' },
-  en: { inicio: '/en', sobre: '/en/about', servicios: '/en/services', contacto: '/en/contact' },
-  it: { inicio: '/it', sobre: '/it/chi-sono', servicios: '/it/servizi', contacto: '/it/contatti' },
-  de: { inicio: '/de', sobre: '/de/ueber-mich', servicios: '/de/leistungen', contacto: '/de/kontakt' }
+  es: {
+    inicio: '/', sobre: '/sobre-mi', servicios: '/servicios', contacto: '/contacto',
+    novias: '/servicios/maquillaje-novia-ibiza',
+    eventos: '/servicios/maquillaje-invitadas-eventos-ibiza',
+    editorial: '/servicios/maquillaje-editorial-moda-ibiza',
+    cine: '/servicios/maquillaje-cine-rodajes-ibiza'
+  },
+  en: {
+    inicio: '/en', sobre: '/en/about', servicios: '/en/services', contacto: '/en/contact',
+    novias: '/en/services/bridal-makeup-ibiza',
+    eventos: '/en/services/wedding-guest-event-makeup-ibiza',
+    editorial: '/en/services/editorial-fashion-makeup-ibiza',
+    cine: '/en/services/film-tv-makeup-ibiza'
+  },
+  it: {
+    inicio: '/it', sobre: '/it/chi-sono', servicios: '/it/servizi', contacto: '/it/contatti',
+    novias: '/it/servizi/trucco-sposa-ibiza',
+    eventos: '/it/servizi/trucco-invitate-eventi-ibiza',
+    editorial: '/it/servizi/trucco-editoriale-moda-ibiza',
+    cine: '/it/servizi/trucco-cinema-tv-ibiza'
+  },
+  de: {
+    inicio: '/de', sobre: '/de/ueber-mich', servicios: '/de/leistungen', contacto: '/de/kontakt',
+    novias: '/de/leistungen/braut-make-up-ibiza',
+    eventos: '/de/leistungen/gaeste-event-make-up-ibiza',
+    editorial: '/de/leistungen/editorial-mode-make-up-ibiza',
+    cine: '/de/leistungen/film-tv-make-up-ibiza'
+  }
 };
 
 /** Prefijo de URL de cada idioma que no es el original. */
@@ -32,7 +63,7 @@ export function idiomaDeRuta(ruta: string): Idioma {
 
 export const esRutaIngles = (ruta: string): boolean => idiomaDeRuta(ruta) === 'en';
 
-/** A que pagina "de pareja" corresponde una ruta, si es una de las cuatro. */
+/** A que pagina "de pareja" corresponde una ruta, si es una de RUTAS. */
 export function paginaDeRuta(ruta: string): Pagina | null {
   const idioma = idiomaDeRuta(ruta);
 

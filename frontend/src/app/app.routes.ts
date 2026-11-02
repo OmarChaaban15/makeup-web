@@ -1,5 +1,5 @@
 import { Route, Routes } from '@angular/router';
-import { Idioma, Pagina, RUTAS } from './shared/idioma';
+import { IDIOMAS, Idioma, PaginaBase, RUTAS } from './shared/idioma';
 import type { IdiomaNativo } from './pages/multi/contenido';
 import { Inicio } from './pages/inicio/inicio';
 import { SobreMi } from './pages/sobre-mi/sobre-mi';
@@ -17,12 +17,14 @@ import { PagoExitoso } from './pages/pago-exitoso/pago-exitoso';
 import { PagoCancelado } from './pages/pago-cancelado/pago-cancelado';
 import { NoEncontrada } from './pages/no-encontrada/no-encontrada';
 import { articuloResolver, seoResolver, tituloResolver } from './blog/blog-rutas';
-import type { SeoRuta } from './shared/seo.service';
+import { NOMBRE_INICIO, type SeoRuta } from './shared/seo.service';
+import { schemaServicio } from './shared/seo-schemas';
+import { COMUNES, SERVICIOS, SERVICIOS_DETALLE } from './pages/servicio/contenido-servicios';
 
 const NOINDEX: SeoRuta = { descripcion: '', noindex: true };
 
 /** Carga de la plantilla de cada pagina; la misma sirve para los tres idiomas. */
-const PLANTILLAS: Record<Pagina, () => Promise<unknown>> = {
+const PLANTILLAS: Record<PaginaBase, () => Promise<unknown>> = {
   inicio: () => import('./pages/multi/inicio/inicio').then(m => m.MultiInicio),
   servicios: () => import('./pages/multi/servicios/servicios').then(m => m.MultiServicios),
   sobre: () => import('./pages/multi/sobre-mi/sobre-mi').then(m => m.MultiSobreMi),
@@ -36,7 +38,7 @@ interface MetaPagina {
   nombre?: string;
 }
 
-const META: Record<IdiomaNativo, Record<Pagina, MetaPagina>> = {
+const META: Record<IdiomaNativo, Record<PaginaBase, MetaPagina>> = {
   en: {
     inicio: {
       title: 'Professional Makeup Artist in Ibiza · Makeup by Yona',
@@ -94,7 +96,7 @@ const META: Record<IdiomaNativo, Record<Pagina, MetaPagina>> = {
 };
 
 const RUTAS_MULTI: Route[] = (Object.keys(META) as IdiomaNativo[]).flatMap(idioma =>
-  (Object.keys(META[idioma]) as Pagina[]).map((pagina): Route => ({
+  (Object.keys(META[idioma]) as PaginaBase[]).map((pagina): Route => ({
     path: RUTAS[idioma as Idioma][pagina].slice(1),
     pathMatch: pagina === 'inicio' ? 'full' : 'prefix',
     loadComponent: PLANTILLAS[pagina] as Route['loadComponent'],
@@ -104,6 +106,37 @@ const RUTAS_MULTI: Route[] = (Object.keys(META) as IdiomaNativo[]).flatMap(idiom
       seo: { nombre: META[idioma][pagina].nombre, descripcion: META[idioma][pagina].descripcion } satisfies SeoRuta
     }
   }))
+);
+
+/**
+ * Una pagina por servicio en cada idioma, con la misma plantilla. Las migas
+ * van Inicio > Servicios > servicio, y el schema Service sale del texto.
+ */
+const RUTAS_SERVICIO: Route[] = IDIOMAS.flatMap(idioma =>
+  SERVICIOS_DETALLE.map((servicio): Route => {
+    const t = SERVICIOS[idioma][servicio];
+    const ruta = RUTAS[idioma][servicio];
+
+    return {
+      path: ruta.slice(1),
+      loadComponent: () => import('./pages/servicio/servicio').then(m => m.Servicio),
+      title: t.title,
+      data: {
+        idioma,
+        servicio,
+        seo: {
+          descripcion: t.descripcion,
+          imagen: `/${t.imagen}`,
+          migas: [
+            { nombre: NOMBRE_INICIO[idioma], ruta: RUTAS[idioma].inicio },
+            { nombre: COMUNES[idioma].servicios, ruta: RUTAS[idioma].servicios },
+            { nombre: t.nombre, ruta }
+          ],
+          jsonLd: schemaServicio(t.nombre, t.descripcion, ruta, t.imagen, idioma)
+        } satisfies SeoRuta
+      }
+    };
+  })
 );
 
 export const routes: Routes = [
@@ -220,6 +253,8 @@ export const routes: Routes = [
     title: tituloResolver('en'),
     resolve: { articulo: articuloResolver('en'), seo: seoResolver('en') }
   },
+
+  ...RUTAS_SERVICIO,
 
   // Paginas en ingles, italiano y aleman (ver shared/idioma.ts y pages/multi).
   // Cada una tiene su pareja en español; el SeoService publica el hreflang.

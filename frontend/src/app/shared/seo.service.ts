@@ -24,7 +24,7 @@ export interface SeoRuta {
 }
 
 /** Primera miga de cada idioma. */
-const NOMBRE_INICIO: Record<Idioma, string> = { es: 'Inicio', en: 'Home', it: 'Home', de: 'Startseite' };
+export const NOMBRE_INICIO: Record<Idioma, string> = { es: 'Inicio', en: 'Home', it: 'Home', de: 'Startseite' };
 
 const LOCALE: Record<Idioma, string> = { es: 'es_ES', en: 'en_US', it: 'it_IT', de: 'de_DE' };
 

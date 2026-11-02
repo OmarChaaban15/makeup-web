@@ -5,7 +5,7 @@
 // ultimo commit que toco los archivos de cada pagina, no la de hoy: un
 // lastmod que cambia siempre hace que Google deje de fiarse de el.
 //
-// Las cuatro paginas que existen en español, ingles, italiano y aleman
+// Las paginas que existen en español, ingles, italiano y aleman
 // llevan xhtml:link hreflang en todas sus URLs, apuntandose entre si
 // (igual que el <head>, ver SeoService). x-default es la version en español.
 //
@@ -24,10 +24,34 @@ const SALIDA = join(RAIZ, 'dist', 'frontend', 'browser', 'sitemap.xml');
 const IDIOMAS = ['es', 'en', 'it', 'de'];
 
 const RUTAS = {
-  es: { inicio: '/', sobre: '/sobre-mi', servicios: '/servicios', contacto: '/contacto' },
-  en: { inicio: '/en', sobre: '/en/about', servicios: '/en/services', contacto: '/en/contact' },
-  it: { inicio: '/it', sobre: '/it/chi-sono', servicios: '/it/servizi', contacto: '/it/contatti' },
-  de: { inicio: '/de', sobre: '/de/ueber-mich', servicios: '/de/leistungen', contacto: '/de/kontakt' }
+  es: {
+    inicio: '/', sobre: '/sobre-mi', servicios: '/servicios', contacto: '/contacto',
+    novias: '/servicios/maquillaje-novia-ibiza',
+    eventos: '/servicios/maquillaje-invitadas-eventos-ibiza',
+    editorial: '/servicios/maquillaje-editorial-moda-ibiza',
+    cine: '/servicios/maquillaje-cine-rodajes-ibiza'
+  },
+  en: {
+    inicio: '/en', sobre: '/en/about', servicios: '/en/services', contacto: '/en/contact',
+    novias: '/en/services/bridal-makeup-ibiza',
+    eventos: '/en/services/wedding-guest-event-makeup-ibiza',
+    editorial: '/en/services/editorial-fashion-makeup-ibiza',
+    cine: '/en/services/film-tv-makeup-ibiza'
+  },
+  it: {
+    inicio: '/it', sobre: '/it/chi-sono', servicios: '/it/servizi', contacto: '/it/contatti',
+    novias: '/it/servizi/trucco-sposa-ibiza',
+    eventos: '/it/servizi/trucco-invitate-eventi-ibiza',
+    editorial: '/it/servizi/trucco-editoriale-moda-ibiza',
+    cine: '/it/servizi/trucco-cinema-tv-ibiza'
+  },
+  de: {
+    inicio: '/de', sobre: '/de/ueber-mich', servicios: '/de/leistungen', contacto: '/de/kontakt',
+    novias: '/de/leistungen/braut-make-up-ibiza',
+    eventos: '/de/leistungen/gaeste-event-make-up-ibiza',
+    editorial: '/de/leistungen/editorial-mode-make-up-ibiza',
+    cine: '/de/leistungen/film-tv-make-up-ibiza'
+  }
 };
 
 const pagina = (carpeta) => {
@@ -36,19 +60,24 @@ const pagina = (carpeta) => {
   return [`src/app/pages/${carpeta}/${nombre}.html`, `src/app/pages/${carpeta}/${nombre}.ts`];
 };
 
+// Las paginas de servicio comparten plantilla y texto en los cuatro idiomas.
+const SERVICIO = [...pagina('servicio'), 'src/app/pages/servicio/contenido-servicios.ts'];
+
 // Archivos de los que depende cada pagina, para el lastmod.
 const ARCHIVOS = {
   es: {
     inicio: [...pagina('inicio'), 'src/app/shared/seo-schemas.ts'],
     sobre: pagina('sobre-mi'),
     servicios: pagina('servicios'),
-    contacto: pagina('contacto')
+    contacto: pagina('contacto'),
+    novias: SERVICIO, eventos: SERVICIO, editorial: SERVICIO, cine: SERVICIO
   },
   otros: {
     inicio: [...pagina('multi/inicio'), 'src/app/pages/multi/contenido.ts'],
     sobre: [...pagina('multi/sobre-mi'), 'src/app/pages/multi/contenido.ts'],
     servicios: [...pagina('multi/servicios'), 'src/app/pages/multi/contenido.ts'],
-    contacto: [...pagina('multi/contacto'), 'src/app/pages/multi/contenido.ts']
+    contacto: [...pagina('multi/contacto'), 'src/app/pages/multi/contenido.ts'],
+    novias: SERVICIO, eventos: SERVICIO, editorial: SERVICIO, cine: SERVICIO
   }
 };
 
@@ -108,7 +137,7 @@ function entrada(ruta, archivos, { pag, fecha } = {}) {
 const ultimaFechaBlog = ARTICULOS.map((articulo) => articulo.fecha).sort().at(-1);
 
 const urls = [
-  // Las cuatro paginas en los cuatro idiomas, agrupadas por pagina.
+  // Las paginas de RUTAS en los cuatro idiomas, agrupadas por pagina.
   ...Object.keys(RUTAS.es).flatMap((pag) =>
     IDIOMAS.map((idioma) =>
       entrada(RUTAS[idioma][pag], idioma === 'es' ? ARCHIVOS.es[pag] : ARCHIVOS.otros[pag], { pag })

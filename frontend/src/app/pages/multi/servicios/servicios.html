@@ -73,6 +73,11 @@
                [class]="$first ? 'bg-[#9a6b43] text-white' : 'border border-[#8a5f3a] text-[#8a5f3a]'">
               {{ servicio.boton }}
             </a>
+            <a [routerLink]="detalles[$index].ruta"
+               class="mt-4 block font-serif text-[0.72rem] font-semibold uppercase tracking-widest underline underline-offset-4"
+               [class.text-[#e8c6a0]]="$first" [class.text-[#8a5f3a]]="!$first">
+              {{ detalles[$index].texto }}
+            </a>
           </div>
         </article>
       }

@@ -1,5 +1,6 @@
 import type { Articulo } from '../blog/blog';
 import type { Curso } from './cursos.service';
+import { RUTAS } from './idioma';
 
 /**
  * Datos del negocio para el marcado schema.org. Solo lo que la web ya
@@ -78,30 +79,49 @@ export function schemaNegocio(): object {
   };
 }
 
-/** Los cuatro servicios que describe /servicios. */
+/** Los cuatro servicios que describe /servicios, cada uno con su pagina. */
 export function schemaServicios(): object {
   const servicios = [
-    ['Maquillaje de novia', 'Prueba de maquillaje, asesoría previa y maquillaje de boda en Ibiza con acabado de larga duración.'],
-    ['Maquillaje para eventos y social', 'Maquillaje profesional para eventos, invitadas y celebraciones en Ibiza.'],
-    ['Maquillaje de moda y editorial', 'Maquillaje para sesiones de moda, editoriales y campañas.'],
-    ['Maquillaje para cine y rodajes', 'Maquillaje para producciones audiovisuales y rodajes.']
+    ['Maquillaje de novia', 'Prueba de maquillaje, asesoría previa y maquillaje de boda en Ibiza con acabado de larga duración.', RUTAS.es.novias],
+    ['Maquillaje para eventos y social', 'Maquillaje profesional para eventos, invitadas y celebraciones en Ibiza.', RUTAS.es.eventos],
+    ['Maquillaje de moda y editorial', 'Maquillaje para sesiones de moda, editoriales y campañas.', RUTAS.es.editorial],
+    ['Maquillaje para cine y rodajes', 'Maquillaje para producciones audiovisuales y rodajes.', RUTAS.es.cine]
   ];
 
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    itemListElement: servicios.map(([name, description], i) => ({
+    itemListElement: servicios.map(([name, description, ruta], i) => ({
       '@type': 'ListItem',
       position: i + 1,
       item: {
         '@type': 'Service',
         name,
         description,
+        url: url(ruta),
         serviceType: name,
         areaServed: IBIZA,
         provider: { '@id': ID_NEGOCIO }
       }
     }))
+  };
+}
+
+/** Pagina de un servicio concreto (pages/servicio), en cualquier idioma. */
+export function schemaServicio(nombre: string, descripcion: string, ruta: string, imagen: string, idioma: string): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${url(ruta)}#servicio`,
+    name: nombre,
+    serviceType: nombre,
+    description: descripcion,
+    url: url(ruta),
+    image: url(`/${imagen}`),
+    inLanguage: idioma,
+    areaServed: IBIZA,
+    // El nodo completo del negocio va en la portada; aqui basta con identificarlo.
+    provider: { '@type': 'HealthAndBeautyBusiness', '@id': ID_NEGOCIO, name: SITIO.nombre, url: url('/') }
   };
 }
 
