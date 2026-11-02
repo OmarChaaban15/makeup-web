@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Mail\AccesoPorCaducar;
+use App\Mail\JustificanteCompra;
 use App\Models\AccesoTutorial;
 use App\Models\Pedido;
 use App\Models\PedidoItem;
@@ -113,7 +115,7 @@ class OfertaYCaducidadTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user, 'sanctum')
-            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id]])
+            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id], 'acepta_condiciones' => true])
             ->assertCreated();
 
         $this->assertSame(['price_oferta'], $espia->prices);
@@ -129,7 +131,7 @@ class OfertaYCaducidadTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user, 'sanctum')
-            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id]])
+            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id], 'acepta_condiciones' => true])
             ->assertCreated();
 
         $this->assertSame(['price_base'], $espia->prices);
@@ -166,6 +168,7 @@ class OfertaYCaducidadTest extends TestCase
             'tutoriales' => [$tutorial->id],
             'nombre' => 'Ana Ruiz',
             'email' => 'ana@example.com',
+            'acepta_condiciones' => true,
         ])->assertCreated();
 
         $this->assertSame('ana@example.com', $espia->email);
@@ -184,7 +187,7 @@ class OfertaYCaducidadTest extends TestCase
     {
         $tutorial = $this->masterclass();
 
-        $this->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id]])
+        $this->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id], 'acepta_condiciones' => true])
             ->assertStatus(422)
             ->assertJsonValidationErrors(['email', 'nombre']);
     }
@@ -221,7 +224,7 @@ class OfertaYCaducidadTest extends TestCase
             'tutorial_id' => $tutorial->id,
         ]);
 
-        Mail::assertSent(\App\Mail\JustificanteCompra::class, function ($mail) {
+        Mail::assertSent(JustificanteCompra::class, function ($mail) {
             return $mail->hasTo('ana@example.com')
                 && $mail->hasCc(config('mail.contacto_destino'))
                 // Cuenta recien creada: tiene que llevar el enlace de contrasena.
@@ -257,7 +260,7 @@ class OfertaYCaducidadTest extends TestCase
         $this->assertDatabaseHas('pedidos', ['id' => $pedido->id, 'user_id' => $usuario->id]);
 
         Mail::assertSent(
-            \App\Mail\JustificanteCompra::class,
+            JustificanteCompra::class,
             fn ($mail) => $mail->enlacePassword === null
         );
     }
@@ -377,14 +380,14 @@ class OfertaYCaducidadTest extends TestCase
 
         // Con acceso vigente no hay nada que pagar.
         $this->actingAs($user, 'sanctum')
-            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id]])
+            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id], 'acepta_condiciones' => true])
             ->assertStatus(409);
 
         // Una vez caducado, sí debe poder volver a comprarlo.
         $acceso->update(['expira_en' => now()->subDay()]);
 
         $this->actingAs($user, 'sanctum')
-            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id]])
+            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id], 'acepta_condiciones' => true])
             ->assertCreated();
     }
 
@@ -412,15 +415,15 @@ class OfertaYCaducidadTest extends TestCase
 
         $this->artisan('cursos:avisar-caducidad')->assertSuccessful();
 
-        Mail::assertSent(\App\Mail\AccesoPorCaducar::class, 1);
+        Mail::assertSent(AccesoPorCaducar::class, 1);
         Mail::assertSent(
-            \App\Mail\AccesoPorCaducar::class,
+            AccesoPorCaducar::class,
             fn ($mail) => $mail->hasTo('proximo@example.com')
         );
 
         // Segunda pasada del planificador: no debe repetir el aviso.
         $this->artisan('cursos:avisar-caducidad')->assertSuccessful();
-        Mail::assertSent(\App\Mail\AccesoPorCaducar::class, 1);
+        Mail::assertSent(AccesoPorCaducar::class, 1);
     }
 
     public function test_el_aviso_no_se_envia_a_accesos_ya_caducados(): void

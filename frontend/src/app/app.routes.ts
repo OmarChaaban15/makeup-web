@@ -232,7 +232,40 @@ export const routes: Routes = [
     data: {
       seo: {
         nombre: 'Política de privacidad',
-        descripcion: 'Política de privacidad de Makeup by Yona: qué datos se recogen y cómo se tratan.'
+        descripcion: 'Política de privacidad de Makeup by Yona: qué datos se recogen, para qué, cuánto tiempo se guardan y cómo ejercer tus derechos.'
+      } satisfies SeoRuta
+    }
+  },
+  {
+    path: 'aviso-legal',
+    loadComponent: () => import('./pages/aviso-legal/aviso-legal').then(m => m.AvisoLegal),
+    title: 'Aviso legal · Makeup by Yona',
+    data: {
+      seo: {
+        nombre: 'Aviso legal',
+        descripcion: 'Aviso legal de Makeup by Yona: datos del titular, propiedad intelectual y condiciones de uso de la web.'
+      } satisfies SeoRuta
+    }
+  },
+  {
+    path: 'condiciones',
+    loadComponent: () => import('./pages/condiciones/condiciones').then(m => m.Condiciones),
+    title: 'Condiciones de venta · Makeup by Yona',
+    data: {
+      seo: {
+        nombre: 'Condiciones de venta',
+        descripcion: 'Condiciones de venta de los cursos online de Makeup by Yona: precio, pago, duración del acceso y derecho de desistimiento.'
+      } satisfies SeoRuta
+    }
+  },
+  {
+    path: 'politica-cookies',
+    loadComponent: () => import('./pages/politica-cookies/politica-cookies').then(m => m.PoliticaCookies),
+    title: 'Política de cookies · Makeup by Yona',
+    data: {
+      seo: {
+        nombre: 'Política de cookies',
+        descripcion: 'Política de cookies de Makeup by Yona: la web no usa cookies de análisis ni de publicidad. Qué se guarda en tu navegador y por qué.'
       } satisfies SeoRuta
     }
   },

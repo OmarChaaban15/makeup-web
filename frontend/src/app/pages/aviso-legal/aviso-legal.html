@@ -1,0 +1,79 @@
+<section class="min-h-[100svh] bg-white pt-32 pb-24">
+  <div class="mx-auto max-w-[780px] px-8">
+
+    <div class="mb-14 border-b border-black/[0.08] pb-10">
+      <p class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.26em] text-[#8a5f3a]">Legal</p>
+      <h1 class="font-serif text-[2.4rem] font-bold uppercase leading-none tracking-[0.06em] text-[#1a1a1a] max-[600px]:text-[1.8rem]">
+        Aviso legal
+      </h1>
+      <p class="mt-4 font-serif text-[0.82rem] italic text-[#666]">Última actualización: {{ revision }}</p>
+    </div>
+
+    <div class="privacy-content font-serif text-[0.92rem] leading-[1.85] text-[#333]">
+
+      <h2>1. Titular de la web</h2>
+      <p>
+        En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la Información y de
+        Comercio Electrónico (LSSI), estos son los datos del titular de {{ d.web }}:
+      </p>
+      <ul>
+        <li><strong>Titular:</strong> {{ d.titular }}</li>
+        <li><strong>Nombre comercial:</strong> {{ d.nombreComercial }}</li>
+        <li><strong>NIF:</strong> {{ d.nif ?? pendiente }}</li>
+        <li><strong>Domicilio:</strong> {{ d.domicilio ?? pendiente }}</li>
+        <li><strong>Correo electrónico:</strong> <a [href]="'mailto:' + d.email">{{ d.email }}</a></li>
+        <li><strong>Teléfono:</strong> {{ d.telefono }}</li>
+        <li><strong>Actividad:</strong> servicios de maquillaje profesional y venta de cursos de maquillaje en línea.</li>
+      </ul>
+
+      <h2>2. Objeto</h2>
+      <p>
+        Esta web da a conocer los servicios de maquillaje de {{ d.nombreComercial }} en Ibiza, permite solicitar
+        información y citas, y vende cursos de maquillaje en vídeo. Usarla implica aceptar este aviso legal. La
+        compra de cursos se rige además por las <a routerLink="/condiciones">condiciones de venta</a>.
+      </p>
+
+      <h2>3. Propiedad intelectual e industrial</h2>
+      <p>
+        Las fotografías, vídeos, textos, cursos, logotipos y el diseño de la web pertenecen a {{ d.titular }} o a
+        sus autores, que han autorizado su uso. No se pueden reproducir, distribuir, comunicar públicamente ni
+        transformar sin permiso por escrito, salvo para uso personal y privado.
+      </p>
+      <p>
+        Si apareces en alguna fotografía y quieres que se retire, escribe a <a [href]="'mailto:' + d.email">{{ d.email }}</a>.
+      </p>
+
+      <h2>4. Responsabilidad</h2>
+      <p>
+        Se procura que la información de la web sea exacta y esté actualizada, pero puede contener errores o
+        cambiar sin previo aviso. El titular no responde de las interrupciones técnicas ajenas a su control ni del
+        contenido de las webs de terceros enlazadas desde aquí (redes sociales, mapas, pasarela de pago), que se
+        rigen por sus propias condiciones.
+      </p>
+
+      <h2>5. Protección de datos y cookies</h2>
+      <p>
+        El tratamiento de los datos personales se explica en la <a routerLink="/politica-privacidad">política de
+        privacidad</a>, y el uso del almacenamiento del navegador en la <a routerLink="/politica-cookies">política
+        de cookies</a>.
+      </p>
+
+      <h2>6. Legislación aplicable</h2>
+      <p>
+        Este aviso se rige por la ley española. Si eres consumidora, puedes acudir a los juzgados de tu domicilio.
+      </p>
+
+    </div>
+
+    <div class="mt-14 border-t border-black/[0.07] pt-8">
+      <a routerLink="/"
+         class="inline-flex items-center gap-2 font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#8a5f3a] no-underline transition-colors hover:text-[#a07850]">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H5M12 5l-7 7 7 7"/>
+        </svg>
+        Volver al inicio
+      </a>
+    </div>
+
+  </div>
+</section>

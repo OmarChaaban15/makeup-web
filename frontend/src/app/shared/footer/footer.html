@@ -107,17 +107,12 @@
   <div class="relative z-10 px-6 py-5 sm:px-10">
     <div class="mx-auto flex max-w-[1180px] flex-col items-center justify-center gap-2 text-[0.72rem] font-light text-white/60">
       <span>&copy; {{ currentYear }} Makeup By Yona. {{ t().derechos }}</span>
-      <div class="flex items-center gap-4">
-        <a routerLink="/politica-privacidad"
-           class="no-underline transition-colors duration-300 hover:text-[#c4956a]">
-          {{ t().privacidad }}
-        </a>
-        <span class="text-white/10">|</span>
-        <button (click)="resetCookies()"
-                class="cursor-pointer border-none bg-transparent p-0 text-[0.72rem] font-light text-white/60 transition-colors duration-300 hover:text-[#c4956a]">
-          {{ t().cookies }}
-        </button>
-      </div>
+      <nav aria-label="Legal" class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+        <a routerLink="/aviso-legal" class="inline-block py-1 no-underline transition-colors duration-300 hover:text-[#c4956a]">{{ t().avisoLegal }}</a>
+        <a routerLink="/condiciones" class="inline-block py-1 no-underline transition-colors duration-300 hover:text-[#c4956a]">{{ t().condiciones }}</a>
+        <a routerLink="/politica-privacidad" class="inline-block py-1 no-underline transition-colors duration-300 hover:text-[#c4956a]">{{ t().privacidad }}</a>
+        <a routerLink="/politica-cookies" class="inline-block py-1 no-underline transition-colors duration-300 hover:text-[#c4956a]">{{ t().cookies }}</a>
+      </nav>
     </div>
   </div>
 

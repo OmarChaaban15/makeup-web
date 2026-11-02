@@ -57,6 +57,8 @@ export interface TextosPie {
   igPers: string;
   derechos: string;
   privacidad: string;
+  avisoLegal: string;
+  condiciones: string;
   cookies: string;
 }
 
@@ -64,86 +66,52 @@ export const PIE: Record<Idioma, TextosPie> = {
   es: {
     lema: 'Estudio Profesional de Maquillaje y Estilismo', lugar: 'Ibiza, España', seguir: 'Sígueme en',
     igPro: 'Maquillaje profesional', igPers: 'Perfil personal', derechos: 'Todos los derechos reservados.',
-    privacidad: 'Política de privacidad', cookies: 'Gestionar cookies'
+    privacidad: 'Política de privacidad', avisoLegal: 'Aviso legal', condiciones: 'Condiciones de venta',
+    cookies: 'Política de cookies'
   },
   en: {
     lema: 'Professional Makeup and Styling Studio', lugar: 'Ibiza, Spain', seguir: 'Follow me on',
     igPro: 'Professional makeup', igPers: 'Personal profile', derechos: 'All rights reserved.',
-    privacidad: 'Privacy policy (Spanish)', cookies: 'Manage cookies'
+    privacidad: 'Privacy policy (Spanish)', avisoLegal: 'Legal notice (Spanish)',
+    condiciones: 'Terms of sale (Spanish)', cookies: 'Cookie policy (Spanish)'
   },
   it: {
     lema: 'Studio professionale di trucco e styling', lugar: 'Ibiza, Spagna', seguir: 'Seguimi su',
     igPro: 'Trucco professionale', igPers: 'Profilo personale', derechos: 'Tutti i diritti riservati.',
-    privacidad: 'Informativa sulla privacy (in spagnolo)', cookies: 'Gestisci i cookie'
+    privacidad: 'Informativa sulla privacy (in spagnolo)', avisoLegal: 'Note legali (in spagnolo)',
+    condiciones: 'Condizioni di vendita (in spagnolo)', cookies: 'Cookie policy (in spagnolo)'
   },
   de: {
     lema: 'Professionelles Make-up- und Styling-Studio', lugar: 'Ibiza, Spanien', seguir: 'Folge mir auf',
     igPro: 'Professionelles Make-up', igPers: 'Persönliches Profil', derechos: 'Alle Rechte vorbehalten.',
-    privacidad: 'Datenschutzerklärung (auf Spanisch)', cookies: 'Cookies verwalten'
+    privacidad: 'Datenschutzerklärung (auf Spanisch)', avisoLegal: 'Impressum (auf Spanisch)',
+    condiciones: 'Verkaufsbedingungen (auf Spanisch)', cookies: 'Cookie-Richtlinie (auf Spanisch)'
   }
 };
 
 export interface TextosCookies {
   aviso: string;
   mas: string;
-  tituloConfig: string;
-  configurar: string;
-  rechazar: string;
-  aceptar: string;
-  nec: string;
-  necDesc: string;
-  siempre: string;
-  ana: string;
-  anaDesc: string;
-  mkt: string;
-  mktDesc: string;
-  cancelar: string;
-  guardar: string;
+  entendido: string;
+  /** Nombre accesible de la region del aviso. */
+  region: string;
 }
 
 export const COOKIES: Record<Idioma, TextosCookies> = {
   es: {
-    aviso: 'Utilizamos cookies propias y de terceros para mejorar tu experiencia y analizar el uso de nuestra web. Puedes aceptarlas todas o configurar tus preferencias.',
-    mas: 'Más información', tituloConfig: 'Configurar cookies', configurar: 'Configurar', rechazar: 'Rechazar',
-    aceptar: 'Aceptar', nec: 'Cookies necesarias',
-    necDesc: 'Imprescindibles para el funcionamiento básico de la web. No pueden desactivarse.',
-    siempre: 'Siempre activas', ana: 'Cookies analíticas',
-    anaDesc: 'Nos ayudan a entender cómo interactúas con la web para mejorar nuestros servicios.',
-    mkt: 'Cookies de marketing',
-    mktDesc: 'Permiten mostrarte contenido y anuncios personalizados según tus intereses.',
-    cancelar: 'Cancelar', guardar: 'Guardar preferencias'
+    aviso: 'Esta web no usa cookies de análisis ni de publicidad. Solo guarda en tu navegador lo necesario para que funcione, como tu sesión o tu idioma.',
+    mas: 'Política de cookies', entendido: 'Entendido', region: 'Aviso de cookies'
   },
   en: {
-    aviso: 'We use our own and third-party cookies to improve your experience and analyse how our website is used. You can accept them all or set your preferences.',
-    mas: 'More information', tituloConfig: 'Cookie settings', configurar: 'Settings', rechazar: 'Reject',
-    aceptar: 'Accept', nec: 'Necessary cookies',
-    necDesc: 'Essential for the basic operation of the website. They cannot be turned off.',
-    siempre: 'Always on', ana: 'Analytics cookies',
-    anaDesc: 'They help us understand how you use the website so we can improve our services.',
-    mkt: 'Marketing cookies',
-    mktDesc: 'They let us show you personalised content and ads based on your interests.',
-    cancelar: 'Cancel', guardar: 'Save preferences'
+    aviso: 'This website does not use analytics or advertising cookies. It only stores what it needs to work in your browser, such as your session or language.',
+    mas: 'Cookie policy (Spanish)', entendido: 'Got it', region: 'Cookie notice'
   },
   it: {
-    aviso: 'Utilizziamo cookie propri e di terze parti per migliorare la tua esperienza e analizzare l\'uso del sito. Puoi accettarli tutti o configurare le tue preferenze.',
-    mas: 'Maggiori informazioni', tituloConfig: 'Impostazioni dei cookie', configurar: 'Impostazioni', rechazar: 'Rifiuta',
-    aceptar: 'Accetta', nec: 'Cookie necessari',
-    necDesc: 'Indispensabili per il funzionamento di base del sito. Non possono essere disattivati.',
-    siempre: 'Sempre attivi', ana: 'Cookie analitici',
-    anaDesc: 'Ci aiutano a capire come usi il sito per migliorare i nostri servizi.',
-    mkt: 'Cookie di marketing',
-    mktDesc: 'Ci permettono di mostrarti contenuti e annunci personalizzati in base ai tuoi interessi.',
-    cancelar: 'Annulla', guardar: 'Salva le preferenze'
+    aviso: 'Questo sito non usa cookie analitici né pubblicitari. Salva nel tuo browser solo ciò che serve per funzionare, come la sessione o la lingua.',
+    mas: 'Cookie policy (in spagnolo)', entendido: 'Ho capito', region: 'Avviso sui cookie'
   },
   de: {
-    aviso: 'Wir verwenden eigene Cookies und Cookies von Drittanbietern, um dein Erlebnis zu verbessern und die Nutzung der Website zu analysieren. Du kannst alle akzeptieren oder deine Einstellungen anpassen.',
-    mas: 'Mehr erfahren', tituloConfig: 'Cookie-Einstellungen', configurar: 'Einstellungen', rechazar: 'Ablehnen',
-    aceptar: 'Akzeptieren', nec: 'Notwendige Cookies',
-    necDesc: 'Unverzichtbar für die Grundfunktionen der Website. Sie können nicht deaktiviert werden.',
-    siempre: 'Immer aktiv', ana: 'Analyse-Cookies',
-    anaDesc: 'Sie helfen uns zu verstehen, wie du die Website nutzt, damit wir unser Angebot verbessern können.',
-    mkt: 'Marketing-Cookies',
-    mktDesc: 'Sie ermöglichen uns, dir personalisierte Inhalte und Anzeigen passend zu deinen Interessen zu zeigen.',
-    cancelar: 'Abbrechen', guardar: 'Einstellungen speichern'
+    aviso: 'Diese Website verwendet keine Analyse- oder Werbe-Cookies. Sie speichert in deinem Browser nur, was sie zum Funktionieren braucht, etwa deine Sitzung oder Sprache.',
+    mas: 'Cookie-Richtlinie (auf Spanisch)', entendido: 'Verstanden', region: 'Cookie-Hinweis'
   }
 };

@@ -64,7 +64,7 @@ On the frontend, `shared/auth.service.ts` owns the session as signals (`estaAute
 ### Payments
 `POST /api/pedidos` is **public**. With a session it reads the buyer via `auth('sanctum')`; without one it requires `nombre` + `email` and the account is created later, in the webhook, once payment is confirmed — so an abandoned checkout never leaves a ghost user whose email would read as "already registered".
 
-`PedidoController::store` validates the cart, rejects tutorials with no Stripe price for the current amount (503) or already owned with a live grant (409), then creates `Pedido` + `PedidoItem` in a transaction. `pedidos.user_id` is nullable for that reason, with `email_cliente`/`nombre_cliente` alongside. The gateway call sits outside the transaction (network I/O); if it throws, the order is marked `cancelado` rather than left dangling as `pendiente`.
+`PedidoController::store` requires `acepta_condiciones` (the buyer asked for immediate access and acknowledged losing the 14-day withdrawal right, art. 103.m TRLGDCU; stored as `pedidos.renuncia_desistimiento_en` and confirmed in `JustificanteCompra`). Both `/oferta` and `/cursos` show that checkbox before every purchase, logged in or not. It then validates the cart, rejects tutorials with no Stripe price for the current amount (503) or already owned with a live grant (409), then creates `Pedido` + `PedidoItem` in a transaction. `pedidos.user_id` is nullable for that reason, with `email_cliente`/`nombre_cliente` alongside. The gateway call sits outside the transaction (network I/O); if it throws, the order is marked `cancelado` rather than left dangling as `pendiente`.
 
 `PasarelaPago` is an interface bound to `StripePasarelaPago` in `AppServiceProvider`, so tests can swap in a fake instead of calling Stripe.
 
@@ -94,6 +94,8 @@ Note: the `remember_tokens` table is a leftover from an earlier iteration and is
 
 ### Frontend structure
 Angular standalone components (no NgModules). Routing in `src/app/app.routes.ts`; pages under `src/app/pages/`, shared services and UI under `src/app/shared/`, route guards under `src/app/guards/`. Providers in `src/app/app.config.ts` (`provideHttpClient(withInterceptors([authInterceptor]))`, router with in-memory scrolling).
+
+Legal pages (`/aviso-legal`, `/condiciones`, `/politica-privacidad`, `/politica-cookies`) read the owner's details from `shared/datos-legales.ts`; fields left `null` render as "pendiente de completar". The cookie banner is informational only: the site stores nothing that needs consent, so do not add accept/reject toggles unless analytics or ads are actually added.
 
 `shared/cursos.service.ts` owns the catalogue and the purchase call (guest or authenticated) and is the only place that formats prices. `shared/contador-oferta/` is the countdown: it takes the seconds the API reports and decrements locally.
 

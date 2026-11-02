@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Pedido extends Model
 {
     public $timestamps = false;
+
     protected $table = 'pedidos';
+
     protected $fillable = [
         'user_id', 'email_cliente', 'nombre_cliente',
         'estado', 'total',
-        'metodo_pago', 'referencia_pago', 'actualizado_en'
+        'metodo_pago', 'referencia_pago', 'actualizado_en',
+        'renuncia_desistimiento_en',
     ];
 
     protected function casts(): array
@@ -20,6 +23,7 @@ class Pedido extends Model
             'total' => 'decimal:2',
             'creado_en' => 'datetime',
             'actualizado_en' => 'datetime',
+            'renuncia_desistimiento_en' => 'datetime',
         ];
     }
 

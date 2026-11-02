@@ -1,0 +1,81 @@
+<section class="min-h-[100svh] bg-white pt-32 pb-24">
+  <div class="mx-auto max-w-[780px] px-8">
+
+    <div class="mb-14 border-b border-black/[0.08] pb-10">
+      <p class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.26em] text-[#8a5f3a]">Legal</p>
+      <h1 class="font-serif text-[2.4rem] font-bold uppercase leading-none tracking-[0.06em] text-[#1a1a1a] max-[600px]:text-[1.8rem]">
+        Política de cookies
+      </h1>
+      <p class="mt-4 font-serif text-[0.82rem] italic text-[#666]">Última actualización: {{ revision }}</p>
+    </div>
+
+    <div class="privacy-content font-serif text-[0.92rem] leading-[1.85] text-[#333]">
+
+      <h2>1. Resumen</h2>
+      <p>
+        Esta web <strong>no usa cookies de análisis ni de publicidad</strong>, ni propias ni de terceros. Solo guarda
+        en tu navegador lo imprescindible para que funcione lo que tú pides: tu sesión, tu idioma y tu progreso en
+        los cursos. Ese almacenamiento técnico está exento de consentimiento (artículo 22.2 de la LSSI), por eso el
+        aviso que ves al entrar es solo informativo.
+      </p>
+
+      <h2>2. Qué se guarda en tu navegador</h2>
+      <p>Se usa el almacenamiento local del navegador (localStorage), que funciona como una cookie pero no viaja al servidor:</p>
+      <ul>
+        <li><strong>auth_token</strong> y <strong>user</strong>: mantienen tu sesión si entras en tu cuenta. Se borran al cerrar sesión; el acceso caduca a los 30 días.</li>
+        <li><strong>yona_cursos_progreso</strong>: los cursos que has marcado como completados. Se queda en tu dispositivo.</li>
+        <li><strong>yona_lang</strong>: el idioma que elegiste en el traductor.</li>
+        <li><strong>cookie-consent</strong>: recuerda que ya has visto el aviso de cookies, para no mostrarlo en cada visita.</li>
+      </ul>
+
+      <h2>3. Servicios de terceros que solo se cargan si los usas</h2>
+      <ul>
+        <li>
+          <strong>Traductor de Google</strong>: solo se carga si eliges un idioma sin versión propia en el selector.
+          Entonces la web guarda la cookie <strong>googtrans</strong> con el idioma elegido, que el traductor necesita para funcionar, y Google recibe tu dirección IP al cargarlo. Si vuelves al español, la cookie se borra.
+        </li>
+        <li>
+          <strong>Mapa de OpenStreetMap</strong> (página de contacto): solo se carga si pulsas «Mostrar mapa». No
+          guarda cookies, pero los servidores del mapa reciben tu dirección IP.
+        </li>
+        <li>
+          <strong>Reproductor de vídeo</strong> (zona Mis cursos): se usa la versión sin cookies de YouTube
+          (youtube-nocookie.com) o Vimeo con la opción de no seguimiento. Al reproducir un vídeo, el proveedor
+          puede guardar datos técnicos en tu navegador.
+        </li>
+        <li>
+          <strong>Stripe</strong>: el pago se hace en la página de Stripe (checkout.stripe.com), que usa sus propias
+          cookies para prevenir el fraude. Se rige por la política de cookies de Stripe.
+        </li>
+      </ul>
+
+      <h2>4. Cómo borrarlo</h2>
+      <p>
+        Puedes borrar el almacenamiento y las cookies de esta web desde la configuración de tu navegador (opción de
+        borrar datos de sitios). Si lo haces, se cerrará tu sesión y volverás a ver el aviso.
+      </p>
+
+      <h2>5. Cambios</h2>
+      <p>
+        Si en el futuro se añade alguna herramienta de análisis o publicidad, se actualizará esta política y se te
+        pedirá permiso antes de activarla, con la opción de rechazarla igual de visible que la de aceptarla.
+      </p>
+      <p>
+        Más información sobre el tratamiento de tus datos en la <a routerLink="/politica-privacidad">política de
+        privacidad</a>.
+      </p>
+
+    </div>
+
+    <div class="mt-14 border-t border-black/[0.07] pt-8">
+      <a routerLink="/"
+         class="inline-flex items-center gap-2 font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#8a5f3a] no-underline transition-colors hover:text-[#a07850]">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H5M12 5l-7 7 7 7"/>
+        </svg>
+        Volver al inicio
+      </a>
+    </div>
+
+  </div>
+</section>

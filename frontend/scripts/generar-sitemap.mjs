@@ -56,7 +56,10 @@ const ARCHIVOS = {
 const SOLO_ESPANOL = [
   { ruta: '/cursos', archivos: pagina('cursos') },
   { ruta: '/oferta', archivos: pagina('oferta') },
-  { ruta: '/politica-privacidad', archivos: pagina('politica-privacidad') }
+  { ruta: '/politica-privacidad', archivos: pagina('politica-privacidad') },
+  { ruta: '/aviso-legal', archivos: pagina('aviso-legal') },
+  { ruta: '/condiciones', archivos: pagina('condiciones') },
+  { ruta: '/politica-cookies', archivos: pagina('politica-cookies') }
 ];
 
 // Articulos del blog: la fecha de publicacion es el lastmod. Los de /en/blog no

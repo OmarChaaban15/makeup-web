@@ -45,14 +45,14 @@
 }
 
 .privacy-content a {
-  color: #c4956a;
+  color: #8a5f3a;
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: color 0.2s;
 }
 
 .privacy-content a:hover {
-  color: #a07850;
+  color: #7a5130;
 }
 
 .privacy-content strong {

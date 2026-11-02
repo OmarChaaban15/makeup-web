@@ -9,6 +9,7 @@ use App\Models\Tutorial;
 use App\Models\User;
 use App\Services\PasarelaPago;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
@@ -43,6 +44,10 @@ class PedidoController extends Controller
         $reglas = [
             'tutoriales' => 'required|array|min:1|max:20',
             'tutoriales.*' => 'integer|distinct|exists:tutoriales,id',
+            // Contenido digital: sin este consentimiento expreso la
+            // compradora conservaria 14 dias de desistimiento aunque ya
+            // hubiera visto el curso (art. 103.m TRLGDCU).
+            'acepta_condiciones' => 'accepted',
         ];
 
         if (! $usuario) {
@@ -56,6 +61,7 @@ class PedidoController extends Controller
             'email.required' => 'Necesitamos tu correo electrónico para darte acceso al curso.',
             'email.email' => 'Introduce un correo electrónico válido.',
             'nombre.required' => 'El nombre es obligatorio.',
+            'acepta_condiciones.accepted' => 'Para comprar tienes que aceptar las condiciones de venta y el acceso inmediato al curso.',
         ]);
 
         $email = $usuario?->email ?? $validated['email'];
@@ -105,6 +111,7 @@ class PedidoController extends Controller
                 // si la oferta caduca despues, el pedido conserva lo pagado.
                 'total' => $tutoriales->sum(fn (Tutorial $t) => (float) $t->precio_efectivo),
                 'metodo_pago' => 'stripe',
+                'renuncia_desistimiento_en' => now(),
             ]);
 
             foreach ($tutoriales as $tutorial) {
@@ -143,7 +150,7 @@ class PedidoController extends Controller
     }
 
     /**
-     * @param  \Illuminate\Support\Collection<int, Tutorial>  $tutoriales
+     * @param  Collection<int, Tutorial>  $tutoriales
      */
     private function yaTieneAcceso(string $email, $tutoriales): bool
     {

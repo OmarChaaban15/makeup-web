@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Mail\JustificanteCompra;
 use App\Models\AccesoTutorial;
 use App\Models\Pedido;
 use App\Models\Tutorial;
@@ -47,7 +48,7 @@ class PedidoTest extends TestCase
         $tutorial = $this->tutorial();
 
         $respuesta = $this->actingAs($user, 'sanctum')
-            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id]]);
+            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id], 'acepta_condiciones' => true]);
 
         $respuesta->assertCreated()
             ->assertJsonPath('checkout_url', 'https://checkout.stripe.com/c/pay/test')
@@ -57,6 +58,37 @@ class PedidoTest extends TestCase
         $this->assertDatabaseHas('pedido_items', ['tutorial_id' => $tutorial->id, 'precio_unitario' => 45.00]);
     }
 
+    public function test_sin_aceptar_el_acceso_inmediato_no_se_crea_el_pedido(): void
+    {
+        $this->fingirPasarela();
+        $user = User::factory()->create();
+        $tutorial = $this->tutorial();
+
+        $this->actingAs($user, 'sanctum')
+            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id]])
+            ->assertStatus(422)
+            ->assertJsonValidationErrors('acepta_condiciones');
+
+        $this->assertDatabaseCount('pedidos', 0);
+    }
+
+    public function test_el_pedido_guarda_cuando_se_renuncio_al_desistimiento(): void
+    {
+        $this->fingirPasarela();
+        $user = User::factory()->create();
+        $tutorial = $this->tutorial();
+
+        $this->actingAs($user, 'sanctum')
+            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id], 'acepta_condiciones' => true])
+            ->assertCreated();
+
+        $pedido = Pedido::first();
+        $this->assertNotNull($pedido->renuncia_desistimiento_en);
+
+        $html = (new JustificanteCompra($pedido))->render();
+        $this->assertStringContainsString('pierdes el derecho de desistimiento', $html);
+    }
+
     public function test_tutorial_sin_stripe_price_id_devuelve_503_y_no_crea_pedido(): void
     {
         $this->fingirPasarela();
@@ -64,7 +96,7 @@ class PedidoTest extends TestCase
         $tutorial = $this->tutorial(['stripe_price_id' => null]);
 
         $this->actingAs($user, 'sanctum')
-            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id]])
+            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id], 'acepta_condiciones' => true])
             ->assertStatus(503);
 
         $this->assertDatabaseCount('pedidos', 0);
@@ -79,7 +111,7 @@ class PedidoTest extends TestCase
         AccesoTutorial::create(['user_id' => $user->id, 'tutorial_id' => $tutorial->id]);
 
         $this->actingAs($user, 'sanctum')
-            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id]])
+            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id], 'acepta_condiciones' => true])
             ->assertStatus(409);
 
         $this->assertDatabaseCount('pedidos', 0);
@@ -99,7 +131,7 @@ class PedidoTest extends TestCase
         });
 
         $this->actingAs($user, 'sanctum')
-            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id]])
+            ->postJson('/api/pedidos', ['tutoriales' => [$tutorial->id], 'acepta_condiciones' => true])
             ->assertStatus(502);
 
         // Lo importante: no queda un pedido "pendiente" huerfano.

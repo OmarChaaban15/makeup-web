@@ -29,11 +29,6 @@ export class Footer {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
-  resetCookies() {
-    localStorage.removeItem('cookie-consent');
-    window.location.reload();
-  }
-
   /** Magnetic button effect — buttons attract toward cursor */
   onMagneticMove(event: MouseEvent, btn: HTMLElement): void {
     if (!this.isBrowser || window.innerWidth < 768) return;

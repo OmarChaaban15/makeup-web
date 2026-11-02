@@ -2,6 +2,7 @@ import { Component, ElementRef, OnDestroy, ViewChild, signal } from '@angular/co
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
 import { environment } from '../../../environments/environment';
 import { mensajeDeError } from '../../shared/errores-api';
@@ -10,7 +11,7 @@ import type * as L from 'leaflet';
 @Component({
   selector: 'app-contacto',
   standalone: true,
-  imports: [CommonModule, FormsModule, ScrollRevealDirective],
+  imports: [CommonModule, FormsModule, RouterLink, ScrollRevealDirective],
   templateUrl: './contacto.html',
   styleUrl: './contacto.css',
 })
