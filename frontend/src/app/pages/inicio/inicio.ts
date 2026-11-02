@@ -84,6 +84,13 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
 
   currentIndex = signal(0);
   private autoPlayTimer: ReturnType<typeof setInterval> | null = null;
+
+  /**
+   * Pausa todo lo que se mueve solo (video de portada, particulas y pase de
+   * fotos): WCAG 2.2.2 pide poder detener el movimiento automatico de mas de
+   * 5 segundos. Arranca en pausa si el sistema pide reducir el movimiento.
+   */
+  movimientoPausado = signal(false);
   readonly autoPlayDuration = 5000;
   progressWidth = signal(0);
   private progressAnimFrame: number | null = null;
@@ -108,6 +115,14 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   // ── Lifecycle ──
 
   ngOnInit() {
+    // En el prerender no hay temporizadores que lanzar.
+    if (!this.isBrowser) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      this.movimientoPausado.set(true);
+      return;
+    }
+
     this.startAutoPlay();
   }
 
@@ -137,7 +152,9 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
     video.volume = 0;
     video.src = this.heroVideos[index];
     video.load();
-    video.play().catch(() => { });
+    if (!this.movimientoPausado()) {
+      video.play().catch(() => { });
+    }
 
     // Deja el siguiente vídeo del bucle ya en caché del navegador, para que
     // el cambio al terminar el actual sea instantáneo y sin pérdida de
@@ -197,7 +214,27 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
       });
     }
 
-    this.animateParticles();
+    if (!this.movimientoPausado()) {
+      this.animateParticles();
+    }
+  }
+
+  /** Boton de pausa: detiene o reanuda video, particulas y pase de fotos. */
+  toggleMovimiento(): void {
+    const pausar = !this.movimientoPausado();
+    this.movimientoPausado.set(pausar);
+    const video = this.heroVideoRef?.nativeElement;
+
+    if (pausar) {
+      this.stopAutoPlay();
+      if (this.animFrameId) cancelAnimationFrame(this.animFrameId);
+      this.animFrameId = null;
+      video?.pause();
+    } else {
+      this.startAutoPlay();
+      if (this.particles.length > 0) this.animateParticles();
+      video?.play().catch(() => { });
+    }
   }
 
   @HostListener('window:resize')
@@ -306,7 +343,9 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
 
   private restartAutoPlay() {
     this.stopAutoPlay();
-    this.startAutoPlay();
+    if (!this.movimientoPausado()) {
+      this.startAutoPlay();
+    }
   }
 
   private animateProgress(): void {

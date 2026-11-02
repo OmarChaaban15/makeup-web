@@ -1,11 +1,11 @@
 <div class="min-h-[100svh] bg-[#fcf9f6] px-6 pb-24 pt-32 sm:px-10">
   <div class="mx-auto max-w-[900px]">
 
-    <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">{{ t.kicker }}</p>
+    <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#8a5f3a]">{{ t.kicker }}</p>
     <h1 class="mt-4 font-serif text-[clamp(2.6rem,5.2vw,4.8rem)] font-light leading-[1.08] text-[#1a1a1a]">
-      {{ t.h1 }} <br><span class="italic text-[#c4956a]">{{ t.h1Em }}</span>
+      {{ t.h1 }} <br><span class="italic text-[#8a5f3a]">{{ t.h1Em }}</span>
     </h1>
-    <div class="mt-6 h-[2px] w-16 bg-[#c4956a]"></div>
+    <div class="mt-6 h-[2px] w-16 bg-[#9a6b43]"></div>
 
     <p class="mt-8 max-w-[640px] text-sm sm:text-base font-light leading-7 text-[#555]">
       @for (parte of t.intro; track $index) {
@@ -19,7 +19,7 @@
 
     <div class="mt-10 flex flex-wrap gap-3">
       <a [href]="enlaceWhatsapp" target="_blank" rel="noopener noreferrer"
-         class="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white no-underline shadow-sm transition-all duration-300 hover:bg-[#1EBE5D]">
+         class="inline-flex items-center gap-2 rounded-full bg-[#0b7a5c] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white no-underline shadow-sm transition-all duration-300 hover:bg-[#075e54]">
         {{ t.whatsapp }}
       </a>
       <a href="mailto:info@makeupbyyona.es"
@@ -42,10 +42,10 @@
     <h2 class="mt-12 font-serif text-2xl font-light text-[#1a1a1a]">{{ t.dondeH2 }}</h2>
     <p class="mt-4 max-w-[640px] text-sm font-light leading-7 text-[#555]">{{ t.dondeTexto }}</p>
 
-    <p class="mt-12 text-sm font-light text-[#888]">
-      <a [routerLink]="r.servicios" class="text-[#c4956a] no-underline">{{ t.verServicios }}</a>
+    <p class="mt-12 text-sm font-light text-[#666]">
+      <a [routerLink]="r.servicios" class="text-[#8a5f3a] no-underline">{{ t.verServicios }}</a>
       &middot;
-      <a routerLink="/contacto" class="text-[#888] no-underline hover:text-[#c4956a]">{{ t.enEspanol }}</a>
+      <a routerLink="/contacto" class="text-[#666] no-underline hover:text-[#c4956a]">{{ t.enEspanol }}</a>
     </p>
   </div>
 </div>

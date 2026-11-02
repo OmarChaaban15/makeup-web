@@ -34,7 +34,7 @@
        [style.transform]="'translate(' + mouseX() * 0.3 + 'px, ' + mouseY() * 0.3 + 'px)'">
     <div class="hero-text-enter mb-4 sm:mb-5 inline-flex items-center gap-2 rounded-full border border-[#c4956a]/40 bg-[#c4956a]/15 px-4 py-1.5 backdrop-blur-md hero-text-delay-1"
          [class.visible]="heroTextVisible()">
-      <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a] animate-pulse"></span>
+      <span class="h-1.5 w-1.5 rounded-full bg-[#9a6b43] animate-pulse"></span>
       <span class="font-serif text-[0.7rem] uppercase tracking-[0.28em] text-[#e8c99a]">Atelier de Maquillaje &middot; Ibiza</span>
     </div>
 
@@ -51,7 +51,7 @@
     <div class="hero-text-enter flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 hero-text-delay-4 w-full"
          [class.visible]="heroTextVisible()">
       <a routerLink="/contacto"
-        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#c4956a] px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-xl transition-all duration-300 hover:bg-[#a87a52] hover:shadow-2xl active:scale-95"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#9a6b43] px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-xl transition-all duration-300 hover:bg-[#7a5130] hover:shadow-2xl active:scale-95"
         id="inicio-cta-contacto">
         <span>Solicitar Cita</span>
         <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -63,6 +63,12 @@
       </a>
     </div>
   </div>
+
+  <!-- Pausa del movimiento (WCAG 2.2.2) -->
+  <button type="button" (click)="toggleMovimiento()" [attr.aria-pressed]="movimientoPausado()"
+          class="absolute bottom-6 left-4 z-20 flex min-h-11 items-center gap-2 rounded-full border border-white/40 bg-black/40 px-4 py-2 font-sans text-xs font-medium text-white backdrop-blur-md transition-colors hover:bg-black/60 cursor-pointer sm:left-6">
+    {{ movimientoPausado() ? 'Reanudar movimiento' : 'Pausar movimiento' }}
+  </button>
 
   <!-- Scroll indicator -->
   <div class="scroll-indicator absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
@@ -81,9 +87,9 @@
 
       <!-- Columna izquierda: texto biográfico -->
       <div>
-        <p scrollReveal="up" class="mb-4 font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">Atelier de Belleza</p>
+        <p scrollReveal="up" class="mb-4 font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#8a5f3a]">Atelier de Belleza</p>
         <h2 scrollReveal="up" scrollDelay="1" class="mb-6 font-serif text-[clamp(2.2rem,4.5vw,3.6rem)] font-light leading-[1.15] text-[#1a1a1a]">
-          Hola, soy <em class="italic text-[#c4956a]">Yonaida</em>
+          Hola, soy <em class="italic text-[#8a5f3a]">Yonaida</em>
         </h2>
 
         <div scrollReveal="up" scrollDelay="2" class="space-y-5 font-sans text-sm sm:text-base font-light leading-[1.85] text-[#555]">
@@ -101,22 +107,22 @@
              (mouseenter)="animateCounters()"
              #counterSection>
           <div class="flex flex-col items-center gap-1 rounded-2xl border border-[#ede0d0] bg-white p-4 text-center shadow-sm">
-            <span class="counter-number font-serif text-2xl sm:text-3xl font-light leading-none text-[#c4956a]">+{{ counterYears() }}</span>
-            <span class="font-sans text-[0.62rem] font-semibold uppercase tracking-wider text-[#888]">Años</span>
+            <span class="counter-number font-serif text-2xl sm:text-3xl font-light leading-none text-[#8a5f3a]">+{{ counterYears() }}</span>
+            <span class="font-sans text-[0.72rem] font-semibold uppercase tracking-wider text-[#666]">Años</span>
           </div>
           <div class="flex flex-col items-center gap-1 rounded-2xl border border-[#ede0d0] bg-white p-4 text-center shadow-sm">
-            <span class="counter-number font-serif text-2xl sm:text-3xl font-light leading-none text-[#c4956a]">+{{ counterClients() }}</span>
-            <span class="font-sans text-[0.62rem] font-semibold uppercase tracking-wider text-[#888]">Clientas</span>
+            <span class="counter-number font-serif text-2xl sm:text-3xl font-light leading-none text-[#8a5f3a]">+{{ counterClients() }}</span>
+            <span class="font-sans text-[0.72rem] font-semibold uppercase tracking-wider text-[#666]">Clientas</span>
           </div>
           <div class="flex flex-col items-center gap-1 rounded-2xl border border-[#ede0d0] bg-white p-4 text-center shadow-sm">
-            <span class="counter-number font-serif text-2xl sm:text-3xl font-light leading-none text-[#c4956a]">{{ counterPersonal() }}%</span>
-            <span class="font-sans text-[0.62rem] font-semibold uppercase tracking-wider text-[#888]">A Medida</span>
+            <span class="counter-number font-serif text-2xl sm:text-3xl font-light leading-none text-[#8a5f3a]">{{ counterPersonal() }}%</span>
+            <span class="font-sans text-[0.72rem] font-semibold uppercase tracking-wider text-[#666]">A Medida</span>
           </div>
         </div>
 
         <div scrollReveal="up" scrollDelay="4" class="mt-8 flex flex-wrap gap-4">
           <a routerLink="/sobre-mi"
-            class="inline-flex items-center gap-2 font-serif text-xs font-semibold uppercase tracking-[0.18em] text-[#c4956a] no-underline transition-all duration-300 hover:gap-3"
+            class="inline-flex items-center gap-2 font-serif text-xs font-semibold uppercase tracking-[0.18em] text-[#8a5f3a] no-underline transition-all duration-300 hover:gap-3"
             id="inicio-link-sobre-mi">
             <span>Conoce mi historia y filosofía</span>
             <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -131,7 +137,7 @@
           style="aspect-ratio: 4/5; min-height: 380px;" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"></div>
         <div class="absolute bottom-6 left-6 right-6 text-white">
-          <p class="font-serif text-[0.65rem] uppercase tracking-[0.25em] text-[#e8c6a0]">Makeup Artist &middot; Ibiza</p>
+          <p class="font-serif text-[0.72rem] uppercase tracking-[0.25em] text-[#e8c6a0]">Makeup Artist &middot; Ibiza</p>
           <p class="mt-1 font-serif text-xl sm:text-2xl font-light italic">"Tu belleza, elevada a su máxima expresión."</p>
         </div>
       </div>
@@ -165,7 +171,7 @@
         <div class="relative aspect-[4/5] w-full overflow-hidden">
           <img decoding="async" src="images/IMG_1.PNG" alt="Maquillaje de novia" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#161514] via-black/40 to-transparent"></div>
-          <span class="absolute top-3.5 left-3.5 rounded-full bg-[#c4956a] px-3 py-1 text-[0.62rem] font-serif uppercase tracking-widest text-white shadow-md">
+          <span class="absolute top-3.5 left-3.5 rounded-full bg-[#9a6b43] px-3 py-1 text-[0.72rem] font-serif uppercase tracking-widest text-white shadow-md">
             Novias VIP
           </span>
         </div>
@@ -181,7 +187,7 @@
         <div class="relative aspect-[4/5] w-full overflow-hidden">
           <img decoding="async" src="images/IMG_3.PNG" alt="Maquillaje para eventos" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#161514] via-black/40 to-transparent"></div>
-          <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.62rem] font-serif uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
+          <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.72rem] font-serif uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
             Social
           </span>
         </div>
@@ -197,7 +203,7 @@
         <div class="relative aspect-[4/5] w-full overflow-hidden">
           <img decoding="async" src="images/IMG_4.PNG" alt="Maquillaje editorial" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#161514] via-black/40 to-transparent"></div>
-          <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.62rem] font-serif uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
+          <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.72rem] font-serif uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
             Moda
           </span>
         </div>
@@ -213,7 +219,7 @@
         <div class="relative aspect-[4/5] w-full overflow-hidden">
           <img decoding="async" src="images/IMG_5.JPEG" alt="Maquillaje audiovisual" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#161514] via-black/40 to-transparent"></div>
-          <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.62rem] font-serif uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
+          <span class="absolute top-3.5 left-3.5 rounded-full bg-black/60 px-3 py-1 text-[0.72rem] font-serif uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
             Cine &amp; TV
           </span>
         </div>
@@ -228,7 +234,7 @@
     <!-- CTA servicios -->
     <div scrollReveal="up" class="mt-14 text-center">
       <a routerLink="/servicios"
-        class="inline-flex items-center gap-3 rounded-full bg-[#c4956a] px-10 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white transition-all duration-300 hover:bg-[#a87a52] hover:shadow-[0_10px_35px_rgba(196,149,106,0.4)] active:scale-95"
+        class="inline-flex items-center gap-3 rounded-full bg-[#9a6b43] px-10 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white transition-all duration-300 hover:bg-[#7a5130] hover:shadow-[0_10px_35px_rgba(196,149,106,0.4)] active:scale-95"
         id="inicio-link-servicios">
         <span>Explorar todos los servicios</span>
         <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -247,8 +253,8 @@
       
       <div class="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
-          <span class="inline-flex items-center gap-2 rounded-full border border-[#c4956a]/50 bg-[#c4956a]/15 px-3.5 py-1 text-[0.65rem] font-serif uppercase tracking-widest text-[#e8c6a0]">
-            <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a] animate-pulse"></span>
+          <span class="inline-flex items-center gap-2 rounded-full border border-[#c4956a]/50 bg-[#c4956a]/15 px-3.5 py-1 text-[0.72rem] font-serif uppercase tracking-widest text-[#e8c6a0]">
+            <span class="h-1.5 w-1.5 rounded-full bg-[#9a6b43] animate-pulse"></span>
             Aprende Conmigo Desde Casa
           </span>
           
@@ -262,13 +268,13 @@
 
           <div class="mt-6 flex items-baseline gap-4">
             <span class="font-serif text-3xl sm:text-4xl font-semibold text-white">45 €</span>
-            <span class="font-serif text-lg text-white/40 line-through">55 €</span>
-            <span class="text-xs uppercase tracking-wider text-[#c4956a] font-semibold">6 meses de acceso</span>
+            <span class="font-serif text-lg text-white/70 line-through">55 €</span>
+            <span class="text-xs uppercase tracking-wider text-[#8a5f3a] font-semibold">6 meses de acceso</span>
           </div>
 
           <div class="mt-8 flex flex-wrap gap-4">
             <a routerLink="/cursos"
-               class="inline-flex items-center gap-2 rounded-full bg-[#c4956a] px-8 py-3.5 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-lg transition-all hover:bg-[#a87a52] active:scale-95">
+               class="inline-flex items-center gap-2 rounded-full bg-[#9a6b43] px-8 py-3.5 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-lg transition-all hover:bg-[#7a5130] active:scale-95">
               <span>Ver Masterclass</span>
               <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </a>
@@ -292,11 +298,11 @@
 
     <!-- Encabezado -->
     <div class="mb-14 text-center">
-      <p scrollReveal="up" class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.3em] text-[#c4956a]">Galería de Trabajos</p>
+      <p scrollReveal="up" class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.3em] text-[#8a5f3a]">Galería de Trabajos</p>
       <h2 scrollReveal="up" scrollDelay="1" class="font-serif text-[clamp(2.2rem,4vw,3.2rem)] font-light leading-[1.2] text-[#1a1a1a]">
-        Momentos <em class="italic text-[#c4956a]">inolvidables</em>
+        Momentos <em class="italic text-[#8a5f3a]">inolvidables</em>
       </h2>
-      <div class="mx-auto mt-4 h-[1.5px] w-12 bg-[#c4956a]"></div>
+      <div class="mx-auto mt-4 h-[1.5px] w-12 bg-[#9a6b43]"></div>
     </div>
 
     <!-- Carrusel -->
@@ -343,13 +349,21 @@
       </button>
 
       <!-- Puntos de paginación -->
-      <div class="mt-6 flex items-center justify-center gap-2.5" role="tablist" aria-label="Diapositivas">
+      <div class="mt-4 flex justify-center">
+        <button type="button" (click)="toggleMovimiento()" [attr.aria-pressed]="movimientoPausado()"
+                class="min-h-11 cursor-pointer rounded-full border border-[#1a1a1a]/20 bg-transparent px-4 font-sans text-xs font-medium text-[#444] transition-colors hover:border-[#9a6b43] hover:text-[#7a5130]">
+          {{ movimientoPausado() ? 'Reanudar pase de fotos' : 'Pausar pase de fotos' }}
+        </button>
+      </div>
+      <div class="mt-4 flex items-center justify-center gap-1" role="tablist" aria-label="Diapositivas">
         @for (slide of slides; track slide.src; let i = $index) {
-        <button class="h-2 rounded-full border-none p-0 transition-all duration-300 cursor-pointer" [class.w-2]="currentIndex() !== i"
-          [class.bg-[#1a1a1a]/20]="currentIndex() !== i" [class.w-7]="currentIndex() === i"
-          [class.bg-[#c4956a]]="currentIndex() === i" (click)="goTo(i)"
-          [attr.aria-label]="'Ir a diapositiva ' + (i + 1)" role="tab"
-          [id]="'carousel-dot-' + i"></button>
+        <button type="button" class="flex h-6 min-w-6 items-center justify-center border-none bg-transparent p-0 cursor-pointer"
+          (click)="goTo(i)" [attr.aria-label]="'Ir a diapositiva ' + (i + 1)" role="tab"
+          [attr.aria-selected]="currentIndex() === i" [id]="'carousel-dot-' + i">
+          <span class="block h-2 rounded-full transition-all duration-300" [class.w-2]="currentIndex() !== i"
+            [class.bg-[#1a1a1a]/40]="currentIndex() !== i" [class.w-7]="currentIndex() === i"
+            [class.bg-[#9a6b43]]="currentIndex() === i"></span>
+        </button>
         }
       </div>
     </div>
@@ -364,11 +378,11 @@
   <div class="mx-auto max-w-[1140px]">
     
     <div class="text-center mb-16">
-      <p scrollReveal="up" class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#c4956a]">Testimonios &amp; Reseñas</p>
+      <p scrollReveal="up" class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#8a5f3a]">Testimonios &amp; Reseñas</p>
       <h2 scrollReveal="up" scrollDelay="1" class="mt-2 font-serif text-[clamp(2.2rem,4vw,3.2rem)] font-light text-[#1a1a1a]">
-        Lo que dicen mis <em class="italic text-[#c4956a]">clientas</em>
+        Lo que dicen mis <em class="italic text-[#8a5f3a]">clientas</em>
       </h2>
-      <div class="mx-auto mt-4 h-[1.5px] w-12 bg-[#c4956a]"></div>
+      <div class="mx-auto mt-4 h-[1.5px] w-12 bg-[#9a6b43]"></div>
     </div>
 
     <div class="grid gap-8 sm:grid-cols-3">
@@ -376,7 +390,7 @@
         <article scrollReveal="up" class="rounded-3xl bg-white p-8 border border-[#ede0d0] shadow-sm flex flex-col justify-between">
           <div>
             <!-- Estrellas doradas -->
-            <div class="flex gap-1 text-[#c4956a] mb-4">
+            <div class="flex gap-1 text-[#8a5f3a] mb-4">
               @for (star of [1,2,3,4,5]; track star) {
                 <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
@@ -389,7 +403,7 @@
           </div>
           <div class="mt-6 pt-5 border-t border-[#f2eae4]">
             <span class="block font-serif text-sm font-medium text-[#1a1a1a]">{{ testimonio.nombre }}</span>
-            <span class="block text-[0.65rem] text-[#888] font-sans">{{ testimonio.tipo }}</span>
+            <span class="block text-[0.72rem] text-[#666] font-sans">{{ testimonio.tipo }}</span>
           </div>
         </article>
       }

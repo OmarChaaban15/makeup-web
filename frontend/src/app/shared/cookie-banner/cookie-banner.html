@@ -9,7 +9,7 @@
     <!-- Icono + texto -->
     <div class="flex flex-1 items-start gap-3 sm:gap-4">
       <!-- Icono cookie -->
-      <div class="mt-[2px] flex-none text-[#c4956a]">
+      <div class="mt-[2px] flex-none text-[#8a5f3a]">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
           <path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/>
@@ -19,7 +19,7 @@
         {{ t().aviso }}
         <a routerLink="/politica-privacidad"
            (click)="accept()"
-           class="ml-1 font-semibold text-[#c4956a] underline underline-offset-2 transition-colors hover:text-[#a07850]">
+           class="ml-1 font-semibold text-[#8a5f3a] underline underline-offset-2 transition-colors hover:text-[#a07850]">
           {{ t().mas }}
         </a>
       </p>
@@ -35,15 +35,15 @@
     -->
     <div class="banner-acciones grid grid-cols-3 gap-2 sm:flex sm:flex-shrink-0 sm:flex-wrap sm:gap-3 w-full sm:w-auto">
       <button (click)="configure()"
-              class="cursor-pointer border border-black/[0.15] bg-transparent px-2 sm:px-5 py-[0.55rem] text-center font-serif text-[0.68rem] sm:text-[0.72rem] font-semibold uppercase tracking-[0.08em] sm:tracking-[0.14em] text-[#555] transition-all duration-200 hover:border-[#c4956a] hover:text-[#c4956a] active:scale-95">
+              class="cursor-pointer border border-black/[0.15] bg-transparent px-2 sm:px-5 py-[0.55rem] text-center font-serif text-[0.72rem] sm:text-[0.72rem] font-semibold uppercase tracking-[0.08em] sm:tracking-[0.14em] text-[#555] transition-all duration-200 hover:border-[#c4956a] hover:text-[#c4956a] active:scale-95">
         {{ t().configurar }}
       </button>
       <button (click)="rejectAll()"
-              class="cursor-pointer border border-black/[0.15] bg-transparent px-2 sm:px-5 py-[0.55rem] text-center font-serif text-[0.68rem] sm:text-[0.72rem] font-semibold uppercase tracking-[0.08em] sm:tracking-[0.14em] text-[#555] transition-all duration-200 hover:border-[#c4956a] hover:text-[#c4956a] active:scale-95">
+              class="cursor-pointer border border-black/[0.15] bg-transparent px-2 sm:px-5 py-[0.55rem] text-center font-serif text-[0.72rem] sm:text-[0.72rem] font-semibold uppercase tracking-[0.08em] sm:tracking-[0.14em] text-[#555] transition-all duration-200 hover:border-[#c4956a] hover:text-[#c4956a] active:scale-95">
         {{ t().rechazar }}
       </button>
       <button (click)="accept()"
-              class="cursor-pointer border-[1.5px] border-[#c4956a] bg-[#c4956a] px-2 sm:px-6 py-[0.55rem] text-center font-serif text-[0.68rem] sm:text-[0.72rem] font-semibold uppercase tracking-[0.08em] sm:tracking-[0.14em] text-white transition-all duration-200 hover:bg-transparent hover:text-[#c4956a] active:scale-95">
+              class="cursor-pointer border-[1.5px] border-[#c4956a] bg-[#9a6b43] px-2 sm:px-6 py-[0.55rem] text-center font-serif text-[0.72rem] sm:text-[0.72rem] font-semibold uppercase tracking-[0.08em] sm:tracking-[0.14em] text-white transition-all duration-200 hover:bg-transparent hover:text-[#c4956a] active:scale-95">
         {{ t().aceptar }}
       </button>
     </div>
@@ -61,10 +61,10 @@
         <div class="flex items-start justify-between gap-6">
           <div>
             <p class="font-serif text-[0.82rem] font-semibold text-[#1a1a1a]">{{ t().nec }}</p>
-            <p class="mt-1 font-serif text-[0.75rem] leading-relaxed text-[#777]">{{ t().necDesc }}</p>
+            <p class="mt-1 font-serif text-[0.75rem] leading-relaxed text-[#666]">{{ t().necDesc }}</p>
           </div>
           <div class="mt-1 flex-none">
-            <span class="font-serif text-[0.68rem] uppercase tracking-[0.1em] text-[#c4956a]">{{ t().siempre }}</span>
+            <span class="font-serif text-[0.72rem] uppercase tracking-[0.1em] text-[#8a5f3a]">{{ t().siempre }}</span>
           </div>
         </div>
 
@@ -72,11 +72,11 @@
         <div class="flex items-start justify-between gap-6 border-t border-black/[0.06] pt-4">
           <div>
             <p class="font-serif text-[0.82rem] font-semibold text-[#1a1a1a]">{{ t().ana }}</p>
-            <p class="mt-1 font-serif text-[0.75rem] leading-relaxed text-[#777]">{{ t().anaDesc }}</p>
+            <p class="mt-1 font-serif text-[0.75rem] leading-relaxed text-[#666]">{{ t().anaDesc }}</p>
           </div>
           <div class="mt-1 flex-none">
             <button (click)="analyticsEnabled = !analyticsEnabled"
-                    [class.bg-[#c4956a]]="analyticsEnabled"
+                    [class.bg-[#9a6b43]]="analyticsEnabled"
                     [class.bg-[#ddd]]="!analyticsEnabled"
                     class="relative h-6 w-11 cursor-pointer rounded-full border-none transition-colors duration-300">
               <span [class.translate-x-5]="analyticsEnabled"
@@ -90,11 +90,11 @@
         <div class="flex items-start justify-between gap-6 border-t border-black/[0.06] pt-4">
           <div>
             <p class="font-serif text-[0.82rem] font-semibold text-[#1a1a1a]">{{ t().mkt }}</p>
-            <p class="mt-1 font-serif text-[0.75rem] leading-relaxed text-[#777]">{{ t().mktDesc }}</p>
+            <p class="mt-1 font-serif text-[0.75rem] leading-relaxed text-[#666]">{{ t().mktDesc }}</p>
           </div>
           <div class="mt-1 flex-none">
             <button (click)="marketingEnabled = !marketingEnabled"
-                    [class.bg-[#c4956a]]="marketingEnabled"
+                    [class.bg-[#9a6b43]]="marketingEnabled"
                     [class.bg-[#ddd]]="!marketingEnabled"
                     class="relative h-6 w-11 cursor-pointer rounded-full border-none transition-colors duration-300">
               <span [class.translate-x-5]="marketingEnabled"
@@ -112,7 +112,7 @@
           {{ t().cancelar }}
         </button>
         <button (click)="saveConfig()"
-                class="cursor-pointer border-[1.5px] border-[#c4956a] bg-[#c4956a] px-6 py-[0.45rem] font-serif text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-white transition-all hover:bg-transparent hover:text-[#c4956a]">
+                class="cursor-pointer border-[1.5px] border-[#c4956a] bg-[#9a6b43] px-6 py-[0.45rem] font-serif text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-white transition-all hover:bg-transparent hover:text-[#c4956a]">
           {{ t().guardar }}
         </button>
       </div>

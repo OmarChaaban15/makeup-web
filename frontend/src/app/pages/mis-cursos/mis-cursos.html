@@ -15,8 +15,8 @@
 
         <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <div class="max-w-[650px]">
-            <div class="inline-flex items-center gap-2 rounded-full border border-[#c4956a]/40 bg-[#c4956a]/15 px-3.5 py-1 text-[0.68rem] font-serif uppercase tracking-[0.25em] text-[#e8c6a0]">
-              <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a] animate-pulse"></span>
+            <div class="inline-flex items-center gap-2 rounded-full border border-[#c4956a]/40 bg-[#c4956a]/15 px-3.5 py-1 text-[0.72rem] font-serif uppercase tracking-[0.25em] text-[#e8c6a0]">
+              <span class="h-1.5 w-1.5 rounded-full bg-[#9a6b43] animate-pulse"></span>
               Aula Virtual Exclusiva
             </div>
             <h1 class="mt-4 font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-tight">
@@ -31,11 +31,11 @@
           <!-- Métricas del alumno -->
           <div class="flex flex-row md:flex-col gap-4 shrink-0">
             <div class="flex-1 md:flex-initial rounded-2xl bg-white/5 p-4 sm:px-6 sm:py-4 border border-white/10 backdrop-blur-md">
-              <span class="block font-sans text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[#c4956a]">Cursos activos</span>
+              <span class="block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[#c4956a]">Cursos activos</span>
               <span class="mt-1 block font-serif text-2xl sm:text-3xl font-normal text-white">{{ cursos().length }}</span>
             </div>
             <div class="flex-1 md:flex-initial rounded-2xl bg-white/5 p-4 sm:px-6 sm:py-4 border border-white/10 backdrop-blur-md">
-              <span class="block font-sans text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[#c4956a]">Resolución HD</span>
+              <span class="block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[#c4956a]">Resolución HD</span>
               <span class="mt-1 block font-serif text-sm sm:text-base font-normal text-white">1080p · Móvil y PC</span>
             </div>
           </div>
@@ -56,11 +56,11 @@
       <div class="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-[#eadecd] pb-5">
         <div>
           <h2 class="font-serif text-[1.4rem] font-normal text-[#1a1a1a]">Tus Masterclasses adquiridas</h2>
-          <p class="mt-0.5 text-xs text-[#777]">Alta definición · 6 meses de acceso desde la compra</p>
+          <p class="mt-0.5 text-xs text-[#666]">Alta definición · 6 meses de acceso desde la compra</p>
         </div>
         <div class="flex items-center gap-3">
           <a routerLink="/cursos"
-             class="inline-flex items-center gap-2 rounded-full border border-[#c4956a] px-5 py-2 text-xs font-serif font-semibold uppercase tracking-wider text-[#c4956a] transition-all duration-300 hover:bg-[#c4956a] hover:text-white">
+             class="inline-flex items-center gap-2 rounded-full border border-[#c4956a] px-5 py-2 text-xs font-serif font-semibold uppercase tracking-wider text-[#8a5f3a] transition-all duration-300 hover:bg-[#c4956a] hover:text-white">
             <span>Explorar catálogo</span>
             <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -84,14 +84,14 @@
           }
         </div>
       } @else if (errorMsg()) {
-        <div class="mx-auto max-w-[500px] rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-sm text-red-600">
+        <div role="alert" class="mx-auto max-w-[500px] rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-sm text-red-600">
           {{ errorMsg() }}
         </div>
       } @else if (cursos().length === 0) {
         
         <!-- ESTADO VACÍO ELEGANTE -->
         <div class="cursos-fade-up mx-auto max-w-[620px] rounded-[32px] border border-[#ede0d0] bg-white p-10 sm:p-14 text-center shadow-[0_12px_40px_rgba(26,26,26,0.04)]">
-          <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#fdf8f4] text-[#c4956a] ring-8 ring-[#faf4ee]">
+          <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#fdf8f4] text-[#8a5f3a] ring-8 ring-[#faf4ee]">
             <svg class="h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.3">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
             </svg>
@@ -134,11 +134,11 @@
                 <!-- Badges superiores -->
                 <div class="absolute left-3.5 top-3.5 right-3.5 flex items-center justify-between z-10">
                   @if (curso.nivel) {
-                    <span class="rounded-full bg-black/60 px-3 py-1 font-serif text-[0.62rem] font-semibold uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
+                    <span class="rounded-full bg-black/60 px-3 py-1 font-serif text-[0.72rem] font-semibold uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
                       {{ curso.nivel }}
                     </span>
                   } @else {
-                    <span class="rounded-full bg-black/60 px-3 py-1 font-serif text-[0.62rem] font-semibold uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
+                    <span class="rounded-full bg-black/60 px-3 py-1 font-serif text-[0.72rem] font-semibold uppercase tracking-widest text-[#e8c6a0] backdrop-blur-md border border-white/10">
                       Masterclass
                     </span>
                   }
@@ -147,7 +147,7 @@
                   <button type="button"
                           (click)="toggleCompletado(curso.id, $event)"
                           [title]="isCompletado(curso.id) ? 'Marcar como pendiente' : 'Marcar como completado'"
-                          class="flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.62rem] font-sans font-medium transition-all backdrop-blur-md cursor-pointer border"
+                          class="flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.72rem] font-sans font-medium transition-all backdrop-blur-md cursor-pointer border"
                           [class.bg-emerald-500]="isCompletado(curso.id)"
                           [class.text-white]="isCompletado(curso.id)"
                           [class.border-emerald-400]="isCompletado(curso.id)"
@@ -164,7 +164,7 @@
                 <!-- Botón flotante Play central: solo si el acceso sigue vivo -->
                 @if (curso.acceso_vigente) {
                   <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="flex h-14 w-14 items-center justify-center rounded-full bg-[#c4956a] text-white shadow-xl transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#a87a52]">
+                    <div class="flex h-14 w-14 items-center justify-center rounded-full bg-[#9a6b43] text-white shadow-xl transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#7a5130]">
                       <svg class="h-6 w-6 ml-0.5" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M8 5v14l11-7z"/>
                       </svg>
@@ -178,7 +178,7 @@
                     <span class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-white">
                       Acceso finalizado
                     </span>
-                    <span class="font-sans text-[0.66rem] font-light text-white/70">
+                    <span class="font-sans text-[0.72rem] font-light text-white/70">
                       Terminó el {{ fechaFinAcceso(curso) }}
                     </span>
                   </div>
@@ -187,13 +187,13 @@
                 <!-- Duración / Formato en footer de imagen -->
                 <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs text-white/80">
                   <span class="flex items-center gap-1.5 text-[0.72rem] font-light">
-                    <svg class="h-3.5 w-3.5 text-[#c4956a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <svg class="h-3.5 w-3.5 text-[#8a5f3a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                       <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     Video On-Demand
                   </span>
-                  <span class="text-[0.68rem] text-white/60 uppercase tracking-wider font-semibold">HD 1080p</span>
+                  <span class="text-[0.72rem] text-white/60 uppercase tracking-wider font-semibold">HD 1080p</span>
                 </div>
               </div>
 
@@ -212,13 +212,13 @@
                 <!-- Periodo de acceso. Visible siempre: es una condicion de
                      lo comprado, no un detalle que se pueda esconder. -->
                 @if (curso.acceso_expira_en) {
-                  <p class="mt-4 inline-flex items-center gap-1.5 self-start rounded-full px-3 py-1 font-sans text-[0.68rem] font-medium"
+                  <p class="mt-4 inline-flex items-center gap-1.5 self-start rounded-full px-3 py-1 font-sans text-[0.72rem] font-medium"
                      [class.bg-[#faf5f0]]="curso.acceso_vigente && !accesoTerminaPronto(curso)"
                      [class.text-[#8a6d4f]]="curso.acceso_vigente && !accesoTerminaPronto(curso)"
                      [class.bg-amber-50]="accesoTerminaPronto(curso)"
                      [class.text-amber-700]="accesoTerminaPronto(curso)"
                      [class.bg-[#f4f0ed]]="!curso.acceso_vigente"
-                     [class.text-[#888]]="!curso.acceso_vigente">
+                     [class.text-[#666]]="!curso.acceso_vigente">
                     <svg class="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 2"/>
                     </svg>
@@ -237,14 +237,14 @@
                   <div class="flex items-center gap-2">
                     <span class="h-2 w-2 rounded-full"
                           [class.bg-emerald-500]="isCompletado(curso.id)"
-                          [class.bg-[#c4956a]]="!isCompletado(curso.id)"></span>
-                    <span class="text-xs font-serif uppercase tracking-wider text-[#777]">
+                          [class.bg-[#9a6b43]]="!isCompletado(curso.id)"></span>
+                    <span class="text-xs font-serif uppercase tracking-wider text-[#666]">
                       {{ isCompletado(curso.id) ? 'Finalizado' : 'Listo para ver' }}
                     </span>
                   </div>
 
                   @if (curso.acceso_vigente) {
-                    <span class="inline-flex items-center gap-1 font-serif text-[0.75rem] font-semibold uppercase tracking-wider text-[#c4956a] group-hover:translate-x-0.5 transition-transform">
+                    <span class="inline-flex items-center gap-1 font-serif text-[0.75rem] font-semibold uppercase tracking-wider text-[#8a5f3a] group-hover:translate-x-0.5 transition-transform">
                       Reproducir
                       <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
@@ -253,7 +253,7 @@
                   } @else {
                     <a routerLink="/contacto"
                        (click)="$event.stopPropagation()"
-                       class="inline-flex items-center gap-1 font-serif text-[0.75rem] font-semibold uppercase tracking-wider text-[#888] underline underline-offset-2 hover:text-[#c4956a]">
+                       class="inline-flex items-center gap-1 font-serif text-[0.75rem] font-semibold uppercase tracking-wider text-[#666] underline underline-offset-2 hover:text-[#c4956a]">
                       Ampliar acceso
                     </a>
                   }
@@ -277,7 +277,7 @@
     <div class="mx-auto max-w-[1240px]">
       <div class="flex flex-col sm:flex-row items-center justify-between gap-6 rounded-2xl bg-[#faf5f0] p-6 sm:p-8 border border-[#ebded2]">
         <div class="flex items-center gap-4">
-          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#c4956a]/15 text-[#c4956a]">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#c4956a]/15 text-[#8a5f3a]">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
             </svg>
@@ -348,7 +348,7 @@
               <button type="button"
                       (click)="activeTab.set('temario')"
                       class="rounded-full px-4 py-1.5 text-xs font-serif uppercase tracking-wider transition-all cursor-pointer"
-                      [class.bg-[#c4956a]]="activeTab() === 'temario'"
+                      [class.bg-[#9a6b43]]="activeTab() === 'temario'"
                       [class.text-white]="activeTab() === 'temario'"
                       [class.bg-white/5]="activeTab() !== 'temario'"
                       [class.text-white/60]="activeTab() !== 'temario'">
@@ -357,7 +357,7 @@
               <button type="button"
                       (click)="activeTab.set('recursos')"
                       class="rounded-full px-4 py-1.5 text-xs font-serif uppercase tracking-wider transition-all cursor-pointer"
-                      [class.bg-[#c4956a]]="activeTab() === 'recursos'"
+                      [class.bg-[#9a6b43]]="activeTab() === 'recursos'"
                       [class.text-white]="activeTab() === 'recursos'"
                       [class.bg-white/5]="activeTab() !== 'recursos'"
                       [class.text-white/60]="activeTab() !== 'recursos'">
@@ -398,15 +398,15 @@
               <h4 class="font-serif text-base text-[#e8c6a0]">Kit recomendado para esta práctica:</h4>
               <ul class="space-y-2 text-xs font-light text-white/80">
                 <li class="flex items-center gap-2">
-                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#9a6b43]"></span>
                   Hidratación y preparación previa de la piel según tu tipo de cutis.
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#9a6b43]"></span>
                   Brochas de difuminado fino y esponja humedecida.
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#9a6b43]"></span>
                   Paleta de sombras neutras y corrector de alta cobertura.
                 </li>
               </ul>

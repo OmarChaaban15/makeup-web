@@ -19,28 +19,33 @@ export interface TextosNavbar {
   iniciar: string;
   menuUsuario: string;
   abrirMenu: string;
+  saltar: string;
 }
 
 export const NAVBAR: Record<Idioma, TextosNavbar> = {
   es: {
     inicio: 'Inicio', sobre: 'Sobre mí', servicios: 'Servicios', cursos: 'Cursos', blog: 'Blog', contacto: 'Contacto',
     misCursos: 'Mis Cursos', contactar: 'Contactar ahora', sesion: 'Sesión iniciada', cerrar: 'Cerrar sesión',
-    iniciar: 'Iniciar sesión', menuUsuario: 'Menú de usuario', abrirMenu: 'Abrir menú'
+    iniciar: 'Iniciar sesión', menuUsuario: 'Menú de usuario', abrirMenu: 'Abrir menú',
+    saltar: 'Saltar al contenido'
   },
   en: {
     inicio: 'Home', sobre: 'About', servicios: 'Services', cursos: 'Courses (ES)', blog: 'Blog (ES)', contacto: 'Contact',
     misCursos: 'My Courses', contactar: 'Get in touch', sesion: 'Signed in', cerrar: 'Log out',
-    iniciar: 'Log in', menuUsuario: 'User menu', abrirMenu: 'Open menu'
+    iniciar: 'Log in', menuUsuario: 'User menu', abrirMenu: 'Open menu',
+    saltar: 'Skip to content'
   },
   it: {
     inicio: 'Home', sobre: 'Chi sono', servicios: 'Servizi', cursos: 'Corsi (ES)', blog: 'Blog (ES)', contacto: 'Contatti',
     misCursos: 'I miei corsi', contactar: 'Contattami', sesion: 'Accesso effettuato', cerrar: 'Esci',
-    iniciar: 'Accedi', menuUsuario: 'Menu utente', abrirMenu: 'Apri il menu'
+    iniciar: 'Accedi', menuUsuario: 'Menu utente', abrirMenu: 'Apri il menu',
+    saltar: 'Vai al contenuto'
   },
   de: {
     inicio: 'Start', sobre: 'Über mich', servicios: 'Leistungen', cursos: 'Kurse (ES)', blog: 'Blog (ES)', contacto: 'Kontakt',
     misCursos: 'Meine Kurse', contactar: 'Kontakt aufnehmen', sesion: 'Angemeldet', cerrar: 'Abmelden',
-    iniciar: 'Anmelden', menuUsuario: 'Benutzermenü', abrirMenu: 'Menü öffnen'
+    iniciar: 'Anmelden', menuUsuario: 'Benutzermenü', abrirMenu: 'Menü öffnen',
+    saltar: 'Zum Inhalt springen'
   }
 };
 

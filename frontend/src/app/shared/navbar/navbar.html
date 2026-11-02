@@ -37,9 +37,9 @@
       <span class="font-serif text-[1rem] min-[380px]:text-[1.15rem] sm:text-[1.25rem] md:text-[1.32rem] font-bold uppercase leading-none tracking-[0.12em] sm:tracking-[0.16em] transition-colors duration-300 group-hover:text-[#c4956a]"
             [class.text-white]="isTransparent"
             [class.text-[#1a1a1a]]="!isTransparent">MAKEUP BY YONA</span>
-      <span class="font-serif text-[0.52rem] sm:text-[0.6rem] font-normal italic tracking-[0.04em] mt-0.5"
+      <span class="font-serif text-[0.52rem] sm:text-[0.72rem] font-normal italic tracking-[0.04em] mt-0.5"
             [class.text-white/75]="isTransparent"
-            [class.text-[#888]]="!isTransparent">Realiza tu belleza &middot; Enhance your beauty</span>
+            [class.text-[#666]]="!isTransparent">Realiza tu belleza &middot; Enhance your beauty</span>
     </a>
 
     <!-- Links derecha (Escritorio) -->
@@ -62,7 +62,7 @@
       </li>
       <li>
         <a [routerLink]="r().contacto" routerLinkActive="active" id="nav-contacto"
-           class="inline-flex min-w-[7.5rem] xl:min-w-[8.5rem] shrink-0 items-center justify-center whitespace-nowrap border-[1.5px] border-[#c4956a] px-[1rem] py-[0.5rem] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#c4956a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white lg:px-[1.2rem] lg:py-[0.55rem]"
+           class="inline-flex min-w-[7.5rem] xl:min-w-[8.5rem] shrink-0 items-center justify-center whitespace-nowrap border-[1.5px] border-[#c4956a] px-[1rem] py-[0.5rem] font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#8a5f3a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white lg:px-[1.2rem] lg:py-[0.55rem]"
            [class.border-white]="isTransparent"
            [class.text-white]="isTransparent"
            [class.hover:border-[#c4956a]]="isTransparent">
@@ -83,7 +83,7 @@
       <!-- ✦ Usuario (escritorio) -->
       <li class="relative ml-2">
         @if (isLoggedIn) {
-          <button (click)="toggleUserMenu($event)"
+          <button (click)="toggleUserMenu($event)" [attr.aria-expanded]="userMenuOpen" aria-haspopup="menu"
                   class="flex cursor-pointer items-center gap-2 border-none bg-transparent p-[6px] transition-colors duration-300 hover:text-[#c4956a]"
                   [class.text-white]="isTransparent"
                   [class.text-[#1a1a1a]]="!isTransparent"
@@ -103,7 +103,7 @@
             <div class="absolute right-0 top-full mt-3 w-60 overflow-hidden rounded-[14px] border border-black/[0.06] bg-white py-2 shadow-[0_12px_40px_rgba(0,0,0,0.12)]"
                  (click)="$event.stopPropagation()">
               <div class="border-b border-black/[0.06] px-4 py-3">
-                <p class="font-sans text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-[#888]">{{ t().sesion }}</p>
+                <p class="font-sans text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[#666]">{{ t().sesion }}</p>
                 <p class="mt-1 truncate font-serif text-[0.95rem] font-light text-[#1a1a1a]">{{ userName }}</p>
               </div>
               <button (click)="logout()"
@@ -132,7 +132,7 @@
       <!-- ✦ Selector de Idioma (ES / EN / IT / DE) Escritorio -->
       <li class="relative ml-1">
         <button type="button"
-                (click)="toggleLangMenu($event)"
+                (click)="toggleLangMenu($event)" [attr.aria-expanded]="langMenuOpen" aria-haspopup="menu"
                 class="flex cursor-pointer items-center gap-2 rounded-full border px-2.5 py-1 transition-all duration-300 backdrop-blur-sm"
                 [class.border-white/40]="isTransparent"
                 [class.bg-white/10]="isTransparent"
@@ -173,7 +173,7 @@
             <!-- Opción ES -->
             <button type="button" (click)="selectLanguage('es', $event)"
                     class="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-left font-serif text-xs transition-colors hover:bg-[#faf4ee]"
-                    [class.text-[#c4956a]]="idiomaActual() === 'es'"
+                    [class.text-[#8a5f3a]]="idiomaActual() === 'es'"
                     [class.font-bold]="idiomaActual() === 'es'"
                     [class.text-[#1a1a1a]]="idiomaActual() !== 'es'">
               <span class="flex items-center gap-2.5">
@@ -181,14 +181,14 @@
                 <span>Español</span>
               </span>
               @if (idiomaActual() === 'es') {
-                <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                <span class="h-1.5 w-1.5 rounded-full bg-[#9a6b43]"></span>
               }
             </button>
 
             <!-- Opción EN -->
             <button type="button" (click)="selectLanguage('en', $event)"
                     class="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-left font-serif text-xs transition-colors hover:bg-[#faf4ee]"
-                    [class.text-[#c4956a]]="idiomaActual() === 'en'"
+                    [class.text-[#8a5f3a]]="idiomaActual() === 'en'"
                     [class.font-bold]="idiomaActual() === 'en'"
                     [class.text-[#1a1a1a]]="idiomaActual() !== 'en'">
               <span class="flex items-center gap-2.5">
@@ -196,14 +196,14 @@
                 <span>English</span>
               </span>
               @if (idiomaActual() === 'en') {
-                <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                <span class="h-1.5 w-1.5 rounded-full bg-[#9a6b43]"></span>
               }
             </button>
 
             <!-- Opción IT -->
             <button type="button" (click)="selectLanguage('it', $event)"
                     class="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-left font-serif text-xs transition-colors hover:bg-[#faf4ee]"
-                    [class.text-[#c4956a]]="idiomaActual() === 'it'"
+                    [class.text-[#8a5f3a]]="idiomaActual() === 'it'"
                     [class.font-bold]="idiomaActual() === 'it'"
                     [class.text-[#1a1a1a]]="idiomaActual() !== 'it'">
               <span class="flex items-center gap-2.5">
@@ -211,14 +211,14 @@
                 <span>Italiano</span>
               </span>
               @if (idiomaActual() === 'it') {
-                <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                <span class="h-1.5 w-1.5 rounded-full bg-[#9a6b43]"></span>
               }
             </button>
 
             <!-- Opción DE -->
             <button type="button" (click)="selectLanguage('de', $event)"
                     class="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-left font-serif text-xs transition-colors hover:bg-[#faf4ee]"
-                    [class.text-[#c4956a]]="idiomaActual() === 'de'"
+                    [class.text-[#8a5f3a]]="idiomaActual() === 'de'"
                     [class.font-bold]="idiomaActual() === 'de'"
                     [class.text-[#1a1a1a]]="idiomaActual() !== 'de'">
               <span class="flex items-center gap-2.5">
@@ -226,7 +226,7 @@
                 <span>Deutsch</span>
               </span>
               @if (idiomaActual() === 'de') {
-                <span class="h-1.5 w-1.5 rounded-full bg-[#c4956a]"></span>
+                <span class="h-1.5 w-1.5 rounded-full bg-[#9a6b43]"></span>
               }
             </button>
           </div>
@@ -249,7 +249,8 @@
       </button>
 
       <button class="hamburger-btn flex h-10 w-10 cursor-pointer items-center justify-center flex-col gap-[5px] border-none bg-transparent"
-              (click)="toggleMenu()" [class.hamburger-open]="menuOpen" id="nav-hamburger" [attr.aria-label]="t().abrirMenu">
+              (click)="toggleMenu()" [class.hamburger-open]="menuOpen" id="nav-hamburger" [attr.aria-label]="t().abrirMenu"
+              [attr.aria-expanded]="menuOpen" aria-controls="menu-movil">
         <span class="block h-[1.5px] w-6 transition-all duration-300"
               [class.bg-white]="isTransparent"
               [class.bg-[#1a1a1a]]="!isTransparent"></span>
@@ -264,7 +265,7 @@
   </div>
 
   <!-- Menú móvil desplegable (Full height con scroll interno libre y fondo 100% opaco) -->
-  <div class="mobile-panel pointer-events-none fixed top-20 left-0 right-0 bottom-0 h-[calc(100dvh-5rem)] overflow-y-auto hidden flex-col gap-4 border-t border-black/[0.06] bg-[#faf8f6] px-6 pb-20 pt-5 opacity-0 shadow-[0_12px_40px_rgba(0,0,0,0.12)] transition-all duration-300 min-[1150px]:hidden z-[1050]"
+  <div id="menu-movil" [attr.inert]="menuOpen ? null : ''" class="mobile-panel pointer-events-none fixed top-20 left-0 right-0 bottom-0 h-[calc(100dvh-5rem)] overflow-y-auto hidden flex-col gap-4 border-t border-black/[0.06] bg-[#faf8f6] px-6 pb-20 pt-5 opacity-0 shadow-[0_12px_40px_rgba(0,0,0,0.12)] transition-all duration-300 min-[1150px]:hidden z-[1050]"
        [class.mobile-open]="menuOpen"
        (click)="closeMenu()">
 
@@ -275,9 +276,9 @@
               class="flex flex-1 items-center justify-center gap-1.5 rounded-xl py-2 transition-all"
               [class.bg-white]="idiomaActual() === 'es'"
               [class.shadow-sm]="idiomaActual() === 'es'"
-              [class.text-[#c4956a]]="idiomaActual() === 'es'"
+              [class.text-[#8a5f3a]]="idiomaActual() === 'es'"
               [class.font-bold]="idiomaActual() === 'es'"
-              [class.text-[#888]]="idiomaActual() !== 'es'">
+              [class.text-[#666]]="idiomaActual() !== 'es'">
         <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 750 500"><rect width="750" height="500" fill="#c60b1e"/><rect width="750" height="250" y="125" fill="#ffc400"/></svg>
         <span class="font-serif text-xs uppercase tracking-wider">ES</span>
       </button>
@@ -286,9 +287,9 @@
               class="flex flex-1 items-center justify-center gap-1.5 rounded-xl py-2 transition-all"
               [class.bg-white]="idiomaActual() === 'en'"
               [class.shadow-sm]="idiomaActual() === 'en'"
-              [class.text-[#c4956a]]="idiomaActual() === 'en'"
+              [class.text-[#8a5f3a]]="idiomaActual() === 'en'"
               [class.font-bold]="idiomaActual() === 'en'"
-              [class.text-[#888]]="idiomaActual() !== 'en'">
+              [class.text-[#666]]="idiomaActual() !== 'en'">
         <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 60 30"><clipPath id="ms2"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="mt2"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#ms2)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#mt2)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>
         <span class="font-serif text-xs uppercase tracking-wider">EN</span>
       </button>
@@ -297,9 +298,9 @@
               class="flex flex-1 items-center justify-center gap-1.5 rounded-xl py-2 transition-all"
               [class.bg-white]="idiomaActual() === 'it'"
               [class.shadow-sm]="idiomaActual() === 'it'"
-              [class.text-[#c4956a]]="idiomaActual() === 'it'"
+              [class.text-[#8a5f3a]]="idiomaActual() === 'it'"
               [class.font-bold]="idiomaActual() === 'it'"
-              [class.text-[#888]]="idiomaActual() !== 'it'">
+              [class.text-[#666]]="idiomaActual() !== 'it'">
         <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 3 2"><rect width="1" height="2" fill="#009246"/><rect width="1" height="2" x="1" fill="#fff"/><rect width="1" height="2" x="2" fill="#ce2b37"/></svg>
         <span class="font-serif text-xs uppercase tracking-wider">IT</span>
       </button>
@@ -308,56 +309,56 @@
               class="flex flex-1 items-center justify-center gap-1.5 rounded-xl py-2 transition-all"
               [class.bg-white]="idiomaActual() === 'de'"
               [class.shadow-sm]="idiomaActual() === 'de'"
-              [class.text-[#c4956a]]="idiomaActual() === 'de'"
+              [class.text-[#8a5f3a]]="idiomaActual() === 'de'"
               [class.font-bold]="idiomaActual() === 'de'"
-              [class.text-[#888]]="idiomaActual() !== 'de'">
+              [class.text-[#666]]="idiomaActual() !== 'de'">
         <svg class="h-3 w-4 shrink-0 rounded-[2px] shadow-sm overflow-hidden" viewBox="0 0 5 3"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#dd0000"/><rect width="5" height="1" y="2" fill="#ffce00"/></svg>
         <span class="font-serif text-xs uppercase tracking-wider">DE</span>
       </button>
     </div>
 
-    <a [routerLink]="r().inicio" routerLinkActive="!text-[#c4956a]" [routerLinkActiveOptions]="{exact:true}"
+    <a [routerLink]="r().inicio" routerLinkActive="!text-[#8a5f3a]" [routerLinkActiveOptions]="{exact:true}"
        class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
       <span>{{ t().inicio }}</span>
-      <span class="text-xs text-[#c4956a]">→</span>
+      <span class="text-xs text-[#8a5f3a]">→</span>
     </a>
-    <a [routerLink]="r().sobre" routerLinkActive="!text-[#c4956a]"
+    <a [routerLink]="r().sobre" routerLinkActive="!text-[#8a5f3a]"
        class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
       <span>{{ t().sobre }}</span>
-      <span class="text-xs text-[#c4956a]">→</span>
+      <span class="text-xs text-[#8a5f3a]">→</span>
     </a>
-    <a [routerLink]="r().servicios" routerLinkActive="!text-[#c4956a]"
+    <a [routerLink]="r().servicios" routerLinkActive="!text-[#8a5f3a]"
        class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
       <span>{{ t().servicios }}</span>
-      <span class="text-xs text-[#c4956a]">→</span>
+      <span class="text-xs text-[#8a5f3a]">→</span>
     </a>
-    <a [routerLink]="r().cursos" routerLinkActive="!text-[#c4956a]"
+    <a [routerLink]="r().cursos" routerLinkActive="!text-[#8a5f3a]"
        class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
       <span>{{ t().cursos }}</span>
-      <span class="text-xs text-[#c4956a]">→</span>
+      <span class="text-xs text-[#8a5f3a]">→</span>
     </a>
-    <a [routerLink]="r().blog" routerLinkActive="!text-[#c4956a]"
+    <a [routerLink]="r().blog" routerLinkActive="!text-[#8a5f3a]"
        class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
       <span>{{ t().blog }}</span>
-      <span class="text-xs text-[#c4956a]">→</span>
+      <span class="text-xs text-[#8a5f3a]">→</span>
     </a>
-    <a [routerLink]="r().contacto" routerLinkActive="!text-[#c4956a]"
+    <a [routerLink]="r().contacto" routerLinkActive="!text-[#8a5f3a]"
        class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
       <span>{{ t().contacto }}</span>
-      <span class="text-xs text-[#c4956a]">→</span>
+      <span class="text-xs text-[#8a5f3a]">→</span>
     </a>
     <!-- ✦ Mis Cursos en menú móvil (solo con sesión iniciada) -->
     @if (isLoggedIn) {
-      <a routerLink="/mis-cursos" routerLinkActive="!text-[#c4956a]"
+      <a routerLink="/mis-cursos" routerLinkActive="!text-[#8a5f3a]"
          class="flex items-center justify-between border-b border-black/[0.04] py-3 font-serif text-[1rem] font-medium uppercase tracking-[0.14em] text-[#1a1a1a] no-underline transition-colors hover:text-[#c4956a]">
         <span>{{ t().misCursos }}</span>
-        <span class="text-xs text-[#c4956a]">→</span>
+        <span class="text-xs text-[#8a5f3a]">→</span>
       </a>
     }
 
     <!-- Botón CTA Contacto -->
     <a [routerLink]="r().contacto" routerLinkActive="active"
-       class="mt-3 flex h-12 items-center justify-center rounded-xl border-[1.5px] border-[#c4956a] bg-[#c4956a] px-6 text-center font-serif text-[0.85rem] font-semibold uppercase tracking-[0.16em] text-white no-underline shadow-[0_6px_20px_rgba(196,149,106,0.3)] transition-all active:scale-[0.98]">
+       class="mt-3 flex h-12 items-center justify-center rounded-xl border-[1.5px] border-[#c4956a] bg-[#9a6b43] px-6 text-center font-serif text-[0.85rem] font-semibold uppercase tracking-[0.16em] text-white no-underline shadow-[0_6px_20px_rgba(196,149,106,0.3)] transition-all active:scale-[0.98]">
       {{ t().contactar }}
     </a>
 
@@ -365,7 +366,7 @@
     @if (isLoggedIn) {
       <div class="mt-4 flex flex-col gap-3 rounded-xl bg-[#faf7f4] p-4 border border-[#eee5dd]">
         <div>
-          <p class="font-sans text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[#888]">{{ t().sesion }}</p>
+          <p class="font-sans text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[#666]">{{ t().sesion }}</p>
           <p class="mt-0.5 truncate font-serif text-[1rem] font-medium text-[#1a1a1a]">{{ userName }}</p>
         </div>
         <button (click)="logout()"

@@ -1,11 +1,17 @@
+<!-- Primer elemento con foco: salta la navegacion (WCAG 2.4.1). -->
+<a href="#contenido" (click)="saltarAlContenido($event)"
+   class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[2000] focus:rounded-full focus:bg-[#1a1a1a] focus:px-5 focus:py-3 focus:font-sans focus:text-sm focus:text-white">
+  {{ textoSaltar() }}
+</a>
+
 @if (!sinLayout()) {
   <app-navbar />
 }
 
 <!-- Contenedor principal con micro-transición al cambiar de idioma -->
-<div class="transition-opacity duration-300" [class.opacity-60]="translation.isTranslating()">
+<main id="contenido" tabindex="-1" class="transition-opacity duration-300 focus:outline-none" [class.opacity-60]="translation.isTranslating()">
   <router-outlet />
-</div>
+</main>
 
 @if (!sinLayout()) {
   <app-footer />
