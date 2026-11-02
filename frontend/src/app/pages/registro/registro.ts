@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
@@ -19,6 +19,10 @@ export class Registro implements OnInit {
   private fb = inject(FormBuilder);
   private auth = inject(AuthService);
   private router = inject(Router);
+  // La app funciona sin Zone.js: lo que cambia al volver una peticion HTTP
+  // (error, "cargando") no se pinta solo. Sin esto un login fallido se
+  // quedaba en "Accediendo..." sin mostrar el error.
+  private cdr = inject(ChangeDetectorRef);
 
   registroForm!: FormGroup;
   showPassword = false;
@@ -89,7 +93,7 @@ export class Registro implements OnInit {
 
     this.auth
       .registro(formData)
-      .pipe(finalize(() => (this.isLoading = false)))
+      .pipe(finalize(() => { this.isLoading = false; this.cdr.markForCheck(); }))
       .subscribe({
         next: () => {
           this.successMsg = '¡Cuenta creada! Redirigiendo...';

@@ -207,6 +207,75 @@ a, button, [role="button"], input[type="submit"], input[type="button"], .cursor-
 }
 
 /* ═══════════════════════════════════════════
+   BOTONES Y TARJETAS DE MARCA (compartidos)
+   ═══════════════════════════════════════════ */
+
+/*
+  Los cambios al pasar el raton solo existen con raton: en un movil el
+  "hover" se queda pegado despues del toque. La flecha avanza 3 px para
+  anunciar que el enlace lleva a otra pagina.
+  Contraste: el boton secundario se rellena de cobre (blanco sobre cobre
+  cumple AA); antes se rellenaba de oro, donde el blanco no llega.
+*/
+.boton-principal,
+.boton-secundario,
+.boton-cristal,
+.boton-categoria,
+.enlace-flecha {
+  transition: transform 160ms var(--ease-salida), background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.flecha {
+  transition: transform 200ms var(--ease-salida);
+}
+
+.tarjeta-servicio {
+  transition: transform 160ms var(--ease-salida), border-color 300ms ease, box-shadow 300ms ease;
+}
+
+/* La foto se acerca un 4%, sin levantar la tarjeta: la foto ya da el movimiento. */
+.foto-tarjeta {
+  transition: transform 700ms var(--ease-salida);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .boton-principal:hover {
+    background-color: var(--color-cobre-oscuro);
+  }
+
+  .boton-secundario:hover {
+    background-color: var(--color-cobre);
+    border-color: var(--color-cobre);
+    color: #fff;
+  }
+
+  .boton-cristal:hover {
+    background-color: #fff;
+    color: var(--color-tinta);
+  }
+
+  .boton-categoria:hover {
+    background-color: var(--color-cobre);
+    border-color: var(--color-cobre);
+  }
+
+  .boton-principal:hover .flecha,
+  .boton-secundario:hover .flecha,
+  .enlace-flecha:hover .flecha,
+  .tarjeta-servicio:hover .flecha {
+    transform: translateX(3px);
+  }
+
+  .tarjeta-servicio:hover {
+    border-color: rgba(196, 149, 106, 0.6);
+  }
+
+  .tarjeta-servicio:hover .foto-tarjeta {
+    transform: scale(1.04);
+  }
+}
+
+/* ═══════════════════════════════════════════
    MÓVIL — CAMPOS DE FORMULARIO
    ═══════════════════════════════════════════ */
 

@@ -3,29 +3,49 @@
   <!-- ══════════════════════════════════════════
        CABECERA HERO EDITORIAL — ACADEMIA
        ══════════════════════════════════════════ -->
+  <!--
+    Cabecera con imagen: la tecnica (pincel y sombra dorada en primer plano)
+    es lo que se aprende aqui. En el movil la foto va debajo del texto en
+    franja apaisada; en escritorio, a la derecha.
+  -->
   <section class="relative px-6 sm:px-10">
-    <div class="mx-auto max-w-[1100px] text-center">
-      
-      <!-- Badge superior -->
-      <div scrollReveal="up" class="mb-5 inline-flex items-center gap-2 rounded-full border border-oro/40 bg-oro/15 px-4 py-1.5 backdrop-blur-md">
-        <span class="h-1.5 w-1.5 rounded-full bg-cobre animate-pulse"></span>
-        <span class="font-serif text-[0.7rem] uppercase tracking-[0.28em] text-cobre-oscuro">Formación Online &middot; Método Yonaida</span>
+    <div class="mx-auto grid max-w-[1140px] items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+
+      <div class="text-center lg:text-left">
+        <!-- Badge superior -->
+        <div scrollReveal="up" class="mb-5 inline-flex items-center gap-2 rounded-full border border-oro/40 bg-oro/15 px-4 py-1.5">
+          <span class="h-1.5 w-1.5 rounded-full bg-cobre" aria-hidden="true"></span>
+          <span class="font-serif text-[0.72rem] uppercase tracking-[0.28em] text-cobre-oscuro">Formación Online &middot; Método Yonaida</span>
+        </div>
+
+        <h1 scrollReveal="up" scrollDelay="1" class="font-serif text-[clamp(2.6rem,5.5vw,4.5rem)] font-light leading-[1.1] text-tinta">
+          Cursos de maquillaje <em class="italic text-bronce">Academia Yonaida</em>
+        </h1>
+
+        <p scrollReveal="up" scrollDelay="2" class="mt-3 font-serif text-[1.15rem] sm:text-[1.25rem] font-light italic text-bronce">
+          Realza tu belleza &middot; Aprende desde donde estés a tu ritmo
+        </p>
+
+        <div class="mx-auto mt-6 h-[1.5px] w-16 bg-cobre lg:mx-0" aria-hidden="true"></div>
+
+        <p scrollReveal="up" scrollDelay="3" class="mx-auto mt-6 max-w-[620px] font-sans text-[0.9375rem] sm:text-base font-light leading-[1.85] text-texto-suave lg:mx-0">
+          Mis formaciones condensan años de experiencia real con clientas, novias y pasarela en clases prácticas, visuales y sin secretos, para que logres acabados profesionales sin complicaciones.
+        </p>
+
+        <a href="#curso-automaquillaje"
+           class="boton-principal pulsable mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-cobre px-8 py-3.5 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline">
+          Ver la masterclass
+          <svg class="flecha h-3.5 w-3.5 rotate-90" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
       </div>
 
-      <h1 scrollReveal="up" scrollDelay="1" class="font-serif text-[clamp(2.6rem,5.5vw,4.5rem)] font-light leading-[1.1] text-tinta">
-        Cursos de maquillaje <em class="italic text-bronce">Academia Yonaida</em>
-      </h1>
-
-      <p scrollReveal="up" scrollDelay="2" class="mt-3 font-serif text-[1.15rem] sm:text-[1.25rem] font-light italic text-bronce">
-        Realza tu belleza &middot; Aprende desde donde estés a tu ritmo
-      </p>
-
-      <div class="mx-auto mt-6 h-[1.5px] w-16 bg-cobre"></div>
-
-      <p scrollReveal="up" scrollDelay="3" class="mx-auto mt-6 max-w-[620px] font-sans text-sm sm:text-base font-light leading-[1.85] text-texto-suave">
-        Mis formaciones condensan años de experiencia real con clientas, novias y pasarela en clases prácticas, visuales y sin secretos, para que logres acabados profesionales sin complicaciones.
-      </p>
-
+      <div scrollReveal="up" scrollDelay="2"
+           class="overflow-hidden rounded-[28px] shadow-[0_25px_60px_rgba(26,26,26,0.14)]">
+        <img decoding="async" fetchpriority="high" src="images/aplicacion-sombra-dorada-pincel.jpg"
+             alt="Aplicación de sombra dorada con pincel sobre el párpado, en primer plano"
+             width="1333" height="2000"
+             class="aspect-[16/10] w-full object-cover object-[center_40%] lg:aspect-[4/5]" />
+      </div>
     </div>
   </section>
 
@@ -34,25 +54,31 @@
        ══════════════════════════════════════════ -->
   <section class="mt-16 px-6 sm:px-10">
     <div class="mx-auto max-w-[1140px]">
-      <div class="grid gap-10 lg:grid-cols-2 lg:items-stretch">
+      <!--
+        Jerarquia: la masterclass (se compra hoy) ocupa la columna ancha; la
+        Certificacion Pro (lista de espera) es la estrecha y oscura. Antes eran
+        dos tarjetas iguales, y la segunda tapada por un velo.
+      -->
+      <div class="grid gap-8 lg:grid-cols-[1.35fr_1fr] lg:items-start lg:gap-10">
 
         <!-- ─── TARJETA 1: MASTERCLASS AUTOMAQUILLAJE (DISPONIBLE AHORA) ─── -->
         <article scrollReveal="up" scrollDelay="1"
-                 class="curso-card group flex flex-col overflow-hidden rounded-[30px] bg-white border border-linea shadow-[0_10px_40px_rgba(26,26,26,0.06)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_25px_60px_rgba(196,149,106,0.2)]" id="curso-automaquillaje">
+                 class="curso-card group flex flex-col overflow-hidden rounded-[30px] bg-white border border-linea shadow-[0_10px_40px_rgba(26,26,26,0.06)] scroll-mt-28" id="curso-automaquillaje">
 
           <!-- Cabecera de tarjeta con fotografía cinematográfica -->
           <div class="relative flex flex-col justify-end overflow-hidden p-8 sm:p-10 min-h-[260px] bg-tinta">
             <!-- Foto oficial de portada -->
             <img decoding="async" src="images/masterclass-automaquillaje-portada.png"
                  alt="Masterclass de Automaquillaje Online — Yonaida"
-                 class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
-            
+                 width="1280" height="720"
+                 class="absolute inset-0 h-full w-full object-cover object-center" />
+
             <!-- Degradado para nitidez del texto -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/30"></div>
 
             <div class="relative z-10 flex items-center justify-between gap-3 mb-3">
               <span class="rounded-full bg-emerald-700 px-3.5 py-1 text-[0.72rem] font-sans font-semibold uppercase tracking-widest text-white shadow-sm flex items-center gap-1.5">
-                <span class="h-1.5 w-1.5 rounded-full bg-white animate-pulse"></span>
+                <span class="h-1.5 w-1.5 rounded-full bg-white" aria-hidden="true"></span>
                 Acceso Inmediato
               </span>
               <span class="rounded-full bg-black/60 px-3 py-1 font-serif text-[0.72rem] uppercase tracking-widest text-oro-claro backdrop-blur-md border border-white/10">
@@ -141,10 +167,21 @@
                       Oferta Especial
                     </span>
                   }
-                  <div class="mt-1 flex items-baseline gap-3">
-                    <span class="font-serif text-3xl sm:text-4xl font-semibold text-tinta">{{ precio() }}</span>
-                    @if (precioBase()) {
-                      <span class="font-serif text-lg text-texto-tenue line-through decoration-oro">{{ precioBase() }}</span>
+                  <!--
+                    Mientras llega el precio se ve un hueco del mismo tamano
+                    (sin saltos de diseno). "Sin limite" solo se muestra si la
+                    API lo dice de verdad (duracion null): antes salia tambien
+                    mientras cargaba o si la API fallaba.
+                  -->
+                  <div class="mt-1 flex min-h-10 items-baseline gap-3" aria-live="polite">
+                    @if (cargandoCatalogo()) {
+                      <span class="hueco-carga inline-block h-9 w-24 rounded-lg" aria-hidden="true"></span>
+                      <span class="sr-only">Cargando precio</span>
+                    } @else {
+                      <span class="font-serif text-3xl sm:text-4xl font-semibold text-tinta">{{ precio() }}</span>
+                      @if (precioBase()) {
+                        <span class="font-serif text-lg text-texto-tenue line-through decoration-oro">{{ precioBase() }}</span>
+                      }
                     }
                   </div>
                   <span class="block text-[0.72rem] text-texto-tenue">IVA incluido</span>
@@ -152,8 +189,10 @@
                 <!-- La duración del acceso, siempre visible antes de comprar -->
                 <div class="text-right shrink-0">
                   <span class="block text-[0.72rem] uppercase tracking-wider text-texto-tenue">Acceso</span>
-                  <span class="block text-xs font-serif font-medium text-tinta">
-                    {{ mesesAcceso() ? mesesAcceso() + ' meses' : 'Sin límite' }}
+                  <span class="block min-h-5 text-sm font-serif font-medium text-tinta">
+                    @if (masterclass()) {
+                      {{ mesesAcceso() ? mesesAcceso() + ' meses' : 'Sin límite' }}
+                    }
                   </span>
                 </div>
               </div>
@@ -171,30 +210,44 @@
                 <button
                   (click)="comprarMasterclass()"
                   [disabled]="!puedeComprar"
-                  class="w-full cursor-pointer rounded-full bg-tinta px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-xl transition-all duration-300 hover:bg-oro hover:shadow-2xl disabled:opacity-50 active:scale-95"
+                  [attr.aria-busy]="comprando() || cargandoCatalogo()"
+                  class="boton-compra pulsable flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-2.5 rounded-full bg-tinta px-6 py-4 font-serif text-xs font-semibold uppercase tracking-[0.12em] sm:px-8 sm:tracking-widest text-white shadow-xl disabled:cursor-wait disabled:opacity-70"
                   id="btn-comprar-masterclass">
-                  <span>
-                    @if (comprando()) {
-                      Conectando con pasarela segura...
-                    } @else if (cargandoCatalogo()) {
-                      Cargando...
-                    } @else {
-                      Comprar Masterclass — {{ precio() }}
-                    }
-                  </span>
+                  @if (comprando()) {
+                    <span class="girando h-4 w-4 rounded-full border-2 border-white/30 border-t-white" aria-hidden="true"></span>
+                    <span>Abriendo el pago seguro…</span>
+                  } @else if (cargandoCatalogo()) {
+                    <span class="girando h-4 w-4 rounded-full border-2 border-white/30 border-t-white" aria-hidden="true"></span>
+                    <span>Preparando la compra…</span>
+                  } @else {
+                    <span>Comprar Masterclass — {{ precio() }}</span>
+                  }
                 </button>
 
-                <div class="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[0.72rem] text-texto-tenue">
-                  <span class="flex items-center gap-1">
-                    <svg class="h-3.5 w-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                    Pago Seguro Stripe
-                  </span>
-                  <span>&bull;</span>
-                  <span>Sin necesidad de crear cuenta</span>
-                </div>
+                <!-- Confianza junto al boton: quien paga, que recibe y cuanto dura -->
+                <ul class="mt-4 grid list-none gap-2 p-0 text-[0.8125rem] text-texto-suave sm:grid-cols-2">
+                  <li class="flex items-center gap-2">
+                    <svg class="h-4 w-4 shrink-0 text-emerald-700" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    Pago seguro con Stripe
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <svg class="h-4 w-4 shrink-0 text-bronce" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    Acceso inmediato tras el pago
+                  </li>
+                  @if (mesesAcceso(); as meses) {
+                    <li class="flex items-center gap-2">
+                      <svg class="h-4 w-4 shrink-0 text-bronce" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                      {{ meses }} meses para verla cuando quieras
+                    </li>
+                  }
+                  <li class="flex items-center gap-2">
+                    <svg class="h-4 w-4 shrink-0 text-bronce" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                    Sin necesidad de crear cuenta
+                  </li>
+                </ul>
 
                 @if (errorMsg()) {
-                  <p role="alert" class="mt-3 text-center text-xs text-red-500">{{ errorMsg() }}</p>
+                  <p role="alert" class="mt-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-center text-sm text-[#912018]">{{ errorMsg() }}</p>
                 }
               } @else {
                 <!-- Paso previo al pago: datos (solo sin cuenta) y consentimientos -->
@@ -204,7 +257,7 @@
                       {{ estaAutenticado() ? 'Antes de ir al pago' : 'Solo necesito estos datos para darte el acceso' }}
                     </p>
                     <button type="button" (click)="cerrarFormCompra()" aria-label="Cancelar"
-                            class="shrink-0 cursor-pointer text-texto-tenue transition-colors hover:text-oro">
+                            class="shrink-0 cursor-pointer text-texto-tenue transition-colors hover:text-cobre-oscuro">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
                     </button>
                   </div>
@@ -255,10 +308,17 @@
                     <p role="alert" class="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-700">{{ errorFormCompra() }}</p>
                   }
 
-                  <button type="submit" [disabled]="comprando()"
-                          class="w-full cursor-pointer rounded-full bg-tinta px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white shadow-xl transition-all hover:bg-oro disabled:opacity-50 active:scale-95">
-                    {{ comprando() ? 'Conectando...' : 'Ir al pago seguro · ' + precio() }}
+                  <button type="submit" [disabled]="comprando()" [attr.aria-busy]="comprando()"
+                          class="boton-compra pulsable flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-2.5 rounded-full bg-tinta px-6 py-4 font-serif text-xs font-semibold uppercase tracking-[0.12em] sm:px-8 sm:tracking-widest text-white shadow-xl disabled:cursor-wait disabled:opacity-70">
+                    @if (comprando()) {
+                      <span class="girando h-4 w-4 rounded-full border-2 border-white/30 border-t-white" aria-hidden="true"></span>
+                      <span>Abriendo el pago seguro…</span>
+                    } @else {
+                      <svg class="h-4 w-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                      <span>Ir al pago seguro · {{ precio() }}</span>
+                    }
                   </button>
+                  <p class="text-center text-[0.72rem] text-texto-tenue">Te llevamos a Stripe para pagar; la web no ve ni guarda los datos de tu tarjeta.</p>
                 </form>
               }
 
@@ -268,49 +328,47 @@
         </article>
 
         <!-- ─── TARJETA 2: FORMACIÓN PROFESIONAL (PRÓXIMAMENTE) ─── -->
+        <!--
+          Certificacion Pro: aun no se vende, se apunta una a la lista de espera.
+          Se lee entera (antes estaba detras de un velo al 20%) y su boton es
+          secundario frente al de compra de la masterclass.
+        -->
         <article scrollReveal="up" scrollDelay="2"
-                 class="curso-card relative flex flex-col overflow-hidden rounded-[30px] bg-white border border-linea shadow-[0_10px_40px_rgba(26,26,26,0.06)]" id="curso-formacion-online">
+                 class="curso-card flex flex-col overflow-hidden rounded-[30px] bg-noche text-white shadow-[0_10px_40px_rgba(26,26,26,0.12)]" id="curso-formacion-online">
 
-          <!-- ░░░ OVERLAY ELEGANTE PRÓXIMAMENTE ░░░ -->
-          <div class="absolute inset-0 z-20 flex flex-col items-center justify-center rounded-[30px] bg-[#141312]/80 backdrop-blur-[5px] p-8 text-center text-white">
-            <div class="mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-oro-claro">
-              <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-            </div>
-            <span class="mb-3 inline-flex items-center gap-2 rounded-full border border-oro/60 bg-oro/20 px-4 py-1 backdrop-blur-md">
-              <span class="h-1.5 w-1.5 rounded-full bg-cobre animate-pulse"></span>
-              <span class="font-serif text-[0.72rem] font-bold uppercase tracking-[0.25em] text-oro-claro">Próxima Edición</span>
+          <div class="relative h-44 w-full overflow-hidden sm:h-56">
+            <img decoding="async" src="images/maquillaje-pasarela-editorial.jpeg" alt="Formación editorial y profesional"
+                 width="800" height="1000"
+                 class="absolute inset-0 h-full w-full object-cover object-[center_25%] opacity-70" />
+            <div class="absolute inset-0 bg-gradient-to-t from-noche via-noche/40 to-transparent"></div>
+            <span class="absolute left-5 right-5 top-5 inline-flex w-fit items-center gap-2 rounded-full border border-oro/50 bg-black/50 px-3.5 py-1">
+              <svg class="h-3.5 w-3.5 text-oro-claro" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 2"/></svg>
+              <span class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-oro-claro">Próxima edición · Lista de espera</span>
             </span>
-            <h3 class="font-serif text-3xl font-light text-white">Certificación Pro</h3>
-            <p class="mt-3 max-w-[280px] text-xs sm:text-sm font-light leading-relaxed text-white/75">
+          </div>
+
+          <div class="flex flex-1 flex-col p-7 sm:p-9">
+            <p class="font-serif text-[0.72rem] uppercase tracking-widest text-oro-claro">40 Horas · Certificado · Formación Online Profesional</p>
+            <h2 class="mt-2 font-serif text-[clamp(1.6rem,2.6vw,2rem)] font-light leading-tight text-white">Certificación Pro</h2>
+            <p class="mt-3 text-[0.9375rem] font-light leading-relaxed text-white/80">
               Formación avanzada integral para quienes desean dedicarse profesionalmente al mundo del maquillaje en bodas y moda.
             </p>
+            <p class="mt-2 text-[0.9375rem] font-light leading-relaxed text-white/80">
+              Técnicas de pasarela, novias de alta gama y gestión de clientes para dedicarte al maquillaje con éxito.
+            </p>
+
+            <div class="mt-6 border-t border-white/10 pt-5">
+              <span class="font-serif text-2xl text-white">350 €</span>
+
+            </div>
+
             <button
               type="button"
               (click)="abrirAvisoProximamente()"
               id="btn-notificar-formacion"
-              class="mt-6 cursor-pointer rounded-full border border-white/30 bg-white/15 px-7 py-3 font-serif text-xs font-semibold uppercase tracking-widest text-white backdrop-blur-md transition-all hover:bg-oro hover:border-oro active:scale-95">
+              class="boton-cristal pulsable mt-6 min-h-12 w-full cursor-pointer rounded-full border border-white/30 bg-white/10 px-7 py-3 font-serif text-xs font-semibold uppercase tracking-widest text-white">
               Avísame con descuento prioritario
             </button>
-          </div>
-
-          <!-- Contenido de fondo estético -->
-          <div class="pointer-events-none select-none opacity-20 flex flex-col h-full">
-            <div class="relative h-64 w-full bg-tinta p-8 flex flex-col justify-end overflow-hidden">
-              <img decoding="async" src="images/maquillaje-pasarela-editorial.jpeg" alt="Formación editorial y profesional"
-                   class="absolute inset-0 h-full w-full object-cover object-top opacity-50" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-              <span class="relative z-10 text-oro text-xs font-serif uppercase tracking-widest">40 Horas · Certificado</span>
-              <h2 class="relative z-10 text-2xl font-serif text-white mt-1">Formación Online Profesional</h2>
-            </div>
-            <div class="p-8 flex-1 flex flex-col justify-between">
-              <p class="text-sm text-texto-suave">Técnicas de pasarela, novias de alta gama y gestión de clientes para dedicarte al maquillaje con éxito.</p>
-              <div class="pt-8 border-t border-[#f0e6dc] flex justify-between items-center">
-                <span class="text-2xl font-serif text-tinta">350 €</span>
-              </div>
-            </div>
           </div>
 
         </article>
@@ -394,7 +452,7 @@
            (click)="$event.stopPropagation()">
 
         <button (click)="cerrarAviso()" aria-label="Cerrar"
-                class="absolute right-4 top-4 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-black/5 text-texto-tenue transition-colors hover:bg-oro hover:text-white">
+                class="absolute right-4 top-4 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-black/5 text-texto-tenue transition-colors hover:bg-cobre hover:text-white">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
         </button>
 

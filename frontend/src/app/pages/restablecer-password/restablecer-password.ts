@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -21,6 +21,10 @@ export class RestablecerPassword implements OnInit {
   private fb = inject(FormBuilder);
   private auth = inject(AuthService);
   private router = inject(Router);
+  // La app funciona sin Zone.js: lo que cambia al volver una peticion HTTP
+  // (error, "cargando") no se pinta solo. Sin esto un login fallido se
+  // quedaba en "Accediendo..." sin mostrar el error.
+  private cdr = inject(ChangeDetectorRef);
   private route = inject(ActivatedRoute);
 
   form!: FormGroup;
@@ -81,7 +85,7 @@ export class RestablecerPassword implements OnInit {
         password: this.form.value.password,
         password_confirmation: this.form.value.confirmPassword
       })
-      .pipe(finalize(() => (this.isLoading = false)))
+      .pipe(finalize(() => { this.isLoading = false; this.cdr.markForCheck(); }))
       .subscribe({
         next: respuesta => {
           this.successMsg = respuesta.message;

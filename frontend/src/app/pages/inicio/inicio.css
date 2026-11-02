@@ -61,37 +61,7 @@
   }
 }
 
-/* ── Botones ── */
-/*
-  Hover solo con raton (en el movil el hover se queda pegado tras tocar).
-  La flecha avanza 3 px: dice "lleva a otra pagina" sin mover el boton.
-*/
-.boton-principal,
-.boton-cristal,
-.enlace-flecha {
-  transition: transform 160ms var(--ease-salida), background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
-}
-
-.flecha {
-  transition: transform 200ms var(--ease-salida);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .boton-principal:hover {
-    background-color: var(--color-cobre-oscuro);
-  }
-
-  .boton-cristal:hover {
-    background-color: #fff;
-    color: var(--color-tinta);
-  }
-
-  .boton-principal:hover .flecha,
-  .enlace-flecha:hover .flecha,
-  .tarjeta-servicio:hover .flecha {
-    transform: translateX(3px);
-  }
-}
+/* Botones, flechas y tarjetas de servicio: estilos compartidos en styles.css. */
 
 /* ── Foto de presentacion ── */
 .foto-zoom img {
@@ -101,29 +71,6 @@
 @media (hover: hover) and (pointer: fine) {
   .foto-zoom:hover img {
     transform: scale(1.03);
-  }
-}
-
-/* ── Tarjetas de servicio ── */
-/*
-  Al pasar el raton la foto se acerca un 4% (antes 10%, que pixelaba) y el
-  borde se calienta. La tarjeta no se levanta: la foto ya da el movimiento.
-*/
-.tarjeta-servicio {
-  transition: transform 160ms var(--ease-salida), border-color 300ms ease;
-}
-
-.foto-tarjeta {
-  transition: transform 700ms var(--ease-salida);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .tarjeta-servicio:hover {
-    border-color: rgba(196, 149, 106, 0.6);
-  }
-
-  .tarjeta-servicio:hover .foto-tarjeta {
-    transform: scale(1.04);
   }
 }
 

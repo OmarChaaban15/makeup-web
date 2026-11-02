@@ -1,17 +1,6 @@
-/* Cursos – Premium animations */
+/* Cursos */
 
-/* Badge pulse dot */
-:host .badge-dot {
-  animation: badgeDotPulse 2s ease-in-out infinite;
-}
-
-@keyframes badgeDotPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(196, 149, 106, 0.4); }
-  50% { box-shadow: 0 0 0 8px rgba(196, 149, 106, 0); }
-}
-
-
-/* Card hover gradient line */
+/* Borde dorado suave al pasar el raton por una tarjeta (solo con raton). */
 :host .curso-card {
   position: relative;
 }
@@ -27,6 +16,36 @@
   z-index: 1;
 }
 
-:host .curso-card:hover::before {
-  border-color: rgba(196, 149, 106, 0.25);
+@media (hover: hover) and (pointer: fine) {
+  :host .curso-card:hover::before {
+    border-color: rgba(196, 149, 106, 0.25);
+  }
+
+  /* Boton de compra: hover a cobre (blanco sobre oro no cumplia AA). */
+  .boton-compra:not(:disabled):hover {
+    background-color: var(--color-cobre);
+  }
+}
+
+.boton-compra {
+  transition: transform 160ms var(--ease-salida), background-color 200ms ease, opacity 200ms ease;
+}
+
+/* Hueco del precio mientras llega de la API: late suave, sin moverse. */
+.hueco-carga {
+  background-color: #efe6dc;
+  animation: hueco 1.2s ease-in-out infinite;
+}
+
+@keyframes hueco {
+  50% { opacity: 0.55; }
+}
+
+/* Indicador de carga del boton: una vuelta cada 600 ms. */
+.girando {
+  animation: gira 600ms linear infinite;
+}
+
+@keyframes gira {
+  to { transform: rotate(360deg); }
 }

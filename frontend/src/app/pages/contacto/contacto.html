@@ -8,10 +8,7 @@
       
       <!-- Badge de atención personalizada -->
       <div scrollReveal="up" class="mb-5 inline-flex items-center gap-2 rounded-full border border-oro/30 bg-oro/10 px-4 py-1.5 backdrop-blur-sm">
-        <span class="relative flex h-2 w-2">
-          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
-        </span>
+        <span class="inline-flex h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true"></span>
         <span class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-cobre-oscuro">
           Atención personalizada · Agenda abierta en Ibiza
         </span>
@@ -43,11 +40,11 @@
               WhatsApp directo
             </a>
             <button (click)="copiarEmail()"
-                    class="inline-flex items-center gap-2 rounded-full border border-black/15 bg-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-tinta shadow-sm transition-all duration-200 hover:border-oro hover:text-oro active:scale-95">
+                    class="inline-flex items-center gap-2 rounded-full border border-black/15 bg-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-tinta shadow-sm transition-all duration-200 hover:border-cobre hover:text-cobre-oscuro active:scale-95" aria-live="polite">
               <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
               </svg>
-              {{ emailCopiado ? '¡Email Copiado!' : 'Copiar Email' }}
+              {{ emailCopiado() ? '¡Email Copiado!' : 'Copiar Email' }}
             </button>
           </div>
         </div>
@@ -76,19 +73,24 @@
             </p>
           </div>
 
-          <form (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
-            
-            <!-- Selector de Servicio por Chips -->
-            <div>
-              <span class="mb-2.5 block text-[11px] font-semibold uppercase tracking-wider text-[#6b6460]">
+          <form (ngSubmit)="onSubmit()" novalidate class="flex flex-col gap-6">
+
+            <!--
+              Tipo de servicio: grupo de opciones de seleccion unica. En el
+              movil son pastillas de 44 px de alto, faciles de tocar con el
+              pulgar; con teclado se recorren con Tab y se marcan con Espacio.
+            -->
+            <fieldset class="m-0 border-0 p-0">
+              <legend class="mb-2.5 block text-[0.72rem] font-semibold uppercase tracking-wider text-[#6b6460]">
                 Tipo de servicio o evento
-              </span>
+              </legend>
               <div class="flex flex-wrap gap-2">
                 @for(opcion of serviciosOpciones; track opcion) {
                   <button type="button"
                           (click)="seleccionarServicio(opcion)"
-                          class="rounded-full px-4 py-2 text-xs font-serif tracking-wider border transition-all duration-200 active:scale-95 cursor-pointer"
-                          [class.border-oro]="formData.servicio === opcion"
+                          [attr.aria-pressed]="formData.servicio === opcion"
+                          class="opcion-servicio pulsable min-h-11 rounded-full px-4 py-2 text-xs font-serif tracking-wider border cursor-pointer"
+                          [class.border-cobre]="formData.servicio === opcion"
                           [class.bg-cobre]="formData.servicio === opcion"
                           [class.text-white]="formData.servicio === opcion"
                           [class.border-[#e0d4c8]]="formData.servicio !== opcion"
@@ -98,54 +100,79 @@
                   </button>
                 }
               </div>
-            </div>
+            </fieldset>
 
             <div class="grid gap-5 sm:grid-cols-2">
               <!-- Nombre -->
               <div>
-                <label class="mb-2 block text-[11px] font-semibold uppercase tracking-wider text-[#6b6460]">
+                <label for="contacto-nombre" class="mb-2 block text-[0.72rem] font-semibold uppercase tracking-wider text-[#6b6460]">
                   Tu nombre y apellidos *
                 </label>
-                <input type="text" [(ngModel)]="formData.nombre" name="nombre" required placeholder="Ej. Clara Gómez"
-                       class="h-12 w-full rounded-xl border border-[#e0d4c8] bg-[#faf8f6] px-4 text-sm text-tinta outline-none transition-all duration-300 placeholder:text-[#b5aea8] focus:border-oro focus:bg-white focus:shadow-[0_0_0_3px_rgba(196,149,106,0.15)]">
+                <input id="contacto-nombre" type="text" [(ngModel)]="formData.nombre" name="nombre" required autocomplete="name"
+                       placeholder="Ej. Clara Gómez"
+                       (blur)="validarCampo('nombre')" (input)="revalidar('nombre')"
+                       [attr.aria-invalid]="errores().nombre ? 'true' : null"
+                       [attr.aria-describedby]="errores().nombre ? 'error-nombre' : null"
+                       class="campo h-12 w-full rounded-xl border border-[#e0d4c8] bg-[#faf8f6] px-4 text-sm text-tinta outline-none placeholder:text-[#8f8780]"
+                       [class.campo-error]="errores().nombre">
+                @if (errores().nombre) {
+                  <p id="error-nombre" class="mensaje-error mt-1.5 text-xs text-[#b42318]">{{ errores().nombre }}</p>
+                }
               </div>
 
               <!-- Email -->
               <div>
-                <label class="mb-2 block text-[11px] font-semibold uppercase tracking-wider text-[#6b6460]">
+                <label for="contacto-email" class="mb-2 block text-[0.72rem] font-semibold uppercase tracking-wider text-[#6b6460]">
                   Correo electrónico *
                 </label>
-                <input type="email" [(ngModel)]="formData.email" name="email" required placeholder="tu@email.com"
-                       class="h-12 w-full rounded-xl border border-[#e0d4c8] bg-[#faf8f6] px-4 text-sm text-tinta outline-none transition-all duration-300 placeholder:text-[#b5aea8] focus:border-oro focus:bg-white focus:shadow-[0_0_0_3px_rgba(196,149,106,0.15)]">
+                <input id="contacto-email" type="email" [(ngModel)]="formData.email" name="email" required autocomplete="email" inputmode="email"
+                       placeholder="tu@email.com"
+                       (blur)="validarCampo('email')" (input)="revalidar('email')"
+                       [attr.aria-invalid]="errores().email ? 'true' : null"
+                       [attr.aria-describedby]="errores().email ? 'error-email' : null"
+                       class="campo h-12 w-full rounded-xl border border-[#e0d4c8] bg-[#faf8f6] px-4 text-sm text-tinta outline-none placeholder:text-[#8f8780]"
+                       [class.campo-error]="errores().email">
+                @if (errores().email) {
+                  <p id="error-email" class="mensaje-error mt-1.5 text-xs text-[#b42318]">{{ errores().email }}</p>
+                }
               </div>
 
               <!-- Teléfono -->
               <div>
-                <label class="mb-2 block text-[11px] font-semibold uppercase tracking-wider text-[#6b6460]">
+                <label for="contacto-telefono" class="mb-2 block text-[0.72rem] font-semibold uppercase tracking-wider text-[#6b6460]">
                   Teléfono / WhatsApp (opcional)
                 </label>
-                <input type="tel" [(ngModel)]="formData.telefono" name="telefono" placeholder="+34 600 000 000"
-                       class="h-12 w-full rounded-xl border border-[#e0d4c8] bg-[#faf8f6] px-4 text-sm text-tinta outline-none transition-all duration-300 placeholder:text-[#b5aea8] focus:border-oro focus:bg-white focus:shadow-[0_0_0_3px_rgba(196,149,106,0.15)]">
+                <input id="contacto-telefono" type="tel" [(ngModel)]="formData.telefono" name="telefono" autocomplete="tel" inputmode="tel"
+                       placeholder="+34 600 000 000"
+                       class="campo h-12 w-full rounded-xl border border-[#e0d4c8] bg-[#faf8f6] px-4 text-sm text-tinta outline-none placeholder:text-[#8f8780]">
               </div>
 
               <!-- Fecha estimada / Lugar -->
               <div>
-                <label class="mb-2 block text-[11px] font-semibold uppercase tracking-wider text-[#6b6460]">
+                <label for="contacto-fecha" class="mb-2 block text-[0.72rem] font-semibold uppercase tracking-wider text-[#6b6460]">
                   Fecha aproximada o evento
                 </label>
-                <input type="text" [(ngModel)]="formData.fecha_evento" name="fecha_evento" placeholder="Ej. Junio 2026 / Boda en Ibiza"
-                       class="h-12 w-full rounded-xl border border-[#e0d4c8] bg-[#faf8f6] px-4 text-sm text-tinta outline-none transition-all duration-300 placeholder:text-[#b5aea8] focus:border-oro focus:bg-white focus:shadow-[0_0_0_3px_rgba(196,149,106,0.15)]">
+                <input id="contacto-fecha" type="text" [(ngModel)]="formData.fecha_evento" name="fecha_evento"
+                       placeholder="Ej. Junio 2026 / Boda en Ibiza"
+                       class="campo h-12 w-full rounded-xl border border-[#e0d4c8] bg-[#faf8f6] px-4 text-sm text-tinta outline-none placeholder:text-[#8f8780]">
               </div>
             </div>
 
             <!-- Mensaje -->
             <div>
-              <label class="mb-2 block text-[11px] font-semibold uppercase tracking-wider text-[#6b6460]">
+              <label for="contacto-mensaje" class="mb-2 block text-[0.72rem] font-semibold uppercase tracking-wider text-[#6b6460]">
                 Tu mensaje o consulta *
               </label>
-              <textarea [(ngModel)]="formData.mensaje" name="mensaje" required rows="4"
+              <textarea id="contacto-mensaje" [(ngModel)]="formData.mensaje" name="mensaje" required rows="4"
                         placeholder="Cuéntame sobre tu estilo deseado, horario, localización o cualquier pregunta que tengas..."
-                        class="w-full resize-y rounded-xl border border-[#e0d4c8] bg-[#faf8f6] px-4 py-3 text-sm text-tinta outline-none transition-all duration-300 placeholder:text-[#b5aea8] focus:border-oro focus:bg-white focus:shadow-[0_0_0_3px_rgba(196,149,106,0.15)]"></textarea>
+                        (blur)="validarCampo('mensaje')" (input)="revalidar('mensaje')"
+                        [attr.aria-invalid]="errores().mensaje ? 'true' : null"
+                        [attr.aria-describedby]="errores().mensaje ? 'error-mensaje' : null"
+                        class="campo w-full resize-y rounded-xl border border-[#e0d4c8] bg-[#faf8f6] px-4 py-3 text-sm text-tinta outline-none placeholder:text-[#8f8780]"
+                        [class.campo-error]="errores().mensaje"></textarea>
+              @if (errores().mensaje) {
+                <p id="error-mensaje" class="mensaje-error mt-1.5 text-xs text-[#b42318]">{{ errores().mensaje }}</p>
+              }
             </div>
 
             <!-- Informacion basica de proteccion de datos (art. 13 RGPD, art. 11 LOPDGDD) -->
@@ -157,14 +184,17 @@
             </p>
 
             <!-- Alertas de estado -->
-            @if (error) {
-              <div role="alert" class="rounded-xl border border-red-200 bg-red-50 p-3.5 text-xs text-red-600">
-                {{ error }}
+            @if (error()) {
+              <div role="alert" class="aviso-estado flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-[#912018]">
+                <svg class="mt-0.5 h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                </svg>
+                <span>{{ error() }}</span>
               </div>
             }
-            @if (enviado) {
-              <div role="status" class="rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-sm text-emerald-800 flex items-start gap-3">
-                <svg class="h-5 w-5 shrink-0 text-emerald-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            @if (enviado()) {
+              <div #avisoEnviado tabindex="-1" role="status" class="aviso-estado rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-sm text-emerald-800 flex items-start gap-3 outline-none">
+                <svg class="h-5 w-5 shrink-0 text-emerald-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div>
@@ -176,18 +206,22 @@
 
             <!-- Botones de acción -->
             <div class="mt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <button type="submit" [disabled]="enviando"
-                      class="inline-flex min-h-[52px] cursor-pointer items-center justify-center gap-2 rounded-full bg-tinta px-10 text-xs font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-oro hover:shadow-[0_8px_30px_rgba(196,149,106,0.3)] disabled:opacity-50 active:scale-95">
-                <span *ngIf="!enviando">Enviar Mensaje</span>
-                <span *ngIf="enviando">Enviando mensaje...</span>
-                <svg *ngIf="!enviando" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+              <button type="submit" [disabled]="enviando()" [attr.aria-busy]="enviando()"
+                      class="boton-enviar pulsable inline-flex min-h-[52px] cursor-pointer items-center justify-center gap-2 rounded-full bg-tinta px-10 text-xs font-semibold uppercase tracking-wider text-white disabled:cursor-wait">
+                @if (enviando()) {
+                  <span class="girando h-4 w-4 rounded-full border-2 border-white/30 border-t-white" aria-hidden="true"></span>
+                  <span>Enviando mensaje...</span>
+                } @else {
+                  <span>Enviar Mensaje</span>
+                  <svg class="flecha h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                }
               </button>
 
               <button type="button" (click)="enviarPorWhatsApp()"
-                      class="inline-flex min-h-[50px] cursor-pointer items-center justify-center gap-2 rounded-full border border-[#25D366]/40 bg-[#0b7a5c]/10 px-6 text-xs font-semibold uppercase tracking-wider text-[#0f6b33] transition-all duration-200 hover:bg-[#0b7a5c] hover:text-white active:scale-95">
-                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                      class="pulsable inline-flex min-h-[50px] cursor-pointer items-center justify-center gap-2 rounded-full border border-[#25D366]/40 bg-[#0b7a5c]/10 px-6 text-xs font-semibold uppercase tracking-wider text-[#0f6b33] hover:bg-[#0b7a5c] hover:text-white">
+                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                 </svg>
                 O prefiero hablar por WhatsApp

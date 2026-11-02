@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
@@ -19,6 +19,10 @@ export class Login implements OnInit {
   private fb = inject(FormBuilder);
   private auth = inject(AuthService);
   private router = inject(Router);
+  // La app funciona sin Zone.js: lo que cambia al volver una peticion HTTP
+  // (error, "cargando") no se pinta solo. Sin esto un login fallido se
+  // quedaba en "Accediendo..." sin mostrar el error.
+  private cdr = inject(ChangeDetectorRef);
   private route = inject(ActivatedRoute);
 
   loginForm!: FormGroup;
@@ -101,7 +105,7 @@ export class Login implements OnInit {
 
     this.auth
       .solicitarRecuperacion(this.forgotForm.value.email)
-      .pipe(finalize(() => (this.forgotLoading = false)))
+      .pipe(finalize(() => { this.forgotLoading = false; this.cdr.markForCheck(); }))
       .subscribe({
         next: respuesta => {
           this.forgotSuccess = true;
@@ -131,7 +135,7 @@ export class Login implements OnInit {
 
     this.auth
       .login(email, password)
-      .pipe(finalize(() => (this.isLoading = false)))
+      .pipe(finalize(() => { this.isLoading = false; this.cdr.markForCheck(); }))
       .subscribe({
         next: () => {
           this.successMsg = '¡Bienvenida! Accediendo a tu cuenta...';
