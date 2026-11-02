@@ -17,5 +17,5 @@ export class MultiServicios {
   readonly r = RUTAS[this.idioma];
 
   /** Imagen de cada servicio, en el orden de `t.servicios`. */
-  readonly imagenes = ['images/IMG_8.jpg', 'images/IMG_3.PNG', 'images/IMG_7.jpg', 'images/IMG_5.JPEG'];
+  readonly imagenes = ['images/maquillaje-novia-detalle-ojos.jpg', 'images/maquillaje-invitada-fiesta-ibiza.png', 'images/maquillaje-sesion-creativa-editorial.jpg', 'images/maquillaje-cine-rodaje-ibiza.jpeg'];
 }

@@ -14,6 +14,8 @@ import { mensajeDeError } from '../../shared/errores-api';
   styleUrl: './login.css'
 })
 export class Login implements OnInit {
+  readonly anio = new Date().getFullYear();
+
   private fb = inject(FormBuilder);
   private auth = inject(AuthService);
   private router = inject(Router);

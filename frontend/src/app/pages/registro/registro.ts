@@ -14,6 +14,8 @@ import { mensajeDeError } from '../../shared/errores-api';
   styleUrl: './registro.css'
 })
 export class Registro implements OnInit {
+  readonly anio = new Date().getFullYear();
+
   private fb = inject(FormBuilder);
   private auth = inject(AuthService);
   private router = inject(Router);

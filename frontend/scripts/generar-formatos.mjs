@@ -3,7 +3,7 @@
 //   npm run formatos
 //
 // Las originales no se tocan ni se recomprimen: las copias van al lado con
-// el nombre completo mas la extension (IMG_1.PNG -> IMG_1.PNG.avif) y Nginx
+// el nombre completo mas la extension (foto.png -> foto.png.avif) y Nginx
 // las sirve en la misma URL cuando el navegador las acepta (cabecera Accept),
 // con la original como respaldo. Ver deploy/nginx/makeupbyyona.es.conf y la
 // politica de medios de CLAUDE.md.

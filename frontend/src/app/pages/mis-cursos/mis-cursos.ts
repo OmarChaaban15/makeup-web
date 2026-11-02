@@ -114,7 +114,7 @@ export class MisCursos implements OnInit, OnDestroy {
     if (curso.miniatura_url && !curso.miniatura_url.includes('img.youtube.com')) {
       return curso.miniatura_url;
     }
-    return 'images/portada_automaquillaje.png';
+    return 'images/masterclass-automaquillaje-portada.png';
   }
 
   abrirCurso(curso: CursoConAcceso): void {

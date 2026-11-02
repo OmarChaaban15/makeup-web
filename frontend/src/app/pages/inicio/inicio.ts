@@ -42,9 +42,11 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   private canvasCtx: CanvasRenderingContext2D | null = null;
 
   // ── Counters ──
-  counterYears = signal(0);
-  counterClients = signal(0);
-  counterPersonal = signal(0);
+  // Arrancan en la cifra final para que el HTML prerenderizado no diga "+0";
+  // la animacion desde 0 es un adorno al pasar el raton.
+  counterYears = signal(5);
+  counterClients = signal(500);
+  counterPersonal = signal(100);
   private countersAnimated = false;
 
   // ── Testimonios VIP ──
@@ -71,15 +73,15 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
 
   // ── Slideshow (works section) ─────────────────
   readonly slides = [
-    { src: 'images/IMG_1.PNG', alt: 'Maquillaje de novia en Ibiza', pos: 'center center' },
-    { src: 'images/IMG_8.jpg', alt: 'Detalle de visagismo y acabado de ojos en alta definición', pos: 'center 30%' },
-    { src: 'images/IMG_2.PNG', alt: 'Maquillaje social para eventos', pos: 'center 35%' },
-    { src: 'images/IMG_6.JPEG', alt: 'Editorial de moda y pasarela con mirada protagonista', pos: 'center 25%' },
-    { src: 'images/IMG_3.PNG', alt: 'Estilismo de fiesta e invitada', pos: 'center 35%' },
-    { src: 'images/IMG_7.jpg', alt: 'Sesión creativa y editorial contemporáneo', pos: 'center 25%' },
-    { src: 'images/IMG_4.PNG', alt: 'Producción de moda y campañas', pos: 'center 40%' },
-    { src: 'images/yonaida8.jpg', alt: 'Técnica de pigmentación glitter y textura de piel', pos: 'center 35%' },
-    { src: 'images/IMG_5.JPEG', alt: 'Rodaje y producción audiovisual', pos: 'center center' },
+    { src: 'images/maquillaje-novia-ibiza.png', alt: 'Maquillaje de novia en Ibiza', pos: 'center center' },
+    { src: 'images/maquillaje-novia-detalle-ojos.jpg', alt: 'Detalle de visagismo y acabado de ojos en alta definición', pos: 'center 30%' },
+    { src: 'images/maquillaje-social-eventos-ibiza.png', alt: 'Maquillaje social para eventos', pos: 'center 35%' },
+    { src: 'images/maquillaje-pasarela-editorial.jpeg', alt: 'Editorial de moda y pasarela con mirada protagonista', pos: 'center 25%' },
+    { src: 'images/maquillaje-invitada-fiesta-ibiza.png', alt: 'Estilismo de fiesta e invitada', pos: 'center 35%' },
+    { src: 'images/maquillaje-sesion-creativa-editorial.jpg', alt: 'Sesión creativa y editorial contemporáneo', pos: 'center 25%' },
+    { src: 'images/maquillaje-editorial-moda-ibiza.png', alt: 'Producción de moda y campañas', pos: 'center 40%' },
+    { src: 'images/maquillaje-glitter-textura-piel.jpg', alt: 'Técnica de pigmentación glitter y textura de piel', pos: 'center 35%' },
+    { src: 'images/maquillaje-cine-rodaje-ibiza.jpeg', alt: 'Rodaje y producción audiovisual', pos: 'center center' },
   ];
 
   currentIndex = signal(0);
@@ -280,7 +282,7 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   // ── Animated Counters ──
 
   animateCounters(): void {
-    if (this.countersAnimated || !this.isBrowser) return;
+    if (this.countersAnimated || !this.isBrowser || this.movimientoPausado()) return;
     this.countersAnimated = true;
 
     this.animateNumber(0, 5, 1500, v => this.counterYears.set(v));

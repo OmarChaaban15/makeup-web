@@ -8,7 +8,8 @@
     "postbuild": "node scripts/generar-sitemap.mjs && node scripts/csp.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "formatos": "node scripts/generar-formatos.mjs"
+    "formatos": "node scripts/generar-formatos.mjs",
+    "iconos": "node scripts/generar-iconos.mjs"
   },
   "private": true,
   "packageManager": "npm@10.9.7",

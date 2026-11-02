@@ -142,7 +142,7 @@
       
       <!-- Fondo fotográfico editorial de alta costura -->
       <div class="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
-        <img src="images/yonaida2.PNG" alt=""
+        <img src="images/yonaida-belhuman-maquilladora-2.png" alt=""
              class="h-full w-full object-cover object-[center_22%] opacity-35 filter contrast-110 brightness-95 scale-105 transition-opacity duration-700" />
         <!-- Degradados envolventes para fusión perfecta con el fondo y máxima legibilidad -->
         <div class="absolute inset-0 bg-gradient-to-b from-[#121110]/90 via-[#121110]/70 to-[#121110]"></div>
@@ -267,7 +267,7 @@
         <div class="relative mx-auto max-w-[620px] aspect-[3/4] overflow-hidden rounded-[26px] sm:rounded-[32px] border border-[#c4956a]/40 shadow-2xl shadow-black/70 select-none bg-[#1a1918]">
           
           <!-- Capa 1: Imagen Después (Día o Noche según pestaña) -->
-          <img [src]="sliderModo() === 'dia' ? 'images/makeup_dia.jpg' : 'images/makeup_noche.jpg'"
+          <img [src]="sliderModo() === 'dia' ? 'images/automaquillaje-dia.jpg' : 'images/automaquillaje-noche.jpg'"
                [alt]="sliderModo() === 'dia' ? 'Makeup Día Terminado' : 'Makeup Noche Terminado'"
                class="absolute inset-0 h-full w-full object-cover object-center pointer-events-none" />
 
@@ -279,7 +279,7 @@
           <!-- Capa 2: Imagen Antes (Sin Maquillar, recortada con clip-path exacto) -->
           <div class="absolute inset-0 overflow-hidden pointer-events-none"
                [style.clip-path]="'polygon(0 0, ' + sliderPos() + '% 0, ' + sliderPos() + '% 100%, 0 100%)'">
-            <img src="images/sin_maquillar.jpg" alt="Rostro sin maquillaje — Natural"
+            <img src="images/automaquillaje-antes-sin-maquillar.jpg" alt="Rostro sin maquillaje — Natural"
                  class="absolute inset-0 h-full w-full object-cover object-center pointer-events-none" />
           </div>
 
@@ -335,7 +335,7 @@
           <div class="gold-glass-card group overflow-hidden rounded-3xl p-4.5 flex flex-col justify-between">
             <div>
               <div class="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-[#1a1918]">
-                <img decoding="async" src="images/sin_maquillar.jpg" alt="Foto sin maquillaje — Imagen natural"
+                <img decoding="async" src="images/automaquillaje-antes-sin-maquillar.jpg" alt="Foto sin maquillaje — Imagen natural"
                      class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
                 <span class="absolute bottom-4 left-4 rounded-full bg-white/20 px-3.5 py-1 font-serif text-[0.72rem] font-semibold uppercase tracking-wider text-white backdrop-blur-md border border-white/25 shadow-md">
@@ -358,7 +358,7 @@
           <div class="gold-glass-card group overflow-hidden rounded-3xl p-4.5 flex flex-col justify-between border-[#c4956a]/40 shadow-xl shadow-[#c4956a]/10">
             <div>
               <div class="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-[#1a1918]">
-                <img decoding="async" src="images/makeup_dia.jpg" alt="Makeup día y tarde"
+                <img decoding="async" src="images/automaquillaje-dia.jpg" alt="Makeup día y tarde"
                      class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
                 <span class="absolute bottom-4 left-4 rounded-full bg-[#9a6b43] px-3.5 py-1 font-serif text-[0.72rem] font-semibold uppercase tracking-wider text-white shadow-lg">
@@ -381,7 +381,7 @@
           <div class="gold-glass-card group overflow-hidden rounded-3xl p-4.5 flex flex-col justify-between">
             <div>
               <div class="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-[#1a1918]">
-                <img decoding="async" src="images/makeup_noche.jpg" alt="Makeup noche"
+                <img decoding="async" src="images/automaquillaje-noche.jpg" alt="Makeup noche"
                      class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
                 <span class="absolute bottom-4 left-4 rounded-full bg-[#1a1918]/85 px-3.5 py-1 font-serif text-[0.72rem] font-semibold uppercase tracking-wider text-[#e8c6a0] backdrop-blur-md border border-[#c4956a]/40 shadow-lg">
@@ -763,7 +763,7 @@
 
           <!-- Foto de Yonaida -->
           <div class="relative overflow-hidden rounded-3xl shadow-2xl border border-white/15 group">
-            <img decoding="async" src="images/yonaida9.jpg" alt="Yonaida — Maquilladora profesional"
+            <img decoding="async" src="images/yonaida-belhuman-maquilladora-9.jpg" alt="Yonaida — Maquilladora profesional"
                  class="h-full w-full object-cover object-top aspect-[4/5] transition-transform duration-700 group-hover:scale-105" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent"></div>
             <div class="absolute bottom-5 left-5 right-5 text-white">
@@ -1143,7 +1143,7 @@
         <div class="mx-auto flex max-w-[1100px] items-center justify-between gap-3">
           <div class="flex items-center gap-2.5 min-w-0">
             <div class="h-9 w-9 sm:h-10 sm:w-10 rounded-full overflow-hidden border border-[#c4956a]/50 shadow-md shrink-0">
-              <img src="images/yonaida.jpg" alt="Yonaida Maquillada" class="h-full w-full object-cover object-top" />
+              <img src="images/yonaida-belhuman-maquilladora-ibiza.jpg" alt="Yonaida Maquillada" class="h-full w-full object-cover object-top" />
             </div>
             <div class="min-w-0">
               <p class="font-serif text-[0.76rem] sm:text-sm font-bold text-white leading-tight truncate">Masterclass Automaquillaje</p>

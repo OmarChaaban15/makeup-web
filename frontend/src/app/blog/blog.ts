@@ -21,7 +21,7 @@ export interface Articulo {
   descripcion: string;
   /** Fecha de publicacion, AAAA-MM-DD. */
   fecha: string;
-  /** Ruta bajo public/, p. ej. images/IMG_1.PNG. */
+  /** Ruta bajo public/, p. ej. images/maquillaje-novia-ibiza.png. */
   imagen: string;
   alt: string;
   /** Minutos de lectura. */

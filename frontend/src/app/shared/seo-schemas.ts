@@ -15,7 +15,7 @@ export const SITIO = {
   email: 'info@makeupbyyona.es',
   // Solo el perfil publico. El otro (@yonadobe) es privado y no aporta
   // nada a un buscador.
-  sameAs: ['https://www.instagram.com/byyonai'],
+  sameAs: ['https://www.instagram.com/byyonai', 'https://www.tiktok.com/@byyonai'],
   imagenOg: '/images/og-makeup-by-yona.jpg'
 } as const;
 
@@ -62,7 +62,7 @@ export function schemaNegocio(): object {
         familyName: 'Belhuman',
         jobTitle: 'Maquilladora profesional',
         url: url('/sobre-mi'),
-        image: url('/images/yonaida.jpg'),
+        image: url('/images/yonaida-belhuman-maquilladora-ibiza.jpg'),
         worksFor: { '@id': ID_NEGOCIO },
         sameAs: SITIO.sameAs
       },

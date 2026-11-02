@@ -252,7 +252,7 @@ const en: Contenido = {
       { titulo: 'Skin preparation', texto: 'A hydrating skincare routine and depuffing massage before any pigment is applied.' },
       { titulo: 'The big day', texto: 'Strict punctuality at your villa or hotel, so you can enjoy a moment of calm and relaxation.' }
     ],
-    cierreKicker: 'Open calendar 2026',
+    cierreKicker: 'Now booking',
     cierreH2: 'Your moment starts here',
     cierreTexto: 'Tell me the date of your event, the people to be made up and any detail you want. I will reply personally with availability and a quote.',
     cierreBoton: 'Get in touch'
@@ -428,7 +428,7 @@ const it: Contenido = {
       { titulo: 'Preparazione della pelle', texto: 'Una routine cosmetica idratante e un massaggio decongestionante prima di applicare qualsiasi pigmento.' },
       { titulo: 'Il grande giorno', texto: 'Massima puntualità nella tua villa o hotel, perché tu possa goderti un momento di calma e relax.' }
     ],
-    cierreKicker: 'Agenda aperta 2026',
+    cierreKicker: 'Agenda aperta',
     cierreH2: 'Il tuo momento inizia qui',
     cierreTexto: "Dimmi la data del tuo evento, le persone da truccare e ogni dettaglio che desideri. Ti risponderò personalmente con disponibilità e preventivo.",
     cierreBoton: 'Contattami'
@@ -604,7 +604,7 @@ const de: Contenido = {
       { titulo: 'Hautvorbereitung', texto: 'Eine feuchtigkeitsspendende Pflegeroutine und eine abschwellende Massage, bevor Pigmente aufgetragen werden.' },
       { titulo: 'Der große Tag', texto: 'Strenge Pünktlichkeit in deiner Villa oder deinem Hotel, damit du einen Moment der Ruhe und Entspannung genießen kannst.' }
     ],
-    cierreKicker: 'Kalender offen 2026',
+    cierreKicker: 'Termine frei',
     cierreH2: 'Dein Moment beginnt hier',
     cierreTexto: 'Nenne mir das Datum deines Events, die Personen, die geschminkt werden sollen, und alle Details, die dir wichtig sind. Ich antworte dir persönlich mit Verfügbarkeit und Angebot.',
     cierreBoton: 'Kontakt aufnehmen'

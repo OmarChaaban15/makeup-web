@@ -17,5 +17,5 @@ export class MultiInicio {
   readonly r = RUTAS[this.idioma];
 
   /** Imagenes de las cuatro tarjetas de servicios, en el orden de `t.tarjetas`. */
-  readonly imagenes = ['images/IMG_1.PNG', 'images/IMG_3.PNG', 'images/IMG_4.PNG', 'images/IMG_5.JPEG'];
+  readonly imagenes = ['images/maquillaje-novia-ibiza.png', 'images/maquillaje-invitada-fiesta-ibiza.png', 'images/maquillaje-editorial-moda-ibiza.png', 'images/maquillaje-cine-rodaje-ibiza.jpeg'];
 }

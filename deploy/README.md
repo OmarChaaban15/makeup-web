@@ -423,7 +423,7 @@ ffmpeg -i masterclass_dia_final.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 -an \
 
 # Imágenes: AVIF/WebP dentro de un <picture>, con el PNG/JPEG original
 # como fallback.
-ffmpeg -i IMG_1.PNG -c:v libaom-av1 -crf 28 -still-picture IMG_1.avif
+ffmpeg -i maquillaje-novia-ibiza.png -c:v libaom-av1 -crf 28 -still-picture maquillaje-novia-ibiza.png.avif
 ```
 
 Eso mantiene el original intacto y solo sirve el formato ligero a quien
