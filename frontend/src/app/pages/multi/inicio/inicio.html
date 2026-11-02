@@ -5,24 +5,24 @@
   <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/85"></div>
 
   <div class="relative z-10 mx-auto max-w-[820px] px-6 text-white">
-    <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-[#c4956a]/40 bg-[#c4956a]/15 px-4 py-1.5 backdrop-blur-md">
-      <span class="h-1.5 w-1.5 rounded-full bg-[#9a6b43]"></span>
-      <span class="font-serif text-[0.7rem] uppercase tracking-[0.28em] text-[#e8c6a0]">{{ t.insignia }}</span>
+    <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-oro/40 bg-oro/15 px-4 py-1.5 backdrop-blur-md">
+      <span class="h-1.5 w-1.5 rounded-full bg-cobre"></span>
+      <span class="font-serif text-[0.7rem] uppercase tracking-[0.28em] text-oro-claro">{{ t.insignia }}</span>
     </div>
 
     <h1 class="font-serif text-[clamp(2.5rem,6.5vw,5.5rem)] font-light leading-[1.1] text-white drop-shadow-2xl">
-      {{ t.h1 }} <br><em class="italic text-[#e8c6a0]">{{ t.h1Em }}</em>
+      {{ t.h1 }} <br><em class="italic text-oro-claro">{{ t.h1Em }}</em>
     </h1>
 
     <p class="mx-auto mt-6 max-w-[540px] font-sans text-sm sm:text-base font-light leading-[1.8] text-white/85">{{ t.intro }}</p>
 
     <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
       <a [routerLink]="r.contacto"
-         class="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-[#9a6b43] px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline shadow-xl transition-all duration-300 hover:bg-[#7a5130]">
+         class="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-cobre px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline shadow-xl transition-all duration-300 hover:bg-cobre-oscuro">
         {{ t.ctaCita }}
       </a>
       <a [routerLink]="r.servicios"
-         class="w-full sm:w-auto inline-flex items-center justify-center rounded-full border border-white/40 bg-white/10 px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-[#1a1a1a]">
+         class="w-full sm:w-auto inline-flex items-center justify-center rounded-full border border-white/40 bg-white/10 px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-tinta">
         {{ t.ctaServicios }}
       </a>
     </div>
@@ -30,19 +30,19 @@
 </section>
 
 <!-- About -->
-<section class="bg-[#fcf9f6] px-6 py-24 sm:px-10 md:py-32">
+<section class="bg-crema px-6 py-24 sm:px-10 md:py-32">
   <div class="mx-auto max-w-[1140px]">
     <div class="grid items-center gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
       <div>
-        <p class="mb-4 font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#8a5f3a]">{{ t.sobreKicker }}</p>
-        <h2 class="mb-6 font-serif text-[clamp(2.2rem,4.5vw,3.6rem)] font-light leading-[1.15] text-[#1a1a1a]">
-          {{ t.sobreSaludo }} <em class="italic text-[#8a5f3a]">{{ t.sobreNombre }}</em>
+        <p class="mb-4 font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-bronce">{{ t.sobreKicker }}</p>
+        <h2 class="mb-6 font-serif text-[clamp(2.2rem,4.5vw,3.6rem)] font-light leading-[1.15] text-tinta">
+          {{ t.sobreSaludo }} <em class="italic text-bronce">{{ t.sobreNombre }}</em>
         </h2>
-        <div class="space-y-5 font-sans text-sm sm:text-base font-light leading-[1.85] text-[#555]">
+        <div class="space-y-5 font-sans text-sm sm:text-base font-light leading-[1.85] text-texto-suave">
           <p>
             @for (parte of t.sobreP1; track $index) {
               @if (parte.b) {
-                <strong class="font-medium text-[#1a1a1a]">{{ parte.t }}</strong>
+                <strong class="font-medium text-tinta">{{ parte.t }}</strong>
               } @else {
                 {{ parte.t }}
               }
@@ -51,7 +51,7 @@
           <p>{{ t.sobreP2 }}</p>
         </div>
         <a [routerLink]="r.sobre"
-           class="mt-8 inline-block font-serif text-xs font-semibold uppercase tracking-[0.18em] text-[#8a5f3a] no-underline">
+           class="mt-8 inline-block font-serif text-xs font-semibold uppercase tracking-[0.18em] text-bronce no-underline">
           {{ t.sobreEnlace }} &rarr;
         </a>
       </div>
@@ -64,11 +64,11 @@
 </section>
 
 <!-- Services -->
-<section class="bg-[#f7f2ed] px-6 py-20 sm:px-10 md:py-28 border-y border-[#ede0d0]">
+<section class="bg-arena px-6 py-20 sm:px-10 md:py-28 border-y border-linea">
   <div class="mx-auto max-w-[1140px]">
     <div class="mx-auto mb-14 max-w-2xl text-center">
-      <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#8a5f3a]">{{ t.serviciosKicker }}</p>
-      <h2 class="mt-3 font-serif text-[clamp(2.2rem,4vw,3.2rem)] font-light text-[#1a1a1a]">{{ t.serviciosH2 }}</h2>
+      <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-bronce">{{ t.serviciosKicker }}</p>
+      <h2 class="mt-3 font-serif text-[clamp(2.2rem,4vw,3.2rem)] font-light text-tinta">{{ t.serviciosH2 }}</h2>
     </div>
 
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -76,8 +76,8 @@
         <article class="overflow-hidden rounded-3xl bg-white shadow-sm">
           <img decoding="async" [src]="imagenes[$index]" [alt]="tarjeta.alt" class="aspect-[4/5] w-full object-cover" />
           <div class="p-6">
-            <h3 class="font-serif text-xl font-light text-[#1a1a1a]">{{ tarjeta.titulo }}</h3>
-            <p class="mt-2 text-sm font-light leading-relaxed text-[#666]">{{ tarjeta.texto }}</p>
+            <h3 class="font-serif text-xl font-light text-tinta">{{ tarjeta.titulo }}</h3>
+            <p class="mt-2 text-sm font-light leading-relaxed text-texto-tenue">{{ tarjeta.texto }}</p>
           </div>
         </article>
       }
@@ -85,7 +85,7 @@
 
     <p class="mt-10 text-center">
       <a [routerLink]="r.servicios"
-         class="font-serif text-xs font-semibold uppercase tracking-[0.18em] text-[#8a5f3a] no-underline">
+         class="font-serif text-xs font-semibold uppercase tracking-[0.18em] text-bronce no-underline">
         {{ t.serviciosTodos }} &rarr;
       </a>
     </p>
@@ -93,26 +93,26 @@
 </section>
 
 <!-- Courses -->
-<section class="bg-[#fcf9f6] px-6 py-20 sm:px-10 md:py-28">
+<section class="bg-crema px-6 py-20 sm:px-10 md:py-28">
   <div class="mx-auto max-w-[760px] text-center">
-    <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[#8a5f3a]">{{ t.cursosKicker }}</p>
-    <h2 class="mt-3 font-serif text-[clamp(2rem,4vw,3rem)] font-light text-[#1a1a1a]">{{ t.cursosH2 }}</h2>
-    <p class="mt-6 text-sm sm:text-base font-light leading-[1.85] text-[#555]">{{ t.cursosTexto }}</p>
-    <p class="mt-3 text-xs font-light text-[#666]">{{ t.cursosNota }}</p>
+    <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-bronce">{{ t.cursosKicker }}</p>
+    <h2 class="mt-3 font-serif text-[clamp(2rem,4vw,3rem)] font-light text-tinta">{{ t.cursosH2 }}</h2>
+    <p class="mt-6 text-sm sm:text-base font-light leading-[1.85] text-texto-suave">{{ t.cursosTexto }}</p>
+    <p class="mt-3 text-xs font-light text-texto-tenue">{{ t.cursosNota }}</p>
     <a routerLink="/cursos"
-       class="mt-8 inline-block rounded-full border border-[#c4956a] px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-[#8a5f3a] no-underline transition-all duration-300 hover:bg-[#c4956a] hover:text-white">
+       class="mt-8 inline-block rounded-full border border-oro px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-bronce no-underline transition-all duration-300 hover:bg-oro hover:text-white">
       {{ t.cursosCta }}
     </a>
   </div>
 </section>
 
 <!-- Call to action -->
-<section class="bg-[#1a1a1a] px-6 py-20 text-center text-white sm:px-10">
+<section class="bg-tinta px-6 py-20 text-center text-white sm:px-10">
   <div class="mx-auto max-w-[640px]">
     <h2 class="font-serif text-[clamp(2rem,4vw,3rem)] font-light">{{ t.cierreH2 }}</h2>
     <p class="mt-5 text-sm font-light leading-relaxed text-white/70">{{ t.cierreTexto }}</p>
     <a [routerLink]="r.contacto"
-       class="mt-8 inline-block rounded-full bg-[#9a6b43] px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline transition-all duration-300 hover:bg-[#7a5130]">
+       class="mt-8 inline-block rounded-full bg-cobre px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline transition-all duration-300 hover:bg-cobre-oscuro">
       {{ t.cierreBoton }}
     </a>
   </div>

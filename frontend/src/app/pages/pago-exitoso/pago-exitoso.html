@@ -1,31 +1,31 @@
 <div class="min-h-[100svh] flex items-center justify-center bg-[#f2eae4] px-6 py-24 font-sans">
   <div class="max-w-[480px] w-full rounded-[24px] bg-white p-10 text-center shadow-sm">
 
-    <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#c4956a]/10">
-      <svg class="h-8 w-8 text-[#8a5f3a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+    <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-oro/10">
+      <svg class="h-8 w-8 text-bronce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
       </svg>
     </div>
 
-    <h1 class="font-serif text-[1.9rem] font-light text-[#1a1a1a]">¡Pago completado!</h1>
+    <h1 class="font-serif text-[1.9rem] font-light text-tinta">¡Pago completado!</h1>
 
-    <p class="mt-4 font-sans text-[0.88rem] font-light leading-relaxed text-[#666]">
+    <p class="mt-4 font-sans text-[0.88rem] font-light leading-relaxed text-texto-tenue">
       Gracias por tu compra. Hemos confirmado tu pago
       <span *ngIf="pedidoId">(pedido #{{ pedidoId }})</span>
       y ya tienes acceso a tu curso.
     </p>
 
-    <p class="mt-2 font-sans text-[0.8rem] font-light text-[#666]">
+    <p class="mt-2 font-sans text-[0.8rem] font-light text-texto-tenue">
       Te hemos enviado un recibo de la compra por email.
     </p>
 
     <a routerLink="/mis-cursos"
-       class="mt-8 inline-block w-full rounded-full bg-gradient-to-r from-[#9a6b43] to-[#7a5130] px-6 py-3.5 text-[0.72rem] font-bold uppercase tracking-widest text-white shadow-[0_6px_24px_rgba(196,149,106,0.35)] transition-all hover:scale-[1.02]">
+       class="mt-8 inline-block w-full rounded-full bg-gradient-to-r from-cobre to-cobre-oscuro px-6 py-3.5 text-[0.72rem] font-bold uppercase tracking-widest text-white shadow-[0_6px_24px_rgba(196,149,106,0.35)] transition-all hover:scale-[1.02]">
       Ver mis cursos
     </a>
 
     <a routerLink="/"
-       class="mt-3 inline-block w-full font-sans text-[0.75rem] font-medium text-[#666] hover:text-[#c4956a]">
+       class="mt-3 inline-block w-full font-sans text-[0.75rem] font-medium text-texto-tenue hover:text-oro">
       Volver al inicio
     </a>
 

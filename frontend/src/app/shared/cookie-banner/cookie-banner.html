@@ -7,7 +7,7 @@
 
     <div class="mx-auto flex max-w-[1300px] items-center gap-4 px-5 py-3.5 sm:gap-8 sm:px-8">
       <div class="flex flex-1 items-start gap-3 sm:gap-4">
-        <div class="mt-[2px] hidden flex-none text-[#8a5f3a] sm:block" aria-hidden="true">
+        <div class="mt-[2px] hidden flex-none text-bronce sm:block" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
             <path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/>
@@ -16,14 +16,14 @@
         <p class="font-serif text-[0.8rem] leading-relaxed text-[#444]">
           {{ t().aviso }}
           <a routerLink="/politica-cookies"
-             class="ml-1 font-semibold text-[#8a5f3a] underline underline-offset-2 transition-colors hover:text-[#7a5130]">
+             class="ml-1 font-semibold text-bronce underline underline-offset-2 transition-colors hover:text-cobre-oscuro">
             {{ t().mas }}
           </a>
         </p>
       </div>
 
       <button type="button" (click)="cerrar()"
-              class="flex-none cursor-pointer border-[1.5px] border-[#9a6b43] bg-[#9a6b43] px-5 py-[0.55rem] font-serif text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white transition-all duration-200 hover:bg-[#7a5130] active:scale-95">
+              class="flex-none cursor-pointer border-[1.5px] border-cobre bg-cobre px-5 py-[0.55rem] font-serif text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white transition-all duration-200 hover:bg-cobre-oscuro active:scale-95">
         {{ t().entendido }}
       </button>
     </div>

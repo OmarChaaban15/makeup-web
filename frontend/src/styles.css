@@ -1,40 +1,72 @@
 /*
  * Fuentes servidas desde la propia web (paquetes @fontsource) y no desde Google:
  * sin ellas cada visita enviaba la IP a Google antes de cualquier consentimiento.
- * Solo latin y latin-ext: cubren español, ingles, italiano y aleman.
+ *
+ * Se importan los ficheros por grosor (400.css...), no los "latin-400.css" +
+ * "latin-ext-400.css": esos dos no declaran unicode-range, asi que el navegador
+ * descargaba los dos ficheros de cada grosor aunque la pagina solo usara letras
+ * latinas basicas. Los ficheros por grosor llevan unicode-range por subconjunto
+ * y solo se baja el que contiene los caracteres que aparecen (latin casi siempre,
+ * latin-ext si hay una letra como la ß o la ł). Mismos glifos, mitad de peticiones.
  */
-@import "@fontsource/cormorant-garamond/latin-300.css";
-@import "@fontsource/cormorant-garamond/latin-400.css";
-@import "@fontsource/cormorant-garamond/latin-500.css";
-@import "@fontsource/cormorant-garamond/latin-600.css";
-@import "@fontsource/cormorant-garamond/latin-700.css";
-@import "@fontsource/cormorant-garamond/latin-300-italic.css";
-@import "@fontsource/cormorant-garamond/latin-400-italic.css";
-@import "@fontsource/cormorant-garamond/latin-500-italic.css";
-@import "@fontsource/inter/latin-300.css";
-@import "@fontsource/inter/latin-400.css";
-@import "@fontsource/inter/latin-500.css";
-@import "@fontsource/inter/latin-600.css";
-@import "@fontsource/cormorant-garamond/latin-ext-300.css";
-@import "@fontsource/cormorant-garamond/latin-ext-400.css";
-@import "@fontsource/cormorant-garamond/latin-ext-500.css";
-@import "@fontsource/cormorant-garamond/latin-ext-600.css";
-@import "@fontsource/cormorant-garamond/latin-ext-700.css";
-@import "@fontsource/cormorant-garamond/latin-ext-300-italic.css";
-@import "@fontsource/cormorant-garamond/latin-ext-400-italic.css";
-@import "@fontsource/cormorant-garamond/latin-ext-500-italic.css";
-@import "@fontsource/inter/latin-ext-300.css";
-@import "@fontsource/inter/latin-ext-400.css";
-@import "@fontsource/inter/latin-ext-500.css";
-@import "@fontsource/inter/latin-ext-600.css";
+@import "@fontsource/cormorant-garamond/300.css";
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/500.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/cormorant-garamond/700.css";
+@import "@fontsource/cormorant-garamond/300-italic.css";
+@import "@fontsource/cormorant-garamond/400-italic.css";
+@import "@fontsource/cormorant-garamond/500-italic.css";
+@import "@fontsource/inter/300.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
 @import "leaflet/dist/leaflet.css";
 @import "tailwindcss";
 
 @source "./app/**/*.{html,ts}";
 
+/*
+ * Tokens de marca. Son los valores que la web ya usaba sueltos en las
+ * plantillas (#c4956a, #9a6b43...), con nombre. Tailwind genera de cada uno
+ * las clases habituales: text-oro, bg-cobre/15, border-linea, rounded-foto,
+ * ease-salida... Cambiar un valor aqui lo cambia en toda la web.
+ */
 @theme {
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Acento dorado de la marca (theme-color). Sobre fondo claro no llega a AA
+     como texto: para texto sobre claro se usa bronce. */
+  --color-oro: #c4956a;
+  /* Dorado claro: texto de acento sobre fondo oscuro o sobre foto. */
+  --color-oro-claro: #e8c6a0;
+  /* Variante del hero (cursiva y etiqueta sobre el video). */
+  --color-oro-palido: #e8c99a;
+  /* Relleno de los botones principales (texto blanco encima: AA). */
+  --color-cobre: #9a6b43;
+  --color-cobre-oscuro: #7a5130;
+  /* Texto de acento sobre fondo claro (AA sobre crema y blanco). */
+  --color-bronce: #8a5f3a;
+
+  --color-tinta: #1a1a1a;
+  --color-noche: #161514;
+  --color-crema: #fcf9f6;
+  --color-arena: #f7f2ed;
+  --color-linea: #ede0d0;
+  --color-texto-suave: #555555;
+  --color-texto-tenue: #666666;
+
+  /* Radios que ya existian: tarjetas de foto y bloques grandes. */
+  --radius-foto: 26px;
+  --radius-bloque: 32px;
+
+  /* Curvas de movimiento. "salida": entradas y respuesta a la usuaria
+     (arranca rapido, frena suave). "suave": la que ya usaban las
+     apariciones al hacer scroll y el hero. */
+  --ease-salida: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-suave: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-en-pantalla: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 /* ═══════════════════════════════════════════
