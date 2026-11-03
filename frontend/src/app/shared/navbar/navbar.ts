@@ -80,6 +80,10 @@ export class Navbar {
 
     if (destino) {
       this.closeMenu();
+      // Con el traductor de Google encendido (se eligio un idioma en el blog,
+      // por ejemplo) hay que apagarlo: si no, la portada en español seguia
+      // traducida y elegir "Español" no hacia nada.
+      if (this.translation.quitarTraduccion(destino)) return;
       this.router.navigateByUrl(destino);
       return;
     }

@@ -130,7 +130,7 @@
       </li>
 
       <!-- ✦ Selector de Idioma (ES / EN / IT / DE) Escritorio -->
-      <li class="relative ml-1">
+      <li class="relative ml-1" translate="no">
         <button type="button"
                 (click)="toggleLangMenu($event)" [attr.aria-expanded]="langMenuOpen" aria-haspopup="menu"
                 class="flex cursor-pointer items-center gap-2 rounded-full border px-2.5 py-1 transition-all duration-300 backdrop-blur-sm"
@@ -270,7 +270,7 @@
        (click)="closeMenu()">
 
     <!-- ✦ Selector de Idioma Móvil (Integrado y Elegante) -->
-    <div class="flex items-center justify-between rounded-2xl bg-[#faf7f4] border border-[#ede3da] p-2"
+    <div translate="no" class="flex items-center justify-between rounded-2xl bg-[#faf7f4] border border-[#ede3da] p-2"
          (click)="$event.stopPropagation()">
       <button type="button" (click)="selectLanguage('es', $event)"
               class="flex flex-1 items-center justify-center gap-1.5 rounded-xl py-2 transition-all"

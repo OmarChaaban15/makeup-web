@@ -42,6 +42,8 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
     'videos/masterclass_noche_final.mp4',
   ];
   private heroVideoIndex = 0;
+  /** Segundo del video que se ve cuando la portada esta en pausa. */
+  private static readonly SEGUNDO_FOTOGRAMA_FIJO = 2;
   private readonly precargados = new Set<string>();
 
   @ViewChild('heroVideo') heroVideoRef!: ElementRef<HTMLVideoElement>;
@@ -160,11 +162,17 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   private autoPlayTimer: ReturnType<typeof setInterval> | null = null;
 
   /**
-   * Pausa todo lo que se mueve solo (video de portada, particulas y pase de
-   * fotos): WCAG 2.2.2 pide poder detener el movimiento automatico de mas de
-   * 5 segundos. Arranca en pausa si el sistema pide reducir el movimiento.
+   * WCAG 2.2.2 pide poder detener el movimiento automatico de mas de 5
+   * segundos, y cada cosa tiene su boton. El pase de fotos arranca en pausa
+   * si el sistema pide reducir el movimiento. El video de portada no: es la
+   * pieza principal de la web y muchos equipos llevan esa opcion activada sin
+   * saberlo (en Windows basta con apagar los efectos de animacion), asi que se
+   * reproduce y se puede pausar desde su boton.
    */
   movimientoPausado = signal(false);
+  /** Video de portada y particulas. */
+  videoPausado = signal(false);
+  private reducirMovimiento = false;
   readonly autoPlayDuration = 5000;
   progressWidth = signal(0);
   private progressAnimFrame: number | null = null;
@@ -213,7 +221,8 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
       error: () => this.masterclass.set(null),
     });
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    this.reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (this.reducirMovimiento) {
       this.movimientoPausado.set(true);
       return;
     }
@@ -228,8 +237,8 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
 
     // Las particulas son decoracion: solo en pantallas con raton, donde
     // sobra potencia. En el movil un bucle de canvas a 60 fps solo gasta
-    // bateria y compite con el scroll.
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    // bateria y compite con el scroll. Tampoco si se pide reducir movimiento.
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !this.reducirMovimiento) {
       this.initParticles();
     }
   }
@@ -251,8 +260,16 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
     video.volume = 0;
     video.src = this.heroVideos[index];
     video.load();
-    if (!this.movimientoPausado()) {
-      video.play().catch(() => { });
+    if (this.videoPausado()) {
+      this.mostrarFotogramaFijo(video);
+    } else {
+      // Si el navegador no deja reproducir solo (ahorro de datos o de
+      // bateria), el boton pasa a "Reanudar" y se ve un fotograma real.
+      video.play().catch((error: unknown) => {
+        if ((error as DOMException)?.name !== 'NotAllowedError') return;
+        this.videoPausado.set(true);
+        this.mostrarFotogramaFijo(video);
+      });
     }
 
     // Deja el siguiente vídeo del bucle ya en caché del navegador, para que
@@ -260,6 +277,17 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
     // calidad. Se lanza cuando el actual ya está reproduciéndose, así que
     // no le roba ancho de banda.
     video.addEventListener('playing', () => this.precargarSiguiente(index), { once: true });
+  }
+
+  /**
+   * El primer fotograma del video es un fundido casi blanco que, bajo la capa
+   * oscura, se ve como un fondo gris vacio. En pausa se muestra uno de pleno
+   * plano del mismo video.
+   */
+  private mostrarFotogramaFijo(video: HTMLVideoElement): void {
+    const situar = () => { video.currentTime = Inicio.SEGUNDO_FOTOGRAMA_FIJO; };
+    if (video.readyState >= HTMLMediaElement.HAVE_METADATA) situar();
+    else video.addEventListener('loadedmetadata', situar, { once: true });
   }
 
   private precargarSiguiente(indiceActual: number): void {
@@ -302,27 +330,34 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
       });
     }
 
-    if (!this.movimientoPausado()) {
+    if (!this.videoPausado()) {
       this.animateParticles();
     }
   }
 
-  /** Boton de pausa: detiene o reanuda video, particulas y pase de fotos. */
-  toggleMovimiento(): void {
-    const pausar = !this.movimientoPausado();
-    this.movimientoPausado.set(pausar);
+  /** Boton de la portada: detiene o reanuda el video y las particulas. */
+  toggleVideo(): void {
+    const pausar = !this.videoPausado();
+    this.videoPausado.set(pausar);
     const video = this.heroVideoRef?.nativeElement;
 
     if (pausar) {
-      this.stopAutoPlay();
       if (this.animFrameId) cancelAnimationFrame(this.animFrameId);
       this.animFrameId = null;
       video?.pause();
     } else {
-      this.startAutoPlay();
       if (this.particles.length > 0) this.animateParticles();
       video?.play().catch(() => { });
     }
+  }
+
+  /** Boton del pase de fotos. */
+  toggleMovimiento(): void {
+    const pausar = !this.movimientoPausado();
+    this.movimientoPausado.set(pausar);
+
+    if (pausar) this.stopAutoPlay();
+    else this.startAutoPlay();
   }
 
   @HostListener('window:resize')

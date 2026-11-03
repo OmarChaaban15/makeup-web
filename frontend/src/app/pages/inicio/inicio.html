@@ -15,7 +15,6 @@
     #heroVideo
     id="hero-video"
     class="absolute inset-0 h-full w-full object-cover"
-    autoplay
     muted
     playsinline
     preload="auto"
@@ -63,12 +62,12 @@
     </div>
   </div>
 
-  <!-- Pausa del movimiento (WCAG 2.2.2): icono con nombre accesible -->
-  <button type="button" (click)="toggleMovimiento()" [attr.aria-pressed]="movimientoPausado()"
-          [attr.aria-label]="movimientoPausado() ? 'Reanudar movimiento' : 'Pausar movimiento'"
-          [attr.title]="movimientoPausado() ? 'Reanudar movimiento' : 'Pausar movimiento'"
+  <!-- Pausa del video (WCAG 2.2.2): icono con nombre accesible -->
+  <button type="button" (click)="toggleVideo()" [attr.aria-pressed]="videoPausado()"
+          [attr.aria-label]="videoPausado() ? 'Reanudar vídeo' : 'Pausar vídeo'"
+          [attr.title]="videoPausado() ? 'Reanudar vídeo' : 'Pausar vídeo'"
           class="pulsable absolute bottom-5 left-4 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/35 text-white cursor-pointer hover:bg-black/55 sm:left-6">
-    @if (movimientoPausado()) {
+    @if (videoPausado()) {
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
     } @else {
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6.5" y="5" width="3.5" height="14" rx="1"/><rect x="14" y="5" width="3.5" height="14" rx="1"/></svg>

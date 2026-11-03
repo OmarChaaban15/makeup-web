@@ -17,7 +17,7 @@
 
       <div class="flex items-center gap-2 sm:gap-3">
         <!-- ✦ Selector de Idioma (ES / EN / IT / DE) -->
-        <div class="relative">
+        <div class="relative" translate="no">
           <button type="button"
                   (click)="toggleLangMenu($event)" [attr.aria-expanded]="langMenuOpen()" aria-haspopup="menu"
                   class="flex cursor-pointer items-center gap-1.5 rounded-full border border-oro/40 bg-oro/15 px-2.5 py-1 sm:px-3 sm:py-1.5 text-white transition-all hover:bg-oro/30 hover:border-oro backdrop-blur-md"
@@ -1172,7 +1172,7 @@
       <p class="font-serif tracking-wider text-white/60">Makeup by Yona &middot; Atelier de Maquillaje en Ibiza</p>
       
       <!-- Selector de idioma en el footer -->
-      <div class="mt-3 flex items-center justify-center gap-1.5 sm:gap-2 text-xs">
+      <div translate="no" class="mt-3 flex items-center justify-center gap-1.5 sm:gap-2 text-xs">
         <button type="button" (click)="selectLanguage('es', $event)"
                 class="flex cursor-pointer items-center gap-1.5 rounded-full px-2.5 py-1 transition-all"
                 [class.bg-oro/20]="translation.currentLang() === 'es'"

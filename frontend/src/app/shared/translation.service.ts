@@ -77,8 +77,11 @@ export class TranslationService {
     localStorage.setItem('yona_lang', lang);
 
     if (lang === 'es') {
+      // El combo de Google no ofrece el idioma original, asi que no sabe
+      // deshacer la traduccion: sin la cookie, recargar devuelve el español.
       this.clearTranslationCookie();
-      this.triggerTranslateWidget('es');
+      window.location.reload();
+      return;
     } else {
       this.applyTranslationCookie(lang);
       this.cargarWidget();
@@ -88,6 +91,22 @@ export class TranslationService {
     setTimeout(() => {
       this.isTranslating.set(false);
     }, 450);
+  }
+
+  /**
+   * Apaga el traductor antes de ir a una pagina que tiene version propia en
+   * el idioma elegido. Google ya ha reescrito el DOM y no lo devuelve, asi
+   * que se carga la pagina de cero. Devuelve false si no estaba activo.
+   */
+  quitarTraduccion(destino: string): boolean {
+    if (!this.isBrowser) return false;
+    if (this.currentLang() === 'es' && !this.getCookie('googtrans')) return false;
+
+    this.clearTranslationCookie();
+    localStorage.setItem('yona_lang', 'es');
+    this.currentLang.set('es');
+    window.location.assign(destino);
+    return true;
   }
 
   /**
@@ -135,6 +154,9 @@ export class TranslationService {
     const domain = window.location.hostname;
     document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain};`;
+    // Google la fija tambien para el dominio con punto delante; si sobrevive,
+    // la pagina vuelve a salir traducida al recargar.
+    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${domain};`;
   }
 
   private triggerTranslateWidget(targetLang: string): void {
