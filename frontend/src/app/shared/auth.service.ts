@@ -71,7 +71,7 @@ export class AuthService {
    * peticion: si el token ya habia caducado el servidor devuelve 401 y
    * dejar al usuario "dentro" seria peor que ignorar el error.
    */
-  logout(redirigirA: string | null = '/inicio'): void {
+  logout(redirigirA: string | null = '/'): void {
     const finalizar = () => {
       this.limpiarSesion();
       if (redirigirA) {

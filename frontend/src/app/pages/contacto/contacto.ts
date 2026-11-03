@@ -1,16 +1,17 @@
-import { afterNextRender, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
 import { environment } from '../../../environments/environment';
 import { mensajeDeError } from '../../shared/errores-api';
-import * as L from 'leaflet';
+import type * as L from 'leaflet';
 
 @Component({
   selector: 'app-contacto',
   standalone: true,
-  imports: [CommonModule, FormsModule, ScrollRevealDirective],
+  imports: [CommonModule, FormsModule, RouterLink, ScrollRevealDirective],
   templateUrl: './contacto.html',
   styleUrl: './contacto.css',
 })
@@ -18,6 +19,7 @@ export class Contacto implements OnDestroy {
   @ViewChild('mapContainer') private mapContainer?: ElementRef<HTMLDivElement>;
 
   private map?: L.Map;
+  private destruido = false;
   private readonly studioLocation: L.LatLngExpression = [38.9067, 1.4206];
 
   formData = {
@@ -43,11 +45,18 @@ export class Contacto implements OnDestroy {
   error = '';
   emailCopiado = false;
 
-  constructor(private http: HttpClient) {
-    afterNextRender(() => this.initMap());
+  /** El mapa no se carga hasta que la visita lo pide (ver contacto.html). */
+  mapaVisible = signal(false);
+
+  constructor(private http: HttpClient) {}
+
+  mostrarMapa(): void {
+    this.mapaVisible.set(true);
+    this.initMap();
   }
 
   ngOnDestroy(): void {
+    this.destruido = true;
     this.map?.remove();
   }
 
@@ -115,8 +124,17 @@ export class Contacto implements OnDestroy {
     });
   }
 
-  private initMap(): void {
+  private async initMap(): Promise<void> {
     if (!this.mapContainer || this.map) {
+      return;
+    }
+
+    // Leaflet usa `window` nada mas cargarse. Se importa aqui, ya en el
+    // navegador, para que el prerender no falle al evaluar este modulo.
+    const modulo = await import('leaflet');
+    const L = ('default' in modulo ? modulo.default : modulo) as typeof import('leaflet');
+
+    if (this.destruido || !this.mapContainer || this.map) {
       return;
     }
 

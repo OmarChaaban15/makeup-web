@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit, computed, inject, signal } from '@angular/core';
+import { Component, HostListener, OnInit, PLATFORM_ID, computed, inject, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -6,6 +7,7 @@ import { finalize } from 'rxjs';
 import { AuthService } from '../../shared/auth.service';
 import { ContadorOferta } from '../../shared/contador-oferta/contador-oferta';
 import { Curso, CursosService } from '../../shared/cursos.service';
+import { SeoService } from '../../shared/seo.service';
 import { mensajeDeError } from '../../shared/errores-api';
 import { TranslationService, Language } from '../../shared/translation.service';
 
@@ -28,6 +30,8 @@ import { TranslationService, Language } from '../../shared/translation.service';
 })
 export class Oferta implements OnInit {
   private cursos = inject(CursosService);
+  private seo = inject(SeoService);
+  private esNavegador = isPlatformBrowser(inject(PLATFORM_ID));
   private auth = inject(AuthService);
   private router = inject(Router);
   public translation = inject(TranslationService);
@@ -40,11 +44,16 @@ export class Oferta implements OnInit {
   errorCompra = signal('');
   yaLoTiene = signal(false);
 
-  /** Formulario de invitado. Solo se muestra si no hay sesión iniciada. */
+  /**
+   * Paso previo al pago. Sin cuenta pide nombre y correo; con cuenta o sin
+   * ella pide aceptar las condiciones y el acceso inmediato, que es lo que
+   * hace valida la renuncia al desistimiento (art. 103.m TRLGDCU).
+   */
   formVisible = signal(false);
   nombre = '';
   email = '';
   aceptaCondiciones = false;
+  aceptaAccesoInmediato = false;
   errorForm = signal('');
 
   /** Selector de idioma desplegable */
@@ -61,6 +70,9 @@ export class Oferta implements OnInit {
   mostrarBarraSticky = signal(false);
 
   readonly estaAutenticado = this.auth.estaAutenticado;
+
+  /** " · 45 €" cuando se conoce el precio; nada mientras carga. */
+  readonly sufijoPrecio = computed(() => (this.precio() ? ` · ${this.precio()}` : ''));
 
   readonly precio = computed(() => {
     const curso = this.curso();
@@ -100,7 +112,11 @@ export class Oferta implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargar();
+    // Al prerenderizar no hay API a la que llamar: la pagina sale con su
+    // contenido fijo y el precio y el contador se rellenan en el navegador.
+    if (this.esNavegador) {
+      this.cargar();
+    }
   }
 
   private cargar(): void {
@@ -110,6 +126,7 @@ export class Oferta implements OnInit {
       .subscribe({
         next: curso => {
           this.curso.set(curso);
+          if (curso) this.seo.publicarCurso(curso);
           if (!curso) {
             this.errorCarga.set('El curso no está disponible en este momento.');
           }
@@ -130,15 +147,9 @@ export class Oferta implements OnInit {
     this.cargar();
   }
 
-  /** Botón principal. Con sesión va directo a Stripe; sin ella pide los datos. */
+  /** Botón principal: abre el paso previo al pago (ver formVisible). */
   empezarCompra(): void {
     this.errorCompra.set('');
-
-    if (this.estaAutenticado()) {
-      this.enviarCompra();
-      return;
-    }
-
     this.formVisible.set(true);
   }
 
@@ -148,11 +159,7 @@ export class Oferta implements OnInit {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    if (!this.estaAutenticado()) {
-      this.formVisible.set(true);
-    } else {
-      this.empezarCompra();
-    }
+    this.empezarCompra();
   }
 
   actualizarSlider(e: Event): void {
@@ -180,25 +187,31 @@ export class Oferta implements OnInit {
     }
   }
 
-  comprarComoInvitado(): void {
+  confirmarCompra(): void {
     this.errorForm.set('');
+    const invitado = !this.estaAutenticado();
 
-    if (!this.nombre.trim()) {
+    if (invitado && !this.nombre.trim()) {
       this.errorForm.set('Dinos tu nombre para personalizar tu acceso.');
       return;
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(this.email.trim())) {
+    if (invitado && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(this.email.trim())) {
       this.errorForm.set('Introduce un correo electrónico válido: es donde recibirás el acceso.');
       return;
     }
 
     if (!this.aceptaCondiciones) {
-      this.errorForm.set('Necesitamos que aceptes la política de privacidad.');
+      this.errorForm.set('Necesitamos que aceptes las condiciones de venta y la política de privacidad.');
       return;
     }
 
-    this.enviarCompra({ nombre: this.nombre.trim(), email: this.email.trim() });
+    if (!this.aceptaAccesoInmediato) {
+      this.errorForm.set('Marca la casilla del acceso inmediato para poder empezar el curso en cuanto pagues.');
+      return;
+    }
+
+    this.enviarCompra(invitado ? { nombre: this.nombre.trim(), email: this.email.trim() } : undefined);
   }
 
   private enviarCompra(invitado?: { nombre: string; email: string }): void {
@@ -228,11 +241,7 @@ export class Oferta implements OnInit {
             'No se pudo iniciar el pago seguro. Inténtalo de nuevo en unos minutos.'
           );
 
-          if (invitado) {
-            this.errorForm.set(mensaje);
-          } else {
-            this.errorCompra.set(mensaje);
-          }
+          this.errorForm.set(mensaje);
         }
       });
   }

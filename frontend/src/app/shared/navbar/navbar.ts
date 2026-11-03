@@ -1,6 +1,8 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, computed, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { IdiomaRuta, RUTAS } from '../idioma';
+import { NAVBAR } from '../textos';
 import { TranslationService } from '../translation.service';
 import { AuthService } from '../auth.service';
 
@@ -20,9 +22,26 @@ export class Navbar {
   public translation = inject(TranslationService);
   private auth = inject(AuthService);
   private router = inject(Router);
+  private idioma = inject(IdiomaRuta);
+
+  /** Idioma de la pagina visible (por la URL). */
+  readonly idiomaPagina = this.idioma.idioma;
+
+  /** Idioma que se marca como activo: el de la pagina, o el del traductor en las paginas en español. */
+  readonly idiomaActual = computed(() =>
+    this.idiomaPagina() === 'es' ? this.translation.currentLang() : this.idiomaPagina()
+  );
+
+  readonly t = computed(() => NAVBAR[this.idiomaPagina()]);
+
+  /** Enlaces del menu. Cursos y blog solo existen en español. */
+  readonly r = computed(() => ({ ...RUTAS[this.idiomaPagina()], cursos: '/cursos', blog: '/blog' }));
 
   // Rutas con imagen a pantalla completa donde el navbar va transparente.
-  private readonly rutasHero = new Set(['/', '/inicio', '/sobre-mi', '/servicios']);
+  private readonly rutasHero = new Set([
+    '/inicio',
+    ...Object.values(RUTAS).flatMap(rutas => [rutas.inicio, rutas.sobre, rutas.servicios])
+  ]);
 
   constructor() {
     this.router.events
@@ -41,8 +60,19 @@ export class Navbar {
 
   selectLanguage(lang: 'es' | 'en' | 'it' | 'de', event?: Event): void {
     if (event) event.stopPropagation();
-    this.translation.setLanguage(lang);
     this.langMenuOpen = false;
+
+    // Si la pagina existe en ese idioma se navega a ella; solo el resto
+    // (cursos, blog, privacidad...) pasa por el traductor de Google.
+    const destino = this.idioma.equivalente(lang);
+
+    if (destino) {
+      this.closeMenu();
+      this.router.navigateByUrl(destino);
+      return;
+    }
+
+    this.translation.setLanguage(lang);
   }
 
   // Leen signals del AuthService en lugar de tocar localStorage (y hacer
@@ -101,6 +131,6 @@ export class Navbar {
   logout() {
     this.userMenuOpen = false;
     this.closeMenu();
-    this.auth.logout('/inicio');
+    this.auth.logout('/');
   }
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Closure;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Contracts\Validation\UncompromisedVerifier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -19,7 +21,7 @@ class AuthController extends Controller
             'nombre' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'telefono' => 'nullable|string|max:20',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => ['required', 'string', 'min:8', 'confirmed', $this->noFiltrada()],
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
             'nombre.max' => 'El nombre no puede superar los 255 caracteres.',
@@ -130,7 +132,7 @@ class AuthController extends Controller
         $request->validate([
             'token' => 'required|string',
             'email' => 'required|string|email',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => ['required', 'string', 'min:8', 'confirmed', $this->noFiltrada()],
         ], [
             'token.required' => 'El enlace de recuperación no es válido.',
             'email.required' => 'El correo electrónico es obligatorio.',
@@ -164,6 +166,25 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Contraseña actualizada. Ya puedes iniciar sesión.',
         ], 200);
+    }
+
+    /**
+     * En produccion rechaza contraseñas que aparecen en filtraciones conocidas
+     * (Have I Been Pwned). Solo viajan los 5 primeros caracteres del hash SHA-1,
+     * nunca la contraseña. Si el servicio no responde se acepta: no debe
+     * impedir registrarse. En local y en los tests no se consulta.
+     */
+    private function noFiltrada(): Closure
+    {
+        return function (string $atributo, mixed $valor, Closure $fallo): void {
+            if (! app()->isProduction()) {
+                return;
+            }
+
+            if (! app(UncompromisedVerifier::class)->verify(['value' => $valor, 'threshold' => 0])) {
+                $fallo('Esta contraseña aparece en filtraciones de datos conocidas. Elige otra.');
+            }
+        };
     }
 
     private function emitirToken(User $user): string

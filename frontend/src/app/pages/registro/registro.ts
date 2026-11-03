@@ -14,6 +14,8 @@ import { mensajeDeError } from '../../shared/errores-api';
   styleUrl: './registro.css'
 })
 export class Registro implements OnInit {
+  readonly anio = new Date().getFullYear();
+
   private fb = inject(FormBuilder);
   private auth = inject(AuthService);
   private router = inject(Router);
@@ -31,7 +33,7 @@ export class Registro implements OnInit {
 
   private checkAuthStatus(): void {
     if (this.auth.estaAutenticado()) {
-      this.router.navigate(['/inicio']);
+      this.router.navigate(['/']);
     }
   }
 
@@ -91,7 +93,7 @@ export class Registro implements OnInit {
       .subscribe({
         next: () => {
           this.successMsg = '¡Cuenta creada! Redirigiendo...';
-          setTimeout(() => this.router.navigate(['/inicio']), 1000);
+          setTimeout(() => this.router.navigate(['/']), 1000);
         },
         error: error => {
           this.errorMsg = mensajeDeError(

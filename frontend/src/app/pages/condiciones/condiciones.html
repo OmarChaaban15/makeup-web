@@ -1,0 +1,117 @@
+<section class="min-h-[100svh] bg-white pt-32 pb-24">
+  <div class="mx-auto max-w-[780px] px-8">
+
+    <div class="mb-14 border-b border-black/[0.08] pb-10">
+      <p class="mb-3 font-serif text-[0.72rem] uppercase tracking-[0.26em] text-[#8a5f3a]">Legal</p>
+      <h1 class="font-serif text-[2.4rem] font-bold uppercase leading-none tracking-[0.06em] text-[#1a1a1a] max-[600px]:text-[1.8rem]">
+        Condiciones de venta
+      </h1>
+      <p class="mt-4 font-serif text-[0.82rem] italic text-[#666]">Última actualización: {{ revision }}</p>
+    </div>
+
+    <div class="privacy-content font-serif text-[0.92rem] leading-[1.85] text-[#333]">
+
+      <h2>1. Quién vende</h2>
+      <p>
+        Los cursos los vende {{ d.titular }} ({{ d.nombreComercial }}), NIF {{ d.nif ?? pendiente }}, con domicilio
+        en {{ d.domicilio ?? pendiente }} y correo <a [href]="'mailto:' + d.email">{{ d.email }}</a>. Estas condiciones
+        se aplican a la compra de cursos en línea en esta web. Los servicios de maquillaje presenciales se
+        presupuestan y se contratan aparte, por correo o WhatsApp.
+      </p>
+
+      <h2>2. Qué compras</h2>
+      <p>
+        Un curso de maquillaje en vídeo (contenido digital) que se ve en línea desde la zona
+        <a routerLink="/mis-cursos">Mis cursos</a>. La ficha de cada curso describe su contenido. El acceso es personal:
+        no se puede compartir la cuenta ni descargar, copiar o difundir los vídeos.
+      </p>
+
+      <h2>3. Precio y pago</h2>
+      <ul>
+        <li>Los precios se muestran en euros, con el IVA incluido. No hay gastos de envío ni otros recargos.</li>
+        <li>
+          Si un curso tiene un precio de lanzamiento por tiempo limitado, la web indica cuándo termina. Se cobra el
+          precio vigente en el momento en que inicias la compra.
+        </li>
+        <li>
+          El pago se hace con tarjeta u otro medio que ofrezca la pasarela segura de Stripe. Esta web no ve ni
+          guarda los datos de tu tarjeta.
+        </li>
+        <li>Si necesitas factura, pídela a <a [href]="'mailto:' + d.email">{{ d.email }}</a> indicando tus datos fiscales.</li>
+      </ul>
+
+      <h2>4. Cómo se compra</h2>
+      <ul>
+        <li>Pulsa el botón de compra del curso. Si no tienes cuenta, basta con tu nombre y tu correo.</li>
+        <li>
+          Marca la casilla con la que pides el acceso inmediato al curso y aceptas estas condiciones (ver el punto 6).
+        </li>
+        <li>Paga en la pasarela de Stripe. Hasta que confirmes el pago no hay contrato ni cargo.</li>
+        <li>
+          Al confirmarse el pago recibes por correo el justificante de compra y, si no tenías cuenta, un enlace para
+          crear tu contraseña. El correo es tu usuario.
+        </li>
+      </ul>
+
+      <h2>5. Duración del acceso y requisitos</h2>
+      <p>
+        El acceso a cada curso dura <strong>6 meses desde la compra</strong>, salvo que la ficha del curso diga otra
+        cosa; la fecha exacta figura en el justificante y en Mis cursos. Treinta días antes de que termine te
+        avisamos por correo. Pasado ese plazo el curso sigue apareciendo en tu cuenta, pero ya no se puede ver.
+      </p>
+      <p>
+        Para verlo necesitas conexión a internet y un navegador actualizado en el móvil, la tableta o el ordenador.
+      </p>
+
+      <h2>6. Derecho de desistimiento</h2>
+      <p>
+        Por regla general, quien compra a distancia puede desistir en 14 días naturales sin dar explicaciones. En el
+        caso del contenido digital que no se entrega en un soporte material, la ley prevé una excepción
+        (artículo 103.m del Texto Refundido de la Ley General para la Defensa de los Consumidores y Usuarios): ese
+        derecho se pierde cuando el acceso empieza con tu consentimiento expreso y tu reconocimiento de que lo
+        pierdes.
+      </p>
+      <p>
+        Por eso, antes de pagar te pedimos que marques una casilla con la que solicitas el acceso inmediato al curso
+        y reconoces que, al empezar, pierdes el derecho de desistimiento. El justificante de compra te lo confirma
+        por escrito. Sin esa casilla no se puede completar la compra.
+      </p>
+
+      <h2>7. Si algo no funciona</h2>
+      <p>
+        Si el curso no se puede ver o no corresponde a lo que describe su ficha, escríbenos a
+        <a [href]="'mailto:' + d.email">{{ d.email }}</a>. Lo solucionaremos y, si no es posible, te devolveremos el
+        importe, conforme a la garantía legal del contenido digital.
+      </p>
+
+      <h2>8. Dudas y reclamaciones</h2>
+      <p>
+        Puedes enviar cualquier duda o reclamación a <a [href]="'mailto:' + d.email">{{ d.email }}</a> o al
+        {{ d.telefono }}. Respondemos en el plazo más breve posible y, en todo caso, en menos de un mes.
+      </p>
+
+      <h2>9. Datos personales</h2>
+      <p>
+        Los datos de la compra se tratan como explica la <a routerLink="/politica-privacidad">política de privacidad</a>.
+      </p>
+
+      <h2>10. Ley aplicable</h2>
+      <p>
+        Estas condiciones se rigen por la ley española. Si eres consumidora, puedes acudir a los juzgados de tu
+        domicilio y a los servicios de consumo de tu comunidad autónoma.
+      </p>
+
+    </div>
+
+    <div class="mt-14 border-t border-black/[0.07] pt-8">
+      <a routerLink="/"
+         class="inline-flex items-center gap-2 font-serif text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[#8a5f3a] no-underline transition-colors hover:text-[#a07850]">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H5M12 5l-7 7 7 7"/>
+        </svg>
+        Volver al inicio
+      </a>
+    </div>
+
+  </div>
+</section>

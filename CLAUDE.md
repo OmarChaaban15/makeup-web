@@ -32,8 +32,9 @@ There is no shared build. Each app is installed, run and tested from its own dir
 
 ### Frontend (`cd frontend`)
 - `npm start` (`ng serve`) — dev server at http://localhost:4200.
-- `npm run build` (`ng build`) — production build; swaps `environment.ts` for `environment.prod.ts` via `fileReplacements`.
+- `npm run build` (`ng build`) — production build; swaps `environment.ts` for `environment.prod.ts` via `fileReplacements`. It prerenders the public routes (`outputMode: static`) and the `postbuild` hook writes `sitemap.xml` into the output (see SEO).
 - `npm test` (`ng test`) — Vitest, not Karma/Jasmine.
+- `npm run formatos` — regenerates the `.avif`/`.webp` copies next to each photo in `public/images` (needed after adding or changing a photo; Nginx serves them on the same URL, see Media policy).
 
 ## Architecture
 
@@ -63,7 +64,7 @@ On the frontend, `shared/auth.service.ts` owns the session as signals (`estaAute
 ### Payments
 `POST /api/pedidos` is **public**. With a session it reads the buyer via `auth('sanctum')`; without one it requires `nombre` + `email` and the account is created later, in the webhook, once payment is confirmed — so an abandoned checkout never leaves a ghost user whose email would read as "already registered".
 
-`PedidoController::store` validates the cart, rejects tutorials with no Stripe price for the current amount (503) or already owned with a live grant (409), then creates `Pedido` + `PedidoItem` in a transaction. `pedidos.user_id` is nullable for that reason, with `email_cliente`/`nombre_cliente` alongside. The gateway call sits outside the transaction (network I/O); if it throws, the order is marked `cancelado` rather than left dangling as `pendiente`.
+`PedidoController::store` requires `acepta_condiciones` (the buyer asked for immediate access and acknowledged losing the 14-day withdrawal right, art. 103.m TRLGDCU; stored as `pedidos.renuncia_desistimiento_en` and confirmed in `JustificanteCompra`). Both `/oferta` and `/cursos` show that checkbox before every purchase, logged in or not. It then validates the cart, rejects tutorials with no Stripe price for the current amount (503) or already owned with a live grant (409), then creates `Pedido` + `PedidoItem` in a transaction. `pedidos.user_id` is nullable for that reason, with `email_cliente`/`nombre_cliente` alongside. The gateway call sits outside the transaction (network I/O); if it throws, the order is marked `cancelado` rather than left dangling as `pendiente`.
 
 `PasarelaPago` is an interface bound to `StripePasarelaPago` in `AppServiceProvider`, so tests can swap in a fake instead of calling Stripe.
 
@@ -94,9 +95,11 @@ Note: the `remember_tokens` table is a leftover from an earlier iteration and is
 ### Frontend structure
 Angular standalone components (no NgModules). Routing in `src/app/app.routes.ts`; pages under `src/app/pages/`, shared services and UI under `src/app/shared/`, route guards under `src/app/guards/`. Providers in `src/app/app.config.ts` (`provideHttpClient(withInterceptors([authInterceptor]))`, router with in-memory scrolling).
 
+Legal pages (`/aviso-legal`, `/condiciones`, `/politica-privacidad`, `/politica-cookies`) read the owner's details from `shared/datos-legales.ts`; fields left `null` render as "pendiente de completar". The cookie banner is informational only: the site stores nothing that needs consent, so do not add accept/reject toggles unless analytics or ads are actually added.
+
 `shared/cursos.service.ts` owns the catalogue and the purchase call (guest or authenticated) and is the only place that formats prices. `shared/contador-oferta/` is the countdown: it takes the seconds the API reports and decrements locally.
 
-A route with `data: { sinLayout: true }` renders without navbar or footer — `app.ts` reads it and `app.html` hides both. `/oferta` is the Instagram ad landing and uses it: a closed funnel with no links out before the purchase. It is `Disallow`ed in `robots.txt` so it does not compete with `/cursos`.
+A route with `data: { sinLayout: true }` renders without navbar or footer — `app.ts` reads it and `app.html` hides both. `/oferta` is the Instagram ad landing and uses it: a closed funnel with no links out before the purchase. It is indexed (own canonical, title and H1 distinct from `/cursos`); see SEO.
 
 Always build URLs from `environment.apiUrl` — never hardcode `http://localhost:8000`. In production `apiUrl` is the relative `/api`, because Nginx serves the SPA and the API from the same origin.
 
@@ -104,7 +107,17 @@ Scroll position is handled solely by the router's `withInMemoryScrolling`; do no
 
 The Google Translate widget is injected on demand by `shared/translation.service.ts` when a non-Spanish language is selected. It is deliberately not in `index.html`: loading it on every visit was render-blocking and set third-party cookies before the consent banner appeared.
 
-**Media policy**: the photography and hero video are the point of this site. They are served at full quality and are never deferred — do not add `loading="lazy"`, poster placeholders that stand in for the video, or connection-based skipping. `decoding="async"` and `fetchpriority="high"` are fine (they change scheduling, not output). If bytes need cutting, add alternative formats as extra `<source>` entries (WebM/AVIF) with the originals as fallback rather than recompressing them; see `deploy/README.md`.
+**Media policy**: the photography and hero video are the point of this site. They are served at full quality and are never deferred — do not add `loading="lazy"`, poster placeholders that stand in for the video, or connection-based skipping. `decoding="async"` and `fetchpriority="high"` are fine (they change scheduling, not output). If bytes need cutting, add alternative formats as extra `<source>` entries (WebM/AVIF) with the originals as fallback rather than recompressing them; see `deploy/README.md`. Photos already get `.avif`/`.webp` copies (`npm run formatos`) that Nginx negotiates on the same URL via the `Accept` header, originals untouched.
+
+### SEO
+Details and the operational checklist live in `docs/seo-guia.md`. What matters when changing code:
+
+- **Per-route metadata**: each route in `app.routes.ts` declares `title` and `data.seo` (`SeoRuta`: description, optional `nombre` for breadcrumbs, `noindex`, `schema`). `shared/seo.service.ts` (started from `App`) applies description, canonical, robots, Open Graph, Twitter, hreflang and JSON-LD on every `NavigationEnd`. There is no static canonical in `index.html`. A new public page needs its `data.seo`, an entry in `scripts/generar-sitemap.mjs`, and a template with exactly one `<h1>` and no skipped levels (`seo-encabezados.spec.ts` lists the pages it checks).
+- **Private or funnel pages use `noindex`, not `Disallow`** in `robots.txt`: a blocked URL never shows the crawler its `noindex`. `robots.txt` stays open to all bots. `/oferta` is indexed on purpose.
+- **Structured data** is in `shared/seo-schemas.ts`. Do not add `AggregateRating`/`Review` or a street address until there are real, visible reviews and a public address. Course prices come from the API (`precio_efectivo`), never typed by hand.
+- **Prerender**: `app.routes.server.ts` decides what is prerendered. Browser-only code (`window`, `localStorage`, Leaflet) must not run at module load or in constructors for prerendered pages: load it lazily or guard with `isPlatformBrowser`. Private routes render in the browser (`index.csr.html`) because they depend on the session. **Components must not call the API when prerendering** (`isPlatformBrowser` guard in `ngOnInit`): the request fails at build time and the error text ends up in the static HTML. `/oferta` and `/cursos` prerender their fixed content; price, countdown and the `Course` JSON-LD fill in once the browser loads the course. Nginx serves `<ruta>/index.html`, `index.csr.html` for those, and a real 404 otherwise (`deploy/nginx`).
+- **Blog**: articles are data in `blog/articulos.json` (no CMS, no database); `blog/blog.ts` types and reads it, `blog/blog-rutas.ts` has the resolvers that give each article its title, SEO data and `BlogPosting` JSON-LD, and `app.routes.server.ts` prerenders one page per slug. The sitemap script reads the same JSON. Body text uses `[text](/path)` for internal links and only `h2`/`h3`; `blog.spec.ts` checks lengths, internal links and related slugs. The one English article lives under `/en/blog/`.
+- **Languages**: Spanish is the original. English, Italian and German live under `/en`, `/it` and `/de` as hand-written pages, not machine translation. `shared/idioma.ts` holds the route table (`RUTAS`) and helpers; the pages in `RUTAS` exist in all four languages: home, about, services and contact (EN/IT/DE rendered by `pages/multi/` from `pages/multi/contenido.ts`), plus one page per service (bridal, guests/events, editorial, film) rendered in every language, Spanish included, by `pages/servicio/` from `pages/servicio/contenido-servicios.ts`, with `Service` JSON-LD and Home > Services > service breadcrumbs. Navbar, footer and cookie banner texts are in `shared/textos.ts` and switch by route. Adding a language means adding it to `RUTAS`, `contenido.ts`, `contenido-servicios.ts`, `textos.ts`, the SEO locale map and `scripts/generar-sitemap.mjs` (a test checks that the script and `RUTAS` agree). Everything else (courses, blog, private area, privacy) is Spanish only; there is one English blog article. The Google Translate widget is only used on Spanish pages that have no native version.
 
 ### CORS
 `backend/config/cors.php` reads `CORS_ALLOWED_ORIGINS` (comma-separated) and falls back to the local `ng serve` ports. `supports_credentials` is false — auth is Bearer-token, not cookie-based — and there are no wildcard origin patterns.

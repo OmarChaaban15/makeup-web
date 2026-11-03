@@ -1,10 +1,13 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { Footer } from './shared/footer/footer';
 import { Navbar } from './shared/navbar/navbar';
 import { CookieBanner } from './shared/cookie-banner/cookie-banner';
+import { IdiomaRuta } from './shared/idioma';
+import { NAVBAR } from './shared/textos';
+import { SeoService } from './shared/seo.service';
 import { TranslationService } from './shared/translation.service';
 
 @Component({
@@ -17,6 +20,23 @@ export class App {
   public translation = inject(TranslationService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+
+  // Se instancia aqui para que empiece a escuchar la navegacion desde la
+  // primera ruta: gestiona canonical, robots, Open Graph y JSON-LD.
+  private seo = inject(SeoService);
+
+  private idioma = inject(IdiomaRuta);
+
+  readonly textoSaltar = computed(() => NAVBAR[this.idioma.idioma()].saltar);
+
+  /**
+   * El enlace "#contenido" no basta en una SPA con <base href="/">: llevaria a
+   * la portada. Se mueve el foco al <main> sin cambiar de ruta.
+   */
+  saltarAlContenido(evento: Event): void {
+    evento.preventDefault();
+    document.getElementById('contenido')?.focus();
+  }
 
   /**
    * Las páginas marcadas con data.sinLayout se muestran sin navbar ni

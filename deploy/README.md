@@ -323,7 +323,11 @@ Automáticas (las hace el propio `deploy.sh` al terminar):
 ```bash
 curl -s https://makeupbyyona.es/up                  # health check de Laravel
 curl -s https://makeupbyyona.es/api/tutoriales      # catálogo público (JSON)
-curl -sI https://makeupbyyona.es/mis-cursos         # 200 + index.html del SPA
+curl -sI https://makeupbyyona.es/mis-cursos         # 200 + index.csr.html del SPA
+curl -sI https://makeupbyyona.es/esta-no-existe     # 404 real (pagina de error del SPA)
+curl -sI https://makeupbyyona.es/inicio             # 301 a /
+curl -s  https://makeupbyyona.es/servicios | grep -o "<h1[^>]*>"   # el HTML ya trae el contenido
+curl -s  https://makeupbyyona.es/sitemap.xml | head -5
 curl -s https://makeupbyyona.es/api/mis-cursos      # 401 sin token
 ```
 
@@ -378,7 +382,7 @@ Y conviene copiar el resultado fuera del servidor.
 | Cambios en `.env` sin efecto           | Falta `php artisan config:cache`                                              |
 | Se desplegó pero no se ven los cambios | `deploy.sh` cogió `main` y el trabajo está en otra rama (paso 0.2)             |
 | 429 al iniciar sesión                  | Rate limiting: 5 intentos por minuto por IP y por email                       |
-| Recargar `/cursos` da 404              | Falta el `try_files ... /index.html` del SPA en Nginx                         |
+| Recargar `/cursos` da 404              | Nginx sin las reglas del SPA: debe existir `<ruta>/index.html` (prerender) o `index.csr.html` |
 | Los formularios no envían correo       | Credenciales SMTP; mirar `storage/logs/laravel.log`                           |
 | La web se quedó "en mantenimiento"     | `cd backend && php artisan up`                                                |
 
@@ -419,7 +423,7 @@ ffmpeg -i masterclass_dia_final.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 -an \
 
 # Imágenes: AVIF/WebP dentro de un <picture>, con el PNG/JPEG original
 # como fallback.
-ffmpeg -i IMG_1.PNG -c:v libaom-av1 -crf 28 -still-picture IMG_1.avif
+ffmpeg -i maquillaje-novia-ibiza.png -c:v libaom-av1 -crf 28 -still-picture maquillaje-novia-ibiza.png.avif
 ```
 
 Eso mantiene el original intacto y solo sirve el formato ligero a quien

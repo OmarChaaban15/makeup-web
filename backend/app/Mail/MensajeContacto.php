@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -27,12 +28,15 @@ class MensajeContacto extends Mailable
      */
     public function envelope(): Envelope
     {
-        $nombre = $this->datos['nombre'] ?? 'Cliente Web';
-        $servicio = $this->datos['servicio'] ?? 'Consulta';
+        // Datos del formulario en el asunto: sin saltos de linea, igual que en
+        // CitaReservada.
+        $nombre = $this->limpiar($this->datos['nombre'] ?? 'Cliente Web');
+        $servicio = $this->limpiar($this->datos['servicio'] ?? 'Consulta');
+
         return new Envelope(
             subject: "Nueva consulta web de {$nombre} - [{$servicio}]",
             replyTo: [
-                new \Illuminate\Mail\Mailables\Address($this->datos['email'], $nombre)
+                new Address($this->datos['email'], $nombre),
             ]
         );
     }
@@ -71,5 +75,10 @@ class MensajeContacto extends Mailable
         return new Content(
             htmlString: $html,
         );
+    }
+
+    private function limpiar(?string $valor): string
+    {
+        return trim(preg_replace('/[\r\n]+/', ' ', (string) $valor));
     }
 }

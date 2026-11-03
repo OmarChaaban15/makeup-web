@@ -20,22 +20,37 @@
 }
 
 /* ── Hero — Staggered text animation ── */
+/*
+ * Es una animacion CSS y no una transicion disparada por JavaScript: el
+ * titular (el elemento mas grande de la portada) empieza a pintarse con el
+ * primer fotograma en vez de esperar a que Angular arranque, y asi no
+ * retrasa el LCP. El efecto visual es el mismo.
+ */
 .hero-text-enter {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: hero-text-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.hero-text-enter.visible {
-  opacity: 1;
-  transform: translateY(0);
+@keyframes hero-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.hero-text-delay-1 { transition-delay: 0.2s; }
-.hero-text-delay-2 { transition-delay: 0.45s; }
-.hero-text-delay-3 { transition-delay: 0.7s; }
-.hero-text-delay-4 { transition-delay: 0.95s; }
+.hero-text-delay-1 { animation-delay: 0.2s; }
+.hero-text-delay-2 { animation-delay: 0.45s; }
+.hero-text-delay-3 { animation-delay: 0.7s; }
+.hero-text-delay-4 { animation-delay: 0.95s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-text-enter {
+    animation: none;
+  }
+}
 
 /* ── Scroll indicator ── */
 .scroll-indicator {

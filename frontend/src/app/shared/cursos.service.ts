@@ -77,9 +77,12 @@ export class CursosService {
    * Inicia la compra. Con sesión iniciada basta el id del curso; sin ella
    * hay que enviar nombre y correo, y la cuenta se crea al confirmarse el
    * pago.
+   *
+   * Solo se llama tras marcar las casillas de condiciones y acceso
+   * inmediato; el servidor rechaza el pedido sin acepta_condiciones.
    */
   comprar(cursoId: number, invitado?: DatosInvitado): Observable<RespuestaCompra> {
-    const cuerpo: Record<string, unknown> = { tutoriales: [cursoId] };
+    const cuerpo: Record<string, unknown> = { tutoriales: [cursoId], acepta_condiciones: true };
 
     if (invitado) {
       cuerpo['nombre'] = invitado.nombre;

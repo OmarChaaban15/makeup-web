@@ -1,65 +1,55 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, computed, inject, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { IdiomaRuta } from '../idioma';
+import { COOKIES } from '../textos';
 
+/**
+ * Aviso informativo. La web solo guarda almacenamiento tecnico (sesion,
+ * idioma, progreso), exento de consentimiento (art. 22.2 LSSI), asi que no
+ * hay nada que aceptar o rechazar: ofrecer casillas de analitica o marketing
+ * que no existen seria enganoso. Si algun dia se anade analitica, aqui ira
+ * el consentimiento, con rechazar al mismo nivel que aceptar.
+ */
 @Component({
   selector: 'app-cookie-banner',
   standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './cookie-banner.html',
-  styleUrl: './cookie-banner.css'
+  imports: [RouterLink],
+  templateUrl: './cookie-banner.html'
 })
 export class CookieBanner implements OnInit {
-  isVisible = false;
-  isHiding = false;
-  showConfig = false;
-  analyticsEnabled = false;
-  marketingEnabled = false;
+  private esNavegador = isPlatformBrowser(inject(PLATFORM_ID));
+  private idioma = inject(IdiomaRuta);
+
+  readonly t = computed(() => COOKIES[this.idioma.idioma()]);
+
+  readonly visible = signal(false);
+  readonly ocultando = signal(false);
 
   ngOnInit() {
-    const consent = localStorage.getItem('cookie-consent');
-    if (!consent) {
-      // Pequeño delay para que no aparezca de golpe al cargar
-      setTimeout(() => { this.isVisible = true; }, 800);
+    // En el prerender no hay localStorage que leer.
+    if (!this.esNavegador) return;
+
+    let visto: string | null = null;
+    try {
+      visto = localStorage.getItem('cookie-consent');
+    } catch {
+      // Almacenamiento bloqueado: se muestra el aviso.
+    }
+
+    if (!visto) {
+      // Pequeño retraso para que no aparezca de golpe al cargar.
+      setTimeout(() => this.visible.set(true), 800);
     }
   }
 
-  accept() {
-    localStorage.setItem('cookie-consent', JSON.stringify({
-      necessary: true,
-      analytics: true,
-      marketing: true,
-      date: new Date().toISOString()
-    }));
-    this.hide();
-  }
-
-  rejectAll() {
-    localStorage.setItem('cookie-consent', JSON.stringify({
-      necessary: true,
-      analytics: false,
-      marketing: false,
-      date: new Date().toISOString()
-    }));
-    this.hide();
-  }
-
-  configure() {
-    this.showConfig = !this.showConfig;
-  }
-
-  saveConfig() {
-    localStorage.setItem('cookie-consent', JSON.stringify({
-      necessary: true,
-      analytics: this.analyticsEnabled,
-      marketing: this.marketingEnabled,
-      date: new Date().toISOString()
-    }));
-    this.hide();
-  }
-
-  private hide() {
-    this.isHiding = true;
-    setTimeout(() => { this.isVisible = false; }, 400);
+  cerrar() {
+    try {
+      localStorage.setItem('cookie-consent', JSON.stringify({ informado: true, date: new Date().toISOString() }));
+    } catch {
+      // Sin almacenamiento el aviso volvera a salir; no es grave.
+    }
+    this.ocultando.set(true);
+    setTimeout(() => this.visible.set(false), 400);
   }
 }

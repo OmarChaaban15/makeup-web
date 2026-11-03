@@ -42,9 +42,11 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   private canvasCtx: CanvasRenderingContext2D | null = null;
 
   // ── Counters ──
-  counterYears = signal(0);
-  counterClients = signal(0);
-  counterPersonal = signal(0);
+  // Arrancan en la cifra final para que el HTML prerenderizado no diga "+0";
+  // la animacion desde 0 es un adorno al pasar el raton.
+  counterYears = signal(5);
+  counterClients = signal(500);
+  counterPersonal = signal(100);
   private countersAnimated = false;
 
   // ── Testimonios VIP ──
@@ -71,19 +73,26 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
 
   // ── Slideshow (works section) ─────────────────
   readonly slides = [
-    { src: 'images/IMG_1.PNG', alt: 'Maquillaje de novia en Ibiza', pos: 'center center' },
-    { src: 'images/IMG_8.jpg', alt: 'Detalle de visagismo y acabado de ojos en alta definición', pos: 'center 30%' },
-    { src: 'images/IMG_2.PNG', alt: 'Maquillaje social para eventos', pos: 'center 35%' },
-    { src: 'images/IMG_6.JPEG', alt: 'Editorial de moda y pasarela con mirada protagonista', pos: 'center 25%' },
-    { src: 'images/IMG_3.PNG', alt: 'Estilismo de fiesta e invitada', pos: 'center 35%' },
-    { src: 'images/IMG_7.jpg', alt: 'Sesión creativa y editorial contemporáneo', pos: 'center 25%' },
-    { src: 'images/IMG_4.PNG', alt: 'Producción de moda y campañas', pos: 'center 40%' },
-    { src: 'images/yonaida8.jpg', alt: 'Técnica de pigmentación glitter y textura de piel', pos: 'center 35%' },
-    { src: 'images/IMG_5.JPEG', alt: 'Rodaje y producción audiovisual', pos: 'center center' },
+    { src: 'images/maquillaje-novia-ibiza.png', alt: 'Maquillaje de novia en Ibiza', pos: 'center center' },
+    { src: 'images/maquillaje-novia-detalle-ojos.jpg', alt: 'Detalle de visagismo y acabado de ojos en alta definición', pos: 'center 30%' },
+    { src: 'images/maquillaje-social-eventos-ibiza.png', alt: 'Maquillaje social para eventos', pos: 'center 35%' },
+    { src: 'images/maquillaje-pasarela-editorial.jpeg', alt: 'Editorial de moda y pasarela con mirada protagonista', pos: 'center 25%' },
+    { src: 'images/maquillaje-invitada-fiesta-ibiza.png', alt: 'Estilismo de fiesta e invitada', pos: 'center 35%' },
+    { src: 'images/maquillaje-sesion-creativa-editorial.jpg', alt: 'Sesión creativa y editorial contemporáneo', pos: 'center 25%' },
+    { src: 'images/maquillaje-editorial-moda-ibiza.png', alt: 'Producción de moda y campañas', pos: 'center 40%' },
+    { src: 'images/maquillaje-glitter-textura-piel.jpg', alt: 'Técnica de pigmentación glitter y textura de piel', pos: 'center 35%' },
+    { src: 'images/maquillaje-cine-rodaje-ibiza.jpeg', alt: 'Rodaje y producción audiovisual', pos: 'center center' },
   ];
 
   currentIndex = signal(0);
   private autoPlayTimer: ReturnType<typeof setInterval> | null = null;
+
+  /**
+   * Pausa todo lo que se mueve solo (video de portada, particulas y pase de
+   * fotos): WCAG 2.2.2 pide poder detener el movimiento automatico de mas de
+   * 5 segundos. Arranca en pausa si el sistema pide reducir el movimiento.
+   */
+  movimientoPausado = signal(false);
   readonly autoPlayDuration = 5000;
   progressWidth = signal(0);
   private progressAnimFrame: number | null = null;
@@ -108,6 +117,14 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   // ── Lifecycle ──
 
   ngOnInit() {
+    // En el prerender no hay temporizadores que lanzar.
+    if (!this.isBrowser) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      this.movimientoPausado.set(true);
+      return;
+    }
+
     this.startAutoPlay();
   }
 
@@ -137,7 +154,9 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
     video.volume = 0;
     video.src = this.heroVideos[index];
     video.load();
-    video.play().catch(() => { });
+    if (!this.movimientoPausado()) {
+      video.play().catch(() => { });
+    }
 
     // Deja el siguiente vídeo del bucle ya en caché del navegador, para que
     // el cambio al terminar el actual sea instantáneo y sin pérdida de
@@ -197,7 +216,27 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
       });
     }
 
-    this.animateParticles();
+    if (!this.movimientoPausado()) {
+      this.animateParticles();
+    }
+  }
+
+  /** Boton de pausa: detiene o reanuda video, particulas y pase de fotos. */
+  toggleMovimiento(): void {
+    const pausar = !this.movimientoPausado();
+    this.movimientoPausado.set(pausar);
+    const video = this.heroVideoRef?.nativeElement;
+
+    if (pausar) {
+      this.stopAutoPlay();
+      if (this.animFrameId) cancelAnimationFrame(this.animFrameId);
+      this.animFrameId = null;
+      video?.pause();
+    } else {
+      this.startAutoPlay();
+      if (this.particles.length > 0) this.animateParticles();
+      video?.play().catch(() => { });
+    }
   }
 
   @HostListener('window:resize')
@@ -243,7 +282,7 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   // ── Animated Counters ──
 
   animateCounters(): void {
-    if (this.countersAnimated || !this.isBrowser) return;
+    if (this.countersAnimated || !this.isBrowser || this.movimientoPausado()) return;
     this.countersAnimated = true;
 
     this.animateNumber(0, 5, 1500, v => this.counterYears.set(v));
@@ -306,7 +345,9 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
 
   private restartAutoPlay() {
     this.stopAutoPlay();
-    this.startAutoPlay();
+    if (!this.movimientoPausado()) {
+      this.startAutoPlay();
+    }
   }
 
   private animateProgress(): void {

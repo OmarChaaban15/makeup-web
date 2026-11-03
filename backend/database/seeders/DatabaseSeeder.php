@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
                 'oferta_fin' => Carbon::parse('2026-09-10 19:00:00', 'Europe/Madrid')->utc(),
                 'duracion_acceso_meses' => 6,
                 'video_url' => null,
-                'miniatura_url' => 'images/portada_automaquillaje.png',
+                'miniatura_url' => 'images/masterclass-automaquillaje-portada.png',
                 'nivel' => 'basico',
                 'activo' => true,
             ]

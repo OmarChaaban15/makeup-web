@@ -1,6 +1,8 @@
-import { Component, ElementRef, HostListener, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, ElementRef, HostListener, PLATFORM_ID, Inject, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { IdiomaRuta, RUTAS } from '../idioma';
+import { PIE } from '../textos';
 import { ScrollRevealDirective } from '../scroll-reveal.directive';
 
 @Component({
@@ -11,6 +13,13 @@ import { ScrollRevealDirective } from '../scroll-reveal.directive';
 })
 export class Footer {
   currentYear = new Date().getFullYear();
+
+  private idioma = inject(IdiomaRuta);
+
+  readonly t = computed(() => PIE[this.idioma.idioma()]);
+
+  readonly inicioRuta = computed(() => RUTAS[this.idioma.idioma()].inicio);
+
   private isBrowser: boolean;
 
   constructor(
@@ -18,11 +27,6 @@ export class Footer {
     @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
-  }
-
-  resetCookies() {
-    localStorage.removeItem('cookie-consent');
-    window.location.reload();
   }
 
   /** Magnetic button effect — buttons attract toward cursor */

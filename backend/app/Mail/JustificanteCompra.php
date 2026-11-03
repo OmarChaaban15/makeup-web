@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use App\Models\AccesoTutorial;
 use App\Models\Pedido;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -70,6 +71,7 @@ class JustificanteCompra extends Mailable
 
                 {$this->bloqueAcceso()}
                 {$this->bloqueCuenta()}
+                {$this->bloqueDesistimiento()}
 
                 <p style="color: #888; font-size: 12px; margin-top: 28px; text-align: center;">
                     Makeup by Yona &middot; Atelier de Maquillaje en Ibiza<br>
@@ -181,6 +183,32 @@ class JustificanteCompra extends Mailable
             HTML;
     }
 
+    /**
+     * Confirmacion por escrito del consentimiento al acceso inmediato, que
+     * la ley exige para que la renuncia al desistimiento sea valida.
+     */
+    private function bloqueDesistimiento(): string
+    {
+        $momento = $this->pedido->renuncia_desistimiento_en;
+
+        if (! $momento) {
+            return '';
+        }
+
+        $fecha = e($this->enHoraLocal($momento));
+        $condiciones = e(rtrim((string) config('app.frontend_url'), '/').'/condiciones');
+
+        return <<<HTML
+            <p style="color: #666; font-size: 12px; line-height: 1.6; margin-top: 18px;">
+                El {$fecha} solicitaste el acceso inmediato al contenido digital y reconociste que,
+                una vez iniciado, pierdes el derecho de desistimiento de 14 días (art. 103.m del
+                Texto Refundido de la Ley General para la Defensa de los Consumidores y Usuarios).
+                Precios con IVA incluido. Consulta las
+                <a href="{$condiciones}" style="color: #8a6d4f;">condiciones de venta</a>.
+            </p>
+            HTML;
+    }
+
     private function importe(mixed $valor): string
     {
         return number_format((float) $valor, 2, ',', '.').' €';
@@ -193,7 +221,7 @@ class JustificanteCompra extends Mailable
             return '-';
         }
 
-        return \Carbon\Carbon::parse($fecha)
+        return Carbon::parse($fecha)
             ->setTimezone('Europe/Madrid')
             ->format($formato);
     }

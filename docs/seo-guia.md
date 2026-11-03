@@ -1,0 +1,175 @@
+# SEO: guia de puesta en marcha y seguimiento
+
+Este documento recoge lo que no vive en el codigo: que desplegar, como darlo de alta en
+los buscadores, la ficha de Google, el plan de contenidos y como medir. Lo implementado en
+el codigo esta resumido en la seccion 1.
+
+## 1. Que hay implementado
+
+| Area | Donde |
+|---|---|
+| Un H1 por pagina y sin saltos de nivel | plantillas de `frontend/src/app/pages/`; lo vigila `seo-encabezados.spec.ts` |
+| title, description, canonical, robots, Open Graph, Twitter, JSON-LD por ruta | `shared/seo.service.ts` y `data.seo` en `app.routes.ts` |
+| Datos estructurados (negocio, persona, servicios, curso, migas) | `shared/seo-schemas.ts` |
+| Paginas privadas con `noindex` (no bloqueadas en robots) | `data.seo.noindex` |
+| Prerender de las paginas publicas | `outputMode: static` en `angular.json`, `app.routes.server.ts` |
+| 404 real y rutas por Nginx | `deploy/nginx/makeupbyyona.es.conf` |
+| Version en ingles, italiano y aleman (`/en`, `/it`, `/de`) con hreflang | `pages/multi/` (el texto esta en `contenido.ts`), `shared/idioma.ts` |
+| `robots.txt` abierto y `sitemap.xml` generado en cada build | `public/robots.txt`, `scripts/generar-sitemap.mjs` |
+
+## 2. Antes de desplegar
+
+1. Instalar el Nginx nuevo. Sin las reglas nuevas, `/en/...` y las rutas prerenderizadas no
+   se sirven bien:
+
+   ```bash
+   sudo cp deploy/nginx/makeupbyyona.es.conf /etc/nginx/sites-available/makeupbyyona.es.conf
+   sudo nginx -t && sudo systemctl reload nginx
+   ```
+
+2. Desplegar con `deploy/deploy.sh`. El build prerenderiza y genera `sitemap.xml` solo
+   (necesita `git` en el servidor para los `lastmod`).
+3. Comprobar (ver tambien la seccion 11 de `deploy/README.md`):
+
+   ```bash
+   curl -sI https://makeupbyyona.es/inicio              # 301 a /
+   curl -sI https://makeupbyyona.es/esta-no-existe      # 404
+   curl -s  https://makeupbyyona.es/servicios | grep -o "<h1[^>]*>"
+   curl -s  https://makeupbyyona.es/en/services | grep -o 'hreflang="[a-z-]*"'
+   curl -s  https://makeupbyyona.es/sitemap.xml | head
+   ```
+
+Nota: la zona privada (login, registro, mis-cursos, pagos) se renderiza en el navegador. `/oferta` y
+`/cursos` se prerenderizan con su contenido fijo; el precio, el contador y el `Course` del JSON-LD
+se rellenan en el navegador porque dependen de la API, que no existe al compilar. No se
+prerenderiza el precio a proposito: quedaria desactualizado al terminar la oferta.
+
+## 3. Google Search Console
+
+1. Entrar en <https://search.google.com/search-console> y añadir la propiedad de tipo
+   **Dominio** (`makeupbyyona.es`). Se verifica con un registro TXT en el DNS.
+2. Menu **Sitemaps**: enviar `https://makeupbyyona.es/sitemap.xml`. Debe aparecer como
+   "Correcto" con 30 URLs descubiertas.
+3. Menu **Inspeccion de URLs**: pegar cada pagina clave (`/`, `/servicios`, `/sobre-mi`,
+   `/cursos`, `/oferta`, `/contacto`, `/en`, `/it`, `/de`) y pulsar "Solicitar
+   indexacion". Comprobar en "Ver pagina probada" que el HTML renderizado trae el H1 y
+   que el canonical es el esperado.
+4. Para Bing: <https://www.bing.com/webmasters> permite importar la propiedad desde
+   Search Console.
+
+Que revisar y cuando:
+
+| Cuando | Que mirar |
+|---|---|
+| 7 dias | Paginas indexadas (informe Indexacion), errores de sitemap, que `/login`, `/registro` y `/mis-cursos` aparezcan como "Excluida por etiqueta noindex" (es lo correcto) |
+| 30 dias | Rendimiento: consultas con "maquilladora Ibiza", "maquillaje novia Ibiza"; paginas con impresiones pero pocos clics (reescribir title y description) |
+| 90 dias | Informe de resultados enriquecidos (Course, migas), Core Web Vitals con datos de campo, consultas en ingles |
+
+## 4. Ficha de Google Business Profile
+
+La ficha da visibilidad en Google Maps y en las busquedas locales. Como no hay direccion
+publica, se configura como **negocio con zona de servicio** (no muestra direccion).
+
+- **Nombre:** `Makeup by Yona`, exactamente igual que en la web y en Instagram.
+- **Categoria principal:** la de maquillador/a profesional; elegir en el desplegable la
+  opcion exacta disponible en español. Secundarias: las que ofrezca la lista para novias,
+  eventos y formacion.
+- **Zona de servicio:** Ibiza (y Formentera si se trabaja alli).
+- **Telefono y web:** `+34 658 728 433` y `https://makeupbyyona.es`. Mismo formato en
+  todos los sitios (NAP coherente).
+- **Servicios:** maquillaje de novia, invitada y eventos, moda y editorial, cine y
+  rodajes, masterclass de automaquillaje.
+- **Descripcion (borrador, maximo 750 caracteres):**
+  "Maquilladora profesional en Ibiza con mas de cinco años de experiencia en bodas de
+  destino, eventos, moda y producciones audiovisuales. Pieles luminosas y duraderas
+  adaptadas al clima mediterraneo, en mi estudio o en tu villa, hotel o finca. Tambien
+  imparto una masterclass de automaquillaje online."
+- **Fotos:** trabajos reales (novias, eventos, editorial), sin logos ni texto encima, y
+  una portada. Subir fotos nuevas cada mes.
+- **Reseñas:** pedir una reseña a cada clienta tras el servicio con el enlace corto de la
+  ficha, y responder a todas. Cuando haya reseñas reales y visibles en la web, se podran
+  añadir al marcado schema (`AggregateRating`/`Review`); hasta entonces no deben
+  publicarse en el JSON-LD.
+
+## 5. Datos que faltan
+
+Cada uno mejora el SEO cuando se pueda aportar:
+
+- Direccion publica del estudio o confirmacion de que no habra (cambia el schema a
+  `PostalAddress` con calle y `geo`).
+- Horario con horas concretas (hoy solo "Lunes a Sabado, con cita previa").
+- Reseñas reales con permiso para mostrarlas, y menciones en prensa o colaboraciones
+  (marcas, fotografos, planificadores de bodas) que se puedan citar.
+- Revisar el pie de pagina: `@yonadobe` es un perfil privado y esta enlazado.
+- Actualizar el texto "Agenda abierta 2026" cuando cambie el año.
+
+## 6. Plan de contenidos (blog)
+
+El blog esta implementado y los diez articulos de la tabla ya estan escritos
+(`frontend/src/app/blog/articulos.json`). Los textos estan redactados en primera persona, con la
+voz de la web, a partir de lo que ya dice el sitio sobre los servicios; conviene que Yonaida los
+revise y ajuste lo que no suene a ella. No llevan precios ni cifras que no se puedan sostener.
+Los terminos son hipotesis a validar en Search Console, no datos de volumen.
+
+Como añadir un articulo:
+
+1. Añadir un objeto al array de `articulos.json` (slug, idioma, titulo, descripcion, fecha, imagen y alt,
+   lectura, contenido y relacionados). Los enlaces internos se escriben `[texto](/ruta)`.
+2. Usar solo `h2` y `h3` en el cuerpo (el `h1` es el titulo) y una descripcion de 60 a 160 caracteres.
+3. `npm test` comprueba longitudes, enlaces internos y relacionados; `npm run build` prerenderiza la
+   pagina y la añade al sitemap con la fecha del articulo.
+4. Si la imagen es nueva, ejecutar `npm run formatos` para generar sus copias AVIF y WebP.
+
+| # | Titulo | Palabra clave principal | Secundarias | Enlaza a |
+|---|---|---|---|---|
+| 1 | Cuanto cuesta una maquilladora de novia en Ibiza | maquillaje novia Ibiza precio | maquilladora novia Ibiza, presupuesto maquillaje boda | `/servicios`, `/contacto` |
+| 2 | La prueba de maquillaje de novia: que es y cuando hacerla | prueba maquillaje novia | cuanto antes de la boda, que llevar a la prueba | `/servicios` |
+| 3 | Maquillaje de novia con calor: como conseguir que dure | maquillaje novia calor | maquillaje resistente al sudor, boda en la playa | `/servicios` |
+| 4 | Como elegir maquilladora para tu boda en Ibiza: 10 preguntas | maquilladora boda Ibiza | maquillaje a domicilio Ibiza | `/servicios`, `/contacto` |
+| 5 | Maquillaje de invitada de boda segun tu vestido | maquillaje invitada boda | maquillaje de fiesta, pestañas para evento | `/servicios` |
+| 6 | Rutina de piel los 7 dias antes de un evento | preparar la piel antes de maquillarse | piel luminosa, hidratacion antes del maquillaje | `/cursos` |
+| 7 | Tono de piel y base: como saber si eres calida, fria o neutra | tono de piel base maquillaje | fototipo, colores que favorecen | `/cursos`, `/oferta` |
+| 8 | Del maquillaje de dia al de noche en 5 minutos | maquillaje de dia a noche | transformar maquillaje, retoque rapido | `/oferta` |
+| 9 | Boda de destino en Ibiza: checklist de belleza | boda de destino Ibiza | calendario belleza boda, novias extranjeras | `/servicios`, `/en` |
+| 10 | Bridal makeup in Ibiza: what to expect for a destination wedding (en ingles) | bridal makeup Ibiza | destination wedding makeup, wedding makeup artist Ibiza | `/en/services`, `/en/contact` |
+
+Reglas: cada articulo con un H1 unico, H2 por apartado, fotos propias con alt descriptivo,
+enlace interno al servicio relacionado y fecha de actualizacion visible. Evitar promesas
+(duracion garantizada, resultados) que no se puedan sostener.
+
+## 7. Medicion tecnica
+
+Medido con Lighthouse 12, perfil movil y red lenta simulada por el navegador (throttling real), contra
+el build servido con las mismas reglas de Nginx (gzip, cache, AVIF/WebP):
+
+| Pagina | Antes | Despues |
+|---|---|---|
+| Portada | rendimiento 71, LCP 5,4 s, 7,9 MB | rendimiento 90, LCP 1,2 s, 5,6 MB |
+| Servicios | rendimiento 73, LCP 3,6 s, 7,9 MB | rendimiento 79, LCP 0,9 s, 2,0 MB |
+
+Que lo mejoro, sin tocar el contenido visual de fotos ni video (politica del proyecto):
+
+- **Copias AVIF y WebP** de las fotos, servidas por Nginx en la misma URL segun la cabecera Accept y
+  con la original de respaldo (`npm run formatos` las genera junto a cada foto usada). Las 21
+  fotos pasan de unos 27 MB a unos 4,5 MB en el mejor formato; la comparacion al 100 % no muestra
+  diferencias apreciables.
+- **Titular de la portada** con animacion CSS en lugar de una transicion que arrancaba con JavaScript,
+  y `scroll-reveal` que ya no oculta lo que se ve al cargar.
+- **Prerender**: el HTML llega con el contenido, sin esperar al arranque de Angular.
+
+Lo que queda por vigilar:
+
+- **TBT en servicios** sube (de 60 a 880 ms en la prueba): ahora el HTML pinta antes y la hidratacion de
+  Angular compite con el hilo principal. No afecta a la carga visible, pero es el siguiente punto a mirar.
+- **El video de la portada** y los dos de la masterclass (unos 5 MB cada uno) se sirven integros. La
+  politica del proyecto permite añadir versiones WebM como `<source>` extra con el MP4 de respaldo;
+  haria falta ffmpeg, que no esta instalado en este equipo.
+- **Originales sin usar en `public/`**: `sin_maquillar.JPEG` (15 MB) y `makeup_dia.JPEG` (12 MB) no los
+  referencia ninguna pagina pero se despliegan. Conviene retirarlos del repositorio.
+- **Bundle inicial**: unos 810 kB, por encima del presupuesto de 700 kB que ya se superaba antes.
+- Las cifras son de un equipo local contra un servidor local: sirven para comparar antes y despues, no
+  como valor absoluto. Conviene repetir la medicion sobre la web real tras desplegar:
+
+```bash
+npx lighthouse https://makeupbyyona.es/ --only-categories=performance,seo --form-factor=mobile --throttling-method=devtools --view
+```
