@@ -1,40 +1,72 @@
 /*
  * Fuentes servidas desde la propia web (paquetes @fontsource) y no desde Google:
  * sin ellas cada visita enviaba la IP a Google antes de cualquier consentimiento.
- * Solo latin y latin-ext: cubren español, ingles, italiano y aleman.
+ *
+ * Se importan los ficheros por grosor (400.css...), no los "latin-400.css" +
+ * "latin-ext-400.css": esos dos no declaran unicode-range, asi que el navegador
+ * descargaba los dos ficheros de cada grosor aunque la pagina solo usara letras
+ * latinas basicas. Los ficheros por grosor llevan unicode-range por subconjunto
+ * y solo se baja el que contiene los caracteres que aparecen (latin casi siempre,
+ * latin-ext si hay una letra como la ß o la ł). Mismos glifos, mitad de peticiones.
  */
-@import "@fontsource/cormorant-garamond/latin-300.css";
-@import "@fontsource/cormorant-garamond/latin-400.css";
-@import "@fontsource/cormorant-garamond/latin-500.css";
-@import "@fontsource/cormorant-garamond/latin-600.css";
-@import "@fontsource/cormorant-garamond/latin-700.css";
-@import "@fontsource/cormorant-garamond/latin-300-italic.css";
-@import "@fontsource/cormorant-garamond/latin-400-italic.css";
-@import "@fontsource/cormorant-garamond/latin-500-italic.css";
-@import "@fontsource/inter/latin-300.css";
-@import "@fontsource/inter/latin-400.css";
-@import "@fontsource/inter/latin-500.css";
-@import "@fontsource/inter/latin-600.css";
-@import "@fontsource/cormorant-garamond/latin-ext-300.css";
-@import "@fontsource/cormorant-garamond/latin-ext-400.css";
-@import "@fontsource/cormorant-garamond/latin-ext-500.css";
-@import "@fontsource/cormorant-garamond/latin-ext-600.css";
-@import "@fontsource/cormorant-garamond/latin-ext-700.css";
-@import "@fontsource/cormorant-garamond/latin-ext-300-italic.css";
-@import "@fontsource/cormorant-garamond/latin-ext-400-italic.css";
-@import "@fontsource/cormorant-garamond/latin-ext-500-italic.css";
-@import "@fontsource/inter/latin-ext-300.css";
-@import "@fontsource/inter/latin-ext-400.css";
-@import "@fontsource/inter/latin-ext-500.css";
-@import "@fontsource/inter/latin-ext-600.css";
+@import "@fontsource/cormorant-garamond/300.css";
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/500.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/cormorant-garamond/700.css";
+@import "@fontsource/cormorant-garamond/300-italic.css";
+@import "@fontsource/cormorant-garamond/400-italic.css";
+@import "@fontsource/cormorant-garamond/500-italic.css";
+@import "@fontsource/inter/300.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
 @import "leaflet/dist/leaflet.css";
 @import "tailwindcss";
 
 @source "./app/**/*.{html,ts}";
 
-@theme {
+/*
+ * Tokens de marca. Son los valores que la web ya usaba sueltos en las
+ * plantillas (#c4956a, #9a6b43...), con nombre. Tailwind genera de cada uno
+ * las clases habituales: text-oro, bg-cobre/15, border-linea, rounded-foto,
+ * ease-salida... Cambiar un valor aqui lo cambia en toda la web.
+ */
+@theme static {
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Acento dorado de la marca (theme-color). Sobre fondo claro no llega a AA
+     como texto: para texto sobre claro se usa bronce. */
+  --color-oro: #c4956a;
+  /* Dorado claro: texto de acento sobre fondo oscuro o sobre foto. */
+  --color-oro-claro: #e8c6a0;
+  /* Variante del hero (cursiva y etiqueta sobre el video). */
+  --color-oro-palido: #e8c99a;
+  /* Relleno de los botones principales (texto blanco encima: AA). */
+  --color-cobre: #9a6b43;
+  --color-cobre-oscuro: #7a5130;
+  /* Texto de acento sobre fondo claro (AA sobre crema y blanco). */
+  --color-bronce: #8a5f3a;
+
+  --color-tinta: #1a1a1a;
+  --color-noche: #161514;
+  --color-crema: #fcf9f6;
+  --color-arena: #f7f2ed;
+  --color-linea: #ede0d0;
+  --color-texto-suave: #555555;
+  --color-texto-tenue: #666666;
+
+  /* Radios que ya existian: tarjetas de foto y bloques grandes. */
+  --radius-foto: 26px;
+  --radius-bloque: 32px;
+
+  /* Curvas de movimiento. "salida": entradas y respuesta a la usuaria
+     (arranca rapido, frena suave). "suave": la que ya usaban las
+     apariciones al hacer scroll y el hero. */
+  --ease-salida: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-suave: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-en-pantalla: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 /* ═══════════════════════════════════════════
@@ -94,37 +126,75 @@ a, button, [role="button"], input[type="submit"], input[type="button"], .cursor-
    SCROLL REVEAL ANIMATION SYSTEM
    ═══════════════════════════════════════════ */
 
-/* Base state — hidden before reveal */
+/*
+  Apariciones al hacer scroll: discretas. Suben 16 px (antes 40-50) en
+  550 ms con la curva de salida, y el escalonado entre piezas es de 60 ms
+  (antes 100). Sin desenfoque (caro de pintar) y sin will-change permanente,
+  que reservaba memoria de GPU para cada bloque de la pagina.
+  Solo se ocultan los bloques que aun no se han visto; lo que esta en
+  pantalla al cargar no se toca (ver scroll-reveal.directive.ts).
+*/
 [data-scroll-reveal] {
   opacity: 0;
-  will-change: transform, opacity;
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 550ms var(--ease-salida),
+              transform 550ms var(--ease-salida);
 }
 
 /* Revealed state */
 [data-scroll-reveal].revealed {
   opacity: 1;
   transform: none !important;
-  filter: none !important;
 }
 
 /* Directional variants */
-[data-scroll-reveal="up"] { transform: translateY(40px); }
-[data-scroll-reveal="down"] { transform: translateY(-40px); }
-[data-scroll-reveal="left"] { transform: translateX(50px); }
-[data-scroll-reveal="right"] { transform: translateX(-50px); }
-[data-scroll-reveal="scale"] { transform: scale(0.92); }
-[data-scroll-reveal="blur"] { transform: translateY(20px); filter: blur(8px); }
+[data-scroll-reveal="up"] { transform: translateY(16px); }
+[data-scroll-reveal="down"] { transform: translateY(-16px); }
+[data-scroll-reveal="left"] { transform: translateX(20px); }
+[data-scroll-reveal="right"] { transform: translateX(-20px); }
+[data-scroll-reveal="scale"] { transform: scale(0.97); }
+[data-scroll-reveal="blur"] { transform: translateY(16px); }
 
 /* Stagger delays */
-[data-scroll-delay="1"] { transition-delay: 0.1s; }
-[data-scroll-delay="2"] { transition-delay: 0.2s; }
-[data-scroll-delay="3"] { transition-delay: 0.3s; }
-[data-scroll-delay="4"] { transition-delay: 0.4s; }
-[data-scroll-delay="5"] { transition-delay: 0.5s; }
-[data-scroll-delay="6"] { transition-delay: 0.6s; }
+[data-scroll-delay="1"] { transition-delay: 60ms; }
+[data-scroll-delay="2"] { transition-delay: 120ms; }
+[data-scroll-delay="3"] { transition-delay: 180ms; }
+[data-scroll-delay="4"] { transition-delay: 240ms; }
+[data-scroll-delay="5"] { transition-delay: 300ms; }
+[data-scroll-delay="6"] { transition-delay: 360ms; }
+
+/* ═══════════════════════════════════════════
+   TRANSICIONES ENTRE PAGINAS (View Transitions)
+   ═══════════════════════════════════════════ */
+
+/*
+  Al cambiar de pagina el contenido funde (sale en 160 ms, entra en 260 ms
+  subiendo 8 px) y la cabecera, la barra de reserva y el aviso de cookies
+  se quedan quietos: tienen nombre propio y no participan del fundido.
+  Navegadores sin View Transitions cambian de pagina como siempre.
+*/
+::view-transition-old(root) {
+  animation: vt-sale 160ms var(--ease-salida) both;
+}
+
+::view-transition-new(root) {
+  animation: vt-entra 260ms var(--ease-salida) both;
+}
+
+@keyframes vt-sale {
+  to { opacity: 0; }
+}
+
+@keyframes vt-entra {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
 
 /* ═══════════════════════════════════════════
    ACCESSIBILITY — REDUCED MOTION
@@ -153,6 +223,94 @@ a, button, [role="button"], input[type="submit"], input[type="button"], .cursor-
   outline: 2px solid #c4956a;
   outline-offset: 3px;
   border-radius: 2px;
+}
+
+/* ═══════════════════════════════════════════
+   PULSACION — respuesta inmediata al tocar
+   ═══════════════════════════════════════════ */
+
+/*
+  Todo lo que se pulsa (botones, tarjetas enlace) se hunde un 3% al
+  presionarlo: confirma que la web ha recibido el toque. Solo transform,
+  que no recalcula el diseno. Sin quitar el resaltado de toque de iOS: se
+  sustituye por esta respuesta, que es mas sutil y de marca.
+*/
+.pulsable {
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 160ms var(--ease-salida), background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.pulsable:active {
+  transform: scale(0.97);
+}
+
+/* ═══════════════════════════════════════════
+   BOTONES Y TARJETAS DE MARCA (compartidos)
+   ═══════════════════════════════════════════ */
+
+/*
+  Los cambios al pasar el raton solo existen con raton: en un movil el
+  "hover" se queda pegado despues del toque. La flecha avanza 3 px para
+  anunciar que el enlace lleva a otra pagina.
+  Contraste: el boton secundario se rellena de cobre (blanco sobre cobre
+  cumple AA); antes se rellenaba de oro, donde el blanco no llega.
+*/
+.boton-principal,
+.boton-secundario,
+.boton-cristal,
+.boton-categoria,
+.enlace-flecha {
+  transition: transform 160ms var(--ease-salida), background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.flecha {
+  transition: transform 200ms var(--ease-salida);
+}
+
+.tarjeta-servicio {
+  transition: transform 160ms var(--ease-salida), border-color 300ms ease, box-shadow 300ms ease;
+}
+
+/* La foto se acerca un 4%, sin levantar la tarjeta: la foto ya da el movimiento. */
+.foto-tarjeta {
+  transition: transform 700ms var(--ease-salida);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .boton-principal:hover {
+    background-color: var(--color-cobre-oscuro);
+  }
+
+  .boton-secundario:hover {
+    background-color: var(--color-cobre);
+    border-color: var(--color-cobre);
+    color: #fff;
+  }
+
+  .boton-cristal:hover {
+    background-color: #fff;
+    color: var(--color-tinta);
+  }
+
+  .boton-categoria:hover {
+    background-color: var(--color-cobre);
+    border-color: var(--color-cobre);
+  }
+
+  .boton-principal:hover .flecha,
+  .boton-secundario:hover .flecha,
+  .enlace-flecha:hover .flecha,
+  .tarjeta-servicio:hover .flecha {
+    transform: translateX(3px);
+  }
+
+  .tarjeta-servicio:hover {
+    border-color: rgba(196, 149, 106, 0.6);
+  }
+
+  .tarjeta-servicio:hover .foto-tarjeta {
+    transform: scale(1.04);
+  }
 }
 
 /* ═══════════════════════════════════════════

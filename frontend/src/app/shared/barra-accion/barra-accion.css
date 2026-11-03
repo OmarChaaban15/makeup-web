@@ -1,0 +1,25 @@
+/*
+  La barra respeta la zona del gesto de inicio en iPhone (safe-area) y entra
+  desde abajo: es la misma direccion por la que se va, asi la usuaria entiende
+  de donde sale. Entra con curva de salida (responde rapido) y se va algo mas
+  deprisa de lo que entra.
+*/
+.barra-accion {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  transform: translateY(0);
+  transition: transform 280ms var(--ease-salida), opacity 280ms var(--ease-salida);
+}
+
+.barra-oculta {
+  transform: translateY(110%);
+  opacity: 0;
+  transition-duration: 200ms;
+}
+
+/* Sin desplazamiento si el sistema pide reducir el movimiento: solo fundido. */
+@media (prefers-reduced-motion: reduce) {
+  .barra-accion,
+  .barra-oculta {
+    transform: none;
+  }
+}

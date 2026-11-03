@@ -91,7 +91,8 @@ const SOLO_ESPANOL = [
   { ruta: '/politica-cookies', archivos: pagina('politica-cookies') }
 ];
 
-// Articulos del blog: la fecha de publicacion es el lastmod. Los de /en/blog no
+// Articulos del blog: el lastmod es la ultima revision (actualizado) o, si no
+// la hay, la fecha de publicacion. Los de /en/blog no
 // tienen pareja en español, asi que van sin hreflang.
 const ARTICULOS = JSON.parse(readFileSync(join(RAIZ, 'src', 'app', 'blog', 'articulos.json'), 'utf8'));
 
@@ -134,7 +135,7 @@ function entrada(ruta, archivos, { pag, fecha } = {}) {
   ].join('\n');
 }
 
-const ultimaFechaBlog = ARTICULOS.map((articulo) => articulo.fecha).sort().at(-1);
+const ultimaFechaBlog = ARTICULOS.map((articulo) => articulo.actualizado ?? articulo.fecha).sort().at(-1);
 
 const urls = [
   // Las paginas de RUTAS en los cuatro idiomas, agrupadas por pagina.
@@ -146,7 +147,7 @@ const urls = [
   ...SOLO_ESPANOL.map(({ ruta, archivos }) => entrada(ruta, archivos)),
   entrada('/blog', [], { fecha: ultimaFechaBlog }),
   ...ARTICULOS.map((articulo) =>
-    entrada(articulo.idioma === 'en' ? `/en/blog/${articulo.slug}` : `/blog/${articulo.slug}`, [], { fecha: articulo.fecha })
+    entrada(articulo.idioma === 'en' ? `/en/blog/${articulo.slug}` : `/blog/${articulo.slug}`, [], { fecha: articulo.actualizado ?? articulo.fecha })
   )
 ];
 

@@ -1,13 +1,11 @@
-import { Component, ElementRef, HostListener, PLATFORM_ID, Inject, computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
 import { IdiomaRuta, RUTAS } from '../idioma';
-import { PIE } from '../textos';
-import { ScrollRevealDirective } from '../scroll-reveal.directive';
+import { ACCION, PIE, enlaceWhatsapp } from '../textos';
 
 @Component({
   selector: 'app-footer',
-  imports: [RouterLink, ScrollRevealDirective],
+  imports: [RouterLink],
   templateUrl: './footer.html',
   styleUrl: './footer.css'
 })
@@ -20,25 +18,9 @@ export class Footer {
 
   readonly inicioRuta = computed(() => RUTAS[this.idioma.idioma()].inicio);
 
-  private isBrowser: boolean;
+  readonly contactoRuta = computed(() => RUTAS[this.idioma.idioma()].contacto);
 
-  constructor(
-    private elRef: ElementRef,
-    @Inject(PLATFORM_ID) private platformId: object
-  ) {
-    this.isBrowser = isPlatformBrowser(platformId);
-  }
+  readonly a = computed(() => ACCION[this.idioma.idioma()]);
 
-  /** Magnetic button effect — buttons attract toward cursor */
-  onMagneticMove(event: MouseEvent, btn: HTMLElement): void {
-    if (!this.isBrowser || window.innerWidth < 768) return;
-    const rect = btn.getBoundingClientRect();
-    const x = event.clientX - rect.left - rect.width / 2;
-    const y = event.clientY - rect.top - rect.height / 2;
-    btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
-  }
-
-  onMagneticLeave(btn: HTMLElement): void {
-    btn.style.transform = '';
-  }
+  readonly whatsapp = computed(() => enlaceWhatsapp(this.idioma.idioma()));
 }

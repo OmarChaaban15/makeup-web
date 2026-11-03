@@ -1,13 +1,29 @@
 import {
-  Component, signal, OnInit, OnDestroy, ElementRef,
-  ViewChild, AfterViewInit, HostListener, PLATFORM_ID, Inject
+  Component, signal, computed, OnInit, OnDestroy, ElementRef,
+  ViewChild, AfterViewInit, HostListener, PLATFORM_ID, Inject, inject
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
+import { RUTAS } from '../../shared/idioma';
+import { CursosService, Curso } from '../../shared/cursos.service';
 
 interface Particle {
   x: number; y: number; size: number; speedX: number; speedY: number; opacity: number;
+}
+
+interface TarjetaServicio {
+  ruta: string;
+  titulo: string;
+  etiqueta: string;
+  texto: string;
+  img: string;
+  alt: string;
+  /**
+   * Precio orientativo "desde X €". Vacio a proposito: lo fija la duena.
+   * Con un valor (p. ej. '180 €') la tarjeta lo muestra; null no pinta nada.
+   */
+  desde: string | null;
 }
 
 @Component({
@@ -17,6 +33,8 @@ interface Particle {
   styleUrl: './inicio.css'
 })
 export class Inicio implements OnInit, OnDestroy, AfterViewInit {
+
+  private readonly cursos = inject(CursosService);
 
   // ── Hero videos ──────────────────────────────────────────────
   private readonly heroVideos = [
@@ -28,26 +46,79 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('heroVideo') heroVideoRef!: ElementRef<HTMLVideoElement>;
   @ViewChild('particleCanvas') particleCanvasRef!: ElementRef<HTMLCanvasElement>;
-
-  // ── Hero text animation ──
-  heroTextVisible = signal(false);
-
-  // ── Mouse parallax ──
-  mouseX = signal(0);
-  mouseY = signal(0);
+  @ViewChild('botonCerrarVisor') cerrarVisorRef?: ElementRef<HTMLButtonElement>;
 
   // ── Particle system ──
   private particles: Particle[] = [];
   private animFrameId: number | null = null;
   private canvasCtx: CanvasRenderingContext2D | null = null;
 
-  // ── Counters ──
-  // Arrancan en la cifra final para que el HTML prerenderizado no diga "+0";
-  // la animacion desde 0 es un adorno al pasar el raton.
-  counterYears = signal(5);
-  counterClients = signal(500);
-  counterPersonal = signal(100);
-  private countersAnimated = false;
+  // ── Cifras ──
+  // Datos, no adorno: se muestran tal cual, sin contar desde 0. Las cifras
+  // las decide la duena (ver informe: inicio y sobre-mi no coinciden).
+  readonly cifras = [
+    { valor: '+5', etiqueta: 'Años' },
+    { valor: '+500', etiqueta: 'Clientas' },
+    { valor: '100%', etiqueta: 'A medida' },
+  ];
+
+  // ── Servicios ──
+  // El servicio estrella (novias) va primero y mas grande; cada tarjeta lleva
+  // a su propia pagina en vez de a /servicios en general.
+  readonly servicioEstrella: TarjetaServicio = {
+    ruta: RUTAS.es.novias,
+    titulo: 'Novias & Bodas',
+    etiqueta: 'Servicio estrella',
+    texto: 'Prueba previa personalizada, kit de retoque y preparación en villas u hoteles de Ibiza.',
+    img: 'images/maquillaje-novia-ibiza.png',
+    alt: 'Maquillaje de novia',
+    desde: null,
+  };
+
+  readonly otrosServicios: TarjetaServicio[] = [
+    {
+      ruta: RUTAS.es.eventos,
+      titulo: 'Invitadas & Galas',
+      etiqueta: 'Social',
+      texto: 'Looks de fiesta sofisticados con pestañas a medida y fijación extrema para bailar toda la noche.',
+      img: 'images/maquillaje-invitada-fiesta-ibiza.png',
+      alt: 'Maquillaje para eventos',
+      desde: null,
+    },
+    {
+      ruta: RUTAS.es.editorial,
+      titulo: 'Editorial & Campañas',
+      etiqueta: 'Moda',
+      texto: 'Concepto creativo para marcas de moda, lookbooks y shootings con fotógrafos internacionales.',
+      img: 'images/maquillaje-editorial-moda-ibiza.png',
+      alt: 'Maquillaje editorial',
+      desde: null,
+    },
+    {
+      ruta: RUTAS.es.cine,
+      titulo: 'Rodajes & TV',
+      etiqueta: 'Cine & TV',
+      texto: 'Control de brillo y textura específico para ópticas 4K/8K en exteriores, spots y videoclips.',
+      img: 'images/maquillaje-cine-rodaje-ibiza.jpeg',
+      alt: 'Maquillaje audiovisual',
+      desde: null,
+    },
+  ];
+
+  // ── Masterclass ──
+  // Precio y acceso los da la API (precio_efectivo, oferta_activa,
+  // duracion_acceso_meses): antes estaban escritos a mano y no coincidian
+  // con /cursos.
+  private readonly masterclass = signal<Curso | null>(null);
+  readonly precioMasterclass = computed(() => {
+    const curso = this.masterclass();
+    return curso ? this.cursos.formatearPrecio(curso.precio_efectivo) : null;
+  });
+  readonly precioAnterior = computed(() => {
+    const curso = this.masterclass();
+    return curso?.oferta_activa ? this.cursos.formatearPrecio(curso.precio) : null;
+  });
+  readonly mesesAcceso = computed(() => this.masterclass()?.duracion_acceso_meses ?? null);
 
   // ── Testimonios VIP ──
   readonly testimonios = [
@@ -81,6 +152,7 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
     { src: 'images/maquillaje-sesion-creativa-editorial.jpg', alt: 'Sesión creativa y editorial contemporáneo', pos: 'center 25%' },
     { src: 'images/maquillaje-editorial-moda-ibiza.png', alt: 'Producción de moda y campañas', pos: 'center 40%' },
     { src: 'images/maquillaje-glitter-textura-piel.jpg', alt: 'Técnica de pigmentación glitter y textura de piel', pos: 'center 35%' },
+    { src: 'images/labios-brillo-dorado-detalle.jpg', alt: 'Detalle de labios con brillo dorado y rosa', pos: 'center 58%' },
     { src: 'images/maquillaje-cine-rodaje-ibiza.jpeg', alt: 'Rodaje y producción audiovisual', pos: 'center center' },
   ];
 
@@ -98,10 +170,23 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   private progressAnimFrame: number | null = null;
   private progressStart: number = 0;
 
-  // ── Lightbox ──
-  lightboxOpen = signal(false);
-  lightboxSrc = signal('');
-  lightboxAlt = signal('');
+  // ── Visor de fotos (pantalla completa) ──
+  readonly visorIndice = signal<number | null>(null);
+  readonly visorFoto = computed(() => {
+    const i = this.visorIndice();
+    return i === null ? null : this.slides[i];
+  });
+  /** Elemento que tenia el foco antes de abrir el visor, para devolverselo. */
+  private focoPrevio: HTMLElement | null = null;
+
+  // ── Gesto de deslizar en el carrusel y el visor ──
+  private toqueInicio: { x: number; y: number; t: number } | null = null;
+  /**
+   * El navegador lanza un clic al levantar el dedo aunque haya sido un
+   * deslizamiento. Esta marca evita que ese clic abra el visor (en el
+   * carrusel) o lo cierre (al tocar el fondo del visor).
+   */
+  private acabaDeDeslizar = false;
 
   // ── Ken Burns ──
   readonly kenBurnsVariants = [
@@ -117,8 +202,16 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   // ── Lifecycle ──
 
   ngOnInit() {
-    // En el prerender no hay temporizadores que lanzar.
+    // En el prerender no hay temporizadores que lanzar ni API a la que
+    // llamar (la peticion fallaria al compilar y el error quedaria en el HTML).
     if (!this.isBrowser) return;
+
+    this.cursos.masterclass().subscribe({
+      next: curso => this.masterclass.set(curso),
+      // Sin precio la tarjeta sigue llevando a /cursos: no es un error que
+      // haya que ensenar en la portada.
+      error: () => this.masterclass.set(null),
+    });
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       this.movimientoPausado.set(true);
@@ -132,16 +225,20 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
     if (!this.isBrowser) return;
 
     this.playHeroVideo(0);
-    this.initParticles();
 
-    // Trigger hero text animation after a brief delay
-    setTimeout(() => this.heroTextVisible.set(true), 300);
+    // Las particulas son decoracion: solo en pantallas con raton, donde
+    // sobra potencia. En el movil un bucle de canvas a 60 fps solo gasta
+    // bateria y compite con el scroll.
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      this.initParticles();
+    }
   }
 
   ngOnDestroy() {
     this.stopAutoPlay();
     if (this.animFrameId) cancelAnimationFrame(this.animFrameId);
     if (this.progressAnimFrame) cancelAnimationFrame(this.progressAnimFrame);
+    if (this.isBrowser) document.body.classList.remove('overflow-hidden');
   }
 
   // ── Hero Video ──
@@ -181,17 +278,6 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   onHeroVideoEnded(): void {
     this.heroVideoIndex = (this.heroVideoIndex + 1) % this.heroVideos.length;
     this.playHeroVideo(this.heroVideoIndex);
-  }
-
-  // ── Mouse Parallax ──
-
-  @HostListener('document:mousemove', ['$event'])
-  onMouseMove(e: MouseEvent) {
-    if (!this.isBrowser) return;
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
-    this.mouseX.set(x);
-    this.mouseY.set(y);
   }
 
   // ── Particle System ──
@@ -242,7 +328,7 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   @HostListener('window:resize')
   onResize() {
     const canvas = this.particleCanvasRef?.nativeElement;
-    if (canvas) this.resizeCanvas(canvas);
+    if (canvas && this.canvasCtx) this.resizeCanvas(canvas);
   }
 
   private resizeCanvas(canvas: HTMLCanvasElement): void {
@@ -277,30 +363,6 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.animFrameId = requestAnimationFrame(() => this.animateParticles());
-  }
-
-  // ── Animated Counters ──
-
-  animateCounters(): void {
-    if (this.countersAnimated || !this.isBrowser || this.movimientoPausado()) return;
-    this.countersAnimated = true;
-
-    this.animateNumber(0, 5, 1500, v => this.counterYears.set(v));
-    this.animateNumber(0, 500, 2000, v => this.counterClients.set(v));
-    this.animateNumber(0, 100, 1800, v => this.counterPersonal.set(v));
-  }
-
-  private animateNumber(start: number, end: number, duration: number, setter: (v: number) => void): void {
-    const startTime = performance.now();
-    const step = (now: number) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      // Ease out cubic
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setter(Math.round(start + (end - start) * eased));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
   }
 
   // ── Slideshow / Carousel ──
@@ -345,7 +407,7 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
 
   private restartAutoPlay() {
     this.stopAutoPlay();
-    if (!this.movimientoPausado()) {
+    if (!this.movimientoPausado() && this.visorIndice() === null) {
       this.startAutoPlay();
     }
   }
@@ -360,48 +422,89 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  // ── Lightbox ──
+  // ── Deslizar con el dedo ──
+  // Un gesto horizontal claro (mas de 40 px, o un golpe rapido) pasa de
+  // foto; uno vertical se deja al scroll de la pagina (touch-action: pan-y).
 
-  openLightbox(slide: { src: string; alt: string }): void {
-    this.lightboxSrc.set(slide.src);
-    this.lightboxAlt.set(slide.alt);
-    this.lightboxOpen.set(true);
+  alEmpezarToque(evento: PointerEvent): void {
+    if (evento.pointerType === 'mouse') return;
+    this.toqueInicio = { x: evento.clientX, y: evento.clientY, t: performance.now() };
   }
 
-  closeLightbox(): void {
-    this.lightboxOpen.set(false);
-  }
+  alTerminarToque(evento: PointerEvent, enVisor = false): void {
+    const inicio = this.toqueInicio;
+    this.toqueInicio = null;
+    if (!inicio) return;
 
-  @HostListener('document:keydown.escape')
-  onEscKey() {
-    if (this.lightboxOpen()) this.closeLightbox();
-  }
+    const dx = evento.clientX - inicio.x;
+    const dy = evento.clientY - inicio.y;
+    if (Math.abs(dx) < Math.abs(dy)) return;
 
-  // ── 3D Tilt for service cards ──
+    const velocidad = Math.abs(dx) / Math.max(performance.now() - inicio.t, 1);
+    if (Math.abs(dx) < 40 && velocidad < 0.11) return;
 
-  onCardMouseMove(event: MouseEvent, card: HTMLElement): void {
-    if (!this.isBrowser || window.innerWidth < 768) return;
-    const rect = card.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -6;
-    const rotateY = ((x - centerX) / centerX) * 6;
+    this.acabaDeDeslizar = true;
+    setTimeout(() => this.acabaDeDeslizar = false, 0);
 
-    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-
-    // Shine effect
-    const shine = card.querySelector('.card-shine') as HTMLElement;
-    if (shine) {
-      shine.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(232,201,154,0.15) 0%, transparent 60%)`;
-      shine.style.opacity = '1';
+    const haciaAtras = dx > 0;
+    if (enVisor) {
+      haciaAtras ? this.visorAnterior() : this.visorSiguiente();
+    } else {
+      haciaAtras ? this.prev() : this.next();
     }
   }
 
-  onCardMouseLeave(card: HTMLElement): void {
-    card.style.transform = '';
-    const shine = card.querySelector('.card-shine') as HTMLElement;
-    if (shine) shine.style.opacity = '0';
+  // ── Visor de fotos ──
+
+  abrirVisor(indice: number, evento?: Event): void {
+    if (this.acabaDeDeslizar) return;
+    this.focoPrevio = (evento?.currentTarget as HTMLElement) ?? (document.activeElement as HTMLElement);
+    this.visorIndice.set(indice);
+    this.stopAutoPlay();
+    document.body.classList.add('overflow-hidden');
+    // El foco entra en el dialogo (boton de cerrar) cuando ya esta pintado.
+    requestAnimationFrame(() => this.cerrarVisorRef?.nativeElement.focus());
+  }
+
+  cerrarVisor(): void {
+    if (this.visorIndice() === null) return;
+    this.visorIndice.set(null);
+    document.body.classList.remove('overflow-hidden');
+    this.focoPrevio?.focus();
+    this.restartAutoPlay();
+  }
+
+  /** Tocar fuera de la foto cierra, salvo que el toque fuera un deslizamiento. */
+  alTocarFondoVisor(): void {
+    if (!this.acabaDeDeslizar) this.cerrarVisor();
+  }
+
+  visorAnterior(): void {
+    this.visorIndice.update(i => i === null ? i : (i - 1 + this.slides.length) % this.slides.length);
+  }
+
+  visorSiguiente(): void {
+    this.visorIndice.update(i => i === null ? i : (i + 1) % this.slides.length);
+  }
+
+  /** Teclado del visor: flechas para pasar, Escape para salir, Tab no se escapa. */
+  @HostListener('document:keydown', ['$event'])
+  alPulsarTecla(evento: KeyboardEvent): void {
+    if (this.visorIndice() === null) return;
+
+    if (evento.key === 'Escape') {
+      this.cerrarVisor();
+    } else if (evento.key === 'ArrowLeft') {
+      this.visorAnterior();
+    } else if (evento.key === 'ArrowRight') {
+      this.visorSiguiente();
+    } else if (evento.key === 'Tab') {
+      // Foco atrapado en el dialogo: recorre solo sus tres botones.
+      const botones = Array.from(document.querySelectorAll<HTMLElement>('.visor button'));
+      const actual = botones.indexOf(document.activeElement as HTMLElement);
+      const siguiente = (actual + (evento.shiftKey ? -1 : 1) + botones.length) % botones.length;
+      botones[siguiente]?.focus();
+      evento.preventDefault();
+    }
   }
 }

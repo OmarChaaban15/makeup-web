@@ -3,6 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { IdiomaRuta } from '../idioma';
 import { COOKIES } from '../textos';
+import { InterfazService } from '../interfaz.service';
 
 /**
  * Aviso informativo. La web solo guarda almacenamiento tecnico (sesion,
@@ -15,11 +16,13 @@ import { COOKIES } from '../textos';
   selector: 'app-cookie-banner',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './cookie-banner.html'
+  templateUrl: './cookie-banner.html',
+  styleUrl: './cookie-banner.css'
 })
 export class CookieBanner implements OnInit {
   private esNavegador = isPlatformBrowser(inject(PLATFORM_ID));
   private idioma = inject(IdiomaRuta);
+  private interfaz = inject(InterfazService);
 
   readonly t = computed(() => COOKIES[this.idioma.idioma()]);
 
@@ -39,7 +42,10 @@ export class CookieBanner implements OnInit {
 
     if (!visto) {
       // Pequeño retraso para que no aparezca de golpe al cargar.
-      setTimeout(() => this.visible.set(true), 800);
+      setTimeout(() => {
+        this.visible.set(true);
+        this.interfaz.avisoCookiesVisible.set(true);
+      }, 800);
     }
   }
 
@@ -50,6 +56,9 @@ export class CookieBanner implements OnInit {
       // Sin almacenamiento el aviso volvera a salir; no es grave.
     }
     this.ocultando.set(true);
-    setTimeout(() => this.visible.set(false), 400);
+    // La salida dura 200 ms (cookie-banner.css); la barra de reserva puede
+    // entrar en cuanto el aviso empieza a irse.
+    this.interfaz.avisoCookiesVisible.set(false);
+    setTimeout(() => this.visible.set(false), 200);
   }
 }

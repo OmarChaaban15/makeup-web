@@ -55,3 +55,71 @@
 .contacto-btn:active {
   transform: scale(0.97);
 }
+
+/* ── Campos del formulario ── */
+/*
+  Foco con anillo dorado suave (el contorno global de :focus-visible sigue
+  ahi para teclado). Un campo con error se marca con borde rojo oscuro y su
+  mensaje aparece debajo con un fundido corto: no solo color, tambien texto.
+*/
+.campo {
+  transition: border-color 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+}
+
+.campo:focus {
+  border-color: var(--color-oro);
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(196, 149, 106, 0.18);
+}
+
+.campo-error,
+.campo-error:focus {
+  border-color: #b42318;
+  box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.12);
+}
+
+.mensaje-error,
+.aviso-estado {
+  animation: aparece 200ms var(--ease-salida) both;
+}
+
+@keyframes aparece {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ── Opciones de servicio ── */
+.opcion-servicio {
+  transition: transform 160ms var(--ease-salida), background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .opcion-servicio[aria-pressed="false"]:hover {
+    border-color: var(--color-oro);
+  }
+}
+
+/* ── Boton de envio ── */
+/* Hover a cobre (blanco sobre cobre cumple AA; sobre oro no llegaba). */
+.boton-enviar {
+  transition: transform 160ms var(--ease-salida), background-color 200ms ease, opacity 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .boton-enviar:not(:disabled):hover {
+    background-color: var(--color-cobre);
+  }
+
+  .boton-enviar:not(:disabled):hover .flecha {
+    transform: translateX(3px);
+  }
+}
+
+/* Indicador de envio: gira rapido (600 ms la vuelta), que se percibe mas agil. */
+.girando {
+  animation: gira 600ms linear infinite;
+}
+
+@keyframes gira {
+  to { transform: rotate(360deg); }
+}

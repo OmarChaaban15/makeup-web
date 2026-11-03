@@ -1,94 +1,102 @@
-<footer class="footer-premium relative overflow-hidden bg-[#1a1a1a] text-white">
+<footer class="footer-premium relative overflow-hidden bg-tinta text-white">
 
-  <!-- CSS particle background -->
-  <div class="footer-particles absolute inset-0 pointer-events-none" aria-hidden="true">
-    <span class="fp fp-1"></span>
-    <span class="fp fp-2"></span>
-    <span class="fp fp-3"></span>
-    <span class="fp fp-4"></span>
-    <span class="fp fp-5"></span>
-    <span class="fp fp-6"></span>
-    <span class="fp fp-7"></span>
-    <span class="fp fp-8"></span>
+  <!--
+    Cierre con accion: quien llega al final de cualquier pagina ya ha visto
+    el trabajo y es el momento de pedir fecha. Antes el pie solo listaba datos.
+  -->
+  <div class="relative z-10 border-b border-white/10 px-6 pb-14 pt-16 sm:px-10 md:pt-20">
+    <div class="mx-auto flex max-w-[1180px] flex-col items-center gap-7 text-center md:flex-row md:justify-between md:text-left">
+      <p class="max-w-[30ch] font-serif text-[clamp(1.5rem,3vw,2.1rem)] font-light leading-snug text-white">
+        {{ a().cierre }}
+      </p>
+      <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+        <a [routerLink]="contactoRuta()"
+           class="pulsable inline-flex h-12 items-center justify-center gap-2 rounded-full bg-cobre px-8 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline hover:bg-cobre-oscuro">
+          {{ a().cita }}
+          <svg class="h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+        <a [href]="whatsapp()" target="_blank" rel="noopener"
+           class="pulsable inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/25 px-7 font-sans text-sm font-medium text-white no-underline hover:border-oro hover:text-oro-claro">
+          {{ a().whatsapp }}
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- Bloque principal -->
-  <div class="relative z-10 px-6 pb-10 pt-16 sm:px-10 md:pt-20">
+  <div class="relative z-10 px-6 pb-10 pt-14 sm:px-10">
     <div class="mx-auto max-w-[1180px] text-center">
 
       <!-- Logo / Marca -->
-      <a [routerLink]="inicioRuta()" class="group inline-block no-underline" scrollReveal="up">
-        <span class="block font-serif text-[1.6rem] font-bold uppercase tracking-[0.2em] text-white transition-colors duration-300 group-hover:text-[#c4956a] sm:text-[1.8rem]">
+      <a [routerLink]="inicioRuta()" class="group inline-block no-underline">
+        <span class="block font-serif text-[1.6rem] font-bold uppercase tracking-[0.2em] text-white transition-colors duration-300 group-hover:text-oro sm:text-[1.8rem]">
           MAKEUP BY YONA
         </span>
-        <span class="mt-1 block font-serif text-[0.78rem] font-normal italic tracking-[0.04em] text-[#c4956a]">
+        <span class="mt-1 block font-serif text-[0.78rem] font-normal italic tracking-[0.04em] text-oro">
           {{ t().lema }}
         </span>
       </a>
 
       <!-- Contacto -->
-      <div scrollReveal="up" scrollDelay="1" class="mt-8 space-y-1 text-sm font-light leading-7 text-white/60">
+      <div class="mt-8 space-y-1 text-sm font-light leading-7 text-white/70">
         <p>
-          <a href="mailto:info@makeupbyyona.es" class="no-underline transition-colors duration-300 hover:text-[#c4956a]">info&#64;makeupbyyona.es</a>
-          <span class="mx-2">|</span>
-          <a href="tel:+34658728433" class="no-underline transition-colors duration-300 hover:text-[#c4956a]">+34 658 728 433</a>
+          <a href="mailto:info@makeupbyyona.es" class="inline-block py-1 no-underline transition-colors duration-200 hover:text-oro">info&#64;makeupbyyona.es</a>
+          <span class="mx-2" aria-hidden="true">|</span>
+          <a href="tel:+34658728433" class="inline-block py-1 no-underline transition-colors duration-200 hover:text-oro">+34 658 728 433</a>
         </p>
         <p>{{ t().lugar }}</p>
       </div>
 
-      <!-- Redes sociales con efecto magnético -->
-      <div scrollReveal="up" scrollDelay="2" class="mt-12">
-        <p class="mb-6 font-serif text-[0.7rem] uppercase tracking-[0.3em] text-white/60">{{ t().seguir }}</p>
+      <!-- Redes sociales -->
+      <div class="mt-12">
+        <p class="mb-6 font-serif text-[0.72rem] uppercase tracking-[0.3em] text-white/70">{{ t().seguir }}</p>
         <div class="flex flex-wrap items-center justify-center gap-4">
 
           <!-- Instagram profesional -->
           <a href="https://www.instagram.com/byyonai?igsh=dTJpZHJlaGpkaDhn" target="_blank" rel="noreferrer"
-            class="magnetic-btn group flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 no-underline backdrop-blur-sm transition-all duration-300 hover:border-[#c4956a]/50 hover:bg-[#c4956a]/10 hover:shadow-[0_0_20px_rgba(196,149,106,0.15)]"
-            id="footer-instagram-pro"
-            (mousemove)="onMagneticMove($event, igPro)" (mouseleave)="onMagneticLeave(igPro)" #igPro>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            class="red-social pulsable group flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 no-underline"
+            id="footer-instagram-pro">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"
               stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
-              class="text-[#c4956a] transition-transform duration-300 group-hover:scale-110">
+              class="text-oro">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
               <circle cx="12" cy="12" r="4" />
               <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
             </svg>
             <span class="flex flex-col text-left leading-tight">
-              <span class="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white transition-colors duration-300 group-hover:text-[#c4956a]">&#64;byyonai</span>
-              <span class="text-[0.72rem] font-light text-white/60">{{ t().igPro }}</span>
+              <span class="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white transition-colors duration-200 group-hover:text-oro">&#64;byyonai</span>
+              <span class="text-[0.72rem] font-light text-white/70">{{ t().igPro }}</span>
             </span>
           </a>
 
           <!-- Instagram personal -->
           <a href="https://www.instagram.com/yonadobe?igsh=czByZHM0MzN5bnNj" target="_blank" rel="noreferrer"
-            class="magnetic-btn group flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 no-underline backdrop-blur-sm transition-all duration-300 hover:border-[#c4956a]/50 hover:bg-[#c4956a]/10 hover:shadow-[0_0_20px_rgba(196,149,106,0.15)]"
-            id="footer-instagram-personal"
-            (mousemove)="onMagneticMove($event, igPers)" (mouseleave)="onMagneticLeave(igPers)" #igPers>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            class="red-social pulsable group flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 no-underline"
+            id="footer-instagram-personal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"
               stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
-              class="text-[#c4956a] transition-transform duration-300 group-hover:scale-110">
+              class="text-oro">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
               <circle cx="12" cy="12" r="4" />
               <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
             </svg>
             <span class="flex flex-col text-left leading-tight">
-              <span class="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white transition-colors duration-300 group-hover:text-[#c4956a]">&#64;yonadobe</span>
-              <span class="text-[0.72rem] font-light text-white/60">{{ t().igPers }}</span>
+              <span class="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white transition-colors duration-200 group-hover:text-oro">&#64;yonadobe</span>
+              <span class="text-[0.72rem] font-light text-white/70">{{ t().igPers }}</span>
             </span>
           </a>
 
           <!-- TikTok -->
           <a href="https://www.tiktok.com/@byyonai?_r=1&_t=ZN-97Tq6g8GIIo" target="_blank" rel="noreferrer"
-            class="magnetic-btn group flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 no-underline backdrop-blur-sm transition-all duration-300 hover:border-[#c4956a]/50 hover:bg-[#c4956a]/10 hover:shadow-[0_0_20px_rgba(196,149,106,0.15)]"
-            id="footer-tiktok"
-            (mousemove)="onMagneticMove($event, tiktokBtn)" (mouseleave)="onMagneticLeave(tiktokBtn)" #tiktokBtn>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
-              class="text-[#c4956a] transition-transform duration-300 group-hover:scale-110">
+            class="red-social pulsable group flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 no-underline"
+            id="footer-tiktok">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+              class="text-oro">
               <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
             </svg>
             <span class="flex flex-col text-left leading-tight">
-              <span class="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white transition-colors duration-300 group-hover:text-[#c4956a]">&#64;byyonai</span>
-              <span class="text-[0.72rem] font-light text-white/60">TikTok</span>
+              <span class="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white transition-colors duration-200 group-hover:text-oro">&#64;byyonai</span>
+              <span class="text-[0.72rem] font-light text-white/70">TikTok</span>
             </span>
           </a>
 
@@ -98,20 +106,23 @@
     </div>
   </div>
 
-  <!-- Separador animado -->
+  <!-- Separador -->
   <div class="relative z-10 mx-6 sm:mx-10">
     <div class="footer-separator h-px"></div>
   </div>
 
-  <!-- Barra inferior -->
-  <div class="relative z-10 px-6 py-5 sm:px-10">
-    <div class="mx-auto flex max-w-[1180px] flex-col items-center justify-center gap-2 text-[0.72rem] font-light text-white/60">
+  <!--
+    Barra inferior. En movil deja debajo el alto de la barra fija de reserva
+    (unos 72 px mas la zona segura) para que no tape los enlaces legales.
+  -->
+  <div class="relative z-10 px-6 pt-5 pb-28 sm:px-10 lg:pb-5">
+    <div class="mx-auto flex max-w-[1180px] flex-col items-center justify-center gap-2 text-[0.72rem] font-light text-white/70">
       <span>&copy; {{ currentYear }} Makeup By Yona. {{ t().derechos }}</span>
       <nav aria-label="Legal" class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-        <a routerLink="/aviso-legal" class="inline-block py-1 no-underline transition-colors duration-300 hover:text-[#c4956a]">{{ t().avisoLegal }}</a>
-        <a routerLink="/condiciones" class="inline-block py-1 no-underline transition-colors duration-300 hover:text-[#c4956a]">{{ t().condiciones }}</a>
-        <a routerLink="/politica-privacidad" class="inline-block py-1 no-underline transition-colors duration-300 hover:text-[#c4956a]">{{ t().privacidad }}</a>
-        <a routerLink="/politica-cookies" class="inline-block py-1 no-underline transition-colors duration-300 hover:text-[#c4956a]">{{ t().cookies }}</a>
+        <a routerLink="/aviso-legal" class="inline-block py-2 no-underline transition-colors duration-200 hover:text-oro">{{ t().avisoLegal }}</a>
+        <a routerLink="/condiciones" class="inline-block py-2 no-underline transition-colors duration-200 hover:text-oro">{{ t().condiciones }}</a>
+        <a routerLink="/politica-privacidad" class="inline-block py-2 no-underline transition-colors duration-200 hover:text-oro">{{ t().privacidad }}</a>
+        <a routerLink="/politica-cookies" class="inline-block py-2 no-underline transition-colors duration-200 hover:text-oro">{{ t().cookies }}</a>
       </nav>
     </div>
   </div>

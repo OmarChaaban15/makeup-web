@@ -1,8 +1,13 @@
 /* ═══════════════════════════════════════════
-   INICIO — Premium Animations & Effects
+   INICIO
    ═══════════════════════════════════════════ */
 
 /* ── Hero — Video overlay ── */
+/*
+  Mas oscuro arriba (cabecera) y abajo (botones) que en el centro, donde va
+  el titular con su sombra suave: el texto blanco queda por encima de 4.5:1
+  en cualquier fotograma del video.
+*/
 .hero-video-overlay {
   background: linear-gradient(
     to bottom,
@@ -19,77 +24,85 @@
   pointer-events: none;
 }
 
-/* ── Hero — Staggered text animation ── */
+/* ── Hero — entrada ── */
 /*
- * Es una animacion CSS y no una transicion disparada por JavaScript: el
- * titular (el elemento mas grande de la portada) empieza a pintarse con el
- * primer fotograma en vez de esperar a que Angular arranque, y asi no
- * retrasa el LCP. El efecto visual es el mismo.
- */
-.hero-text-enter {
-  animation: hero-text-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  Animacion CSS, no disparada por JavaScript: empieza con el primer fotograma
+  del HTML prerenderizado. El titular es el LCP, asi que nunca parte de
+  opacidad 0 (eso retrasaba el LCP hasta el final del fundido): solo sube
+  12 px. El resto funde y sube escalonado 80 ms, cada pieza en 500 ms.
+*/
+.hero-titular {
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+  animation: hero-sube 700ms var(--ease-salida) both;
 }
 
-@keyframes hero-text-in {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.hero-entra {
+  animation: hero-funde 500ms var(--ease-salida) both;
 }
 
-.hero-text-delay-1 { animation-delay: 0.2s; }
-.hero-text-delay-2 { animation-delay: 0.45s; }
-.hero-text-delay-3 { animation-delay: 0.7s; }
-.hero-text-delay-4 { animation-delay: 0.95s; }
+.hero-paso-1 { animation-delay: 0ms; }
+.hero-paso-2 { animation-delay: 120ms; }
+.hero-paso-3 { animation-delay: 200ms; }
+
+@keyframes hero-sube {
+  from { transform: translateY(12px); }
+  to { transform: none; }
+}
+
+@keyframes hero-funde {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-text-enter {
+  .hero-titular,
+  .hero-entra {
     animation: none;
   }
 }
 
-/* ── Scroll indicator ── */
-.scroll-indicator {
-  animation: scrollBounce 2s ease-in-out infinite;
+/* Botones, flechas y tarjetas de servicio: estilos compartidos en styles.css. */
+
+/* ── Foto de presentacion ── */
+.foto-zoom img {
+  transition: transform 700ms var(--ease-salida);
 }
 
-@keyframes scrollBounce {
-  0%, 100% { transform: translateY(0); opacity: 0.6; }
-  50% { transform: translateY(10px); opacity: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .foto-zoom:hover img {
+    transform: scale(1.03);
+  }
 }
 
-/* ── Decorative line expand ── */
-.line-expand {
-  width: 0;
-  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+/* ── Carrusel ── */
+/* El dedo en vertical hace scroll; en horizontal lo gestiona el carrusel. */
+.carrusel-pista {
+  touch-action: pan-y;
 }
 
-.line-expand.revealed {
-  width: 80px;
+.flecha-carrusel {
+  transition: transform 160ms var(--ease-salida), background-color 200ms ease;
 }
 
-/* ── 3D Tilt card ── */
-.tilt-card {
-  transition: transform 0.15s ease-out, box-shadow 0.3s ease;
-  transform-style: preserve-3d;
-  will-change: transform;
+@media (hover: hover) and (pointer: fine) {
+  .flecha-carrusel:hover {
+    background-color: var(--color-oro);
+  }
 }
 
-.card-shine {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 1;
+/* Punto activo: la pastilla se alarga con scaleX, no con width. */
+.punto {
+  background-color: rgba(26, 26, 26, 0.4);
+  transform: scaleX(0.2857);
+  transition: transform 300ms var(--ease-salida), background-color 300ms ease;
 }
 
-/* ── Ken Burns effects for carousel ── */
+.punto-activo {
+  background-color: var(--color-cobre);
+  transform: none;
+}
+
+/* ── Ken Burns ── */
 .ken-burns-1 {
   animation: kenBurns1 6s ease-in-out forwards;
 }
@@ -120,95 +133,37 @@
   to { transform: scale(1.06) translate(-1%, 1%); }
 }
 
-/* ── Carousel progress bar ── */
+/* ── Barra de progreso del carrusel ── */
+/* Crece con scaleX desde la izquierda: no recalcula el diseno cada fotograma. */
 .carousel-progress {
   height: 3px;
+  width: 100%;
+  transform-origin: left center;
   background: linear-gradient(90deg, #c4956a, #e8c99a);
-  transition: width 0.1s linear;
   border-radius: 2px;
 }
 
-/* ── Lightbox ── */
-.lightbox-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(0, 0, 0, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  animation: lightboxIn 0.35s ease;
-  cursor: zoom-out;
+/* ── Visor de fotos ── */
+.visor {
+  animation: visor-funde 200ms var(--ease-salida) both;
 }
 
-.lightbox-overlay img {
-  max-width: 90vw;
-  max-height: 85dvh;
-  object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-  animation: lightboxImgIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+/* Cada foto entra desde un 97% con fundido: nada aparece de la nada. */
+.visor-foto {
+  animation: visor-foto-entra 260ms var(--ease-salida) both;
 }
 
-/*
-  En movil, 2rem de margen a cada lado se comen un tercio del ancho util
-  de un telefono pequeno. La foto es el contenido: se le deja el sitio.
-*/
-@media (max-width: 640px) {
-  .lightbox-overlay {
-    padding: 0.75rem;
-  }
-
-  .lightbox-overlay img {
-    max-width: 96vw;
-    max-height: 88dvh;
-  }
-}
-
-@keyframes lightboxIn {
+@keyframes visor-funde {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes lightboxImgIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+@keyframes visor-foto-entra {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: none; }
 }
 
-/* ── Counter section ── */
+/* ── Cifras ── */
 .counter-number {
   font-variant-numeric: tabular-nums;
 }
-
-/* ── Animated gradient line ── */
-.gradient-line-animated {
-  background: linear-gradient(90deg, transparent, #c4956a, transparent);
-  background-size: 200% 100%;
-  animation: gradientShift 3s ease-in-out infinite;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 100% 50%; }
-  50% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-
-/* ── Marquee infinito ── */
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marqueeScroll 28s linear infinite;
-}
-
-.marquee-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes marqueeScroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
