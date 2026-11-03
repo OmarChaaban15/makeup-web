@@ -1,4 +1,5 @@
-import { ARTICULOS, segmentos } from './blog';
+import { ARTICULOS, CATEGORIAS, anclaDe, minutosDeLectura, segmentos } from './blog';
+import { RUTAS } from '../shared/idioma';
 
 describe('articulos del blog', () => {
   it('los slugs no se repiten', () => {
@@ -25,15 +26,40 @@ describe('articulos del blog', () => {
       });
 
       it('los enlaces internos apuntan a paginas que existen', () => {
-        const textos = articulo.contenido.flatMap(b => (b.t === 'ul' ? b.x : b.t === 'p' ? [b.x] : []));
+        // Parrafos, listas, notas y respuestas de las preguntas frecuentes.
+        const textos = [
+          ...articulo.contenido.flatMap(b => (typeof b.x === 'string' ? (b.t === 'h2' || b.t === 'h3' ? [] : [b.x]) : b.x)),
+          ...(articulo.faq ?? []).map(f => f.r)
+        ];
         const enlaces = textos.flatMap(texto => segmentos(texto)).flatMap(s => (s.enlace ? [s.enlace] : []));
         const validos = new Set([
-          '/', '/servicios', '/sobre-mi', '/contacto', '/cursos', '/oferta', '/blog',
-          '/en', '/en/services', '/en/about', '/en/contact',
+          // Todas las paginas de la tabla de idiomas, incluidas las de cada servicio.
+          ...Object.values(RUTAS).flatMap(rutas => Object.values(rutas)),
+          '/cursos', '/oferta', '/blog',
           ...ARTICULOS.map(a => (a.idioma === 'en' ? `/en/blog/${a.slug}` : `/blog/${a.slug}`))
         ]);
 
         for (const enlace of enlaces) expect(validos.has(enlace), `enlace roto: ${enlace}`).toBe(true);
+      });
+
+      it('tiene categoria valida y un resumen de dos a cuatro claves', () => {
+        expect(CATEGORIAS).toContain(articulo.categoria);
+        expect(articulo.claves.length).toBeGreaterThanOrEqual(2);
+        expect(articulo.claves.length).toBeLessThanOrEqual(4);
+      });
+
+      it('los h2 tienen anclas distintas (el indice del articulo enlaza a ellas)', () => {
+        const anclas = articulo.contenido.filter(b => b.t === 'h2').map(b => anclaDe(b.x as string));
+
+        expect(new Set(anclas).size).toBe(anclas.length);
+      });
+
+      it('no salta de fecha: la revision no es anterior a la publicacion', () => {
+        if (articulo.actualizado) expect(articulo.actualizado >= articulo.fecha).toBe(true);
+      });
+
+      it('tiene una lectura de al menos 3 minutos (no es un articulo de relleno)', () => {
+        expect(minutosDeLectura(articulo)).toBeGreaterThanOrEqual(3);
       });
 
       it('los relacionados existen y son del mismo idioma', () => {
@@ -46,6 +72,12 @@ describe('articulos del blog', () => {
       });
     });
   }
+});
+
+describe('anclaDe', () => {
+  it('quita tildes, signos y espacios', () => {
+    expect(anclaDe('¿Qué llevar a la prueba?')).toBe('que-llevar-a-la-prueba');
+  });
 });
 
 describe('segmentos', () => {

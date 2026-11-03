@@ -103,7 +103,7 @@ export interface TextosCookies {
 export const COOKIES: Record<Idioma, TextosCookies> = {
   es: {
     aviso: 'Sin cookies de análisis ni de publicidad: solo lo necesario para que la web funcione.',
-    mas: 'Más información', entendido: 'Entendido', region: 'Aviso de cookies'
+    mas: 'Política de cookies', entendido: 'Entendido', region: 'Aviso de cookies'
   },
   en: {
     aviso: 'No analytics or advertising cookies: only what the site needs to work.',

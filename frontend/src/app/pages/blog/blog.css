@@ -1,0 +1,75 @@
+/* Portada del blog */
+
+/* Foto de cada tarjeta: se acerca un 4% al pasar el raton (solo con raton). */
+.foto-blog {
+  transition: transform 700ms var(--ease-salida);
+}
+
+.titulo-enlace {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 300ms var(--ease-salida), color 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .foto-blog,
+  .tarjeta-blog:hover .foto-blog {
+    transform: scale(1.04);
+  }
+
+  .group:hover .titulo-enlace {
+    background-size: 100% 1px;
+  }
+
+  .paso-guia:hover .numero {
+    color: var(--color-cobre-oscuro);
+  }
+
+  .paso-guia:hover .flecha {
+    transform: translateX(3px);
+  }
+
+  .filtro:not(.filtro-activo):hover {
+    border-color: var(--color-oro);
+  }
+}
+
+/* Guia para novias: la fila responde al tocar (pulsacion de la flecha). */
+.paso-guia {
+  transition: background-color 200ms ease;
+}
+
+.paso-guia:active {
+  background-color: rgba(196, 149, 106, 0.08);
+}
+
+/* Filtros por tema */
+.filtro {
+  border-color: #e0d4c8;
+  background-color: #fff;
+  color: var(--color-texto-suave);
+  transition: transform 160ms var(--ease-salida), background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.filtro-activo {
+  border-color: var(--color-tinta);
+  background-color: var(--color-tinta);
+  color: #fff;
+}
+
+/* Al cambiar de filtro, las tarjetas entran con un fundido corto. */
+.aparece {
+  animation: aparece 300ms var(--ease-salida) both;
+}
+
+@keyframes aparece {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aparece {
+    animation: none;
+  }
+}

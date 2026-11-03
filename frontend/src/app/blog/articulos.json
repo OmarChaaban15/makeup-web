@@ -5,40 +5,59 @@
     "titulo": "Cuánto cuesta una maquilladora de novia en Ibiza y qué incluye",
     "descripcion": "Qué influye en el precio del maquillaje de novia en Ibiza, qué debe incluir un presupuesto y qué preguntar antes de reservar.",
     "fecha": "2026-10-29",
+    "actualizado": "2026-11-03",
+    "categoria": "Novias",
     "imagen": "images/maquillaje-novia-ibiza.png",
     "alt": "Maquillaje de novia en Ibiza",
-    "lectura": 4,
+    "claves": [
+      "No hay una tarifa única: el precio depende de las personas a maquillar, la prueba, el desplazamiento y el horario.",
+      "Compara contenidos antes que cifras: prueba, duración, pestañas, desplazamiento y retoques deberían figurar por escrito.",
+      "En temporada alta la agenda se llena antes, así que conviene pedir presupuesto en cuanto tengas fecha y lugar."
+    ],
     "relacionados": ["prueba-de-maquillaje-de-novia", "como-elegir-maquilladora-boda-ibiza", "boda-de-destino-ibiza-checklist-belleza"],
     "contenido": [
-      { "t": "p", "x": "Es la primera pregunta que me hacen casi todas las novias, y la respuesta honesta es que no existe una tarifa única: el precio depende de lo que incluye el servicio y de cómo sea tu boda. En esta guía te explico qué factores lo mueven y qué conviene que aparezca por escrito para comparar presupuestos con criterio." },
+      { "t": "p", "x": "Es la primera pregunta que me hacen casi todas las novias, y la respuesta honesta es que no existe una tarifa única. El precio depende de lo que incluye el servicio y de cómo sea tu boda: no cuesta lo mismo maquillar a una novia en un estudio a media mañana que desplazarse de madrugada a una finca para maquillar a la novia, a su madre y a tres damas. En esta guía te explico qué factores mueven el precio y qué conviene que aparezca por escrito para comparar presupuestos con criterio." },
       { "t": "h2", "x": "Qué influye en el precio del maquillaje de novia" },
-      { "t": "ul", "x": [
-        "El número de personas a maquillar: la novia, la madre, las damas o las invitadas.",
-        "Si incluye prueba previa y cómo se hace: con el peinado y el vestido a mano, con registro fotográfico o sin él.",
-        "El lugar y el horario: en un estudio, o desplazándose a tu villa, hotel o finca, y a qué hora hay que empezar.",
-        "Los productos: una piel bien preparada y una fijación de gama alta marcan la diferencia en duración y comodidad.",
-        "La fecha: en temporada alta la agenda se completa antes, así que conviene coordinar con tiempo."
-      ] },
+      { "t": "h3", "x": "Cuántas personas hay que maquillar" },
+      { "t": "p", "x": "Es el factor que más cambia el presupuesto. Además de la novia, muchas bodas incluyen a la madre, a la suegra, a las damas de honor o a alguna invitada. Cada persona suma tiempo de trabajo, y ese tiempo condiciona a qué hora hay que empezar para que la novia esté lista la última, con calma y sin prisas." },
+      { "t": "h3", "x": "La prueba previa" },
+      { "t": "p", "x": "No todas las maquilladoras la incluyen ni la hacen igual. Una prueba completa, con el look terminado y un registro fotográfico, requiere su propia cita y su propio tiempo. Para mí es imprescindible: es donde se decide todo con tranquilidad, como explico en [la prueba de maquillaje de novia](/blog/prueba-de-maquillaje-de-novia)." },
+      { "t": "h3", "x": "Lugar, horario y desplazamiento" },
+      { "t": "p", "x": "En Ibiza muchas novias se preparan en villas, fincas u hoteles repartidos por la isla, y algunas bodas se celebran en Formentera. El desplazamiento, la hora de inicio (una boda al atardecer no se prepara igual que una ceremonia a mediodía) y el tiempo de espera entre maquillajes forman parte del presupuesto." },
+      { "t": "h3", "x": "Productos y fijación" },
+      { "t": "p", "x": "Una piel bien preparada y una fijación de gama alta marcan la diferencia en duración y comodidad, sobre todo con el calor y la humedad de la isla. No es un detalle menor: es lo que decide si el maquillaje sigue intacto en el baile." },
+      { "t": "h3", "x": "La fecha" },
+      { "t": "p", "x": "En temporada alta la agenda se completa antes y algunos días concentran varias bodas. Cuanto antes pidas presupuesto, más margen tendrás para elegir." },
       { "t": "h2", "x": "Qué debería incluir un presupuesto de novia" },
-      { "t": "p", "x": "Antes de comparar cifras, compara contenidos. Un presupuesto claro detalla estos puntos:" },
+      { "t": "p", "x": "Antes de comparar cifras, compara contenidos. Dos presupuestos con el mismo importe pueden ofrecer cosas muy distintas. Un presupuesto claro detalla estos puntos:" },
       { "t": "ul", "x": [
-        "Si hay prueba de maquillaje y en qué fecha se hace.",
+        "Si hay prueba de maquillaje, en qué fecha y dónde se hace.",
         "Cuánto dura el servicio el día de la boda y a qué hora llega la maquilladora.",
-        "Si el desplazamiento está incluido.",
-        "Si se llevan pestañas y de qué tipo.",
-        "Si hay retoques durante el día o un kit para hacerlos tú."
+        "Cuántas personas se maquillan y en qué orden.",
+        "Si el desplazamiento está incluido y hasta dónde.",
+        "Si se llevan pestañas y de qué tipo (individuales o en tira).",
+        "Si hay retoques durante el día o un kit para hacerlos tú.",
+        "Cómo se confirma la reserva y qué ocurre si cambia la fecha."
       ] },
-      { "t": "p", "x": "En mis servicios de novia incluyo una sesión previa de asesoría personalizada, una prueba completa con registro fotográfico, la preparación de la piel con una mascarilla hidratante y un kit de retoque de regalo para el transcurso de la boda. Puedes ver el detalle en la página de [servicios de maquillaje en Ibiza](/servicios)." },
+      { "t": "nota", "x": "Pide siempre el presupuesto por escrito y con el horario del día. Si una propuesta no dice a qué hora empieza ni cuánto dura, es difícil saber qué estás comparando." },
+      { "t": "h2", "x": "Qué incluye mi servicio de novia" },
+      { "t": "p", "x": "En mis servicios de novia incluyo una sesión previa de asesoría y visagismo personalizado, una prueba completa con registro fotográfico, la preparación de la piel con una mascarilla hidratante y un kit de retoque de regalo para el transcurso de la boda. Trabajo en estudio o desplazándome a tu villa, hotel o finca. Tienes todo el detalle en la página de [maquillaje de novia en Ibiza](/servicios/maquillaje-novia-ibiza)." },
       { "t": "h2", "x": "Preguntas que conviene hacer antes de reservar" },
-      { "t": "ul", "x": [
+      { "t": "ol", "x": [
         "¿Puedo ver trabajos reales, también de bodas con el calor de Ibiza?",
         "¿Cómo se trabaja la piel para que el maquillaje aguante el calor y la humedad?",
         "¿Qué ocurre si hay un retraso o un cambio de horario el día de la boda?",
         "¿Cómo se confirma la reserva y qué condiciones hay si cambia la fecha?"
       ] },
+      { "t": "p", "x": "Si quieres ampliar la lista, tienes [diez preguntas para elegir maquilladora](/blog/como-elegir-maquilladora-boda-ibiza) pensadas justo para esa conversación." },
       { "t": "h2", "x": "Por qué trabajo con propuestas personalizadas" },
-      { "t": "p", "x": "Cada boda tiene su propio ritmo. Una ceremonia al atardecer en una villa privada no se organiza igual que una boda en un hotel con varias personas que maquillar. Por eso preparo una propuesta para cada fecha, con disponibilidad y presupuesto." },
-      { "t": "p", "x": "Si me cuentas la fecha, el lugar y cuántas personas sois, [te respondo personalmente](/contacto) con una propuesta a medida. Y si todavía estás en fase de decidir, te puede ayudar leer cómo es [la prueba de maquillaje de novia](/blog/prueba-de-maquillaje-de-novia)." }
+      { "t": "p", "x": "Cada boda tiene su propio ritmo. Una ceremonia al atardecer en una villa privada no se organiza igual que una boda en un hotel con varias personas que maquillar. Por eso preparo una propuesta para cada fecha, con disponibilidad, horario y presupuesto cerrado." },
+      { "t": "p", "x": "Si me cuentas la fecha, el lugar y cuántas personas sois, [te respondo personalmente](/contacto) con una propuesta a medida en 24 a 48 horas." }
+    ],
+    "faq": [
+      { "p": "¿Por qué no publicas una tarifa cerrada?", "r": "Porque el precio cambia mucho según las personas a maquillar, el lugar, el horario y si hay prueba. Prefiero darte una cifra real para tu boda que una orientativa que luego no se cumple." },
+      { "p": "¿El maquillaje de la madre o de las damas se puede añadir?", "r": "Sí. Cuantas más personas, antes hay que empezar, así que conviene decirlo al pedir presupuesto para organizar bien el horario." },
+      { "p": "¿Os desplazáis a Formentera?", "r": "Cuéntame el lugar y la fecha al escribirme y lo valoramos en la propuesta, porque el desplazamiento condiciona el horario del día." }
     ]
   },
   {
@@ -47,35 +66,54 @@
     "titulo": "La prueba de maquillaje de novia: qué es y cuándo hacerla",
     "descripcion": "Qué se hace en la prueba de maquillaje de novia, cuándo conviene programarla y qué llevar para sacarle el máximo partido.",
     "fecha": "2026-10-29",
+    "actualizado": "2026-11-03",
+    "categoria": "Novias",
     "imagen": "images/maquillaje-novia-detalle-ojos.jpg",
     "alt": "Detalle del acabado de ojos de un maquillaje de novia",
-    "lectura": 4,
+    "claves": [
+      "La prueba es el ensayo general: se decide el look con calma y se comprueba cómo se comporta en tu piel.",
+      "Lo habitual es hacerla entre uno y tres meses antes de la boda.",
+      "Lleva fotos del vestido, del peinado y de looks que te gusten y que no te gusten."
+    ],
     "relacionados": ["cuanto-cuesta-maquilladora-novia-ibiza", "maquillaje-novia-calor-que-dure", "boda-de-destino-ibiza-checklist-belleza"],
     "contenido": [
-      { "t": "p", "x": "La prueba de maquillaje es el ensayo general del día de tu boda. Sirve para que veas el resultado con calma, para ajustar lo que no te convenza y para llegar al gran día sabiendo exactamente qué esperar. Si me preguntas por el paso que más tranquilidad da a una novia, es este." },
+      { "t": "p", "x": "La prueba de maquillaje es el ensayo general del día de tu boda. Sirve para que veas el resultado con calma, para ajustar lo que no te convenza y para llegar al gran día sabiendo exactamente qué esperar. Si me preguntas por el paso que más tranquilidad da a una novia, es este: el día de la boda ya no hay que decidir nada, solo disfrutar." },
       { "t": "h2", "x": "Para qué sirve la prueba" },
       { "t": "ul", "x": [
         "Afinar cada matiz de color, la intensidad y la duración del maquillaje.",
         "Comprobar cómo se comporta la piel con los productos elegidos, también con calor.",
         "Decidir el tipo de pestañas, el labio y el acabado del ojo.",
         "Ver cómo encaja el maquillaje con el peinado, el escote y los accesorios.",
-        "Coordinar el horario del día de la boda con tiempo."
+        "Calcular cuánto tiempo lleva tu maquillaje para planificar el horario del día."
       ] },
       { "t": "h2", "x": "Cuándo hacer la prueba" },
-      { "t": "p", "x": "Suele programarse entre uno y tres meses antes de la boda: con margen para ajustar y sin que la piel cambie demasiado. Si vas a tomar el sol antes de la boda, conviene tenerlo en cuenta al elegir el tono de la base, y puede merecer la pena un pequeño ajuste final." },
+      { "t": "p", "x": "Suele programarse entre uno y tres meses antes de la boda: con margen para ajustar y sin que la piel cambie demasiado. Si te haces un tratamiento facial, cambias de color de pelo o vas a tomar el sol antes de la boda, cuéntamelo, porque influye en el tono de la base y en la elección de colores." },
+      { "t": "nota", "x": "Si puedes, haz la prueba el mismo día que la prueba de peinado o lleva una foto del recogido. El maquillaje y el pelo se ven juntos en las fotos, y lo que equilibra un rostro con el pelo suelto cambia con un recogido alto." },
       { "t": "h2", "x": "Qué llevar a la prueba" },
       { "t": "ul", "x": [
         "Fotos de inspiración con looks que te gusten y, también, con los que no.",
-        "Una foto del vestido, sobre todo del escote y del color.",
+        "Una foto del vestido, sobre todo del escote, el tejido y el color.",
         "Ideas del peinado y los pendientes o accesorios que llevarás.",
-        "La piel limpia y sin maquillaje, y cualquier producto o alergia que debamos tener presente."
+        "La piel limpia y sin maquillaje, y cualquier producto o alergia que debamos tener presente.",
+        "Una camiseta o top del tono del vestido: ayuda a ver los colores con la luz real."
       ] },
-      { "t": "h2", "x": "Cómo es la prueba" },
-      { "t": "h3", "x": "Primero hablamos" },
-      { "t": "p", "x": "Empiezo escuchando: cómo te imaginas ese día, qué te hace sentir tú misma y qué te preocupa. Con eso diseño el look mediante un pequeño estudio de tu rostro y tus rasgos, lo que llamamos visagismo." },
-      { "t": "h3", "x": "Después trabajamos el look completo" },
-      { "t": "p", "x": "Preparo la piel y aplico el maquillaje completo. En mi prueba dejo un registro fotográfico del resultado para que puedas verlo con calma y decidir cambios, y para tenerlo como referencia el día de la boda." },
-      { "t": "p", "x": "Esta prueba forma parte de mis [servicios de maquillaje de novia en Ibiza](/servicios). Si quieres conocer los costes que influyen en el presupuesto, lo explico en [cuánto cuesta una maquilladora de novia en Ibiza](/blog/cuanto-cuesta-maquilladora-novia-ibiza). Y si ya tienes fecha, [escríbeme](/contacto) y buscamos un hueco." }
+      { "t": "h2", "x": "Cómo es la prueba, paso a paso" },
+      { "t": "ol", "x": [
+        "Hablamos: cómo te imaginas ese día, qué te hace sentir tú misma y qué te preocupa.",
+        "Estudio tu rostro y tus rasgos (visagismo) para decidir dónde poner luz, color y definición.",
+        "Preparo la piel con una rutina hidratante, como se hará el día de la boda.",
+        "Aplico el maquillaje completo, con pestañas y labio.",
+        "Lo miramos juntas con luz natural y ajustamos lo que haga falta.",
+        "Dejo un registro fotográfico del resultado para que lo tengas como referencia."
+      ] },
+      { "t": "h2", "x": "Después de la prueba" },
+      { "t": "p", "x": "Llévate el maquillaje puesto unas horas: verás cómo evoluciona con el paso del tiempo, cómo se siente en la piel y cómo sale en las fotos con el móvil, con flash y sin él. Si algo no te convence, lo apuntamos y se ajusta para el día de la boda." },
+      { "t": "p", "x": "Esta prueba forma parte de mi [maquillaje de novia en Ibiza](/servicios/maquillaje-novia-ibiza). Si quieres conocer los costes que influyen en el presupuesto, lo explico en [cuánto cuesta una maquilladora de novia en Ibiza](/blog/cuanto-cuesta-maquilladora-novia-ibiza). Y si ya tienes fecha, [escríbeme](/contacto) y buscamos un hueco." }
+    ],
+    "faq": [
+      { "p": "¿Puedo hacer la prueba si vivo fuera de Ibiza?", "r": "Sí: muchas novias la hacen aprovechando un viaje a la isla, por ejemplo cuando visitan el lugar de la boda. Si no es posible, lo hablamos y buscamos la mejor alternativa." },
+      { "p": "¿Y si en la prueba no me veo yo?", "r": "Para eso está. Se ajusta lo que haga falta en ese momento: un labio más suave, menos definición en el ojo o un acabado más luminoso." },
+      { "p": "¿Cuánto dura la prueba?", "r": "Depende del look y de los ajustes, pero conviene reservar la mañana o la tarde con calma, sin otra cita justo después." }
     ]
   },
   {
@@ -84,34 +122,54 @@
     "titulo": "Maquillaje de novia con calor: cómo conseguir que dure todo el día",
     "descripcion": "Claves para que el maquillaje de novia aguante el calor y la humedad de Ibiza: preparación de la piel, fijación y kit de retoque.",
     "fecha": "2026-10-29",
+    "actualizado": "2026-11-03",
+    "categoria": "Novias",
     "imagen": "images/yonaida-belhuman-maquilladora-6.png",
     "alt": "Maquillaje de larga duración en Ibiza",
-    "lectura": 4,
+    "claves": [
+      "La duración se construye desde la piel: hidratada y bien preparada retiene mejor el maquillaje.",
+      "Capas finas, polvo solo donde hace falta y un sellado profesional resisten mejor que mucho producto.",
+      "Durante el día, papel matificante y labial en el bolso: nada de capas de polvo extra."
+    ],
     "relacionados": ["prueba-de-maquillaje-de-novia", "preparar-la-piel-antes-de-un-evento", "maquillaje-invitada-boda"],
     "contenido": [
-      { "t": "p", "x": "Casarse en Ibiza significa luz preciosa y, a menudo, calor y humedad. El maquillaje que luce perfecto en el espejo del hotel tiene que seguir bien después de la ceremonia, de los abrazos, de las lágrimas y del baile. La buena noticia es que la duración se construye en capas, desde la piel." },
+      { "t": "p", "x": "Casarse en Ibiza significa luz preciosa y, a menudo, calor y humedad. El maquillaje que luce perfecto en el espejo del hotel tiene que seguir bien después de la ceremonia al sol, de los abrazos, de las lágrimas y del baile. La buena noticia es que la duración no es cuestión de suerte: se construye en capas, desde la piel." },
       { "t": "h2", "x": "Todo empieza en la preparación de la piel" },
-      { "t": "p", "x": "Una piel hidratada retiene mejor el maquillaje que una piel seca o cargada. Por eso, antes de aplicar ningún pigmento, dedico tiempo a la preparación: una rutina cosmética hidratante y un masaje para descongestionar la piel. Una mascarilla hidratante previa es un gesto sencillo que se nota en el acabado." },
-      { "t": "h2", "x": "Capas finas y fijación profesional" },
+      { "t": "p", "x": "Una piel hidratada retiene mejor el maquillaje que una piel seca o cargada. Cuando la piel está deshidratada, absorbe la base y produce más grasa para compensar; el resultado son brillos a media tarde. Por eso, antes de aplicar ningún pigmento, dedico tiempo a la preparación: una rutina cosmética hidratante, un masaje para descongestionar y una mascarilla hidratante previa." },
+      { "t": "nota", "x": "La piel se prepara desde días antes, no solo esa mañana. Si sigues una rutina sencilla la semana de la boda, el maquillaje se funde mejor y dura más. La tienes en [cómo preparar la piel en los 7 días antes](/blog/preparar-la-piel-antes-de-un-evento)." },
+      { "t": "h2", "x": "Las capas que hacen que dure" },
+      { "t": "ol", "x": [
+        "Piel preparada e hidratada, con el producto bien absorbido.",
+        "Base en capas finas: menos peso y menos riesgo de que se cuartee o se mueva.",
+        "Corrector solo donde hace falta, también fino.",
+        "Polvo únicamente en la zona central del rostro, que es la que más brilla.",
+        "Ojos con productos resistentes al agua y pestañas bien fijadas.",
+        "Sellado profesional de fijación para resistir el sudor y la humedad."
+      ] },
+      { "t": "h2", "x": "Errores que acortan la vida del maquillaje" },
       { "t": "ul", "x": [
-        "Capas finas de producto: menos peso en la piel y menos riesgo de que se cuartee o se mueva.",
-        "Texturas que respiran y se funden con la piel en lugar de taparla.",
-        "Polvo solo donde hace falta, normalmente en la zona central del rostro.",
-        "Un sellado profesional de fijación, pensado para resistir el sudor y la humedad.",
-        "Pestañas bien colocadas y productos de ojos resistentes al agua para los momentos de emoción."
+        "Estrenar productos de cuidado la semana de la boda: si la piel reacciona, no hay tiempo de corregirlo.",
+        "Tomar el sol los días previos sin protección: una piel enrojecida es difícil de maquillar.",
+        "Retocar con capas de polvo: se acumulan y el acabado se vuelve pesado.",
+        "Tocarse la cara a menudo, sobre todo con las manos calientes."
       ] },
       { "t": "h2", "x": "Qué hacer durante el día" },
       { "t": "ul", "x": [
-        "Evita tocarte la cara y busca la sombra mientras esperas la ceremonia.",
+        "Busca la sombra mientras esperas la ceremonia y en las fotos de grupo largas.",
         "Bebe agua y no te saltes la comida: la piel también lo nota.",
-        "Retoca con papel matificante y no con capas de polvo adicionales.",
+        "Retoca con papel matificante, presionando sin arrastrar.",
         "Ten a mano el color del labio para repasarlo después de comer y de brindar."
       ] },
       { "t": "h2", "x": "El kit de retoque" },
-      { "t": "p", "x": "Mis novias reciben un kit de retoque de regalo para el transcurso de la boda, con lo imprescindible para repasar el rostro sin deshacer el trabajo. Pide a una persona de confianza que lo lleve consigo y que sepa cuándo usarlo." },
+      { "t": "p", "x": "Mis novias reciben un kit de retoque de regalo para el transcurso de la boda, con lo imprescindible para repasar el rostro sin deshacer el trabajo. Pide a una persona de confianza que lo lleve consigo y que sepa cuándo usarlo: después de la ceremonia y antes de la entrada al banquete son buenos momentos." },
       { "t": "h2", "x": "Prueba antes, ajusta después" },
-      { "t": "p", "x": "La mejor forma de saber cómo aguanta el maquillaje es hacerlo en la [prueba de maquillaje de novia](/blog/prueba-de-maquillaje-de-novia), con la piel en condiciones parecidas a las del gran día. Además, si cuidas tu piel los días anteriores, el resultado mejora: te cuento cómo en [la rutina de piel antes de un evento](/blog/preparar-la-piel-antes-de-un-evento)." },
-      { "t": "p", "x": "Si tu boda es en Ibiza y quieres un maquillaje pensado para el clima mediterráneo, consulta mis [servicios de novia](/servicios) o [escríbeme](/contacto) y lo hablamos." }
+      { "t": "p", "x": "La mejor forma de saber cómo aguanta el maquillaje es hacerlo en la [prueba de maquillaje de novia](/blog/prueba-de-maquillaje-de-novia), con la piel en condiciones parecidas a las del gran día, y llevarlo puesto unas horas." },
+      { "t": "p", "x": "Si tu boda es en Ibiza y quieres un maquillaje pensado para el clima mediterráneo, mira mi [maquillaje de novia en Ibiza](/servicios/maquillaje-novia-ibiza) o [escríbeme](/contacto) y lo hablamos." }
+    ],
+    "faq": [
+      { "p": "¿El maquillaje resistente al agua reseca la piel?", "r": "No tiene por qué si la piel está bien preparada y se usa solo donde hace falta, como en las pestañas y la línea del ojo." },
+      { "p": "¿Necesito un primer especial para el calor?", "r": "Depende de tu piel. Lo decidimos en la prueba: a una piel grasa le conviene algo diferente que a una piel seca." },
+      { "p": "¿Cuánto aguanta un buen maquillaje de novia?", "r": "Bien preparado y fijado, está pensado para acompañarte de la ceremonia al final de la fiesta, con algún retoque puntual de labio y brillos." }
     ]
   },
   {
@@ -120,34 +178,68 @@
     "titulo": "Cómo elegir maquilladora para tu boda en Ibiza: 10 preguntas clave",
     "descripcion": "Diez preguntas para elegir a la maquilladora de tu boda en Ibiza: portfolio, productos, prueba, logística y condiciones de reserva.",
     "fecha": "2026-10-29",
+    "actualizado": "2026-11-03",
+    "categoria": "Novias",
     "imagen": "images/yonaida-belhuman-maquilladora-7.jpg",
     "alt": "Yonaida preparando un maquillaje en Ibiza",
-    "lectura": 5,
+    "claves": [
+      "Mira trabajos reales y recientes, a ser posible de bodas con calor y en distintos tipos de piel.",
+      "Pregunta por el proceso: conversación previa, prueba, preparación de la piel y retoques.",
+      "Deja claras la logística y las condiciones: desplazamiento, horario y qué pasa si cambia la fecha."
+    ],
     "relacionados": ["cuanto-cuesta-maquilladora-novia-ibiza", "prueba-de-maquillaje-de-novia", "boda-de-destino-ibiza-checklist-belleza"],
     "contenido": [
-      { "t": "p", "x": "Elegir a la persona que te va a maquillar el día de tu boda es una decisión de confianza. No se trata solo de que te guste su trabajo: tiene que entender cómo eres, llegar a tiempo y resolver imprevistos con calma. Estas diez preguntas te ayudan a decidir con criterio." },
+      { "t": "p", "x": "Elegir a la persona que te va a maquillar el día de tu boda es una decisión de confianza. No se trata solo de que te guste su trabajo en Instagram: tiene que entender cómo eres, llegar a tiempo y resolver imprevistos con calma, en una mañana en la que todo el mundo está nervioso. Estas diez preguntas te ayudan a decidir con criterio." },
       { "t": "h2", "x": "Sobre su trabajo" },
-      { "t": "ul", "x": [
-        "1. ¿Puedo ver trabajos reales y recientes, con distintos tipos de piel y no solo fotos retocadas?",
-        "2. ¿Tiene experiencia con bodas en Ibiza y con el calor y la humedad de la isla?",
-        "3. ¿Qué productos utiliza y por qué? La piel y la fijación de gama alta influyen en la duración y la comodidad."
+      { "t": "ol", "x": [
+        "¿Puedo ver trabajos reales y recientes, con distintos tipos de piel y no solo fotos retocadas?",
+        "¿Tiene experiencia con bodas en Ibiza y con el calor y la humedad de la isla?",
+        "¿Qué productos utiliza y por qué? La piel y la fijación de gama alta influyen en la duración y la comodidad."
       ] },
+      { "t": "nota", "x": "Pide ver fotos de novias, no solo de sesiones editoriales. Un maquillaje de editorial está pensado para unas horas bajo focos; el de novia tiene que durar desde la mañana hasta el baile." },
       { "t": "h2", "x": "Sobre el proceso" },
-      { "t": "ul", "x": [
-        "4. ¿Hay una conversación previa para conocer tu estilo, el vestido y el horario?",
-        "5. ¿Incluye prueba de maquillaje y se hace un registro del resultado?",
-        "6. ¿Cómo prepara la piel antes de aplicar el maquillaje?",
-        "7. ¿Hay kit o plan de retoques para durante la boda?"
+      { "t": "ol", "x": [
+        "¿Hay una conversación previa para conocer tu estilo, el vestido y el horario?",
+        "¿Incluye prueba de maquillaje y se hace un registro del resultado?",
+        "¿Cómo prepara la piel antes de aplicar el maquillaje?",
+        "¿Hay kit o plan de retoques para durante la boda?"
       ] },
       { "t": "h2", "x": "Sobre la logística y las condiciones" },
+      { "t": "ol", "x": [
+        "¿Se desplaza a tu villa, hotel o finca, y está incluido en el presupuesto?",
+        "¿Qué plan hay si surge un retraso o un cambio de horario ese día?",
+        "¿Cómo se confirma la reserva y qué condiciones hay si cambia la fecha?"
+      ] },
+      { "t": "h2", "x": "Cómo mirar un portfolio con ojo crítico" },
+      { "t": "p", "x": "Las redes sociales están llenas de fotos preciosas, pero no todas cuentan lo mismo. Cuando revises el trabajo de una maquilladora, fíjate en estos detalles:" },
       { "t": "ul", "x": [
-        "8. ¿Se desplaza a tu villa, hotel o finca, y está incluido en el presupuesto?",
-        "9. ¿Qué plan hay si surge un retraso o un cambio de horario ese día?",
-        "10. ¿Cómo se confirma la reserva y qué condiciones hay si cambia la fecha?"
+        "La piel: ¿se ve piel de verdad, con textura, o todo parece filtrado? Un buen maquillaje de novia se nota en primer plano y a la luz del día.",
+        "La variedad: novias con distintos tonos de piel, edades y estilos. Así sabes que se adapta a ti y no repite el mismo look.",
+        "La luz: fotos al aire libre y a pleno sol, que es como se verá tu maquillaje en una boda en Ibiza.",
+        "La coherencia: si te gusta su estilo en diez fotos seguidas, y no solo en una, es probable que te guste también contigo."
+      ] },
+      { "t": "h2", "x": "Qué preparar para la primera conversación" },
+      { "t": "p", "x": "Cuanta más información des al principio, más precisa será la propuesta y menos idas y venidas habrá. Ten a mano:" },
+      { "t": "ul", "x": [
+        "La fecha, el lugar donde te vas a preparar y la hora aproximada de la ceremonia.",
+        "Cuántas personas necesitan maquillaje además de ti.",
+        "Dos o tres fotos de looks que te gusten y alguna del vestido.",
+        "Si tienes la piel sensible, alergias o algún producto que no toleres."
+      ] },
+      { "t": "h2", "x": "Señales de que es la persona adecuada" },
+      { "t": "ul", "x": [
+        "Te escucha antes de proponer, y no al revés.",
+        "Te explica con claridad qué incluye y qué no.",
+        "Te da un horario realista para el día, contando con todas las personas a maquillar.",
+        "Te dice que no a algo cuando no te va a favorecer, con argumentos."
       ] },
       { "t": "h2", "x": "Una pregunta más: ¿te sientes cómoda?" },
       { "t": "p", "x": "El día de la boda los nervios están a flor de piel. Fíjate en cómo te responde: si te escucha, si te explica con claridad y si te transmite calma. Mi compromiso es ofrecerte un ambiente de tranquilidad, puntualidad y mimo en cada momento." },
-      { "t": "p", "x": "Trabajo en estudio y también desplazándome a tu villa, hotel o localización en la isla. Puedes ver cómo trabajo y qué incluye cada servicio en [mis servicios](/servicios), conocerme mejor en [sobre mí](/sobre-mi) o [contarme los detalles de tu boda](/contacto) para que te prepare una propuesta." }
+      { "t": "p", "x": "Trabajo en estudio y también desplazándome a tu villa, hotel o localización en la isla. Puedes ver qué incluye mi [maquillaje de novia](/servicios/maquillaje-novia-ibiza), conocerme mejor en [sobre mí](/sobre-mi) o [contarme los detalles de tu boda](/contacto) para que te prepare una propuesta." }
+    ],
+    "faq": [
+      { "p": "¿Con cuánta antelación debo reservar?", "r": "En cuanto tengas fecha y lugar. En temporada alta las fechas más buscadas se ocupan antes." },
+      { "p": "¿Es buena idea contratar a la misma persona para maquillaje y peinado?", "r": "Depende del número de personas y del horario. Lo importante es que los tiempos de ambos servicios estén coordinados para que la novia termine con calma." }
     ]
   },
   {
@@ -156,12 +248,18 @@
     "titulo": "Maquillaje de invitada de boda: cómo elegirlo según tu vestido",
     "descripcion": "Cómo elegir el maquillaje de invitada de boda según el vestido, el escote y la hora: looks de día o de noche y consejos para que dure.",
     "fecha": "2026-10-29",
+    "actualizado": "2026-11-03",
+    "categoria": "Invitadas y eventos",
     "imagen": "images/maquillaje-invitada-fiesta-ibiza.png",
     "alt": "Maquillaje de invitada para evento",
-    "lectura": 4,
+    "claves": [
+      "Empieza por el vestido y la hora: el color, el escote y la luz deciden el maquillaje.",
+      "Elige un solo protagonista, ojos o labios, para un look elegante sin exceso.",
+      "Para que dure: piel hidratada, capas finas, sellado y el labial en el bolso."
+    ],
     "relacionados": ["maquillaje-de-dia-a-noche-5-minutos", "maquillaje-novia-calor-que-dure", "preparar-la-piel-antes-de-un-evento"],
     "contenido": [
-      { "t": "p", "x": "Ser invitada a una boda es la ocasión perfecta para arreglarse con calma. El reto es acertar con un maquillaje que te favorezca, combine con el vestido y siga bien de la ceremonia a la última canción. Estas son las claves que aplico cuando maquillo a invitadas." },
+      { "t": "p", "x": "Ser invitada a una boda es la ocasión perfecta para arreglarse con calma. El reto es acertar con un maquillaje que te favorezca, combine con el vestido y siga bien de la ceremonia a la última canción. Estas son las claves que aplico cuando maquillo a invitadas en Ibiza." },
       { "t": "h2", "x": "Empieza por el vestido y el horario" },
       { "t": "ul", "x": [
         "El color del vestido: un tono llamativo pide un maquillaje más contenido, y uno neutro admite más protagonismo en labios u ojos.",
@@ -169,18 +267,31 @@
         "La hora: de día, mejor acabados luminosos y ligeros; de noche, más definición en la mirada o en los labios.",
         "La luz: en el exterior, la luz natural revela cada detalle; un acabado fresco queda mejor que uno muy cubriente."
       ] },
+      { "t": "h2", "x": "Ideas según el color del vestido" },
+      { "t": "h3", "x": "Vestidos en tonos neutros o pastel" },
+      { "t": "p", "x": "Te dejan jugar: un labio con más presencia o una mirada más ahumada aportan el punto de color que el vestido no tiene." },
+      { "t": "h3", "x": "Vestidos de colores intensos o estampados" },
+      { "t": "p", "x": "El vestido ya habla mucho. Una piel luminosa, una mirada definida pero suave y un labio en tono natural equilibran el conjunto." },
+      { "t": "h3", "x": "Vestidos negros o muy oscuros" },
+      { "t": "p", "x": "Admiten un maquillaje más sofisticado. Cuida que la piel tenga luz para que el oscuro no apague el rostro." },
       { "t": "h2", "x": "Elige un protagonista: ojos o labios" },
-      { "t": "p", "x": "Un maquillaje elegante suele tener un solo foco. Si apuestas por un labio intenso, deja los ojos más suaves, y al revés. Así consigues un look sofisticado sin sensación de exceso." },
+      { "t": "p", "x": "Un maquillaje elegante suele tener un solo foco. Si apuestas por un labio intenso, deja los ojos más suaves, y al revés. Así consigues un look sofisticado sin sensación de exceso, y además las fotos lo agradecen." },
+      { "t": "nota", "x": "En las bodas de día en Ibiza la luz es muy blanca y directa. Evita las bases muy cubrientes y los polvos con mucho brillo: en las fotos al sol se nota todo." },
       { "t": "h2", "x": "Que dure toda la celebración" },
-      { "t": "ul", "x": [
-        "Prepara la piel con hidratación y aplica el maquillaje en capas finas.",
+      { "t": "ol", "x": [
+        "Prepara la piel con hidratación y deja que se absorba antes de maquillar.",
+        "Aplica el maquillaje en capas finas.",
         "Usa un sellado de fijación profesional si prevés calor o baile.",
-        "Unas pestañas bien colocadas, individuales o en tira a medida, abren la mirada y evitan retoques.",
+        "Coloca bien las pestañas, individuales o en tira a medida: abren la mirada y evitan retoques.",
         "Lleva el labial en el bolso y repásalo después de comer y brindar."
       ] },
       { "t": "h2", "x": "Con asesoría, mejor" },
-      { "t": "p", "x": "Cuando maquillo a una invitada empiezo con un diagnóstico rápido de la piel y una asesoría según su estilismo. Incluyo pestañas, individuales o en tira a medida, y un sellado antitranspirante profesional para que el resultado aguante toda la velada." },
-      { "t": "p", "x": "Si quieres que te maquille para una boda, una fiesta o un evento en Ibiza, mira el servicio de [maquillaje social e invitadas](/servicios) o [escríbeme](/contacto). Y si te gustaría aprender a transformar tu propio maquillaje, cuento un truco en [del maquillaje de día al de noche en 5 minutos](/blog/maquillaje-de-dia-a-noche-5-minutos)." }
+      { "t": "p", "x": "Cuando maquillo a una invitada empiezo con un diagnóstico rápido de la piel y una asesoría según su estilismo. Incluyo pestañas, individuales o en tira a medida, y un sellado antitranspirante profesional para que el resultado aguante toda la velada. Puedo maquillarte en el estudio o desplazarme." },
+      { "t": "p", "x": "Si quieres que te maquille para una boda, una fiesta o un evento en Ibiza, mira el servicio de [maquillaje de invitadas y eventos](/servicios/maquillaje-invitadas-eventos-ibiza) o [escríbeme](/contacto). Y si te gustaría aprender a transformar tu propio maquillaje, te cuento cómo en [del maquillaje de día al de noche en 5 minutos](/blog/maquillaje-de-dia-a-noche-5-minutos)." }
+    ],
+    "faq": [
+      { "p": "¿Puedo ir de invitada con un labio rojo?", "r": "Claro. Si el labio es el protagonista, deja la mirada más suave y la piel luminosa, y lleva el labial en el bolso para retocar." },
+      { "p": "¿Maquilláis a grupos de invitadas?", "r": "Sí. Si sois varias, cuéntamelo al escribirme para organizar el horario y que todas estéis listas a tiempo." }
     ]
   },
   {
@@ -189,32 +300,57 @@
     "titulo": "Cómo preparar la piel en los 7 días antes de un evento",
     "descripcion": "Rutina sencilla de cuidado de la piel durante la semana previa a una boda o un evento, para un maquillaje más luminoso y duradero.",
     "fecha": "2026-10-29",
+    "actualizado": "2026-11-03",
+    "categoria": "Piel",
     "imagen": "images/maquillaje-glitter-textura-piel.jpg",
     "alt": "Textura de piel y acabado luminoso",
-    "lectura": 4,
+    "claves": [
+      "No estrenes productos la semana del evento: mantén tu rutina de siempre.",
+      "Hidratación mañana y noche, protección solar diaria y descanso.",
+      "Si exfolias, con suavidad y dos o tres días antes, nunca el día anterior."
+    ],
     "relacionados": ["maquillaje-novia-calor-que-dure", "tono-de-piel-base-subtono", "maquillaje-invitada-boda"],
     "contenido": [
-      { "t": "p", "x": "El secreto de un maquillaje elegante está en cómo se prepara y se trabaja el cutis. Cuanto mejor estén hidratadas y tranquilas las capas de la piel, menos producto hace falta y más fresco y duradero queda el resultado. Esta es la rutina que recomiendo la semana antes de un evento importante." },
+      { "t": "p", "x": "El secreto de un maquillaje elegante está en cómo se prepara el cutis. Cuanto mejor hidratada y más tranquila esté la piel, menos producto hace falta y más fresco y duradero queda el resultado. Esta es la rutina que recomiendo la semana antes de una boda o un evento importante. Es sencilla a propósito: lo que funciona es la constancia, no los productos milagro." },
       { "t": "h2", "x": "La semana anterior" },
       { "t": "ul", "x": [
         "Mantén tu rutina de siempre. No estrenes productos nuevos justo antes de un evento: si algo sienta mal, no habrá tiempo de corregirlo.",
         "Hidrata mañana y noche, y bebe agua con regularidad.",
-        "Usa protección solar todos los días, también en invierno y con nubes.",
+        "Usa protección solar todos los días, también con nubes.",
         "Descansa lo que puedas: el sueño se ve en la piel.",
-        "Evita tratamientos agresivos en el rostro, como peelings o depilaciones, durante los días previos."
+        "Evita tratamientos agresivos en el rostro, como peelings intensos o depilaciones, durante los días previos."
       ] },
-      { "t": "h2", "x": "Entre dos y tres días antes" },
-      { "t": "p", "x": "Si exfolias, hazlo con suavidad y con margen, nunca el día anterior. Una piel irritada o enrojecida es difícil de maquillar. Si tienes dudas sobre tu piel, consulta con un profesional de la dermatología antes de probar algo nuevo." },
+      { "t": "h2", "x": "Tu calendario de siete días" },
+      { "t": "ol", "x": [
+        "Siete días antes: revisa tu rutina y deja fuera cualquier producto que no hayas usado antes.",
+        "Cinco días antes: si te depilas el rostro o las cejas, que sea ahora, para que la piel tenga tiempo de calmarse.",
+        "Tres días antes: exfoliación suave, solo si es algo que ya haces.",
+        "Dos días antes: una mascarilla hidratante que conozcas.",
+        "El día anterior: limpieza suave, hidratación y a dormir temprano.",
+        "El día del evento: piel limpia, hidratante y protección solar, sin maquillaje."
+      ] },
+      { "t": "nota", "x": "Si tienes un granito los días previos, no lo toques. Un grano intacto se disimula con corrector; uno manipulado deja costra y rojez, y eso es mucho más difícil de cubrir." },
+      { "t": "h2", "x": "Según tu tipo de piel" },
+      { "t": "h3", "x": "Piel seca" },
+      { "t": "p", "x": "Insiste en la hidratación y usa una crema algo más nutritiva por la noche. La base se agarra mejor a una piel flexible que a una tirante." },
+      { "t": "h3", "x": "Piel grasa o mixta" },
+      { "t": "p", "x": "Hidrata igual, con texturas ligeras. Una piel grasa deshidratada produce todavía más brillo para compensar." },
+      { "t": "h3", "x": "Piel sensible" },
+      { "t": "p", "x": "Menos es más. Mantén lo que ya sabes que te sienta bien y consulta con un profesional de la dermatología antes de probar algo nuevo." },
       { "t": "h2", "x": "El día del evento" },
       { "t": "ul", "x": [
         "Limpia el rostro con suavidad, aplica tu hidratante y deja que se absorba.",
         "Incluye protección solar, sobre todo si el evento es al aire libre.",
         "Cuida también los labios con un bálsamo: así el color se aplica mejor.",
-        "Llega con el rostro sin maquillaje, para que la preparación previa se haga con tiempo."
+        "Llega con el rostro sin maquillaje, para que la preparación se haga con tiempo."
       ] },
       { "t": "h2", "x": "Qué hago yo antes de maquillar" },
       { "t": "p", "x": "Antes de aplicar cualquier pigmento hago una preparación de la piel con una rutina cosmética hidratante y un masaje para descongestionar. Con una mascarilla hidratante previa, la base se funde con la piel y dura más." },
-      { "t": "p", "x": "Aprender a conocer y a hidratar tu piel es justo el punto de partida de mi [masterclass de automaquillaje](/cursos), pensada para que tu maquillaje quede mucho más bonito. Y si el evento es una boda con calor, mira cómo [hacer que el maquillaje dure todo el día](/blog/maquillaje-novia-calor-que-dure)." }
+      { "t": "p", "x": "Aprender a conocer y a hidratar tu piel es justo el punto de partida de mi [masterclass de automaquillaje](/cursos). Y si el evento es una boda con calor, mira cómo [hacer que el maquillaje dure todo el día](/blog/maquillaje-novia-calor-que-dure)." }
+    ],
+    "faq": [
+      { "p": "¿Puedo hacerme una limpieza facial antes del evento?", "r": "Mejor con al menos una semana de margen. Algunas limpiezas dejan la piel enrojecida o sensible unos días." },
+      { "p": "¿Y si tengo la piel muy seca el mismo día?", "r": "Una buena hidratación y un masaje antes de maquillar ayudan mucho. Es justo lo que hago en la preparación de la piel." }
     ]
   },
   {
@@ -223,32 +359,52 @@
     "titulo": "Tono de piel y base de maquillaje: cómo saber qué subtono tienes",
     "descripcion": "Cómo distinguir el tono y el subtono de tu piel (cálido, frío o neutro) y cómo probar una base para elegir la que mejor te favorece.",
     "fecha": "2026-10-29",
-    "imagen": "images/yonaida-belhuman-maquilladora-ibiza.jpg",
-    "alt": "Yonaida, maquilladora profesional en Ibiza",
-    "lectura": 5,
+    "actualizado": "2026-11-03",
+    "categoria": "Piel",
+    "imagen": "images/productos-maquillaje-sobre-marmol.jpg",
+    "alt": "Paleta de sombras, iluminador, colorete y máscara de pestañas sobre mármol",
+    "claves": [
+      "El tono es la profundidad de la piel; el subtono, el matiz que tiene por debajo: cálido, frío o neutro.",
+      "Venas, joyas y colores que te favorecen dan pistas, pero la prueba en la mandíbula es la que decide.",
+      "Prueba la base con luz natural y espera unos minutos: algunas cambian al oxidarse."
+    ],
     "relacionados": ["maquillaje-de-dia-a-noche-5-minutos", "preparar-la-piel-antes-de-un-evento", "maquillaje-invitada-boda"],
     "contenido": [
-      { "t": "p", "x": "Una base que no es de tu tono se nota: apaga el rostro, deja un contorno visible o se oscurece con las horas. Elegir bien parte de entender dos conceptos distintos, el tono y el subtono, y de probarla correctamente. Te explico cómo hacerlo en casa." },
+      { "t": "p", "x": "Una base que no es de tu tono se nota: apaga el rostro, deja un corte visible en la mandíbula o se oscurece con las horas. Elegir bien parte de entender dos conceptos distintos, el tono y el subtono, y de probarla correctamente. Te explico cómo hacerlo en casa, sin necesidad de ir a una tienda a ciegas." },
       { "t": "h2", "x": "Tono y subtono: qué es cada cosa" },
-      { "t": "p", "x": "El tono es la profundidad de tu piel, de muy clara a muy oscura. El subtono es el matiz que la acompaña por debajo y se suele clasificar en cálido (dorado o melocotón), frío (rosado o azulado) o neutro (una mezcla de ambos). Dos personas con el mismo tono pueden tener subtonos distintos." },
+      { "t": "p", "x": "El tono es la profundidad de tu piel, de muy clara a muy oscura. El subtono es el matiz que la acompaña por debajo y se suele clasificar en cálido (dorado o melocotón), frío (rosado o azulado) o neutro (una mezcla de ambos). Dos personas con el mismo tono pueden tener subtonos distintos, y por eso la misma base les queda diferente." },
       { "t": "h2", "x": "Pistas para reconocer tu subtono" },
       { "t": "ul", "x": [
         "Las venas de la muñeca: si se ven más verdes, suele indicar subtono cálido; si se ven más azules o violetas, frío; si no lo tienes claro, puede ser neutro.",
         "Las joyas: el dorado suele favorecer a pieles cálidas y el plateado a las frías.",
+        "La ropa blanca: el blanco puro suele sentar mejor a las pieles frías y el blanco roto a las cálidas.",
         "Cómo te favorecen los colores: algunos tonos de ropa o de labios te iluminan y otros te apagan.",
         "Cómo reacciona tu piel al sol, algo que se relaciona con el fototipo."
       ] },
       { "t": "p", "x": "Son pistas orientativas, no una regla exacta. Lo importante es probar el producto en tu piel." },
-      { "t": "h2", "x": "Cómo probar una base" },
+      { "t": "h2", "x": "Cómo probar una base, paso a paso" },
+      { "t": "ol", "x": [
+        "Elige dos o tres tonos que te parezcan cercanos.",
+        "Aplica una línea fina de cada uno en la mandíbula, entre la mejilla y el cuello. En la mano no sirve: es otro color de piel.",
+        "Ponte junto a una ventana, con luz natural, y no bajo la luz de una tienda.",
+        "Espera unos minutos: algunas bases cambian de color al oxidarse con el aire y la piel.",
+        "Quédate con el tono que desaparece en tu piel, el que no se nota dónde empieza ni dónde acaba."
+      ] },
+      { "t": "nota", "x": "Si dudas entre dos tonos, en verano elige el ligeramente más cálido. Y recuerda que puedes ajustar la base con un poco de bronceador en lugar de comprar otra." },
+      { "t": "h2", "x": "Errores frecuentes al elegir base" },
       { "t": "ul", "x": [
-        "Pruébala en la línea de la mandíbula y no en la mano: es la zona que une el rostro con el cuello.",
-        "Hazlo con luz natural, cerca de una ventana, y no bajo la luz de una tienda.",
-        "Espera unos minutos antes de decidir: algunas bases cambian de color al oxidarse con el aire y la piel.",
-        "Compara dos o tres tonos próximos y quédate con el que desaparece en tu piel."
+        "Elegir un tono más oscuro para parecer bronceada: se nota el corte en el cuello.",
+        "Fijarse solo en el tono y olvidar el subtono: la base queda grisácea o anaranjada.",
+        "Probarla con la piel sin hidratar: se ve más mate y más oscura de lo que es.",
+        "Mantener la misma base todo el año: en verano la piel suele cambiar de tono."
       ] },
       { "t": "h2", "x": "Qué colores te favorecen" },
-      { "t": "p", "x": "El tono y el subtono también guían la elección de sombras, coloretes y labiales. En mi masterclass de automaquillaje te enseño a saber qué colores te favorecen según tu fototipo de piel, además de a maquillarte teniendo en cuenta la forma de tu rostro." },
-      { "t": "p", "x": "Puedes conocer el curso en [la página de la masterclass](/oferta) o ver todos los [cursos de maquillaje](/cursos). Y si lo que buscas es llegar a un evento con la piel a punto, empieza por [preparar la piel antes del evento](/blog/preparar-la-piel-antes-de-un-evento)." }
+      { "t": "p", "x": "El tono y el subtono también guían la elección de sombras, coloretes y labiales. Como orientación, a los subtonos cálidos suelen favorecerles los dorados, los melocotón y los terracota; a los fríos, los rosados, los malva y los plateados; y los neutros pueden moverse entre ambos." },
+      { "t": "p", "x": "En mi [masterclass de automaquillaje](/oferta) te enseño a saber qué colores te favorecen según tu fototipo de piel y a maquillarte teniendo en cuenta la forma de tu rostro. Puedes ver también todos los [cursos de maquillaje](/cursos). Y si lo que buscas es llegar a un evento con la piel a punto, empieza por [preparar la piel antes del evento](/blog/preparar-la-piel-antes-de-un-evento)." }
+    ],
+    "faq": [
+      { "p": "¿El subtono cambia con el bronceado?", "r": "El subtono no cambia, pero el tono sí. Por eso muchas personas usan una base algo más oscura en verano." },
+      { "p": "¿Puedo mezclar dos bases?", "r": "Sí, es un buen recurso si estás entre dos tonos o en los cambios de estación." }
     ]
   },
   {
@@ -257,24 +413,36 @@
     "titulo": "Del maquillaje de día al de noche en 5 minutos",
     "descripcion": "Cómo transformar un maquillaje de día en uno de noche en cinco minutos: ojos, labios, luz y fijación, sin empezar de cero.",
     "fecha": "2026-10-29",
-    "imagen": "images/masterclass-automaquillaje-portada.png",
-    "alt": "Masterclass de automaquillaje de Yonaida",
-    "lectura": 4,
+    "actualizado": "2026-11-03",
+    "categoria": "Automaquillaje",
+    "imagen": "images/labios-brillo-dorado-detalle.jpg",
+    "alt": "Labios con brillo dorado: el toque de luz de un maquillaje de noche",
+    "claves": [
+      "No hace falta desmaquillarse: la piel de día es la base del look de noche.",
+      "Cinco gestos: refrescar la piel, intensificar la mirada, más pestañas, cambiar el labio y fijar.",
+      "Un solo protagonista, ojos o labios, para que el resultado sea sofisticado y no recargado."
+    ],
     "relacionados": ["tono-de-piel-base-subtono", "maquillaje-invitada-boda", "preparar-la-piel-antes-de-un-evento"],
     "contenido": [
-      { "t": "p", "x": "Sales de trabajar con un maquillaje ligero de día y tienes una cena, una celebración o un evento por la noche. No necesitas desmaquillarte ni empezar de cero: con unos pocos gestos puedes transformar el look en cinco minutos. Te explico la lógica que sigo." },
+      { "t": "p", "x": "Sales de trabajar con un maquillaje ligero de día y tienes una cena, una celebración o un evento por la noche. No necesitas desmaquillarte ni empezar de cero: con unos pocos gestos puedes transformar el look en cinco minutos. Te explico la lógica que sigo, para que puedas aplicarla con lo que ya tienes en el neceser." },
       { "t": "h2", "x": "La base de día: ligera y luminosa" },
-      { "t": "p", "x": "El punto de partida es una piel fresca, con una base ligera y buenos toques de luz. Si el maquillaje de día está bien hecho, ya has hecho la mitad del trabajo: la piel es la misma, solo vamos a darle más intensidad." },
+      { "t": "p", "x": "El punto de partida es una piel fresca, con una base ligera y buenos toques de luz. Si el maquillaje de día está bien hecho, ya tienes la mitad del trabajo: la piel es la misma, solo vamos a darle más intensidad. Por eso conviene que la base de la mañana sea de larga duración y que la fijes bien." },
       { "t": "h2", "x": "Los cinco gestos de la transformación" },
-      { "t": "ul", "x": [
+      { "t": "ol", "x": [
         "Refresca la piel: retira el exceso de brillo con un papel matificante y unifica con un toque de polvo solo donde haga falta.",
         "Intensifica la mirada: añade una sombra más oscura en la línea de las pestañas o un eyeliner y define la forma del ojo.",
         "Más pestañas: una segunda capa de máscara, o unas pestañas en tira, aportan profundidad.",
-        "Cambia el labio: pasa de un tono suave a un color con más presencia.",
+        "Cambia el labio: pasa de un tono suave a un color con más presencia, o añade un toque de brillo en el centro.",
         "Fija el resultado: una bruma fijadora ayuda a que el conjunto se integre y aguante."
       ] },
+      { "t": "nota", "x": "Un toque de iluminador en el centro del párpado y en el arco de cupido hace más por un look de noche que muchas capas de sombra. La luz de las velas y de los restaurantes lo agradece." },
       { "t": "h2", "x": "Un solo protagonista" },
-      { "t": "p", "x": "Si vas a intensificar la mirada, mantén el labio más suave, y viceversa. Con un único foco el look de noche resulta sofisticado y no recargado." },
+      { "t": "p", "x": "Si vas a intensificar la mirada, mantén el labio más suave, y viceversa. Con un único foco el look de noche resulta sofisticado y no recargado. Si dudas, mira tu ropa: un vestido con mucho detalle pide un maquillaje más contenido." },
+      { "t": "h2", "x": "Dos versiones según tu plan" },
+      { "t": "h3", "x": "Cena tranquila" },
+      { "t": "p", "x": "Mirada algo más definida con una sombra marrón en la línea de las pestañas, máscara extra y un labio en tono rosado o nude con algo más de color." },
+      { "t": "h3", "x": "Fiesta o evento" },
+      { "t": "p", "x": "Eyeliner o ahumado suave, pestañas en tira y luz en el párpado, con un labio discreto. O, al revés, ojo limpio y un labio intenso como protagonista." },
       { "t": "h2", "x": "Qué necesitas llevar contigo" },
       { "t": "ul", "x": [
         "Un papel matificante y un pequeño pincel.",
@@ -283,7 +451,11 @@
         "Un labial con más color.",
         "Una bruma fijadora, si te resulta cómoda."
       ] },
-      { "t": "p", "x": "Esta transformación es uno de los temas que trabajo en mi [masterclass de automaquillaje online](/oferta), donde te enseño a crear un maquillaje de día y a convertirlo en uno de noche en solo cinco minutos, con explicación paso a paso. También puedes ver [el resto de mis cursos](/cursos) y, si buscas inspiración para un evento, leer [cómo elegir el maquillaje de invitada de boda](/blog/maquillaje-invitada-boda)." }
+      { "t": "p", "x": "Esta transformación es uno de los temas de mi [masterclass de automaquillaje online](/oferta), donde te enseño a crear un maquillaje de día y a convertirlo en uno de noche en solo cinco minutos, con explicación paso a paso y planos cercanos. También puedes ver [el resto de mis cursos](/cursos) y, si buscas inspiración para un evento, leer [cómo elegir el maquillaje de invitada de boda](/blog/maquillaje-invitada-boda)." }
+    ],
+    "faq": [
+      { "p": "¿Y si mi maquillaje de día ya no aguanta por la tarde?", "r": "Retira el exceso de brillo con papel matificante, unifica con un poco de corrector donde haga falta y sigue con los cinco gestos. No añadas más base encima." },
+      { "p": "¿Necesito productos especiales?", "r": "No. Con una sombra oscura, máscara y un labial con más color tienes casi todo. En la masterclass enseño a sacar partido al neceser que ya tienes." }
     ]
   },
   {
@@ -292,40 +464,56 @@
     "titulo": "Boda de destino en Ibiza: checklist de belleza para novias",
     "descripcion": "Calendario y lista de comprobación de belleza para una boda de destino en Ibiza: reserva, prueba, cuidado de la piel y logística del día.",
     "fecha": "2026-10-29",
-    "imagen": "images/maquillaje-social-eventos-ibiza.png",
-    "alt": "Maquillaje social para eventos en Ibiza",
-    "lectura": 5,
+    "actualizado": "2026-11-03",
+    "categoria": "Novias",
+    "imagen": "images/mesa-maquillaje-paletas-backstage.jpg",
+    "alt": "Mesa de trabajo con paletas, polvos sueltos y bronceador preparada para un maquillaje",
+    "claves": [
+      "Reserva maquilladora en cuanto tengas fecha y lugar, y decide cuántas personas se maquillan.",
+      "Haz la prueba entre uno y tres meses antes y cuida la piel con constancia, sin estrenar productos.",
+      "El día de la boda: horario con holgura, buena luz natural y el kit de retoque en manos de alguien de confianza."
+    ],
     "relacionados": ["cuanto-cuesta-maquilladora-novia-ibiza", "como-elegir-maquilladora-boda-ibiza", "maquillaje-novia-calor-que-dure"],
     "contenido": [
-      { "t": "p", "x": "Una boda de destino tiene su propia logística: viajes, proveedores a distancia y un clima que influye en todo, también en el maquillaje. Este calendario te ayuda a no olvidar nada de la parte de belleza y a llegar a Ibiza con todo planificado. Si tu familia o tus invitados vienen de fuera, también tienes esta información en [inglés](/en)." },
+      { "t": "p", "x": "Una boda de destino tiene su propia logística: viajes, proveedores a distancia y un clima que influye en todo, también en el maquillaje. Este calendario te ayuda a no olvidar nada de la parte de belleza y a llegar a Ibiza con todo planificado. Si tu familia o tus invitados vienen de fuera, también tienes información en [inglés](/en)." },
       { "t": "h2", "x": "Con mucha antelación" },
       { "t": "ul", "x": [
         "Reserva a tu maquilladora en cuanto tengas fecha y lugar: en temporada alta la agenda se completa antes.",
         "Decide cuántas personas necesitarán maquillaje: novia, madre, damas e invitadas.",
-        "Guarda fotos de inspiración y del vestido para compartirlas."
+        "Guarda fotos de inspiración y del vestido para compartirlas.",
+        "Si tu boda es en Formentera o en un lugar alejado, coméntalo desde el principio: condiciona el horario."
       ] },
       { "t": "h2", "x": "Uno a tres meses antes" },
       { "t": "ul", "x": [
         "Haz la [prueba de maquillaje](/blog/prueba-de-maquillaje-de-novia) con el peinado y el vestido a mano, si es posible.",
         "Empieza a cuidar la piel con constancia, sin estrenar productos en las últimas semanas.",
-        "Si vas a viajar antes de la boda, comenta tu plan de sol con tu maquilladora para ajustar el tono."
+        "Si vas a viajar antes de la boda, comenta tu plan de sol con tu maquilladora para ajustar el tono.",
+        "Prueba los pendientes y accesorios con el maquillaje de la prueba."
       ] },
       { "t": "h2", "x": "La semana de la boda" },
       { "t": "ul", "x": [
         "Sigue la [rutina de piel de los siete días previos](/blog/preparar-la-piel-antes-de-un-evento).",
         "Confirma por escrito el horario, el lugar y quién estará en la habitación a cada hora.",
-        "Usa protección solar y evita quemarte: una piel enrojecida es difícil de maquillar."
+        "Usa protección solar y evita quemarte: una piel enrojecida es difícil de maquillar.",
+        "Prepara una bolsa con bálsamo de labios, pañuelos y tu labial para el kit de retoque."
       ] },
+      { "t": "nota", "x": "Pide que la novia sea la última en maquillarse. Así llega a las fotos con el maquillaje recién terminado y con un rato de calma, en lugar de esperar arreglada mientras se maquilla el resto." },
       { "t": "h2", "x": "El día de la boda" },
-      { "t": "ul", "x": [
-        "Planifica el maquillaje con holgura: el horario real siempre se estira.",
-        "Ten preparado un espacio con buena luz natural para maquillarte.",
-        "Lleva el kit de retoque y a una persona de confianza que sepa usarlo.",
+      { "t": "ol", "x": [
+        "Desayuna bien y bebe agua: el día es largo.",
+        "Llega al maquillaje con la piel limpia e hidratada y el pelo como te indique tu peluquera.",
+        "Ten preparado un espacio con buena luz natural, cerca de una ventana.",
+        "Ponte el vestido después del maquillaje, con una camisa abierta por delante mientras tanto.",
+        "Entrega el kit de retoque a una persona de confianza que sepa usarlo.",
         "Piensa en el calor y la humedad: un maquillaje con [buena fijación](/blog/maquillaje-novia-calor-que-dure) marca la diferencia."
       ] },
       { "t": "h2", "x": "Cómo trabajo las bodas de destino" },
-      { "t": "p", "x": "Me desplazo a tu villa, hotel o localización en la isla y llego con puntualidad para que disfrutes de un momento de calma antes de la ceremonia. Primero hablamos de tu evento, el vestido, la hora de la celebración y tus preferencias; después, la prueba, la preparación de la piel y, por último, el gran día." },
-      { "t": "p", "x": "Si me cuentas el lugar y la fecha, [te preparo una propuesta](/contacto). También puedes ver [qué incluyen mis servicios de novia](/servicios) o leer [cuánto cuesta una maquilladora de novia en Ibiza](/blog/cuanto-cuesta-maquilladora-novia-ibiza)." }
+      { "t": "p", "x": "Me desplazo a tu villa, hotel o localización en la isla y llego con puntualidad para que disfrutes de un momento de calma antes de la ceremonia. Primero hablamos de tu evento, el vestido, la hora de la celebración y tus preferencias; después, la prueba, la preparación de la piel y, por último, el gran día. Muchas novias lo organizan todo a distancia por WhatsApp o correo." },
+      { "t": "p", "x": "Si me cuentas el lugar y la fecha, [te preparo una propuesta](/contacto). También puedes ver [qué incluye mi maquillaje de novia](/servicios/maquillaje-novia-ibiza) o leer [cuánto cuesta una maquilladora de novia en Ibiza](/blog/cuanto-cuesta-maquilladora-novia-ibiza)." }
+    ],
+    "faq": [
+      { "p": "¿Puedo organizarlo todo sin estar en Ibiza?", "r": "Sí. Fecha, lugar, número de personas y fotos de inspiración se pueden acordar por WhatsApp o correo, y la prueba se puede encajar en un viaje a la isla." },
+      { "p": "¿Cuánto antes empiezo el maquillaje el día de la boda?", "r": "Depende de cuántas personas se maquillen. Lo calculamos juntas para que la novia termine con margen antes de vestirse." }
     ]
   },
   {
@@ -334,19 +522,26 @@
     "titulo": "Bridal makeup in Ibiza: what to expect for a destination wedding",
     "descripcion": "What to expect from bridal makeup at a destination wedding in Ibiza: trial, skin preparation, heat-proof staying power and getting ready at your villa.",
     "fecha": "2026-10-29",
+    "actualizado": "2026-11-03",
+    "categoria": "Novias",
     "imagen": "images/yonaida-belhuman-maquilladora-4.png",
     "alt": "Yonaida, professional makeup artist in Ibiza",
-    "lectura": 4,
+    "claves": [
+      "Ibiza light and heat call for fresh, long-lasting skin rather than heavy layers.",
+      "The process: consultation, a full trial with photos, skin preparation and the wedding day at your villa or hotel.",
+      "You can plan everything from abroad by WhatsApp or email."
+    ],
     "relacionados": [],
     "contenido": [
       { "t": "p", "x": "Getting married in Ibiza means gorgeous light, a beautiful setting and, often, warm weather. It also means planning your bridal makeup from a distance. Here is how I work with brides who are marrying on the island, so you know exactly what to expect." },
       { "t": "h2", "x": "Why makeup for an Ibiza wedding is different" },
       { "t": "p", "x": "On an island where the sunset light takes centre stage and the Mediterranean climate is demanding, makeup has to look natural in photographs and stay fresh through the ceremony, the hugs, the tears and the dancing. My technique focuses on flawless, fresh and long-lasting skin rather than heavy layers." },
+      { "t": "nota", "x": "Midday ceremonies in Ibiza bring very bright, direct light. Thin layers and a well-prepared skin photograph far better than full coverage." },
       { "t": "h2", "x": "How we work together" },
       { "t": "h3", "x": "Initial consultation" },
       { "t": "p", "x": "We talk about your wedding, your dress, the time of the ceremony and your personal preferences. Inspiration photos of your dress and the look you love help me design a proposal in which you feel completely yourself." },
       { "t": "h3", "x": "Trial and adjustments" },
-      { "t": "p", "x": "For brides, I carry out a meticulous trial to refine every shade of colour, intensity and durability." },
+      { "t": "p", "x": "For brides, I carry out a meticulous trial to refine every shade of colour, intensity and durability, with a photographic record so you can review the result calmly." },
       { "t": "h3", "x": "Skin preparation and the big day" },
       { "t": "p", "x": "Before any pigment goes on, I prepare the skin with a hydrating routine and a depuffing massage. On the wedding day I arrive on time at your villa or hotel, so you can enjoy a moment of calm before the ceremony." },
       { "t": "h2", "x": "What is included in my bridal service" },
@@ -356,9 +551,35 @@
         "Skin preparation with a hydrating mask beforehand.",
         "A touch-up kit as a gift for the day of the wedding."
       ] },
+      { "t": "h2", "x": "Looking your best in Ibiza light" },
+      { "t": "p", "x": "The island light changes a lot through the day, and your makeup should work with it, not against it:" },
+      { "t": "ul", "x": [
+        "Midday ceremonies: bright, overhead sun. Light textures, a luminous but not shiny finish and well-defined brows.",
+        "Golden hour and sunset: warm, soft light that flatters skin. A touch more definition on the eyes holds up beautifully in photos.",
+        "Night celebrations: candles and string lights. A slightly more intense lip or eye keeps the look alive after dark."
+      ] },
+      { "t": "h2", "x": "The wedding morning" },
+      { "t": "p", "x": "A calm morning shows in your photos. These small details make a real difference:" },
+      { "t": "ul", "x": [
+        "Have a proper breakfast and drink water: it is a long day.",
+        "Arrive with clean, moisturised skin and no makeup.",
+        "Choose a room with good natural light, close to a window.",
+        "Wear a button-up shirt so you can change into your dress without touching your makeup.",
+        "Ask someone you trust to keep the touch-up kit with them during the day."
+      ] },
+      { "t": "p", "x": "If several people are having their makeup done, the bride usually goes last, so you step into your dress with a freshly finished look and a few quiet minutes to enjoy it." },
       { "t": "h2", "x": "Planning from abroad" },
-      { "t": "p", "x": "Many of my brides organise everything remotely. We can agree on the details by WhatsApp or email: send me the date, the venue, the number of people who need makeup and a few photos of your dress and your inspiration, and I will reply personally with availability and a quote." },
+      { "t": "ol", "x": [
+        "Send me the date, the venue and how many people need makeup.",
+        "Share a few photos of your dress and your inspiration.",
+        "I reply personally with availability and a quote.",
+        "We fit the trial into one of your trips to the island, if possible."
+      ] },
       { "t": "p", "x": "You can see everything I offer on the [services page](/en/services), read [more about me](/en/about) or [get in touch](/en/contact) to start planning your wedding makeup in Ibiza." }
+    ],
+    "faq": [
+      { "p": "Do you travel to villas and hotels across the island?", "r": "Yes. I work in my studio and also travel to your villa, hotel or venue in Ibiza." },
+      { "p": "Can my mother and bridesmaids have their makeup done too?", "r": "Of course. Tell me how many people when you get in touch so we can plan the timing of the morning." }
     ]
   }
 ]

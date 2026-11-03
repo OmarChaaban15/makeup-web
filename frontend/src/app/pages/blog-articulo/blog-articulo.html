@@ -1,92 +1,269 @@
 @if (articulo(); as a) {
-  <article class="bg-crema px-6 pb-24 pt-32 sm:px-10">
-    <div class="mx-auto max-w-[760px]">
+  <!-- Barra fina de avance de lectura, bajo la cabecera -->
+  <div class="progreso-lectura fixed left-0 right-0 top-20 z-[990] h-[2px]" aria-hidden="true">
+    <div class="h-full origin-left bg-cobre" [style.transform]="'scaleX(' + progreso() + ')'"></div>
+  </div>
 
-      <nav aria-label="Breadcrumb" class="text-xs font-light text-texto-tenue">
-        <a [routerLink]="ingles() ? '/en' : '/'" class="text-texto-tenue no-underline hover:text-oro">{{ ingles() ? 'Home' : 'Inicio' }}</a>
-        @if (!ingles()) {
-          <span class="mx-2">/</span>
-          <a routerLink="/blog" class="text-texto-tenue no-underline hover:text-oro">Blog</a>
-        }
-      </nav>
+  <article class="bg-crema pb-24 pt-28 sm:pt-32">
 
-      <h1 class="mt-6 font-serif text-[clamp(2rem,4.6vw,3.4rem)] font-light leading-[1.15] text-tinta">{{ a.titulo }}</h1>
+    <!-- ══ Cabecera del articulo ══ -->
+    <header class="px-6 sm:px-10">
+      <div class="mx-auto max-w-[820px]">
+        <nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-x-2 text-xs font-light text-texto-tenue">
+          <a [routerLink]="ingles() ? '/en' : '/'" class="miga text-texto-tenue no-underline">{{ ingles() ? 'Home' : 'Inicio' }}</a>
+          @if (!ingles()) {
+            <span aria-hidden="true">/</span>
+            <a routerLink="/blog" class="miga text-texto-tenue no-underline">Blog</a>
+            <span aria-hidden="true">/</span>
+            <a routerLink="/blog" [queryParams]="{ categoria: a.categoria }" class="miga text-bronce no-underline">{{ a.categoria }}</a>
+          }
+        </nav>
 
-      <p class="mt-5 text-xs font-light text-texto-tenue">
-        <time [attr.datetime]="a.fecha">{{ fecha(a) }}</time>
-        &middot; {{ a.lectura }} {{ ingles() ? 'min read' : 'min de lectura' }}
-        &middot; {{ ingles() ? 'By Yonaida Belhuman' : 'Por Yonaida Belhuman' }}
-      </p>
+        <h1 class="mt-6 font-serif text-[clamp(2.1rem,5vw,3.6rem)] font-light leading-[1.1] text-tinta">{{ a.titulo }}</h1>
 
-      <img decoding="async" fetchpriority="high" [src]="a.imagen" [alt]="a.alt"
-           class="mt-8 aspect-[16/10] w-full rounded-3xl object-cover object-top shadow-[0_20px_50px_rgba(26,26,26,0.12)]" />
+        <p class="mt-5 font-serif text-[1.25rem] font-light italic leading-snug text-texto-suave sm:text-[1.4rem]">{{ a.descripcion }}</p>
 
-      <div class="mt-10 space-y-5 font-sans text-[0.98rem] font-light leading-[1.85] text-[#444]">
-        @for (bloque of a.contenido; track $index) {
-          @switch (bloque.t) {
-            @case ('h2') {
-              <h2 class="!mt-12 font-serif text-[1.7rem] font-normal leading-snug text-tinta">{{ bloque.x }}</h2>
-            }
-            @case ('h3') {
-              <h3 class="!mt-8 font-serif text-[1.3rem] font-normal text-tinta">{{ bloque.x }}</h3>
-            }
-            @case ('ul') {
-              <ul class="list-disc space-y-2 pl-6 marker:text-oro">
-                @for (item of bloque.x; track $index) {
-                  <li>
-                    @for (parte of segmentos(item); track $index) {
+        <div class="mt-7 flex items-center gap-3 border-t border-linea pt-5">
+          <img src="images/yonaida-belhuman-maquilladora-ibiza.jpg" alt="" width="44" height="44" decoding="async"
+               class="h-11 w-11 shrink-0 rounded-full object-cover object-top" />
+          <div class="text-[0.8125rem] leading-snug text-texto-suave">
+            <p class="font-medium text-tinta">{{ ingles() ? 'By Yonaida Belhuman' : 'Por Yonaida Belhuman' }}</p>
+            <p>
+              <time [attr.datetime]="a.fecha">{{ fecha(a) }}</time>
+              @if (a.actualizado && a.actualizado !== a.fecha) {
+                &middot; {{ ingles() ? 'Updated' : 'Actualizado el' }} <time [attr.datetime]="a.actualizado">{{ fecha(a, 'actualizado') }}</time>
+              }
+              &middot; {{ minutos() }} {{ ingles() ? 'min read' : 'min de lectura' }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-auto mt-10 max-w-[1100px]">
+        <img decoding="async" fetchpriority="high" [src]="a.imagen" [alt]="a.alt" width="1100" height="619"
+             class="aspect-[4/5] w-full rounded-bloque object-cover object-top shadow-[0_20px_50px_rgba(26,26,26,0.12)] sm:aspect-[16/9]" />
+      </div>
+    </header>
+
+    <!-- ══ Cuerpo + indice lateral ══ -->
+    <div class="mt-12 px-6 sm:px-10">
+      <div class="mx-auto grid max-w-[1100px] gap-12 lg:grid-cols-[minmax(0,1fr)_240px] lg:gap-16">
+
+        <div class="min-w-0 max-w-[700px] lg:ml-auto lg:mr-0 w-full mx-auto">
+
+          <!-- En 30 segundos -->
+          <aside class="rounded-3xl bg-arena p-6 sm:p-8" [attr.aria-label]="ingles() ? 'Key points' : 'Lo esencial'">
+            <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.25em] text-bronce">{{ ingles() ? 'In 30 seconds' : 'En 30 segundos' }}</p>
+            <ul class="mt-4 list-none space-y-3 p-0">
+              @for (clave of a.claves; track $index) {
+                <li class="flex gap-3 text-[0.9375rem] leading-relaxed text-tinta">
+                  <svg class="mt-1 h-4 w-4 shrink-0 text-bronce" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  <span>{{ clave }}</span>
+                </li>
+              }
+            </ul>
+          </aside>
+
+          <!-- Indice en movil y tablet: plegado para no empujar el texto -->
+          @if (indice().length > 2) {
+            <details class="indice-movil mt-6 rounded-2xl border border-linea bg-white lg:hidden">
+              <summary class="flex min-h-12 cursor-pointer list-none items-center justify-between px-5 font-serif text-base text-tinta">
+                {{ ingles() ? 'In this article' : 'En este artículo' }}
+                <svg class="chevron h-4 w-4 text-bronce" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+              </summary>
+              <ol class="list-none space-y-1 px-5 pb-4 pt-1">
+                @for (entrada of indice(); track entrada.ancla) {
+                  <li><a [routerLink]="[]" [fragment]="entrada.ancla" class="block py-1.5 text-sm text-texto-suave no-underline hover:text-cobre-oscuro">{{ entrada.texto }}</a></li>
+                }
+              </ol>
+            </details>
+          }
+
+          <!-- Texto -->
+          <div class="cuerpo mt-10">
+            @for (bloque of a.contenido; track $index) {
+              @switch (bloque.t) {
+                @case ('h2') {
+                  <h2 [id]="anclaDe($any(bloque.x))">{{ bloque.x }}</h2>
+                }
+                @case ('h3') {
+                  <h3>{{ bloque.x }}</h3>
+                }
+                @case ('ul') {
+                  <ul class="lista">
+                    @for (item of bloque.x; track $index) {
+                      <li>
+                        @for (parte of segmentos(item); track $index) {
+                          @if (parte.enlace) {
+                            <a [routerLink]="parte.enlace">{{ parte.texto }}</a>
+                          } @else {
+                            {{ parte.texto }}
+                          }
+                        }
+                      </li>
+                    }
+                  </ul>
+                }
+                @case ('ol') {
+                  <ol class="pasos">
+                    @for (item of bloque.x; track $index) {
+                      <li>
+                        @for (parte of segmentos(item); track $index) {
+                          @if (parte.enlace) {
+                            <a [routerLink]="parte.enlace">{{ parte.texto }}</a>
+                          } @else {
+                            {{ parte.texto }}
+                          }
+                        }
+                      </li>
+                    }
+                  </ol>
+                }
+                @case ('nota') {
+                  <aside class="nota" [attr.aria-label]="ingles() ? 'Tip from Yonaida' : 'Consejo de Yonaida'">
+                    <p class="nota-etiqueta">{{ ingles() ? 'Yonaida’s tip' : 'Consejo de Yonaida' }}</p>
+                    <p>
+                      @for (parte of segmentos($any(bloque.x)); track $index) {
+                        @if (parte.enlace) {
+                          <a [routerLink]="parte.enlace">{{ parte.texto }}</a>
+                        } @else {
+                          {{ parte.texto }}
+                        }
+                      }
+                    </p>
+                  </aside>
+                }
+                @default {
+                  <p>
+                    @for (parte of segmentos($any(bloque.x)); track $index) {
                       @if (parte.enlace) {
-                        <a [routerLink]="parte.enlace" class="text-cobre-oscuro underline underline-offset-2">{{ parte.texto }}</a>
+                        <a [routerLink]="parte.enlace">{{ parte.texto }}</a>
                       } @else {
                         {{ parte.texto }}
                       }
                     }
-                  </li>
+                  </p>
                 }
-              </ul>
+              }
             }
-            @default {
-              <p>
-                @for (parte of segmentos(bloque.x); track $index) {
-                  @if (parte.enlace) {
-                    <a [routerLink]="parte.enlace" class="text-cobre-oscuro underline underline-offset-2">{{ parte.texto }}</a>
-                  } @else {
-                    {{ parte.texto }}
-                  }
+          </div>
+
+          <!-- Preguntas frecuentes -->
+          @if (a.faq?.length) {
+            <section class="mt-16">
+              <h2 id="preguntas-frecuentes" class="font-serif text-[1.9rem] font-normal leading-snug text-tinta">
+                {{ ingles() ? 'Frequently asked questions' : 'Preguntas frecuentes' }}
+              </h2>
+              <div class="mt-6 space-y-3">
+                @for (pregunta of a.faq; track $index) {
+                  <details class="faq rounded-2xl border border-linea bg-white">
+                    <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-serif text-[1.1rem] text-tinta">
+                      {{ pregunta.p }}
+                      <span class="mas flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-arena text-bronce" aria-hidden="true">+</span>
+                    </summary>
+                    <p class="px-5 pb-5 text-[0.9375rem] font-light leading-relaxed text-texto-suave">
+                      @for (parte of segmentos(pregunta.r); track $index) {
+                        @if (parte.enlace) {
+                          <a [routerLink]="parte.enlace" class="text-cobre-oscuro underline underline-offset-2">{{ parte.texto }}</a>
+                        } @else {
+                          {{ parte.texto }}
+                        }
+                      }
+                    </p>
+                  </details>
                 }
-              </p>
-            }
+              </div>
+            </section>
           }
+
+          <!-- Autora -->
+          <section class="mt-16 flex flex-col gap-5 rounded-3xl border border-linea bg-white p-6 sm:flex-row sm:items-center sm:p-8" [attr.aria-label]="ingles() ? 'About the author' : 'Sobre la autora'">
+            <img src="images/yonaida-belhuman-maquilladora-ibiza.jpg" alt="Yonaida Belhuman" width="96" height="96" decoding="async"
+                 class="h-24 w-24 shrink-0 rounded-full object-cover object-top" />
+            <div>
+              <p class="font-serif text-xl text-tinta">Yonaida Belhuman</p>
+              <p class="mt-1 text-[0.9375rem] font-light leading-relaxed text-texto-suave">
+                {{ ingles()
+                  ? 'Professional makeup artist based in Ibiza, with more than five years helping brides, private clients and brands look their best.'
+                  : 'Maquilladora profesional afincada en Ibiza, con más de cinco años de experiencia ayudando a novias, clientas particulares y marcas a proyectar su mejor versión.' }}
+              </p>
+              <a [routerLink]="ingles() ? '/en/about' : '/sobre-mi'" class="enlace-flecha mt-3 inline-flex min-h-11 items-center gap-2 font-serif text-xs font-semibold uppercase tracking-[0.18em] text-bronce no-underline">
+                {{ ingles() ? 'More about me' : 'Conoce mi historia' }}
+                <svg class="flecha h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+            </div>
+          </section>
+
+          <!-- Llamada a la accion -->
+          <section class="mt-8 rounded-3xl bg-noche px-7 py-10 text-center text-white sm:px-10">
+            <h2 class="font-serif text-[1.8rem] font-light leading-tight">
+              {{ ingles() ? 'Planning your makeup in Ibiza?' : '¿Hablamos de tu maquillaje?' }}
+            </h2>
+            <p class="mx-auto mt-4 max-w-[46ch] text-[0.9375rem] font-light leading-relaxed text-white/80">
+              {{ ingles()
+                ? 'Tell me the date and the details and I will reply personally with availability and a quote.'
+                : 'Cuéntame la fecha y los detalles y te responderé personalmente con disponibilidad y presupuesto.' }}
+            </p>
+            <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a [routerLink]="ingles() ? '/en/contact' : '/contacto'"
+                 class="boton-principal pulsable inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-cobre px-8 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline sm:w-auto">
+                {{ ingles() ? 'Get in touch' : 'Solicitar cita' }}
+                <svg class="flecha h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+              <a [href]="whatsapp()" target="_blank" rel="noopener"
+                 class="pulsable inline-flex min-h-12 w-full items-center justify-center rounded-full border border-white/30 px-7 text-sm font-medium text-white no-underline hover:border-oro sm:w-auto">
+                WhatsApp
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <!-- Indice lateral (escritorio): sigue al lector -->
+        @if (indice().length > 2) {
+          <nav class="hidden lg:block" [attr.aria-label]="ingles() ? 'In this article' : 'En este artículo'">
+            <div class="sticky top-28">
+              <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.25em] text-bronce">{{ ingles() ? 'In this article' : 'En este artículo' }}</p>
+              <ol class="mt-4 list-none space-y-1 border-l border-linea p-0">
+                @for (entrada of indice(); track entrada.ancla) {
+                  <li><a [routerLink]="[]" [fragment]="entrada.ancla" class="entrada-indice -ml-px block border-l border-transparent py-1.5 pl-4 text-[0.8125rem] leading-snug text-texto-suave no-underline">{{ entrada.texto }}</a></li>
+                }
+                @if (a.faq?.length) {
+                  <li><a [routerLink]="[]" fragment="preguntas-frecuentes" class="entrada-indice -ml-px block border-l border-transparent py-1.5 pl-4 text-[0.8125rem] leading-snug text-texto-suave no-underline">{{ ingles() ? 'FAQ' : 'Preguntas frecuentes' }}</a></li>
+                }
+              </ol>
+            </div>
+          </nav>
         }
       </div>
+    </div>
 
-      <section class="mt-16 rounded-3xl bg-tinta px-8 py-10 text-center text-white">
-        <h2 class="font-serif text-[1.7rem] font-light">
-          {{ ingles() ? 'Planning your makeup in Ibiza?' : '¿Hablamos de tu maquillaje?' }}
-        </h2>
-        <p class="mx-auto mt-4 max-w-[480px] text-sm font-light leading-relaxed text-white/70">
-          {{ ingles()
-            ? 'Tell me the date and the details and I will reply personally with availability and a quote.'
-            : 'Cuéntame la fecha y los detalles y te responderé personalmente con disponibilidad y presupuesto.' }}
-        </p>
-        <a [routerLink]="ingles() ? '/en/contact' : '/contacto'"
-           class="mt-6 inline-block rounded-full bg-cobre px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline transition-all duration-300 hover:bg-cobre-oscuro">
-          {{ ingles() ? 'Get in touch' : 'Contactar' }}
-        </a>
-      </section>
-
-      @if (relacionados().length > 0) {
-        <section class="mt-16">
-          <h2 class="font-serif text-2xl font-light text-tinta">Sigue leyendo</h2>
-          <ul class="mt-5 list-none space-y-3 p-0">
+    <!-- ══ Sigue leyendo ══ -->
+    @if (relacionados().length > 0) {
+      <section class="mt-20 px-6 sm:px-10">
+        <div class="mx-auto max-w-[1100px]">
+          <div class="flex items-end justify-between gap-4">
+            <h2 class="font-serif text-[clamp(1.8rem,3vw,2.4rem)] font-light text-tinta">Sigue <em class="italic text-bronce">leyendo</em></h2>
+            <a routerLink="/blog" class="enlace-flecha hidden min-h-11 items-center gap-2 font-serif text-xs font-semibold uppercase tracking-[0.18em] text-bronce no-underline sm:inline-flex">
+              Todo el blog
+              <svg class="flecha h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+          <ul class="mt-8 grid list-none gap-8 p-0 sm:grid-cols-3">
             @for (otro of relacionados(); track otro.slug) {
               <li>
-                <a [routerLink]="rutaDe(otro)" class="font-serif text-lg text-tinta no-underline hover:text-oro">{{ otro.titulo }}</a>
+                <a [routerLink]="rutaDe(otro)" class="relacionado pulsable group block no-underline">
+                  <div class="overflow-hidden rounded-foto">
+                    <img [src]="otro.imagen" [alt]="otro.alt" decoding="async" width="600" height="450"
+                         class="foto-relacionado aspect-[4/3] w-full object-cover object-top" />
+                  </div>
+                  <p class="mt-4 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-bronce">{{ otro.categoria }} &middot; <span class="text-texto-tenue">{{ minutosDe(otro) }} min</span></p>
+                  <h3 class="mt-1.5 font-serif text-xl leading-snug text-tinta">{{ otro.titulo }}</h3>
+                </a>
               </li>
             }
           </ul>
-        </section>
-      }
-    </div>
+        </div>
+      </section>
+    }
   </article>
 }

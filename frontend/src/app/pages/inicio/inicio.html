@@ -163,9 +163,9 @@
       <!-- Servicio estrella -->
       <a scrollReveal="up" [routerLink]="servicioEstrella.ruta"
          class="tarjeta-servicio pulsable group relative flex flex-col overflow-hidden rounded-foto border border-oro/30 bg-white/5 no-underline">
-        <div class="relative aspect-[4/5] w-full overflow-hidden lg:aspect-auto lg:min-h-[560px] lg:flex-1">
+        <div class="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/11] lg:aspect-auto lg:min-h-[560px] lg:flex-1">
           <img decoding="async" [src]="servicioEstrella.img" [alt]="servicioEstrella.alt" width="900" height="1125"
-               class="foto-tarjeta absolute inset-0 h-full w-full object-cover" />
+               class="foto-tarjeta absolute inset-0 h-full w-full object-cover object-[center_25%]" />
           <div class="absolute inset-0 bg-gradient-to-t from-noche via-black/30 to-transparent"></div>
           <span class="absolute top-4 left-4 rounded-full bg-cobre px-3 py-1 text-[0.72rem] font-serif uppercase tracking-widest text-white">
             {{ servicioEstrella.etiqueta }}
@@ -191,7 +191,7 @@
              class="tarjeta-servicio pulsable group grid grid-cols-[112px_1fr] overflow-hidden rounded-foto border border-white/10 bg-white/5 no-underline sm:grid-cols-[160px_1fr] lg:flex-1">
             <div class="relative overflow-hidden">
               <img decoding="async" [src]="servicio.img" [alt]="servicio.alt" width="320" height="400"
-                   class="foto-tarjeta absolute inset-0 h-full w-full object-cover" />
+                   class="foto-tarjeta absolute inset-0 h-full w-full object-cover object-[center_25%]" />
             </div>
             <div class="flex flex-col justify-center gap-1.5 p-5 sm:p-6">
               <span class="font-serif text-[0.72rem] uppercase tracking-widest text-oro-claro">{{ servicio.etiqueta }}</span>

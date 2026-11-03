@@ -36,7 +36,8 @@ function textoDelCodigo(dir) {
     .map((e) => {
       const ruta = join(dir, e.name);
       if (e.isDirectory()) return textoDelCodigo(ruta);
-      return /\.(html|ts|css)$/.test(e.name) ? readFileSync(ruta, 'utf8') : '';
+      // .json: las fotos del blog se nombran en blog/articulos.json.
+      return /\.(html|ts|css|json)$/.test(e.name) ? readFileSync(ruta, 'utf8') : '';
     })
     .join('\n');
 }

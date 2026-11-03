@@ -1,71 +1,187 @@
-<div class="min-h-[100svh] bg-crema px-6 pb-24 pt-32 sm:px-10">
-  <div class="mx-auto max-w-[1140px]">
+<div class="min-h-[100svh] bg-crema pb-24 pt-28 sm:pt-32">
 
-    <header class="max-w-[720px]">
-      <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-bronce">Blog</p>
-      <h1 class="mt-4 font-serif text-[clamp(2.4rem,5vw,4.2rem)] font-light leading-[1.1] text-tinta">
-        Blog de maquillaje <em class="italic text-bronce">en Ibiza</em>
-      </h1>
-      <div class="mt-6 h-[2px] w-16 bg-cobre"></div>
-      <p class="mt-6 text-sm sm:text-base font-light leading-7 text-texto-suave">
-        Guías prácticas sobre maquillaje de novia, invitadas y eventos, cuidado de la piel y
-        automaquillaje, escritas desde mi experiencia como maquilladora profesional en Ibiza.
-      </p>
-    </header>
+  <!-- ══════════════════════════════════════════
+       CABECERA
+       ══════════════════════════════════════════ -->
+  <header class="px-6 sm:px-10">
+    <div class="mx-auto grid max-w-[1140px] gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+      <div>
+        <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-bronce">Blog &middot; Guías de maquillaje</p>
+        <h1 class="mt-4 font-serif text-[clamp(2.5rem,5.5vw,4.4rem)] font-light leading-[1.06] text-tinta">
+          Blog de maquillaje <em class="italic text-bronce">en Ibiza</em>
+        </h1>
+      </div>
+      <div class="lg:pb-2">
+        <p class="text-[0.9375rem] sm:text-base font-light leading-7 text-texto-suave">
+          Guías prácticas sobre maquillaje de novia, invitadas y eventos, cuidado de la piel y
+          automaquillaje, escritas desde mi experiencia como maquilladora profesional en Ibiza.
+        </p>
+        <div class="mt-5 flex items-center gap-3">
+          <img src="images/yonaida-belhuman-maquilladora-ibiza.jpg" alt="" width="40" height="40" decoding="async"
+               class="h-10 w-10 rounded-full object-cover object-top" />
+          <p class="text-sm text-texto-suave">Por <span class="font-medium text-tinta">Yonaida Belhuman</span></p>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    <ul class="mt-14 grid list-none gap-8 p-0 sm:grid-cols-2 lg:grid-cols-3">
-      @for (articulo of espanol; track articulo.slug) {
-        <li>
-          <article class="group flex h-full flex-col overflow-hidden rounded-3xl border border-linea bg-white shadow-sm transition-shadow duration-300 hover:shadow-md">
-            <a [routerLink]="rutaDe(articulo)" class="block overflow-hidden no-underline">
-              <img decoding="async" [src]="articulo.imagen" [alt]="articulo.alt"
-                   class="aspect-[4/3] w-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+  <!-- ══════════════════════════════════════════
+       ARTICULO DESTACADO
+       ══════════════════════════════════════════ -->
+  <section class="mt-12 px-6 sm:mt-16 sm:px-10" aria-label="Artículo destacado">
+    <div class="mx-auto max-w-[1140px]">
+      <a [routerLink]="rutaDe(destacado)"
+         class="tarjeta-blog pulsable group grid overflow-hidden rounded-bloque bg-noche text-white no-underline md:grid-cols-[1fr_1.05fr]">
+        <div class="relative aspect-[4/3] overflow-hidden md:aspect-auto md:min-h-[460px]">
+          <img [src]="destacado.imagen" [alt]="destacado.alt" decoding="async" fetchpriority="high" width="900" height="1125"
+               class="foto-blog absolute inset-0 h-full w-full object-cover object-top" />
+        </div>
+        <div class="flex flex-col justify-center gap-4 p-7 sm:p-10 lg:p-14">
+          <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-oro-claro">
+            <span>Destacado</span>
+            <span aria-hidden="true">&middot;</span>
+            <span>{{ destacado.categoria }}</span>
+          </p>
+          <h2 class="font-serif text-[clamp(1.8rem,3.2vw,2.6rem)] font-light leading-[1.15]">{{ destacado.titulo }}</h2>
+          <p class="text-[0.9375rem] font-light leading-relaxed text-white/80">{{ destacado.descripcion }}</p>
+          <p class="text-xs text-white/70">{{ minutos(destacado) }} min de lectura</p>
+          <span class="enlace-flecha mt-2 inline-flex items-center gap-2 font-serif text-xs font-semibold uppercase tracking-[0.18em] text-oro-claro">
+            Leer el artículo
+            <svg class="flecha h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       GUIA PARA NOVIAS, EN ORDEN
+       ══════════════════════════════════════════ -->
+  <section class="mt-20 px-6 sm:mt-24 sm:px-10">
+    <div class="mx-auto grid max-w-[1140px] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+      <div>
+        <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-bronce">Si te casas en Ibiza</p>
+        <h2 class="mt-3 font-serif text-[clamp(2rem,3.6vw,2.9rem)] font-light leading-[1.15] text-tinta">
+          Guía para novias, <em class="italic text-bronce">en orden</em>
+        </h2>
+        <p class="mt-5 text-[0.9375rem] font-light leading-7 text-texto-suave">
+          Seis lecturas para organizar la belleza de tu boda paso a paso: de elegir maquilladora
+          a tener el kit de retoque a mano el gran día.
+        </p>
+      </div>
+
+      <ol class="guia list-none p-0">
+        @for (paso of guiaNovias; track paso.slug; let i = $index) {
+          <li scrollReveal="up" [scrollDelay]="'' + (i % 3)">
+            <a [routerLink]="rutaDe(paso.articulo)"
+               class="paso-guia group grid grid-cols-[2.75rem_1fr_auto] items-center gap-4 border-b border-linea py-5 no-underline">
+              <span class="numero font-serif text-2xl font-light text-bronce [font-variant-numeric:lining-nums]" aria-hidden="true">{{ i + 1 }}</span>
+              <span>
+                <span class="block text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-texto-tenue">{{ paso.cuando }}</span>
+                <span class="mt-1 block font-serif text-lg leading-snug text-tinta sm:text-xl">{{ paso.articulo.titulo }}</span>
+              </span>
+              <svg class="flecha h-4 w-4 text-bronce" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </a>
-            <div class="flex flex-1 flex-col p-6">
-              <p class="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-bronce">
-                {{ articulo.lectura }} min de lectura
-              </p>
-              <h2 class="mt-2 font-serif text-xl font-normal leading-snug text-tinta">
-                <a [routerLink]="rutaDe(articulo)" class="text-tinta no-underline hover:text-oro">
-                  {{ articulo.titulo }}
-                </a>
-              </h2>
-              <p class="mt-3 flex-1 text-sm font-light leading-relaxed text-texto-tenue">{{ articulo.descripcion }}</p>
-              <a [routerLink]="rutaDe(articulo)"
-                 class="mt-5 font-serif text-xs font-semibold uppercase tracking-[0.18em] text-bronce no-underline">
-                Leer el artículo &rarr;
-              </a>
-            </div>
-          </article>
-        </li>
-      }
-    </ul>
+          </li>
+        }
+      </ol>
+    </div>
+  </section>
 
-    @if (ingles.length > 0) {
-      <section class="mt-20 border-t border-linea pt-12">
+  <!-- ══════════════════════════════════════════
+       TODOS LOS ARTICULOS
+       ══════════════════════════════════════════ -->
+  <section class="mt-20 px-6 sm:mt-24 sm:px-10">
+    <div class="mx-auto max-w-[1140px]">
+      <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <h2 class="font-serif text-[clamp(2rem,3.6vw,2.9rem)] font-light leading-[1.15] text-tinta">
+          Todos los <em class="italic text-bronce">artículos</em>
+        </h2>
+
+        <!-- Filtro por tema: botones con aria-pressed; sin JS se ven todos. -->
+        <div class="-mx-6 flex gap-2 overflow-x-auto px-6 pb-1 md:mx-0 md:flex-wrap md:px-0" role="group" aria-label="Filtrar por tema">
+          <button type="button" (click)="elegir(null)" [attr.aria-pressed]="filtro() === null"
+                  class="filtro pulsable shrink-0 min-h-11 cursor-pointer rounded-full border px-4 text-xs font-medium"
+                  [class.filtro-activo]="filtro() === null">
+            Todos <span class="ml-1 opacity-70">{{ espanol.length }}</span>
+          </button>
+          @for (cat of categorias; track cat.nombre) {
+            <button type="button" (click)="elegir(cat.nombre)" [attr.aria-pressed]="filtro() === cat.nombre"
+                    class="filtro pulsable shrink-0 min-h-11 cursor-pointer rounded-full border px-4 text-xs font-medium"
+                    [class.filtro-activo]="filtro() === cat.nombre">
+              {{ cat.nombre }} <span class="ml-1 opacity-70">{{ cat.total }}</span>
+            </button>
+          }
+        </div>
+      </div>
+
+      <p class="sr-only" aria-live="polite">{{ visibles().length }} artículos</p>
+
+      <ul class="mt-10 grid list-none gap-x-8 gap-y-12 p-0 sm:grid-cols-2 lg:grid-cols-3">
+        @for (articulo of visibles(); track articulo.slug) {
+          <li class="aparece">
+            <article class="group flex h-full flex-col">
+              <a [routerLink]="rutaDe(articulo)" class="tarjeta-blog pulsable block overflow-hidden rounded-foto no-underline" tabindex="-1" aria-hidden="true">
+                <img decoding="async" [src]="articulo.imagen" [alt]="articulo.alt" width="600" height="750"
+                     class="foto-blog aspect-[4/3] w-full object-cover object-[center_30%] sm:aspect-[4/5] sm:object-top" />
+              </a>
+              <div class="flex flex-1 flex-col pt-5">
+                <p class="flex flex-wrap items-center gap-x-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-bronce">
+                  <span>{{ articulo.categoria }}</span>
+                  <span aria-hidden="true">&middot;</span>
+                  <span class="text-texto-tenue">{{ minutos(articulo) }} min</span>
+                </p>
+                <h3 class="mt-2 font-serif text-[1.35rem] font-normal leading-snug text-tinta">
+                  <a [routerLink]="rutaDe(articulo)" class="titulo-enlace text-tinta no-underline">{{ articulo.titulo }}</a>
+                </h3>
+                <p class="mt-2 flex-1 text-sm font-light leading-relaxed text-texto-suave">{{ articulo.descripcion }}</p>
+                <p class="mt-4 text-xs text-texto-tenue">
+                  <time [attr.datetime]="articulo.actualizado ?? articulo.fecha">{{ fecha(articulo) }}</time>
+                </p>
+              </div>
+            </article>
+          </li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  @if (ingles.length > 0) {
+    <section class="mt-20 px-6 sm:px-10" lang="en">
+      <div class="mx-auto max-w-[1140px] rounded-bloque border border-linea bg-white p-7 sm:p-10">
         <h2 class="font-serif text-2xl font-light text-tinta">In English</h2>
-        <ul class="mt-6 list-none space-y-4 p-0">
+        <ul class="mt-5 list-none space-y-4 p-0">
           @for (articulo of ingles; track articulo.slug) {
             <li>
-              <a [routerLink]="rutaDe(articulo)" class="font-serif text-lg text-tinta no-underline hover:text-oro">
+              <a [routerLink]="rutaDe(articulo)" class="enlace-flecha inline-flex items-center gap-2 font-serif text-lg text-tinta no-underline">
                 {{ articulo.titulo }}
+                <svg class="flecha h-4 w-4 text-bronce" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
               </a>
-              <p class="mt-1 text-sm font-light text-texto-tenue">{{ articulo.descripcion }}</p>
+              <p class="mt-1 text-sm font-light text-texto-suave">{{ articulo.descripcion }}</p>
             </li>
           }
         </ul>
-      </section>
-    }
-
-    <section class="mt-20 rounded-3xl bg-tinta px-8 py-12 text-center text-white">
-      <h2 class="font-serif text-[clamp(1.6rem,3vw,2.2rem)] font-light">¿Tienes un evento en Ibiza?</h2>
-      <p class="mx-auto mt-4 max-w-[520px] text-sm font-light leading-relaxed text-white/70">
-        Cuéntame la fecha y los detalles y te responderé personalmente con disponibilidad y presupuesto.
-      </p>
-      <a routerLink="/contacto"
-         class="mt-7 inline-block rounded-full bg-cobre px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline transition-all duration-300 hover:bg-cobre-oscuro">
-        Contactar
-      </a>
+      </div>
     </section>
-  </div>
+  }
+
+  <section class="mt-20 px-6 sm:px-10">
+    <div class="mx-auto grid max-w-[1140px] overflow-hidden rounded-bloque bg-noche text-white md:grid-cols-[1fr_0.8fr]">
+      <div class="p-8 sm:p-12">
+        <h2 class="font-serif text-[clamp(1.8rem,3vw,2.4rem)] font-light leading-tight">¿Tienes un evento <em class="italic text-oro-claro">en Ibiza?</em></h2>
+        <p class="mt-4 max-w-[46ch] text-[0.9375rem] font-light leading-relaxed text-white/80">
+          Cuéntame la fecha y los detalles y te responderé personalmente con disponibilidad y presupuesto.
+        </p>
+        <a routerLink="/contacto"
+           class="boton-principal pulsable mt-7 inline-flex min-h-12 items-center gap-2 rounded-full bg-cobre px-8 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline">
+          Contactar
+          <svg class="flecha h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+      <div class="relative hidden min-h-[280px] md:block">
+        <img src="images/aplicacion-sombra-dorada-pincel.jpg" alt="" decoding="async" width="1333" height="2000"
+             class="absolute inset-0 h-full w-full object-cover object-[center_40%]" />
+      </div>
+    </div>
+  </section>
 </div>
