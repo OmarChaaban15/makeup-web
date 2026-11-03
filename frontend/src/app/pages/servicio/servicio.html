@@ -1,113 +1,166 @@
-<!-- Hero -->
-<section class="relative flex min-h-[80svh] w-full items-center justify-center overflow-hidden pt-20 text-center">
-  <img decoding="async" fetchpriority="high" [src]="t.imagen" [alt]="t.alt"
-       class="absolute inset-0 h-full w-full object-cover" [style.object-position]="t.posicion" />
-  <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/85"></div>
+<!-- ══════════════════════════════════════════
+     HERO EDITORIAL
+     Movil: la foto a sangre arriba y el titulo montado sobre su borde.
+     Escritorio: texto y foto a partes iguales. La foto se ve limpia (sin el
+     velo oscuro de antes): el trabajo es el producto.
+     ══════════════════════════════════════════ -->
+<section class="relative overflow-hidden bg-noche text-white lg:pt-20">
+  <div class="mx-auto grid max-w-[1240px] lg:min-h-[86svh] lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16 lg:px-10">
 
-  <div class="relative z-10 mx-auto max-w-[820px] px-6 text-white">
-    <nav [attr.aria-label]="c.servicios" class="mb-5 font-sans text-[0.72rem] uppercase tracking-[0.2em] text-white/80">
-      <a [routerLink]="r.servicios" class="underline underline-offset-4 hover:text-oro-claro">{{ c.servicios }}</a>
-      <span aria-hidden="true" class="mx-2">/</span>
-      <span>{{ t.insignia }}</span>
-    </nav>
-    <h1 class="font-serif text-[clamp(2.4rem,6vw,5rem)] font-light leading-[1.08] text-white drop-shadow-2xl">
-      {{ t.h1 }} <br><em class="italic text-oro-claro">{{ t.h1Em }}</em>
-    </h1>
-    <p class="mx-auto mt-6 max-w-[580px] font-sans text-sm sm:text-base font-light leading-[1.8] text-white/85">{{ t.intro }}</p>
-    <a [routerLink]="r.contacto"
-       class="mt-8 inline-block rounded-full bg-cobre px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline transition-all duration-300 hover:bg-cobre-oscuro">
-      {{ t.cta }}
-    </a>
+    <!-- Foto principal -->
+    <div class="relative h-[58svh] min-h-[360px] lg:order-2 lg:h-auto lg:min-h-0">
+      <img decoding="async" fetchpriority="high" [src]="t.imagen" [alt]="t.alt" width="900" height="1125"
+           class="hero-foto absolute inset-0 h-full w-full object-cover lg:relative lg:aspect-[4/5] lg:max-h-[78svh] lg:rounded-bloque"
+           [style.object-position]="t.posicion" />
+      <!-- Solo un fundido abajo en el movil, para que el titulo se lea sobre la foto -->
+      <div class="absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-noche lg:hidden"></div>
+      <span class="absolute bottom-5 right-5 hidden rounded-full bg-black/55 px-4 py-1.5 font-serif text-[0.72rem] uppercase tracking-[0.2em] text-oro-claro lg:inline-block">
+        {{ t.insignia }}
+      </span>
+    </div>
+
+    <!-- Texto -->
+    <div class="relative z-10 -mt-28 px-6 pb-14 sm:px-10 lg:order-1 lg:mt-0 lg:px-0 lg:pb-0">
+      <nav [attr.aria-label]="c.servicios" class="mb-5 flex flex-wrap items-center gap-x-2 font-sans text-[0.72rem] uppercase tracking-[0.2em] text-white/80">
+        <a [routerLink]="r.servicios" class="miga text-white/80 no-underline">{{ c.servicios }}</a>
+        <span aria-hidden="true">/</span>
+        <span class="text-oro-claro">{{ t.insignia }}</span>
+      </nav>
+      <h1 class="hero-entra font-serif text-[clamp(2.6rem,6.4vw,5.2rem)] font-light leading-[1.04] text-white lg:text-[clamp(2.8rem,4.1vw,4.3rem)]">
+        {{ t.h1 }} <br><em class="italic text-oro-claro">{{ t.h1Em }}</em>
+      </h1>
+      <p class="hero-entra hero-paso-2 mt-6 max-w-[52ch] font-sans text-[0.9375rem] sm:text-base font-light leading-[1.8] text-white/85">{{ t.intro }}</p>
+      <div class="hero-entra hero-paso-3 mt-8 flex flex-col gap-3 sm:flex-row">
+        <a [routerLink]="r.contacto" [queryParams]="{ servicio: claveContacto }"
+           class="boton-principal pulsable inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-cobre px-8 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline">
+          {{ t.cta }}
+          <svg class="flecha h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+        <a [href]="whatsapp" target="_blank" rel="noopener"
+           class="boton-cristal pulsable inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border border-white/30 bg-white/5 px-7 font-sans text-sm font-medium text-white no-underline">
+          <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.39 9.39 0 0 1-1.44-5.01c0-5.19 4.23-9.42 9.43-9.42a9.37 9.37 0 0 1 6.66 2.76 9.36 9.36 0 0 1 2.76 6.67c0 5.2-4.23 9.42-9.43 9.42zm8.02-17.44A11.28 11.28 0 0 0 12.05.75C5.8.75.72 5.83.72 12.08c0 2 .52 3.95 1.52 5.66L.62 23.25l5.65-1.48a11.3 11.3 0 0 0 5.78 1.47h.01c6.25 0 11.33-5.08 11.33-11.33 0-3.03-1.18-5.87-3.32-8.01z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- Que incluye -->
-<section class="px-6 py-20 sm:px-10 md:py-28">
-  <div class="mx-auto grid max-w-[1140px] items-center gap-12 lg:grid-cols-2 lg:gap-20">
-    <div>
-      <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-bronce">{{ c.incluyeKicker }}</p>
-      <h2 class="mt-4 font-serif text-[clamp(2rem,3.8vw,3rem)] font-light leading-[1.2] text-tinta">{{ t.incluyeH2 }}</h2>
-      <ul class="mt-8 space-y-4">
+<!-- ══════════════════════════════════════════
+     QUE INCLUYE: lista numerada junto a una foto que acompana al leer
+     ══════════════════════════════════════════ -->
+<section class="bg-crema px-6 py-20 sm:px-10 md:py-28">
+  <div class="mx-auto grid max-w-[1140px] gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+    <div class="lg:order-2">
+      <p scrollReveal="up" class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-bronce">{{ c.incluyeKicker }}</p>
+      <h2 scrollReveal="up" scrollDelay="1" class="mt-4 font-serif text-[clamp(2.1rem,4vw,3.2rem)] font-light leading-[1.12] text-tinta">{{ t.incluyeH2 }}</h2>
+      <ol class="mt-10 list-none space-y-0 p-0">
         @for (item of t.incluye; track $index) {
-          <li class="flex items-start gap-3 font-sans text-[0.95rem] font-light leading-relaxed text-texto-suave">
-            <svg class="mt-1 h-4 w-4 shrink-0 text-bronce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            <span>{{ item }}</span>
+          <li scrollReveal="up" [scrollDelay]="'' + ($index % 4)"
+              class="grid grid-cols-[3rem_1fr] items-baseline gap-3 border-t border-linea py-5 last:border-b">
+            <span class="numero font-serif text-2xl font-light text-bronce" aria-hidden="true">{{ ($index + 1).toString().padStart(2, '0') }}</span>
+            <span class="font-sans text-base font-light leading-relaxed text-tinta">{{ item }}</span>
           </li>
         }
-      </ul>
+      </ol>
     </div>
-    <div class="overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(26,26,26,0.12)]">
-      <img decoding="async" [src]="t.imagen2" [alt]="t.alt2" class="aspect-[4/5] w-full object-cover object-center" />
+    <div class="lg:order-1">
+      <div class="overflow-hidden rounded-bloque shadow-[0_25px_60px_rgba(26,26,26,0.14)] lg:sticky lg:top-28">
+        <img decoding="async" [src]="t.imagen2" [alt]="t.alt2" width="900" height="1125"
+             class="aspect-[4/5] w-full object-cover object-center" />
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Texto -->
-<section class="border-y border-linea bg-arena px-6 py-20 sm:px-10 md:py-24">
-  <div class="mx-auto max-w-[760px]">
-    <h2 class="font-serif text-[clamp(1.9rem,3.6vw,2.8rem)] font-light leading-[1.2] text-tinta">{{ t.textoH2 }}</h2>
-    <div class="mt-6 space-y-5 font-sans text-[0.95rem] font-light leading-[1.85] text-texto-suave">
+<!-- ══════════════════════════════════════════
+     TEXTO: entradilla editorial
+     ══════════════════════════════════════════ -->
+<section class="bg-arena px-6 py-20 sm:px-10 md:py-28">
+  <div class="mx-auto grid max-w-[1140px] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+    <h2 scrollReveal="up" class="font-serif text-[clamp(2rem,3.8vw,3rem)] font-light leading-[1.12] text-tinta">{{ t.textoH2 }}</h2>
+    <div class="border-l-2 border-cobre pl-6 sm:pl-8">
       @for (parrafo of t.texto; track $index) {
-        <p>{{ parrafo }}</p>
+        @if ($first) {
+          <p scrollReveal="up" class="font-serif text-[1.35rem] font-light italic leading-[1.55] text-tinta sm:text-[1.55rem]">{{ parrafo }}</p>
+        } @else {
+          <p scrollReveal="up" scrollDelay="1" class="mt-6 font-sans text-base font-light leading-[1.85] text-texto-suave">{{ parrafo }}</p>
+        }
       }
     </div>
   </div>
 </section>
 
-<!-- Proceso -->
-<section class="px-6 py-20 sm:px-10 md:py-28">
+<!-- ══════════════════════════════════════════
+     PROCESO: linea de tiempo (vertical en movil, horizontal en escritorio)
+     ══════════════════════════════════════════ -->
+<section class="bg-noche px-6 py-20 text-white sm:px-10 md:py-28">
   <div class="mx-auto max-w-[1140px]">
-    <div class="mx-auto mb-14 max-w-2xl text-center">
-      <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-bronce">{{ c.procesoKicker }}</p>
-      <h2 class="mt-3 font-serif text-[clamp(2rem,3.8vw,3rem)] font-light text-tinta">{{ c.procesoH2 }}</h2>
+    <div class="mb-14 max-w-2xl">
+      <p scrollReveal="up" class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-oro">{{ c.procesoKicker }}</p>
+      <h2 scrollReveal="up" scrollDelay="1" class="mt-3 font-serif text-[clamp(2rem,3.8vw,3rem)] font-light text-white">{{ c.procesoH2 }}</h2>
     </div>
-    <ol class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <ol class="linea-tiempo relative grid list-none gap-10 p-0 lg:grid-cols-4 lg:gap-8">
       @for (paso of t.pasos; track $index) {
-        <li class="rounded-3xl border border-linea bg-white p-7 shadow-sm">
-          <span class="font-serif text-2xl font-light text-bronce" aria-hidden="true">0{{ $index + 1 }}</span>
-          <h3 class="mt-3 font-serif text-lg font-normal text-tinta">{{ paso.titulo }}</h3>
-          <p class="mt-2 text-sm font-light leading-relaxed text-texto-tenue">{{ paso.texto }}</p>
+        <li scrollReveal="up" [scrollDelay]="'' + ($index + 1)" class="paso relative pl-14 lg:pl-0 lg:pt-16">
+          <span class="punto-paso absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full border border-oro/60 bg-noche font-serif text-lg text-oro-claro" aria-hidden="true">{{ $index + 1 }}</span>
+          <h3 class="font-serif text-xl font-normal text-white">{{ paso.titulo }}</h3>
+          <p class="mt-2 text-[0.9375rem] font-light leading-relaxed text-white/75">{{ paso.texto }}</p>
         </li>
       }
     </ol>
   </div>
 </section>
 
-<!-- Preguntas frecuentes -->
-<section class="border-y border-linea bg-crema px-6 py-20 sm:px-10 md:py-24">
-  <div class="mx-auto max-w-[780px]">
-    <div class="mb-10 text-center">
+<!-- ══════════════════════════════════════════
+     PREGUNTAS FRECUENTES
+     ══════════════════════════════════════════ -->
+<section class="bg-crema px-6 py-20 sm:px-10 md:py-28">
+  <div class="mx-auto grid max-w-[1140px] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+    <div>
       <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-bronce">{{ c.faqKicker }}</p>
-      <h2 class="mt-3 font-serif text-[clamp(2rem,3.8vw,3rem)] font-light text-tinta">{{ c.faqH2 }}</h2>
+      <h2 class="mt-3 font-serif text-[clamp(2rem,3.8vw,3rem)] font-light leading-[1.12] text-tinta">{{ c.faqH2 }}</h2>
+      <a [href]="whatsapp" target="_blank" rel="noopener"
+         class="enlace-flecha mt-6 inline-flex min-h-11 items-center gap-2 font-serif text-xs font-semibold uppercase tracking-[0.18em] text-bronce no-underline">
+        WhatsApp
+        <svg class="flecha h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </a>
     </div>
-    <div class="space-y-4">
+    <div class="space-y-3">
       @for (pregunta of t.faq; track $index) {
-        <details class="group rounded-2xl border border-linea bg-white p-5 sm:p-6" [open]="$first">
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-4">
-            <h3 class="font-serif text-base font-medium text-tinta">{{ pregunta.p }}</h3>
-            <span class="shrink-0 font-serif text-xl text-bronce transition-transform duration-300 group-open:rotate-45" aria-hidden="true">+</span>
+        <details class="faq rounded-2xl border border-linea bg-white" [open]="$first">
+          <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 sm:px-6">
+            <h3 class="font-serif text-[1.1rem] font-normal leading-snug text-tinta">{{ pregunta.p }}</h3>
+            <span class="mas flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-arena font-serif text-xl text-bronce" aria-hidden="true">+</span>
           </summary>
-          <p class="mt-3 text-sm font-light leading-relaxed text-texto-suave">{{ pregunta.r }}</p>
+          <p class="px-5 pb-5 text-[0.9375rem] font-light leading-relaxed text-texto-suave sm:px-6">{{ pregunta.r }}</p>
         </details>
       }
     </div>
   </div>
 </section>
 
-<!-- Otros servicios -->
-<section class="px-6 py-20 sm:px-10 md:py-24">
+<!-- ══════════════════════════════════════════
+     OTROS SERVICIOS
+     ══════════════════════════════════════════ -->
+<section class="border-t border-linea bg-crema px-6 py-20 sm:px-10 md:py-24">
   <div class="mx-auto max-w-[1140px]">
-    <div class="mx-auto mb-12 max-w-2xl text-center">
+    <div class="mb-10 flex flex-col gap-2">
       <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-bronce">{{ c.otrosKicker }}</p>
-      <h2 class="mt-3 font-serif text-[clamp(1.9rem,3.6vw,2.8rem)] font-light text-tinta">{{ c.otrosH2 }}</h2>
+      <h2 class="font-serif text-[clamp(1.9rem,3.6vw,2.8rem)] font-light text-tinta">{{ c.otrosH2 }}</h2>
     </div>
-    <div class="grid gap-6 sm:grid-cols-3">
+    <div class="grid gap-5 sm:grid-cols-3">
       @for (otro of otros; track otro.ruta) {
-        <a [routerLink]="otro.ruta" class="group block overflow-hidden rounded-3xl border border-linea bg-white no-underline shadow-sm">
-          <img decoding="async" [src]="otro.imagen" [alt]="otro.alt" class="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <span class="block p-6">
-            <span class="block font-serif text-lg text-tinta">{{ otro.nombre }}</span>
-            <span class="mt-2 block font-serif text-xs font-semibold uppercase tracking-widest text-bronce">{{ c.verMas }} &rarr;</span>
+        <a [routerLink]="otro.ruta" class="tarjeta-servicio pulsable group relative block overflow-hidden rounded-foto no-underline">
+          <img decoding="async" [src]="otro.imagen" [alt]="otro.alt" width="600" height="750"
+               class="foto-tarjeta aspect-[4/3] w-full object-cover object-[center_30%] sm:aspect-[4/5]" />
+          <span class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" aria-hidden="true"></span>
+          <span class="absolute inset-x-0 bottom-0 block p-6 text-white">
+            <span class="block font-serif text-xl leading-snug">{{ otro.nombre }}</span>
+            <span class="mt-2 inline-flex items-center gap-2 font-serif text-xs font-semibold uppercase tracking-widest text-oro-claro">
+              {{ c.verMas }}
+              <svg class="flecha h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </span>
           </span>
         </a>
       }
@@ -115,15 +168,29 @@
   </div>
 </section>
 
-<!-- Cierre -->
-<section class="bg-tinta px-6 py-20 text-center text-white sm:px-10">
-  <div class="mx-auto max-w-[640px]">
-    <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-oro">{{ c.cierreKicker }}</p>
-    <h2 class="mt-3 font-serif text-[clamp(2rem,4vw,3rem)] font-light">{{ c.cierreH2 }}</h2>
-    <p class="mt-5 text-sm font-light leading-relaxed text-white/70">{{ c.cierreTexto }}</p>
-    <a [routerLink]="r.contacto"
-       class="mt-8 inline-block rounded-full bg-cobre px-8 py-4 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline transition-all duration-300 hover:bg-cobre-oscuro">
-      {{ c.cierreBoton }}
-    </a>
+<!-- ══════════════════════════════════════════
+     CIERRE a sangre con la foto del servicio
+     ══════════════════════════════════════════ -->
+<section class="relative overflow-hidden bg-noche px-6 py-24 text-white sm:px-10 md:py-32">
+  <img decoding="async" [src]="t.imagen2" alt="" width="1400" height="900"
+       class="absolute inset-0 h-full w-full object-cover opacity-45" [style.object-position]="'center 30%'" />
+  <div class="absolute inset-0 bg-gradient-to-r from-noche via-noche/85 to-noche/30" aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-[1140px]">
+    <div class="max-w-[560px]">
+      <p class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-oro">{{ c.cierreKicker }}</p>
+      <h2 class="mt-3 font-serif text-[clamp(2.2rem,4.5vw,3.6rem)] font-light leading-[1.08]">{{ c.cierreH2 }}</h2>
+      <p class="mt-5 text-base font-light leading-relaxed text-white/80">{{ c.cierreTexto }}</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a [routerLink]="r.contacto" [queryParams]="{ servicio: claveContacto }"
+           class="boton-principal pulsable inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-cobre px-8 font-serif text-xs font-semibold uppercase tracking-widest text-white no-underline">
+          {{ c.cierreBoton }}
+          <svg class="flecha h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+        <a [href]="whatsapp" target="_blank" rel="noopener"
+           class="boton-cristal pulsable inline-flex min-h-[52px] items-center justify-center rounded-full border border-white/30 bg-white/5 px-7 font-sans text-sm font-medium text-white no-underline">
+          WhatsApp
+        </a>
+      </div>
+    </div>
   </div>
 </section>

@@ -1,0 +1,97 @@
+/* Pagina de un servicio */
+
+/*
+  Entrada del hero: el titular (LCP) nunca parte de opacidad 0, solo sube
+  12 px; la entradilla y los botones funden detras, escalonados.
+*/
+.hero-entra {
+  animation: sube 700ms var(--ease-salida) both;
+}
+
+.hero-paso-2,
+.hero-paso-3 {
+  animation-name: funde;
+  animation-duration: 500ms;
+}
+
+.hero-paso-2 { animation-delay: 120ms; }
+.hero-paso-3 { animation-delay: 200ms; }
+
+@keyframes sube {
+  from { transform: translateY(12px); }
+}
+
+@keyframes funde {
+  from { opacity: 0; transform: translateY(12px); }
+}
+
+/* La foto del hero se asienta: arranca un 4% mas cerca y se aleja despacio. */
+.hero-foto {
+  animation: asienta 1400ms var(--ease-salida) both;
+}
+
+@keyframes asienta {
+  from { transform: scale(1.04); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-entra,
+  .hero-foto {
+    animation: none;
+  }
+}
+
+/* Cifras de caja alta (Cormorant usa por defecto cifras de estilo antiguo). */
+.numero,
+.punto-paso {
+  font-variant-numeric: lining-nums;
+}
+
+/*
+  Linea de tiempo: un hilo dorado une los pasos. Vertical en movil (a la
+  izquierda, por el centro de los circulos) y horizontal en escritorio.
+*/
+.linea-tiempo::before {
+  content: '';
+  position: absolute;
+  left: 1.25rem;
+  top: 1.25rem;
+  bottom: 1.25rem;
+  width: 1px;
+  background: linear-gradient(to bottom, rgba(196, 149, 106, 0.6), rgba(196, 149, 106, 0.1));
+}
+
+@media (min-width: 1024px) {
+  .linea-tiempo::before {
+    left: 1.25rem;
+    right: 1.25rem;
+    top: 1.25rem;
+    bottom: auto;
+    width: auto;
+    height: 1px;
+    background: linear-gradient(to right, rgba(196, 149, 106, 0.6), rgba(196, 149, 106, 0.1));
+  }
+}
+
+/* Preguntas: el + gira a x al abrir. */
+.mas {
+  transition: transform 200ms var(--ease-salida);
+}
+
+.faq[open] .mas {
+  transform: rotate(45deg);
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .miga:hover {
+    color: var(--color-oro-claro);
+  }
+
+  .faq:not([open]):hover {
+    border-color: rgba(196, 149, 106, 0.5);
+  }
+}

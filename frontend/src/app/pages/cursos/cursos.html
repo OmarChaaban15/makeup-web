@@ -333,42 +333,48 @@
           Se lee entera (antes estaba detras de un velo al 20%) y su boton es
           secundario frente al de compra de la masterclass.
         -->
-        <article scrollReveal="up" scrollDelay="2"
-                 class="curso-card flex flex-col overflow-hidden rounded-[30px] bg-noche text-white shadow-[0_10px_40px_rgba(26,26,26,0.12)]" id="curso-formacion-online">
+        <article scrollReveal="up" scrollDelay="2" aria-describedby="estado-certificacion"
+                 class="curso-card curso-no-disponible flex flex-col overflow-hidden rounded-[30px] border border-dashed border-white/25 bg-noche text-white shadow-[0_10px_40px_rgba(26,26,26,0.12)]" id="curso-formacion-online">
 
-          <div class="relative h-44 w-full overflow-hidden sm:h-56">
+          <!-- Foto en blanco y negro y apagada: se ve que aun no esta a la venta. -->
+          <div class="relative h-40 w-full overflow-hidden sm:h-48">
             <img decoding="async" src="images/maquillaje-pasarela-editorial.jpeg" alt="Formación editorial y profesional"
                  width="800" height="1000"
-                 class="absolute inset-0 h-full w-full object-cover object-[center_25%] opacity-70" />
-            <div class="absolute inset-0 bg-gradient-to-t from-noche via-noche/40 to-transparent"></div>
-            <span class="absolute left-5 right-5 top-5 inline-flex w-fit items-center gap-2 rounded-full border border-oro/50 bg-black/50 px-3.5 py-1">
-              <svg class="h-3.5 w-3.5 text-oro-claro" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 2"/></svg>
-              <span class="font-serif text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-oro-claro">Próxima edición · Lista de espera</span>
+                 class="absolute inset-0 h-full w-full object-cover object-[center_25%] opacity-60 grayscale" />
+            <div class="absolute inset-0 bg-gradient-to-t from-noche via-noche/50 to-transparent"></div>
+            <span class="absolute left-5 right-5 top-5 inline-flex w-fit items-center gap-2 rounded-full bg-white px-3.5 py-1 text-tinta">
+              <svg class="h-3.5 w-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 018 0v3"/></svg>
+              <span class="font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em]">Aún no disponible</span>
             </span>
           </div>
 
           <div class="flex flex-1 flex-col p-7 sm:p-9">
-            <p class="font-serif text-[0.72rem] uppercase tracking-widest text-oro-claro">40 Horas · Certificado · Formación Online Profesional</p>
-            <h2 class="mt-2 font-serif text-[clamp(1.6rem,2.6vw,2rem)] font-light leading-tight text-white">Certificación Pro</h2>
-            <p class="mt-3 text-[0.9375rem] font-light leading-relaxed text-white/80">
-              Formación avanzada integral para quienes desean dedicarse profesionalmente al mundo del maquillaje en bodas y moda.
-            </p>
-            <p class="mt-2 text-[0.9375rem] font-light leading-relaxed text-white/80">
-              Técnicas de pasarela, novias de alta gama y gestión de clientes para dedicarte al maquillaje con éxito.
+            <p class="font-serif text-[0.72rem] uppercase tracking-widest text-white/60">Próxima edición · 40 horas · Certificado</p>
+            <h2 class="mt-2 font-serif text-[clamp(1.6rem,2.6vw,2rem)] font-light leading-tight text-white/90">Certificación Pro</h2>
+            <p class="mt-3 text-[0.9375rem] font-light leading-relaxed text-white/70">
+              Formación avanzada integral para quienes desean dedicarse profesionalmente al mundo del maquillaje en bodas y moda:
+              técnicas de pasarela, novias de alta gama y gestión de clientes.
             </p>
 
-            <div class="mt-6 border-t border-white/10 pt-5">
-              <span class="font-serif text-2xl text-white">350 €</span>
-
+            <!-- Estado, dicho con palabras (no solo con el aspecto apagado) -->
+            <div id="estado-certificacion" class="mt-6 flex gap-3 rounded-2xl border border-oro/30 bg-oro/10 p-4">
+              <svg class="mt-0.5 h-5 w-5 shrink-0 text-oro-claro" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 2"/></svg>
+              <p class="text-sm leading-relaxed text-white/85">
+                <strong class="font-medium text-white">Las inscripciones aún no están abiertas.</strong>
+                Apúntate a la lista de espera y te aviso en cuanto abra, con descuento prioritario.
+              </p>
             </div>
+
+            <p class="mt-5 text-sm text-white/60">Precio previsto: <span class="font-serif text-lg text-white/80">350 €</span></p>
 
             <button
               type="button"
               (click)="abrirAvisoProximamente()"
               id="btn-notificar-formacion"
-              class="boton-cristal pulsable mt-6 min-h-12 w-full cursor-pointer rounded-full border border-white/30 bg-white/10 px-7 py-3 font-serif text-xs font-semibold uppercase tracking-widest text-white">
-              Avísame con descuento prioritario
+              class="boton-cristal pulsable mt-6 min-h-12 w-full cursor-pointer rounded-full border border-white/30 bg-white/10 px-5 py-3 font-serif text-xs font-semibold uppercase tracking-[0.12em] text-white sm:tracking-widest">
+              Apuntarme a la lista de espera
             </button>
+            <p class="mt-3 text-center text-[0.72rem] text-white/60">Sin pago ni compromiso: solo te escribo cuando abra.</p>
           </div>
 
         </article>

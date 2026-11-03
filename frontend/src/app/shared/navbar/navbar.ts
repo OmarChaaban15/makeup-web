@@ -46,7 +46,11 @@ export class Navbar {
   // Rutas con imagen a pantalla completa donde el navbar va transparente.
   private readonly rutasHero = new Set([
     '/inicio',
-    ...Object.values(RUTAS).flatMap(rutas => [rutas.inicio, rutas.sobre, rutas.servicios])
+    ...Object.values(RUTAS).flatMap(rutas => [
+      rutas.inicio, rutas.sobre, rutas.servicios,
+      // Paginas de cada servicio: foto a sangre bajo la cabecera en el movil.
+      rutas.novias, rutas.eventos, rutas.editorial, rutas.cine
+    ])
   ]);
 
   constructor() {
