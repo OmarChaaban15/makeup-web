@@ -126,37 +126,75 @@ a, button, [role="button"], input[type="submit"], input[type="button"], .cursor-
    SCROLL REVEAL ANIMATION SYSTEM
    ═══════════════════════════════════════════ */
 
-/* Base state — hidden before reveal */
+/*
+  Apariciones al hacer scroll: discretas. Suben 16 px (antes 40-50) en
+  550 ms con la curva de salida, y el escalonado entre piezas es de 60 ms
+  (antes 100). Sin desenfoque (caro de pintar) y sin will-change permanente,
+  que reservaba memoria de GPU para cada bloque de la pagina.
+  Solo se ocultan los bloques que aun no se han visto; lo que esta en
+  pantalla al cargar no se toca (ver scroll-reveal.directive.ts).
+*/
 [data-scroll-reveal] {
   opacity: 0;
-  will-change: transform, opacity;
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 550ms var(--ease-salida),
+              transform 550ms var(--ease-salida);
 }
 
 /* Revealed state */
 [data-scroll-reveal].revealed {
   opacity: 1;
   transform: none !important;
-  filter: none !important;
 }
 
 /* Directional variants */
-[data-scroll-reveal="up"] { transform: translateY(40px); }
-[data-scroll-reveal="down"] { transform: translateY(-40px); }
-[data-scroll-reveal="left"] { transform: translateX(50px); }
-[data-scroll-reveal="right"] { transform: translateX(-50px); }
-[data-scroll-reveal="scale"] { transform: scale(0.92); }
-[data-scroll-reveal="blur"] { transform: translateY(20px); filter: blur(8px); }
+[data-scroll-reveal="up"] { transform: translateY(16px); }
+[data-scroll-reveal="down"] { transform: translateY(-16px); }
+[data-scroll-reveal="left"] { transform: translateX(20px); }
+[data-scroll-reveal="right"] { transform: translateX(-20px); }
+[data-scroll-reveal="scale"] { transform: scale(0.97); }
+[data-scroll-reveal="blur"] { transform: translateY(16px); }
 
 /* Stagger delays */
-[data-scroll-delay="1"] { transition-delay: 0.1s; }
-[data-scroll-delay="2"] { transition-delay: 0.2s; }
-[data-scroll-delay="3"] { transition-delay: 0.3s; }
-[data-scroll-delay="4"] { transition-delay: 0.4s; }
-[data-scroll-delay="5"] { transition-delay: 0.5s; }
-[data-scroll-delay="6"] { transition-delay: 0.6s; }
+[data-scroll-delay="1"] { transition-delay: 60ms; }
+[data-scroll-delay="2"] { transition-delay: 120ms; }
+[data-scroll-delay="3"] { transition-delay: 180ms; }
+[data-scroll-delay="4"] { transition-delay: 240ms; }
+[data-scroll-delay="5"] { transition-delay: 300ms; }
+[data-scroll-delay="6"] { transition-delay: 360ms; }
+
+/* ═══════════════════════════════════════════
+   TRANSICIONES ENTRE PAGINAS (View Transitions)
+   ═══════════════════════════════════════════ */
+
+/*
+  Al cambiar de pagina el contenido funde (sale en 160 ms, entra en 260 ms
+  subiendo 8 px) y la cabecera, la barra de reserva y el aviso de cookies
+  se quedan quietos: tienen nombre propio y no participan del fundido.
+  Navegadores sin View Transitions cambian de pagina como siempre.
+*/
+::view-transition-old(root) {
+  animation: vt-sale 160ms var(--ease-salida) both;
+}
+
+::view-transition-new(root) {
+  animation: vt-entra 260ms var(--ease-salida) both;
+}
+
+@keyframes vt-sale {
+  to { opacity: 0; }
+}
+
+@keyframes vt-entra {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
 
 /* ═══════════════════════════════════════════
    ACCESSIBILITY — REDUCED MOTION

@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter, withInMemoryScrolling } from '@angular/router';
+import { provideRouter, withInMemoryScrolling, withViewTransitions } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
@@ -17,7 +17,10 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({
         scrollPositionRestoration: 'enabled',
         anchorScrolling: 'enabled'
-      })
+      }),
+      // Fundido entre paginas (estilos en styles.css). skipInitialTransition:
+      // la primera carga no anima, el HTML prerenderizado se ve tal cual.
+      withViewTransitions({ skipInitialTransition: true })
     ),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideClientHydration(withEventReplay())

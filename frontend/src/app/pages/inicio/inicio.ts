@@ -152,6 +152,7 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
     { src: 'images/maquillaje-sesion-creativa-editorial.jpg', alt: 'Sesión creativa y editorial contemporáneo', pos: 'center 25%' },
     { src: 'images/maquillaje-editorial-moda-ibiza.png', alt: 'Producción de moda y campañas', pos: 'center 40%' },
     { src: 'images/maquillaje-glitter-textura-piel.jpg', alt: 'Técnica de pigmentación glitter y textura de piel', pos: 'center 35%' },
+    { src: 'images/labios-brillo-dorado-detalle.jpg', alt: 'Detalle de labios con brillo dorado y rosa', pos: 'center 58%' },
     { src: 'images/maquillaje-cine-rodaje-ibiza.jpeg', alt: 'Rodaje y producción audiovisual', pos: 'center center' },
   ];
 
