@@ -59,7 +59,7 @@ La parte legal es una revisión técnica, no asesoramiento jurídico.
 ### Pendiente
 | Prioridad | Hallazgo | Solución |
 |---|---|---|
-| Alto | **Domicilio** del titular sin rellenar: el aviso legal muestra "pendiente de completar" (LSSI art. 10 exige una dirección; puede ser la fiscal). También faltan el proveedor de alojamiento y el de correo en `shared/datos-legales.ts`. | Completar `domicilio`, `alojamiento` y `correo`. |
+| Alto | **Domicilio** del titular sin rellenar: el aviso legal muestra "pendiente de completar" (LSSI art. 10 exige una dirección; puede ser la fiscal). Alojamiento ya indicado (Hostinger); falta el proveedor de correo en `shared/datos-legales.ts`. | Completar `domicilio` y `correo`. |
 | Alto | **"Valores" tachados en /oferta**: "Valor 120 €" y "Valor 35 €" junto a un curso de 55 €. Si esos importes no se han cobrado nunca, es un anclaje de precio que la Ley de Competencia Desleal puede considerar engañoso. | Quitar los importes o sustituirlos por lo que incluye cada parte. |
 | Alto | **L6 Testimonios y cifras**: los 3 testimonios están escritos en el código y no se ha confirmado que sean reales. Las cifras no cuadran: "+500 clientas" en inicio y "+150 novias" en sobre mí. | Confirmar y demostrar, o quitar. Mejor reseñas reales de Google con permiso. |
 | Medio | **L7** Precio tachado de la masterclass cuando hay oferta: solo es correcto si 55 € se ha cobrado antes. | Si no, "Precio de lanzamiento" sin tachar. |
@@ -117,7 +117,7 @@ ampliado con categorías, resumen, índice y enlaces a cada servicio, y una guí
 ## 5. Siguientes pasos, en orden
 
 1. Desplegar `main` en producción y comprobar Search Console.
-2. Completar domicilio, alojamiento y correo en `datos-legales.ts`.
+2. Completar domicilio y correo en `datos-legales.ts`.
 3. Quitar los "Valor X €" tachados de /oferta y decidir el precio tachado de la masterclass.
 4. Confirmar testimonios y la cifra de clientas, o retirarlos.
 5. Subtítulos en los vídeos de /oferta.
