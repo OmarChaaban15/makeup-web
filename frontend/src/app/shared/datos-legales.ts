@@ -28,7 +28,7 @@ export const DATOS_LEGALES: DatosLegales = {
   telefono: '+34 658 728 433',
   web: 'https://makeupbyyona.es',
   alojamiento: 'Hostinger International Ltd. (Chipre, Unión Europea)',
-  correo: null
+  correo: 'Hostinger International Ltd. (Chipre, Unión Europea)'
 };
 
 export const PENDIENTE = 'pendiente de completar';
