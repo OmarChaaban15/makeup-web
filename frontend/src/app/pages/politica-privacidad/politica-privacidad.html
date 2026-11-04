@@ -47,10 +47,16 @@
           <strong>Datos técnicos</strong> (dirección IP y registros del servidor): para la seguridad de la web y
           evitar abusos, como los intentos repetidos de acceso. Base: interés legítimo (art. 6.1.f).
         </li>
+        <li>
+          <strong>Estadísticas de visitas y rendimiento</strong> (página vista, país, tipo de dispositivo y navegador,
+          tiempos de carga): para saber qué páginas se leen y si la web carga rápido. Se recogen con Cloudflare Web
+          Analytics, que no usa cookies ni guarda nada en tu navegador, no te sigue entre webs y solo muestra cifras
+          agregadas. Base: interés legítimo (art. 6.1.f).
+        </li>
       </ul>
       <p>
         No enviamos publicidad sin tu permiso, no hacemos perfiles ni tomamos decisiones automatizadas y no usamos
-        herramientas de análisis ni de publicidad.
+        herramientas de publicidad.
       </p>
 
       <h2>3. Cuánto tiempo se guardan</h2>
@@ -68,6 +74,11 @@
       <ul>
         <li><strong>Stripe Payments Europe Ltd.</strong> (Irlanda): cobra los cursos. Los datos de tu tarjeta los recibe solo Stripe.</li>
         <li><strong>Alojamiento del servidor:</strong> {{ d.alojamiento ?? pendiente }}.</li>
+        <li>
+          <strong>Cloudflare, Inc.</strong> (Estados Unidos): red de distribución y protección de la web. Todas las
+          visitas pasan por sus servidores, que reciben tu dirección IP para entregar la página y frenar ataques, y
+          elabora las estadísticas de visitas sin cookies.
+        </li>
         <li><strong>Envío de correos:</strong> {{ d.correo ?? pendiente }}.</li>
         <li><strong>YouTube (Google) o Vimeo</strong>: reproducen los vídeos de los cursos en la zona de alumnas.</li>
         <li><strong>Google</strong>: el traductor, solo si eliges un idioma en el selector.</li>
@@ -77,7 +88,7 @@
 
       <h2>5. Transferencias fuera de la Unión Europea</h2>
       <p>
-        Google, Meta, Vimeo y Stripe pueden tratar datos en Estados Unidos. Están adheridos al Marco de Privacidad de
+        Cloudflare, Google, Meta, Vimeo y Stripe pueden tratar datos en Estados Unidos. Están adheridos al Marco de Privacidad de
         Datos UE-EE. UU. (decisión de adecuación de la Comisión Europea de 10 de julio de 2023) y, en su defecto,
         aplican las cláusulas contractuales tipo aprobadas por la Comisión.
       </p>
@@ -107,7 +118,8 @@
 
       <h2>8. Cookies</h2>
       <p>
-        La web no usa cookies de análisis ni de publicidad. Lo que se guarda en tu navegador se explica en la
+        La web no usa cookies de análisis ni de publicidad: las estadísticas de visitas se obtienen sin cookies. Lo
+        que se guarda en tu navegador se explica en la
         <a routerLink="/politica-cookies">política de cookies</a>.
       </p>
 

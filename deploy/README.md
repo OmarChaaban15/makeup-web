@@ -23,9 +23,7 @@ Estas dos cosas hay que hacerlas en local, y son bloqueantes.
 
 ### 0.1 · Compilar y pasar los tests
 
-El código de esta rama **no se ha compilado ni ejecutado nunca**: se
-escribió en una máquina sin PHP ni Node. Hasta que esto pase en verde, no
-tiene sentido subir nada.
+Hasta que esto pase en verde, no tiene sentido subir nada.
 
 ```bash
 cd backend  && composer install && composer test
@@ -39,21 +37,21 @@ tarjeta de prueba de Stripe, y el formulario de contacto.
 ### 0.2 · Fusionar el trabajo en `main`
 
 El script de despliegue toma `main` por defecto. Si los cambios siguen en
-`rama-omar`, **se desplegaría la versión antigua sin darse cuenta**.
+otra rama, **se desplegaría la versión antigua sin darse cuenta**: fusiónala
+(mejor con un Pull Request) y haz `git push origin main`.
 
-```bash
-git checkout main
-git merge rama-omar        # o mejor: abrir un Pull Request y revisarlo
-git push origin main
-```
-
-(Si prefieres desplegar la rama directamente, `RAMA=rama-omar bash
+(Para desplegar otra rama directamente, `RAMA=otra-rama bash
 deploy/deploy.sh`. El script muestra el commit y pide confirmación antes
 de continuar.)
 
 ---
 
 ## 1 · DNS
+
+Si el DNS lo gestiona Cloudflare (paso 13), crea los registros con la nube
+**gris** ("Solo DNS") hasta terminar el paso 7: el primer certificado se
+emite por HTTP contra el servidor, y con el proxy activo y HTTPS forzado en
+Cloudflare la validación acabaría en un 521.
 
 En el panel del dominio:
 
@@ -326,6 +324,9 @@ curl -s https://makeupbyyona.es/api/tutoriales      # catálogo público (JSON)
 curl -sI https://makeupbyyona.es/mis-cursos         # 200 + index.csr.html del SPA
 curl -sI https://makeupbyyona.es/esta-no-existe     # 404 real (pagina de error del SPA)
 curl -sI https://makeupbyyona.es/inicio             # 301 a /
+curl -sI https://makeupbyyona.es/servicios/         # 301 a /servicios (sin barra final)
+curl -sI https://makeupbyyona.es/api/tutoriales | grep -i x-robots-tag   # noindex
+curl -sI https://makeupbyyona.es/login | grep -i x-robots-tag            # noindex
 curl -s  https://makeupbyyona.es/servicios | grep -o "<h1[^>]*>"   # el HTML ya trae el contenido
 curl -s  https://makeupbyyona.es/sitemap.xml | head -5
 curl -s https://makeupbyyona.es/api/mis-cursos      # 401 sin token
@@ -365,6 +366,125 @@ sudo chmod +x /etc/cron.daily/backup-makeup
 Necesita credenciales en `/root/.my.cnf` o un usuario de solo lectura.
 Y conviene copiar el resultado fuera del servidor.
 
+## 13 · Cloudflare
+
+Se hace **después** del paso 11, con la web ya funcionando por HTTPS
+directamente contra el servidor. Así, si algo falla, se sabe que es
+Cloudflare.
+
+### 13.1 · IP real de las visitas (antes de activar el proxy)
+
+Con el proxy activo, todas las conexiones llegan desde IPs de Cloudflare.
+Sin este fichero, los límites de intentos de login y de formularios se
+aplicarían a todas las visitas a la vez, y los logs no servirían.
+
+```bash
+cd /var/www/makeup-web
+sudo cp deploy/nginx/cloudflare-ip-real.conf /etc/nginx/conf.d/
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+Los rangos de Cloudflare cambian muy de vez en cuando. Para refrescarlos
+solos cada semana:
+
+```bash
+echo '0 5 * * 1 root bash /var/www/makeup-web/deploy/cloudflare-ips.sh' \
+  | sudo tee /etc/cron.d/cloudflare-ips
+```
+
+### 13.2 · Activar el proxy
+
+En Cloudflare → DNS, pasar `@` y `www` a nube **naranja**. Después, en el
+panel de la zona:
+
+| Dónde | Ajuste | Por qué |
+|---|---|---|
+| SSL/TLS → Información general | **Completo (estricto)** | "Flexible" hace un bucle de redirecciones con el 301 a HTTPS de Nginx |
+| SSL/TLS → Certificados perimetrales | Usar siempre HTTPS: **activado** | El bloque `acme-challenge` del server 443 ya cubre la renovación de certbot |
+| Velocidad → Optimización | **Rocket Loader: desactivado** | Reescribe las etiquetas `<script>`: rompe la CSP con hashes y el arranque de Angular |
+| Scrape Shield | **Ofuscación de correo: desactivada** | Reescribe los `mailto:` del HTML prerenderizado e inyecta un script |
+| Seguridad → Bots | **Bot Fight Mode: desactivado** | En el plan gratuito no se puede excluir una ruta, y puede bloquear el webhook de Stripe |
+| Almacenamiento en caché → Configuración | Caché del navegador: **respetar encabezados existentes** | Nginx ya fija la caché de cada tipo de fichero |
+
+No crear reglas "Cache Everything": el HTML se sirve con `no-store` a
+propósito y, si Cloudflare lo guardase, los despliegues no se verían.
+
+Las reglas de bloqueo de bots de IA y el `robots.txt` gestionado por
+Cloudflare son opcionales. No bloquean a Googlebot, pero modifican el
+`robots.txt` publicado: compruébalo con `curl -s https://makeupbyyona.es/robots.txt`.
+
+Comprobar:
+
+```bash
+curl -sI https://makeupbyyona.es/ | grep -iE "cf-ray|cf-cache-status"   # cf-ray presente; DYNAMIC o BYPASS
+sudo certbot renew --dry-run                                            # la renovación sigue funcionando
+tail -5 /var/log/nginx/makeupbyyona.access.log                          # IPs de visitas, no de Cloudflare
+```
+
+Y en Stripe → Webhooks, que las entregas siguen llegando con 200 tras
+activar el proxy.
+
+### 13.3 · Fotos AVIF/WebP y la caché de Cloudflare
+
+Nginx sirve AVIF, WebP o el original en la **misma URL** según la cabecera
+`Accept`. En el plan gratuito, Cloudflare ignora `Vary: Accept` y guardaría
+la primera variante que le pidan para todo el mundo: una vista previa de
+WhatsApp o un navegador antiguo podrían recibir un AVIF que no entienden.
+
+Por eso Nginx añade `Cloudflare-CDN-Cache-Control: no-store` a esas fotos:
+Cloudflare no las guarda, y el navegador de cada visita sí, 30 días. Es lo
+seguro por defecto.
+
+Opcional, para que Cloudflare también las sirva desde su caché: Almacenamiento
+en caché → Cache Rules → crear regla para la ruta que empieza por `/images/`,
+apta para caché, con el ajuste **Vary** activado para la cabecera `accept`
+en modo `normalize` (disponible en todos los planes desde julio de 2026,
+<https://developers.cloudflare.com/cache/concepts/vary/>). Después, quitar la
+línea `Cloudflare-CDN-Cache-Control` de `deploy/nginx/makeupbyyona.es.conf`,
+copiarlo a `/etc/nginx/sites-available/` y recargar. Comprobar que cada
+navegador recibe su formato:
+
+```bash
+F=https://makeupbyyona.es/images/og-makeup-by-yona.jpg
+curl -s -o /dev/null -w '%{content_type}\n' -H 'Accept: image/avif,image/*' $F   # image/avif
+curl -s -o /dev/null -w '%{content_type}\n' -H 'Accept: image/jpeg'         $F   # image/jpeg
+```
+
+`deploy.sh` hace la segunda comprobación en cada despliegue y avisa si falla.
+
+### 13.4 · Web Analytics (visitas y Core Web Vitals)
+
+Analytics y registros → Web Analytics → Añadir sitio → `makeupbyyona.es` con
+la **configuración automática**. Cloudflare inserta su script en cada HTML
+al pasar por su red; la CSP ya lo permite (`frontend/scripts/csp.mjs`).
+
+- No usa cookies ni almacenamiento local: el aviso de cookies sigue siendo
+  informativo. La política de privacidad y la de cookies ya lo mencionan.
+- Mide también la navegación dentro del SPA (cambios de ruta sin recarga).
+- Comprobar en el navegador (DevTools → Red) que carga `beacon.min.js` y que
+  hay un `POST /cdn-cgi/rum` con respuesta 204. Si la consola muestra un
+  error de CSP, hay que desplegar el frontend con el `csp.mjs` actual.
+- Los datos de rendimiento (LCP, INP, CLS) aparecen en Web Analytics → Core
+  Web Vitals, desglosados por página. Son de visitas reales, igual que el
+  informe de Search Console, pero llegan en horas en vez de en semanas.
+
+Las métricas de Analytics → Tráfico (las que salen de los registros de
+Cloudflare) cuentan también robots: para visitas de personas, usar Web
+Analytics.
+
+## 14 · Google Search Console
+
+1. <https://search.google.com/search-console> → Añadir propiedad → tipo
+   **Dominio** → `makeupbyyona.es`. Google ofrece verificar con Cloudflare
+   directamente; si no, copiar el registro TXT y crearlo en Cloudflare → DNS
+   (tipo `TXT`, nombre `@`). Una propiedad de dominio cubre `www`, `http` y
+   `https` a la vez.
+2. Sitemaps → enviar `https://makeupbyyona.es/sitemap.xml`.
+3. Inspección de URLs → pedir la indexación de las páginas clave.
+
+El resto (qué revisar a los 7, 30 y 90 días) está en `docs/seo-guia.md`,
+sección 3.
+
 ---
 
 ## Resolución de problemas
@@ -385,6 +505,11 @@ Y conviene copiar el resultado fuera del servidor.
 | Recargar `/cursos` da 404              | Nginx sin las reglas del SPA: debe existir `<ruta>/index.html` (prerender) o `index.csr.html` |
 | Los formularios no envían correo       | Credenciales SMTP; mirar `storage/logs/laravel.log`                           |
 | La web se quedó "en mantenimiento"     | `cd backend && php artisan up`                                                |
+| 429 a todo el mundo a la vez           | Falta `/etc/nginx/conf.d/cloudflare-ip-real.conf` (paso 13.1)                 |
+| Error 521/525/526 de Cloudflare        | Nginx caído, o modo SSL que no es "Completo (estricto)" (paso 13.2)           |
+| Bucle de redirecciones                 | Modo SSL "Flexible" en Cloudflare: cambiarlo a "Completo (estricto)"          |
+| Web Analytics sin datos                | Proxy en nube gris, o error de CSP en la consola (paso 13.4)                  |
+| `certbot renew` falla con Cloudflare   | Falta el bloque `acme-challenge` en el server 443 (Nginx antiguo)             |
 
 Logs:
 
@@ -433,7 +558,8 @@ puede mostrarlo con la misma calidad percibida.
 
 - **Verificar el dominio del correo**: comprobar que `info@makeupbyyona.es`
   existe y que el SMTP puede enviar desde `no-reply@makeupbyyona.es`
-  (SPF y DKIM del dominio), o los correos acabarán en spam.
-- **Aviso legal**: hay política de privacidad, pero no aviso legal ni
-  condiciones de contratación, que son obligatorios vendiendo online en
-  España.
+  (SPF y DKIM del dominio), o los correos acabarán en spam. Si el DNS pasa a
+  Cloudflare, copiar allí los registros MX, SPF, DKIM y DMARC de Hostinger
+  **con la nube gris**: el correo no puede ir por el proxy.
+- **Domicilio del titular** en el aviso legal (`frontend/src/app/shared/datos-legales.ts`):
+  sigue a `null` y la página muestra "pendiente de completar". La LSSI lo exige.

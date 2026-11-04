@@ -49,7 +49,7 @@ prerenderiza el precio a proposito: quedaria desactualizado al terminar la ofert
 1. Entrar en <https://search.google.com/search-console> y añadir la propiedad de tipo
    **Dominio** (`makeupbyyona.es`). Se verifica con un registro TXT en el DNS.
 2. Menu **Sitemaps**: enviar `https://makeupbyyona.es/sitemap.xml`. Debe aparecer como
-   "Correcto" con 30 URLs descubiertas.
+   "Correcto" con 49 URLs descubiertas (las que imprime `npm run build`).
 3. Menu **Inspeccion de URLs**: pegar cada pagina clave (`/`, `/servicios`, `/sobre-mi`,
    `/cursos`, `/oferta`, `/contacto`, `/en`, `/it`, `/de`) y pulsar "Solicitar
    indexacion". Comprobar en "Ver pagina probada" que el HTML renderizado trae el H1 y

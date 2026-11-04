@@ -24,12 +24,19 @@ const RAIZ = join(dirname(fileURLToPath(import.meta.url)), '..', 'dist', 'fronte
 // pagina sin version nativa).
 const TRADUCTOR = ['https://translate.google.com', 'https://translate.googleapis.com', 'https://www.gstatic.com'];
 
+// Cloudflare Web Analytics con instalacion automatica: Cloudflare inserta
+// en cada HTML <script src="https://static.cloudflareinsights.com/beacon.min.js/v...">
+// (la ruta lleva version, por eso se permite el origen y no el fichero) y
+// el script envia las metricas a /cdn-cgi/rum del propio dominio, que ya
+// cubre connect-src 'self'. No usa cookies ni almacenamiento local.
+const ANALITICA = 'https://static.cloudflareinsights.com';
+
 function politica(hashes, manejadores) {
   return [
     "default-src 'self'",
     // 'unsafe-hashes' solo cubre los manejadores en linea cuyo hash se lista:
     // el onload con el que Angular activa la hoja de estilos diferida.
-    `script-src 'self' ${hashes.map((h) => `'sha256-${h}'`).join(' ')}${manejadores.length ? ` 'unsafe-hashes' ${manejadores.map((h) => `'sha256-${h}'`).join(' ')}` : ''} ${TRADUCTOR.join(' ')}`,
+    `script-src 'self' ${hashes.map((h) => `'sha256-${h}'`).join(' ')}${manejadores.length ? ` 'unsafe-hashes' ${manejadores.map((h) => `'sha256-${h}'`).join(' ')}` : ''} ${ANALITICA} ${TRADUCTOR.join(' ')}`,
     // Angular inyecta estilos en linea (CSS critico y de componentes).
     `style-src 'self' 'unsafe-inline' ${TRADUCTOR.join(' ')}`,
     // Miniaturas de cursos, teselas del mapa e iconos del traductor.

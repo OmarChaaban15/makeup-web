@@ -170,5 +170,34 @@ if [ "$ESTADO_UP" != "200" ] || [ "$ESTADO_API" != "200" ]; then
   exit 1
 fi
 
+# ─── 5. Cloudflare (solo avisa, no hace fallar el despliegue) ────────
+# Si la web pasa por Cloudflare, comprueba lo que suele romperse sin que se
+# note: que el HTML no se quede en su cache y que una foto pedida sin AVIF
+# no llegue en AVIF (ver paso 13 del README).
+CABECERAS=$(curl -sI "$URL/" || true)
+if echo "$CABECERAS" | grep -qi '^cf-ray:'; then
+  echo "==> Cloudflare"
+  CACHE_HTML=$(echo "$CABECERAS" | tr -d '\r' | awk -F': ' 'tolower($1)=="cf-cache-status"{print $2}')
+  TIPO_FOTO=$(curl -s -o /dev/null -w '%{content_type}' -H 'Accept: image/jpeg' \
+    "$URL/images/og-makeup-by-yona.jpg" || echo "?")
+
+  echo "    HTML cf-cache-status -> ${CACHE_HTML:-(sin cabecera)}"
+  echo "    foto sin AVIF        -> $TIPO_FOTO"
+
+  case "$CACHE_HTML" in
+    HIT|STALE|UPDATING|REVALIDATED)
+      echo "    AVISO: Cloudflare esta sirviendo el HTML desde su cache; no se veran"
+      echo "    los despliegues. Revisa que no haya una regla 'Cache Everything'." ;;
+  esac
+  case "$TIPO_FOTO" in
+    image/jpeg*) ;;
+    *) echo "    AVISO: la foto deberia llegar como image/jpeg. Revisa la Cache Rule de"
+       echo "    /images/ o purga la cache de Cloudflare." ;;
+  esac
+
+  # Los videos no llevan hash en el nombre y Cloudflare los guarda 30 dias.
+  echo "    (si has sustituido un video o el favicon, purga esa URL en Cloudflare)"
+fi
+
 echo ""
 echo "==> Despliegue completado: $DESCRIPCION"
