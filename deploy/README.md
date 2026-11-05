@@ -456,9 +456,17 @@ curl -s -o /dev/null -w '%{content_type}\n' -H 'Accept: image/jpeg'         $F  
 
 ### 13.4 · Web Analytics (visitas y Core Web Vitals)
 
-Analytics y registros → Web Analytics → Añadir sitio → `makeupbyyona.es` con
-la **configuración automática**. Cloudflare inserta su script en cada HTML
-al pasar por su red; la CSP ya lo permite (`frontend/scripts/csp.mjs`).
+**Estado actual (noviembre de 2026):** el DNS sigue en cdmon y el proxy de
+Cloudflare no está activo, así que los pasos 13.1 a 13.3 no aplican todavía.
+Web Analytics funciona con la **instalación manual**: el script con el token
+del sitio está en `frontend/src/index.html` y la CSP permite cargarlo y
+enviar a `cloudflareinsights.com` (`frontend/scripts/csp.mjs`). Basta con
+desplegar; en el panel no hay que tocar nada más.
+
+Si algún día se pasa el DNS a Cloudflare con la nube naranja, se puede
+cambiar a la **configuración automática** (Cloudflare inserta el script al
+pasar por su red). En ese caso, quitar el `<script>` de `index.html` para no
+medir cada visita dos veces.
 
 - No usa cookies ni almacenamiento local: el aviso de cookies sigue siendo
   informativo. La política de privacidad y la de cookies ya lo mencionan.

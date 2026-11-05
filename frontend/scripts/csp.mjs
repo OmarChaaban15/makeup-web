@@ -24,12 +24,15 @@ const RAIZ = join(dirname(fileURLToPath(import.meta.url)), '..', 'dist', 'fronte
 // pagina sin version nativa).
 const TRADUCTOR = ['https://translate.google.com', 'https://translate.googleapis.com', 'https://www.gstatic.com'];
 
-// Cloudflare Web Analytics con instalacion automatica: Cloudflare inserta
-// en cada HTML <script src="https://static.cloudflareinsights.com/beacon.min.js/v...">
-// (la ruta lleva version, por eso se permite el origen y no el fichero) y
-// el script envia las metricas a /cdn-cgi/rum del propio dominio, que ya
-// cubre connect-src 'self'. No usa cookies ni almacenamiento local.
+// Cloudflare Web Analytics. El script va en src/index.html (instalacion
+// manual, el dominio no pasa por el proxy) y envia las metricas a
+// cloudflareinsights.com/cdn-cgi/rum. Se permite el origen y no el fichero
+// porque, si algun dia se activa el proxy y la instalacion automatica,
+// Cloudflare lo inserta con la version en la ruta (beacon.min.js/v...) y
+// envia a /cdn-cgi/rum del propio dominio, que ya cubre 'self'.
+// No usa cookies ni almacenamiento local.
 const ANALITICA = 'https://static.cloudflareinsights.com';
+const ANALITICA_ENVIO = 'https://cloudflareinsights.com';
 
 function politica(hashes, manejadores) {
   return [
@@ -42,7 +45,7 @@ function politica(hashes, manejadores) {
     // Miniaturas de cursos, teselas del mapa e iconos del traductor.
     "img-src 'self' data: https:",
     "font-src 'self' data:",
-    `connect-src 'self' ${TRADUCTOR.join(' ')}`,
+    `connect-src 'self' ${ANALITICA_ENVIO} ${TRADUCTOR.join(' ')}`,
     // Videos de la zona de alumnas.
     'frame-src https://www.youtube-nocookie.com https://player.vimeo.com',
     "media-src 'self'",

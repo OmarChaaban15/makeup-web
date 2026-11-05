@@ -63,5 +63,13 @@
 </head>
 <body>
   <app-root></app-root>
+  <!--
+    Cloudflare Web Analytics (instalacion manual: el dominio no pasa por el
+    proxy de Cloudflare). Sin cookies ni almacenamiento local. Es un modulo,
+    asi que se ejecuta diferido y no bloquea el pintado. Mide tambien los
+    cambios de ruta del SPA. El token es publico (identifica el sitio, no da
+    acceso a nada). La CSP lo permite en scripts/csp.mjs.
+  -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "036bae389fb94cb7ab055f86d3327185"}'></script>
 </body>
 </html>
