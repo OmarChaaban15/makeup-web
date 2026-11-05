@@ -144,7 +144,10 @@ chmod -R a+rX "$DIST"
 
 # ─── 3. Servicios ────────────────────────────────────────────────────
 echo "==> Servicios"
-sudo systemctl restart php8.3-fpm
+# PHP-FPM de la misma version que el php de la linea de comandos (el
+# servidor de produccion lleva 8.4). PHP_FPM=php8.x-fpm para forzar otro.
+PHP_FPM="${PHP_FPM:-php$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')-fpm}"
+sudo systemctl restart "$PHP_FPM"
 
 # El worker de colas puede no estar instalado todavía en el primer
 # despliegue; no es motivo para dar el despliegue por fallido.

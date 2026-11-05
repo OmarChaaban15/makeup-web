@@ -70,9 +70,11 @@ dig +short makeupbyyona.es
 
 ```bash
 sudo apt update
+# El servidor de produccion lleva PHP 8.4. Con otra version, cambiar el
+# numero aqui y en el fastcgi_pass de deploy/nginx/makeupbyyona.es.conf.
 sudo apt install -y nginx mysql-server git rsync unzip curl ufw \
-  php8.3-fpm php8.3-mysql php8.3-mbstring php8.3-xml php8.3-curl \
-  php8.3-zip php8.3-bcmath php8.3-intl
+  php8.4-fpm php8.4-mysql php8.4-mbstring php8.4-xml php8.4-curl \
+  php8.4-zip php8.4-bcmath php8.4-intl
 
 # Composer
 curl -sS https://getcomposer.org/installer | php

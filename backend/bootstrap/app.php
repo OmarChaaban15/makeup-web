@@ -13,6 +13,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Sin sesion, la API responde 401. Por defecto Laravel intenta
+        // redirigir a la ruta "login", que aqui no existe (el login es una
+        // pagina de Angular): sin "Accept: application/json" daba un 500.
+        $middleware->redirectGuestsTo(
+            fn (Request $request) => $request->is('api/*') ? null : '/login'
+        );
+
         // Detras de Nginx necesitamos el header X-Forwarded-* para que
         // request()->ip() no devuelva siempre 127.0.0.1 (lo usan los
         // rate limiters) y para que las URLs se generen en https.

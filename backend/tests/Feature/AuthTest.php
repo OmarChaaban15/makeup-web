@@ -74,6 +74,9 @@ class AuthTest extends TestCase
     public function test_rutas_privadas_exigen_token(): void
     {
         $this->getJson('/api/mis-cursos')->assertStatus(401);
+        // Sin "Accept: application/json" (curl, buscadores): 401 tambien,
+        // no un 500 por intentar redirigir a una ruta "login" que no existe.
+        $this->get('/api/mis-cursos')->assertStatus(401);
         $this->getJson('/api/pedidos')->assertStatus(401);
         $this->getJson('/api/citas')->assertStatus(401);
     }
