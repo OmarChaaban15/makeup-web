@@ -159,8 +159,21 @@ sudo nginx -t && sudo systemctl reload nginx
 # ─── 4. Verificación ─────────────────────────────────────────────────
 echo "==> Comprobando que responde"
 
-ESTADO_UP=$(curl -s -o /dev/null -w '%{http_code}' "$URL/up" || echo "000")
-ESTADO_API=$(curl -s -o /dev/null -w '%{http_code}' "$URL/api/tutoriales" || echo "000")
+# PHP-FPM acaba de reiniciarse: las primeras peticiones pueden encontrarlo
+# arrancando y cortarse sin respuesta. Se reintenta hasta ~20 s antes de
+# dar el despliegue por fallido.
+estado() {
+  local codigo
+  for _ in 1 2 3 4 5 6 7 8 9 10; do
+    codigo=$(curl -s -o /dev/null --max-time 10 -w '%{http_code}' "$1") || codigo="000"
+    [ "$codigo" = "200" ] && break
+    sleep 2
+  done
+  echo "$codigo"
+}
+
+ESTADO_UP=$(estado "$URL/up")
+ESTADO_API=$(estado "$URL/api/tutoriales")
 
 echo "    /up             -> $ESTADO_UP"
 echo "    /api/tutoriales -> $ESTADO_API"
