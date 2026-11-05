@@ -115,8 +115,13 @@ EN_MANTENIMIENTO=0
 #
 # Las cachés recién escritas (bootstrap/cache) y los logs (storage) tienen
 # que quedar en manos de www-data, que es quien ejecuta PHP-FPM.
+#
+# "ug+rwX" y no "775": la X mayuscula solo da ejecucion a los directorios.
+# Con 775 los .gitignore que Git controla dentro de storage/ quedaban como
+# ejecutables, Git lo veia como un cambio y el siguiente despliegue se
+# negaba a arrancar por "cambios sin confirmar".
 sudo chown -R www-data:www-data storage bootstrap/cache
-sudo chmod -R 775 storage bootstrap/cache
+sudo chmod -R ug+rwX storage bootstrap/cache
 
 # ─── 2. Frontend ─────────────────────────────────────────────────────
 cd "$RAIZ/frontend"

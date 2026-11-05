@@ -205,7 +205,7 @@ concedidos antes de este cambio.
 ```bash
 cd /var/www/makeup-web
 sudo chown -R www-data:www-data backend/storage backend/bootstrap/cache
-sudo chmod -R 775 backend/storage backend/bootstrap/cache
+sudo chmod -R ug+rwX backend/storage backend/bootstrap/cache   # X: ejecucion solo en directorios
 
 # El usuario que despliega tiene que poder escribir en esos directorios
 # (Laravel escribe ahí las cachés durante el despliegue).
